@@ -1,0 +1,1 @@
+export const sample = (a, b) => a + b;

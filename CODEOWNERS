@@ -1,0 +1,19 @@
+# This is the repository's CODEOWNERS file
+
+# Each line is a file pattern followed by one or more owners.
+# You can also use email addresses if you prefer - they'll be used
+# to look up users just like we do for commits.
+
+# The users below will be the default owners for everything in the repo,
+# unless a later match takes precedence.
+# The user(s) below will be requested for review when someone opens a pull request.
+*       @kraytaps
+
+
+# These files below relate to some of the more essential files in the repository
+# This means environmental files, files relating to documentation, styles, configs, and etc
+.env*           @ad2969
+.eslint*        @ad2969
+.gitignore      @ad2969
+*.config.js     @ad2969
+README.md       @ad2969
