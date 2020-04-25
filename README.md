@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9c2b1115-c493-484a-a3be-e9062c9573f4/deploy-status)](https://app.netlify.com/sites/link-link-web-app/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/91ce92f8-211d-4058-98c5-c57183cc31b9/deploy-status)](https://app.netlify.com/sites/onlinker-app/deploys)
 
 # Event Discovery App
 ONLINKERS' Event Web Application
