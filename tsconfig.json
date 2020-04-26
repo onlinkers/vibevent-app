@@ -11,13 +11,13 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": false, // allow casing filenames to use cases (important for build)
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "noImplicitAny": false,
+    "noImplicitAny": false, // important to skip downloading/creating ts definitions for external packages
     "jsx": "react"
   },
   "include": [
