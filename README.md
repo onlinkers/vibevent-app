@@ -80,6 +80,8 @@ Overwrites to libraries or global style variables and constants can be wrriten i
 
 None yet. Application's `master` branch is currently built on Netlify for live viewing. Build settings can be accessed ONLY through the onlinker-admin netlify account. Netlify teams has a billing plan which we are too cheap to purchase as of now.
 
+Our custom domain is: https://onlinker-domain.live
+
 Run `npm run build` to minify and compile the application for production. Build location is in the `build` folder
 
 ## Contributing
