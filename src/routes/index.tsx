@@ -2,10 +2,10 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // Import all the route wrappers
-import Home from "./Home";
-import Events from "./Events";
-import Discover from "./Discover";
-import NotFound from "./Authentication/NotFound";
+import Home from "./house";
+import Events from "./even";
+import Discover from "./disc";
+import NotFound from "./auth/NotFound";
 
 const Routes = () => {
 	return (
