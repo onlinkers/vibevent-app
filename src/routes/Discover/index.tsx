@@ -1,9 +1,10 @@
 import React from "react";
+import Map from "components/Map";
 
 const Discover = () => {
 	return (
-		<div>
-            Discover
+		<div className="Discover Page">
+			<Map />
 		</div>
 	);
 };
