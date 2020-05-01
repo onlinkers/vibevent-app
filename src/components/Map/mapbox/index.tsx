@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useContext, useState } from "react";
-
 import { MapContext } from "context/MapContext";
 import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
+
+import EventMarker from "../markers/eventMarker";
+
+import { Event } from "types/props";
 import "./index.css";
 
 // Most of the react mapbox wrappers need updating to accommodate for deprecating react functions & packages
@@ -11,9 +14,13 @@ import "./index.css";
 
 interface MapboxProps {
 	children?: React.ReactNode
+	events: Event[] | []
 }
 
-const Mapbox: React.FunctionComponent<MapboxProps> = ({ children }) => {
+// Map component is "memoized" to prevent unnecesseary re-rendering
+// Re-rendering should only be deone when any of the data being passed in is "changed"
+// A "TODO" is to determine how often this data needs to change (important for live events)
+const Mapbox = React.memo<MapboxProps>(({ children, events = [] }) => {
 
 	const { map, setMap } = useContext(MapContext);
 	const mapContainer = useRef(null);
@@ -42,8 +49,12 @@ const Mapbox: React.FunctionComponent<MapboxProps> = ({ children }) => {
 			});
 
 		}
+			
+		events.forEach((event) => {
+			console.log({ event });
+		});
 
-	}, [center, zoom, map, setMap]);
+	}, [center, zoom, map, setMap, events]);
 
 	return (
 		<div className="Mapbox" ref={mapContainer}>
@@ -51,6 +62,6 @@ const Mapbox: React.FunctionComponent<MapboxProps> = ({ children }) => {
 		</div>
 	);
 
-};
+});
 
 export default Mapbox;

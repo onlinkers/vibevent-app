@@ -31,8 +31,14 @@ code {
 }
 
 .Loader {
+	background: white;
+	position: absolute;
 	align-items: center;
 	display: flex;
 	justify-content: center;
 	text-align: center;
+	left: 0;
+	top: 0;
+	opacity: 60%;
+	z-index: 999;
 }
