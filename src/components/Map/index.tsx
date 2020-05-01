@@ -1,5 +1,5 @@
 import React from "react";
-import Mapbox from "./box";
+import Mapbox from "./mapbox";
 
 interface Props {
     loaded: boolean
