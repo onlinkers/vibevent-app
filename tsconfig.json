@@ -6,6 +6,12 @@
       "dom.iterable",
       "esnext"
     ],
+    // vscode absolute imports
+    "baseUrl": "src",
+    "paths": {
+      "src/*": ["./src/*"]
+    },
+    // typescript configs
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,12 +21,11 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": true,
     "noImplicitAny": false, // important to skip downloading/creating ts definitions for external packages
     "jsx": "react"
   },
-  "include": [
-    "src"
-  ]
+  "include": [ "src" ],
+  "exclude": [ "node_modules", "build" ]
 }

@@ -40,7 +40,8 @@ module.exports = {
 		"react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
 		
 		// Non-react rules
-		"no-unused-vars": 1,
+		"no-unused-vars": 0,
+		"@typescript-eslint/no-unused-vars": 1,
 		"comma-dangle": [1, "only-multiline"],
 		"indent": [1, "tab"],
 		"no-mixed-spaces-and-tabs": 1,
