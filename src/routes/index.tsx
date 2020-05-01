@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import Events from "./Event";
 import Discover from "./Discover";
+import Auth from "./Authentication";
 import NotFound from "./Authentication/NotFound";
 
 const Routes = () => {
@@ -14,7 +15,8 @@ const Routes = () => {
 				<Route exact path="/" component={Home}/>
 				<Route path="/discover" component={Discover}/>
 				<Route path="/event" component={Events}/>
-				<Route path="*" component={NotFound} />
+				<Route path="/auth" component={Auth}/>
+				<Route path="*" component={NotFound}/>
 			</Switch>
 		</BrowserRouter>
 	);
