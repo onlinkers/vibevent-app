@@ -26,13 +26,16 @@ const Mapbox: React.FunctionComponent<MapboxProps> = ({ children }) => {
 
 		if(!map) {
 
+			// mapbox initialization occurs here
 			const mapObject = new mapboxgl.Map({
 				container: mapContainer.current,
 				style: "mapbox://styles/mapbox/streets-v11",
 				center: center,
 				zoom: zoom,
 			});
-            
+			
+			// any additional map functionality and listeners should be written
+			// in this "useEffect" method
 			mapObject.on("load", () => {
 				setMap(mapObject);
 				mapObject.resize();

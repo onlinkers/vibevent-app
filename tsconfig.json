@@ -6,26 +6,26 @@
       "dom.iterable",
       "esnext"
     ],
-    // vscode absolute imports
     "baseUrl": "src",
-    "paths": {
-      "src/*": ["./src/*"]
-    },
-    // typescript configs
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": false, // allow casing filenames to use cases (important for build)
+    "forceConsistentCasingInFileNames": false,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true,
-    "noImplicitAny": false, // important to skip downloading/creating ts definitions for external packages
+    "noImplicitAny": false,
     "jsx": "react"
   },
-  "include": [ "src" ],
-  "exclude": [ "node_modules", "build" ]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
 }
