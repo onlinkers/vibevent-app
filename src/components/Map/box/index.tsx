@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useContext, useState } from "react";
-import PropTypes from "prop-types";
 
 import { MapContext } from "context/MapContext";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -51,5 +50,4 @@ const Mapbox: React.FunctionComponent<MapboxProps> = ({ children }) => {
 
 };
 
-Mapbox.propTypes = { children: PropTypes.node };
 export default Mapbox;
