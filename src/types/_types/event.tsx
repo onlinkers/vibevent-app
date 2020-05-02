@@ -3,6 +3,7 @@ import { Venue } from "./venue";
 import { Image } from "./image";
 
 export interface Event {
+    _id: string
     hosts: string[]
     name: string
     startDate: Date
