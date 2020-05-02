@@ -1,0 +1,41 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.desktop-explore {
+    display: flex;
+    flex-direction: row;
+}
+
+.explore-title {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.explore-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.explore-link {
+    display: flex;
+    flex-shrink: 1;
+    line-height: 1.5em;
+    margin-right: 1em;
+    margin-left: 1em;
+    transition: 0.2s;
+}
+
+.explore-link:hover {
+    transition: 0.2s;
+    transform: scale(1.1);
+}
+
+.explore-profile {
+    /* TODO: Replace with User Profile Icon/Dropdown */
+    line-height: 1.5em;
+    margin-right: 20px;
+}
