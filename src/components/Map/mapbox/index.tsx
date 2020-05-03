@@ -46,9 +46,10 @@ const Mapbox: React.FunctionComponent<MapboxProps> = ({ children }) => {
 	}, [center, zoom, map, setMap]);
 
 	return (
-		<div className="Mapbox" ref={mapContainer}>
+		<React.Fragment>
+			<div className="Mapbox" ref={mapContainer} />
 			{map && children}
-		</div>
+		</React.Fragment>
 	);
 
 };

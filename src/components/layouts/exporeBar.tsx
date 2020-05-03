@@ -29,25 +29,25 @@ const ExploreBar: React.FunctionComponent<Props> = () => {
 			<div className="explore-links">
 				<Link to="/event/dashboard">
 					<div className="explore-link">
-						<h4 className="explore-link-text">Dashboard</h4>
+						<p className={`explore-link-text ${pathname.includes(EXPLORE_STATES.DASHBOARD) && "active"}`}>Dashboard</p>
 						{pathname.includes(EXPLORE_STATES.DASHBOARD) && <div className="explore-link-line"/>}
 					</div>
 				</Link>
 				<Link to="/discover">
 					<div className="explore-link">
-						<h4 className="explore-link-text">Discover</h4>
+						<p className={`explore-link-text ${pathname.includes(EXPLORE_STATES.DISCOVER) && "active"}`}>Discover</p>
 						{pathname.includes(EXPLORE_STATES.DISCOVER) && <div className="explore-link-line"/>}
 					</div>
 				</Link>
 				<Link to="#">
 					<div className="explore-link">
-						<h4 className="explore-link-text">Moments</h4>
+						<p className={`explore-link-text ${pathname.includes(EXPLORE_STATES.MOMENTS) && "active"}`}>Moments</p>
 						{pathname.includes(EXPLORE_STATES.MOMENTS) && <div className="explore-link-line"/>}
 					</div>
 				</Link>
 				<Link to="/event/create">
 					<div className="explore-link">
-						<h4 className="explore-link-text">Create</h4>
+						<p className={`explore-link-text ${pathname.includes(EXPLORE_STATES.CREATE) && "active"}`}>Create</p>
 						{pathname.includes(EXPLORE_STATES.CREATE) && <div className="explore-link-line"/>}
 					</div>
 				</Link>

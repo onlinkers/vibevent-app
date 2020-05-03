@@ -4,10 +4,14 @@ a {
 }
 
 .desktop-explore {
+    background: white;
     display: flex;
     flex-direction: row;
+    position: absolute;
+    top: 0;
+    width: 100%;
     z-index: 500;
-    box-shadow: 8px 8px 20px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .explore-title {
@@ -29,13 +33,14 @@ a {
 }
 
 .explore-link {
-    color: black;
+    color: grey;
+    line-height: 2em;
     margin-right: 1em;
     margin-left: 1em;
 }
+.active { color: #2351e0; }
 .explore-link-text {
-    line-height: 1em;
-    margin-bottom: 0.4em;
+    margin-bottom: 0.2em;
     transition: 0.2s;
 }
 .explore-link-text:hover {
@@ -60,7 +65,7 @@ a {
     bottom: 0;
     width: 100%;
     z-index: 500;
-    box-shadow: 8px 8px 20px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Doesn't need hover anims because it's in mobile view */
@@ -70,8 +75,4 @@ a {
     bottom: 0;
     transform: translate(-50%, 0) scale(1.2);
     transition: 0.2s;   
-}
-/* Need nesting */
-svg {
-    filter: drop-shadow(8px 8px 20px 10px rgba(35, 81, 224, 0.2));
 }
