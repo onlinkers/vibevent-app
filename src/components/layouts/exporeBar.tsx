@@ -2,6 +2,13 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as ExploreButton } from "assets/icons/explore.svg";
 
+import {
+	HomeOutlined,
+	GlobalOutlined,
+	BulbOutlined,
+	UserOutlined
+} from "@ant-design/icons";
+
 import "./index.css";
 
 const EXPLORE_STATES = {
@@ -52,7 +59,7 @@ const ExploreBar: React.FunctionComponent<Props> = () => {
 					</div>
 				</Link>
 			</div>
-			<div className="explore-profile"><h4>USER</h4></div>
+			<div className="explore-profile"><UserOutlined style={{ color: "##2351e0" }}/></div>
 		</div>
 
 	) : ( // TODO: Icons and stuff
@@ -60,17 +67,17 @@ const ExploreBar: React.FunctionComponent<Props> = () => {
 		<div className="mobile-explore">
 			<div className="explore-links explore-links---mobile">
 				<Link to="/event/dashboard">
-					<h4 className="explore-link">D</h4>
+					<p className="explore-link"><HomeOutlined style={{ fontSize: "1.5em", color: "##2351e0" }}/></p>
 				</Link>
 				<Link to="/discover">
-					<h4 className="explore-link">D</h4>
+					<p className="explore-link"><GlobalOutlined style={{ fontSize: "1.5em", color: "##2351e0" }}/></p>
 				</Link>
 				<div className="explore-mobile-spacer" />
 				<Link to="#">
-					<h4 className="explore-link">M</h4>
+					<p className="explore-link"><BulbOutlined style={{ fontSize: "1.5em", color: "##2351e0" }}/></p>
 				</Link>
 				<Link to="#">
-					<h4 className="explore-link">C</h4>
+					<p className="explore-link"><UserOutlined style={{ fontSize: "1.5em", color: "##2351e0" }}/></p>
 				</Link>
 			</div>
 			<div className="explore-mobile-button"><ExploreButton /></div>

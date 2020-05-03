@@ -37,9 +37,12 @@ a {
     line-height: 2em;
     margin-right: 1em;
     margin-left: 1em;
+    margin-bottom: 1em;
+    user-select: none;
 }
 .active { color: #2351e0; }
 .explore-link-text {
+    user-select: none;
     margin-bottom: 0.2em;
     transition: 0.2s;
 }
