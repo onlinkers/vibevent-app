@@ -37,8 +37,15 @@ const Mapbox: React.FunctionComponent<MapboxProps> = ({ children }) => {
 			// any additional map functionality and listeners should be written
 			// in this "useEffect" method
 			mapObject.on("load", () => {
-				setMap(mapObject);
-				mapObject.resize();
+		
+				// IF statement is a temporary fix to prevent updates after the user moves to another page
+				// Additional map initializations will be trying to update an unmounted component, causing
+				// a no-op error to be thrown in the component
+				if(mapContainer.current) {
+					setMap(mapObject);
+					mapObject.resize();
+				}
+		
 			});
 
 		}
