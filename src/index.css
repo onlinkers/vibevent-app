@@ -9,3 +9,30 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.App {
+	height: 100vh;
+	width: 100vw;
+}
+
+.Page {
+	height: 100%;
+	width: 100%;
+}
+
+/* Should extend "Page" */
+.Page--center {
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+.Loader {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
