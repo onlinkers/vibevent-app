@@ -6,8 +6,8 @@ import EventDetails from "./EventDetails";
 
 const Events = () => (
 	<Route>
-		<Route path="dashboard" component={EventDashboard}/>
-		<Route path="details" component={EventDetails}/>
+		<Route path="/event/dashboard" component={EventDashboard}/>
+		<Route path="/event/:eventId" component={EventDetails}/>
 	</Route>
 );
 
