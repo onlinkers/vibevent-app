@@ -36,6 +36,7 @@ module.exports = {
     "react-hooks/rules-of-hooks": 2, // Checks rules of Hooks
     "react-hooks/exhaustive-deps": 1, // Checks effect dependencies
     "react/prop-types": 0,
+    "react/display-name": 0,
 
     // Non-react rules
     "no-unused-vars": 0,
