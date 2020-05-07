@@ -8,8 +8,8 @@ import EventCreate from "./EventCreate";
 const Events = () => (
 	<Route>
 		<Route path="/event/dashboard" component={EventDashboard}/>
-		<Route path="details" component={EventDetails}/>
 		<Route path="/event/create" component={EventCreate}/>
+		<Route path="/event/:eventId" component={EventDetails}/>
 	</Route>
 );
 
