@@ -20,6 +20,7 @@ const Discover: React.FunctionComponent = () => {
 
     fetchEvents();
   }, []);
+
   return (
     <MapProvider>
       <MapContext.Consumer>
