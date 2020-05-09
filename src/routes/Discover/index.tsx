@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Map from "components/Map";
+import ExploreBar from "components/layouts/exporeBar";
+
 import { MapContext, MapProvider } from "context/MapContext";
 import { apiFetch } from "utils";
 
@@ -24,6 +26,7 @@ const Discover: React.FunctionComponent = () => {
       <MapContext.Consumer>
         {({ loaded }) => (
           <div className="Discover Page">
+            <ExploreBar />
             <Map loaded={loaded && eventsLoaded} events={events} />
           </div>
         )}
