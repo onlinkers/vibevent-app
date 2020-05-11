@@ -14,24 +14,24 @@ interface Props {
 // Speciffically, the component should handle loading logic and rendering
 const Map = React.memo<Props>(({ loaded, events }) => {
 
-	// Allow redirecting from componenets of the map
-	const history = useHistory();
+    // Allow redirecting from componenets of the map
+    const history = useHistory();
 
-	const redirectToEvent = (eventId) => {
-		history.push(`/event/${eventId}`); 
-	};
+    const redirectToEvent = (eventId) => {
+        history.push(`/event/${eventId}`); 
+    };
 
-	return (
-		<React.Fragment>
-			{!loaded && <div className="Page Loader">Loading...</div>}
-			<Mapbox
-				events={events}
-				functions={{
-					redirectToEvent
-				}}
-			/>
-		</React.Fragment>
-	);
+    return (
+        <React.Fragment>
+            {!loaded && <div className="Page Loader">Loading...</div>}
+            <Mapbox
+                events={events}
+                functions={{
+                    redirectToEvent
+                }}
+            />
+        </React.Fragment>
+    );
 });
 
 export default Map;
