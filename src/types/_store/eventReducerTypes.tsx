@@ -1,5 +1,7 @@
 import { Event } from "types/props";
-import { SetGeneralEvents, SetLocalEvent } from "constants/index";
+
+const SetGeneralEvents = "setGeneralEvents";
+const SetLocalEvent = "setLocalEvent";
 
 export interface EventList {
   events: Event[];
