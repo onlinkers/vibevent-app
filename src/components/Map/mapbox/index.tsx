@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useContext, useState } from "react";
 import ReactDOM from "react-dom";
 import mapboxgl from "mapbox-gl";
-import MapboxGeocoder from "mapbox-gl-geocoder";
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 import { MapContext } from "context/MapContext";
 import EventMarker from "../markers/eventMarker";
@@ -30,11 +30,13 @@ interface EventFeature {
   properties: {
       title: string
       description: string
+      maki?: string
   }
   geometry: {
       coordinates: number[]
       type: "Point" | null
   }
+  [x: string]: any 
 }
 
 // Map component is "memoized" to prevent unnecesseary re-rendering
@@ -120,13 +122,31 @@ const Mapbox = React.memo<MapboxProps>(
      * The mapbox-gl-geocoder controller takes the 'top-right' spot
      */
     const loadMapSearch = () => {
+
       const mapGeocoder = new MapboxGeocoder({
         accessToken: MAPBOX_TOKEN,
-        placeholder: "Search for a place/event",
+        placeholder: "Search for events, locations, dates",
         // localGeocoder: localEventGeocoder,
         // localGeocoderOnly: true
-        // mapboxgl: mapboxgl,
+        mapboxgl: mapboxgl,
         // marker: true,
+        render: (item: EventFeature) => {
+          // "place_name" contains the text itself. remove to clean it.
+          let locationArray: string[] = item.place_name.split(",");
+          locationArray = locationArray.filter(word => word.toLowerCase() !== item.text.toLowerCase());
+          const locationString: string = locationArray.join(", ");
+
+          // "maki" property is used to find the appripriate mapbox icon
+          // TODO: check if 'event' or 'place' and add appropriate icons
+          const icon = item.properties.maki || "marker";
+
+          // Need to return a string
+          return `<div>
+              <img class="geocoder-dropdown-icon" src="https://unpkg.com/@mapbox/maki@6.1.0/icons/${icon}-15.svg" />
+              <strong>${item.text}</strong>
+            </div>
+            <div>${locationString}</div>`;
+        }
       });
 
       map.addControl(mapGeocoder, "top-right");
