@@ -5,7 +5,14 @@ const initState: EventList = {
 };
 
 const eventReducer = (state = initState, action: EventActionTypes) => {
-  return state;
+  switch (action.type) {
+    case "setGeneralEvents":
+      return state;
+    case "setLocalEvent":
+      return state;
+    default:
+      return state;
+  }
 };
 
 export default eventReducer;
