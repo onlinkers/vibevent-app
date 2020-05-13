@@ -53,8 +53,9 @@ const Mapbox = React.memo<MapboxProps>(
     const formattedEvents = {
       features: events.map((event) => (event && {
         type: "Feature",
+        text: event.name,
         properties: {
-          title: event.name,
+          title: event.venue.name,
           description: event.description || "",
         },
         geometry: event.venue.location
@@ -78,12 +79,15 @@ const Mapbox = React.memo<MapboxProps>(
       const matchingFeatures: EventFeature[] = [];
       formattedEvents.features.forEach((event) => {
 
-        if(event.properties.title.toLowerCase().search(query.toLowerCase()) !== -1) {
+        // Search through both the event name and title
+        const placeName = `${event.text} @ ${event.properties.title}`;
+        if(placeName.toLowerCase().search(query.toLowerCase()) !== -1) {
           const feature = {
             ...event,
-            "place_name": event.properties.title,
+            "place_name": placeName,
+            "place_name_exclude_text": event.properties.title,
             "center": event.geometry.coordinates,
-            "place_type": ["event"]
+            "place_type": ["custom_event"]
           };
           matchingFeatures.push(feature);
         }
@@ -101,6 +105,7 @@ const Mapbox = React.memo<MapboxProps>(
       events.forEach((event) => {
         // load the react JSX as a DOM element
         const markerNode = document.createElement("div");
+        markerNode.className="custom-mapbox-event-marker";
         ReactDOM.render(
           <EventMarker
             event={event}
@@ -126,15 +131,21 @@ const Mapbox = React.memo<MapboxProps>(
       const mapGeocoder = new MapboxGeocoder({
         accessToken: MAPBOX_TOKEN,
         placeholder: "Search for events, locations, dates",
-        // localGeocoder: localEventGeocoder,
-        // localGeocoderOnly: true
+        localGeocoder: localEventGeocoder,
         mapboxgl: mapboxgl,
-        // marker: true,
+        marker: true,
         render: (item: EventFeature) => {
-          // "place_name" contains the text itself. remove to clean it.
-          let locationArray: string[] = item.place_name.split(",");
-          locationArray = locationArray.filter(word => word.toLowerCase() !== item.text.toLowerCase());
-          const locationString: string = locationArray.join(", ");
+
+          // Check if an event or palce
+          const isEvent = item["place_type"].includes("custom_event");
+
+          // for mapbox places, "place_name" tends to contain the text itself. remove to clean it.
+          let locationString = item.place_name_exclude_text || item.place_name;
+          if(!isEvent && item.text) {
+            let locationArray: string[] = item.place_name.split(",");
+            locationArray = locationArray.filter(word => word.toLowerCase() !== item.text.toLowerCase());
+            locationString = locationArray.join(", ");
+          }
 
           // "maki" property is used to find the appripriate mapbox icon
           // TODO: check if 'event' or 'place' and add appropriate icons

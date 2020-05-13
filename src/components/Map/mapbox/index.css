@@ -68,3 +68,8 @@
 .Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder > .suggestions-wrapper > .suggestions > li:hover {
     opacity: 1;
 }
+
+/* Hack to make "flyTo" markers invisible to selection */
+.mapboxgl-marker-anchor-center:not(.custom-mapbox-event-marker) {
+    pointer-events: none;
+}
