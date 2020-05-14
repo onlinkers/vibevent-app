@@ -1,22 +1,18 @@
 /* dependencies */
-import React, { useEffect, useState, Dispatch } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 /* components */
 import { MapContext, MapProvider } from "context/MapContext";
 import Map from "components/Map";
 import ExploreBar from "components/layouts/exporeBar";
-import { Event } from "types/props";
 import { EventListLoading } from "types/store";
 
 interface DispatchProps {
-  queryAllEvents: () => void;
   eventData: EventListLoading;
 }
 
-const Discover: React.FunctionComponent<DispatchProps> = (props) => {
-  const { eventData } = props;
-
+const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
   return (
     <MapProvider>
       <MapContext.Consumer>
@@ -34,9 +30,9 @@ const Discover: React.FunctionComponent<DispatchProps> = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ eventData }) => {
   return {
-    eventData: state,
+    eventData: eventData,
   };
 };
 
