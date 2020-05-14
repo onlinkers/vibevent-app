@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
-import Map from "components/Map";
-import ExploreBar from "components/layouts/exporeBar";
+import { connect } from "react-redux";
 
 import { MapContext, MapProvider } from "context/MapContext";
 import { apiFetch } from "utils";
-
 import { Event } from "types/props";
+
+import Map from "components/Map";
+import ExploreBar from "components/layouts/exporeBar";
 
 const Discover: React.FunctionComponent = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [eventsLoaded, setEventsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      const events = await apiFetch("/events", {});
-      setEvents(Object.values(events));
-      setEventsLoaded(true);
-    };
-
-    fetchEvents();
+    // const fetchEvents = async () => {
+    //   const events = await apiFetch("/events", {});
+    //   setEvents(Object.values(events));
+    //   setEventsLoaded(true);
+    // };
+    // fetchEvents();
   }, []);
 
   return (
