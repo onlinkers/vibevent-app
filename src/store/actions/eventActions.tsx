@@ -1,23 +1,27 @@
+import { Dispatch } from "redux";
+
 import {
   FETCH_ALL_EVENTS_REQUEST,
   FETCH_ALL_EVENTS_SUCCESS,
   FETCH_ALL_EVENTS_FAILURE,
+  EventActionTypes,
 } from "types/store";
+import eventService from "services/eventService";
 
-export const fetchAllEventsRequest = () => {
+const fetchAllEventsRequest = () => {
   return {
     type: FETCH_ALL_EVENTS_REQUEST,
   };
 };
 
-export const fetchAllEventsSuccess = (events) => {
+const fetchAllEventsSuccess = (events) => {
   return {
     type: FETCH_ALL_EVENTS_SUCCESS,
     payload: events,
   };
 };
 
-export const fetchAllEventsFailure = (error) => {
+const fetchAllEventsFailure = (error) => {
   return {
     type: FETCH_ALL_EVENTS_FAILURE,
     payload: error,
@@ -25,6 +29,17 @@ export const fetchAllEventsFailure = (error) => {
 };
 
 // action creator
-const fetchAllEvents = () => {
-  return (dispatch) => {};
+export const fetchAllEvents = () => {
+  return (dispatch) => {
+    dispatch(fetchAllEventsRequest());
+    eventService
+      .getAllEvents()
+      .then((response) => {
+        const events = response.data;
+        dispatch(fetchAllEventsSuccess(events));
+      })
+      .catch((error) => {
+        dispatch(fetchAllEventsFailure(error.message));
+      });
+  };
 };

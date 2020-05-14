@@ -9,7 +9,7 @@ const initState: EventListLoading = {
   error: "",
 };
 
-const allEventsReducer = (state = initState, action: EventActionTypes) => {
+const allEventsReducer = (state = initState, action) => {
   switch (action.type) {
     case "FETCH_ALL_EVENTS_REQUEST":
       return {
