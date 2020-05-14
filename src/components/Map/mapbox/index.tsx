@@ -14,9 +14,9 @@ import "./index.css";
 // Good resource: https://blog.mapbox.com/mapbox-gl-js-react-764da6cc074a
 
 interface MapboxProps {
-	children?: React.ReactNode
-	functions?: any
-	events: Event[] | []
+  children?: React.ReactNode;
+  functions?: any;
+  events: Event[] | [];
 }
 
 // Map component is "memoized" to prevent unnecesseary re-rendering
@@ -24,7 +24,6 @@ interface MapboxProps {
 // A "TODO" is to determine how often this data needs to change (important for live events)
 const Mapbox = React.memo<MapboxProps>(
   ({ children, functions, events = [] }) => {
-
     const { map, setMap } = useContext(MapContext);
     const mapContainer = useRef(null);
     const [center, setCenter] = useState([-123.1207, 49.2827]);
@@ -84,5 +83,11 @@ const Mapbox = React.memo<MapboxProps>(
     );
   }
 );
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    eventData: state,
+  };
+};
 
 export default Mapbox;

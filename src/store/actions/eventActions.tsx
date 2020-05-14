@@ -1,5 +1,3 @@
-import { Dispatch } from "redux";
-
 import {
   FETCH_ALL_EVENTS_REQUEST,
   FETCH_ALL_EVENTS_SUCCESS,
@@ -30,12 +28,13 @@ const fetchAllEventsFailure = (error) => {
 
 // action creator
 export const fetchAllEvents = () => {
-  return (dispatch: Dispatch<any>) => {
+  return (dispatch) => {
     dispatch(fetchAllEventsRequest());
     eventService
       .getAllEvents()
       .then((response) => {
-        const events = response.data;
+        const eventArray = Object.values(response.data);
+        const events = [...eventArray];
         dispatch(fetchAllEventsSuccess(events));
       })
       .catch((error) => {
