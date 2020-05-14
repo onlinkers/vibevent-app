@@ -1,8 +1,5 @@
 import { EventListLoading, EventActionTypes } from "types/store";
 
-// replace with axios
-import { apiFetch } from "utils";
-
 const initState: EventListLoading = {
   loading: false,
   events: [],

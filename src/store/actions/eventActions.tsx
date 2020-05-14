@@ -30,7 +30,7 @@ const fetchAllEventsFailure = (error) => {
 
 // action creator
 export const fetchAllEvents = () => {
-  return (dispatch) => {
+  return (dispatch: Dispatch<any>) => {
     dispatch(fetchAllEventsRequest());
     eventService
       .getAllEvents()

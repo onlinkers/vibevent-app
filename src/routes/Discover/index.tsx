@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Dispatch } from "react";
 import { connect } from "react-redux";
 
 import { MapContext, MapProvider } from "context/MapContext";
-import { apiFetch } from "utils";
 import { Event } from "types/props";
 
 import Map from "components/Map";
 import ExploreBar from "components/layouts/exporeBar";
+import { fetchAllEvents } from "store/actions/eventActions";
 
-const Discover: React.FunctionComponent = () => {
+interface DispatchProps {
+  queryAllEvents: () => void;
+}
+
+const Discover: React.FunctionComponent<DispatchProps> = (props) => {
   const [events, setEvents] = useState<Event[]>([]);
-  const [eventsLoaded, setEventsLoaded] = useState<boolean>(true);
+  const [eventsLoaded, setEventsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    // const fetchEvents = async () => {
-    //   const events = await apiFetch("/events", {});
-    //   setEvents(Object.values(events));
-    //   setEventsLoaded(true);
-    // };
-    // fetchEvents();
-  }, []);
+    console.log(props);
+  });
 
   return (
     <MapProvider>
@@ -35,4 +34,19 @@ const Discover: React.FunctionComponent = () => {
   );
 };
 
-export default Discover;
+const mapStateToProps = (state) => {
+  return {
+    events: state.events,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // queryAllEvents: () => {
+    //   dispatch(fetchAllEvents());
+    // },
+    // queryAllEvents: fetchAllEvents(),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Discover);
