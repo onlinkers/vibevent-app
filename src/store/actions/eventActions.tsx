@@ -4,22 +4,27 @@ import {
   FETCH_ALL_EVENTS_FAILURE,
 } from "types/store";
 
-export const fetchEventsRequest = () => {
+export const fetchAllEventsRequest = () => {
   return {
     type: FETCH_ALL_EVENTS_REQUEST,
   };
 };
 
-export const fetchEventsSuccess = (events) => {
+export const fetchAllEventsSuccess = (events) => {
   return {
     type: FETCH_ALL_EVENTS_SUCCESS,
     payload: events,
   };
 };
 
-export const fetchEventsFailure = (error) => {
+export const fetchAllEventsFailure = (error) => {
   return {
     type: FETCH_ALL_EVENTS_FAILURE,
     payload: error,
   };
+};
+
+// action creator
+const fetchAllEvents = () => {
+  return (dispatch) => {};
 };

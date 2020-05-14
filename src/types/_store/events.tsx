@@ -10,11 +10,12 @@ export interface EventListLoading {
   error: string;
 }
 
-// interface SetGeneralEventsAction {
-//   type:
-//     | typeof FETCH_ALL_EVENTS_REQUEST
-//     | typeof FETCH_ALL_EVENTS_SUCCESS
-//     | typeof FETCH_ALL_EVENTS_FAILURE;
-// }
+interface SetGeneralEventsAction {
+  type:
+    | typeof FETCH_ALL_EVENTS_REQUEST
+    | typeof FETCH_ALL_EVENTS_SUCCESS
+    | typeof FETCH_ALL_EVENTS_FAILURE;
+  payload?: any;
+}
 
-// export type EventActionTypes = SetGeneralEventsAction;
+export type EventActionTypes = SetGeneralEventsAction;

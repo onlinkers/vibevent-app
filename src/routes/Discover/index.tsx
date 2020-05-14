@@ -10,7 +10,7 @@ import ExploreBar from "components/layouts/exporeBar";
 
 const Discover: React.FunctionComponent = () => {
   const [events, setEvents] = useState<Event[]>([]);
-  const [eventsLoaded, setEventsLoaded] = useState<boolean>(false);
+  const [eventsLoaded, setEventsLoaded] = useState<boolean>(true);
 
   useEffect(() => {
     // const fetchEvents = async () => {

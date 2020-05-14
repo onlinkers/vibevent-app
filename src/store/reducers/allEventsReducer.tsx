@@ -1,4 +1,4 @@
-import { EventListLoading } from "types/store";
+import { EventListLoading, EventActionTypes } from "types/store";
 
 // replace with axios
 import { apiFetch } from "utils";
@@ -9,27 +9,25 @@ const initState: EventListLoading = {
   error: "",
 };
 
-const fetchEvents = async () => {
-  const events = await apiFetch("/events", {});
-  return events;
-  // setEvents(Object.values(events));
-  // setEventsLoaded(true);
-};
-
-const allEventsReducer = (state = initState, action) => {
+const allEventsReducer = (state = initState, action: EventActionTypes) => {
   switch (action.type) {
     case "FETCH_ALL_EVENTS_REQUEST":
-      fetchEvents().then((data) => {
-        return {
-          ...state,
-          events: data,
-        };
-      });
-      return state;
+      return {
+        ...state,
+        loading: true,
+      };
     case "FETCH_ALL_EVENTS_SUCCESS":
-      return state;
+      return {
+        loading: false,
+        events: action.payload,
+        error: "",
+      };
     case "FETCH_ALL_EVENTS_FAILURE":
-      return state;
+      return {
+        loading: false,
+        events: [...state.events],
+        error: action.payload,
+      };
     default:
       return state;
   }
