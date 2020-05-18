@@ -5,7 +5,7 @@ ONLINKERS' Event Web Application
 
 Some libraries used in this app:
 - Router via `react-router`
-- Storage Management via `redux`
+- Storage Management via `redux` and `redux-thunk`
 - Component Styles via `ant-d`
 - Maps via `mapbox-gl`
 - HTTP Requests via `axios`
