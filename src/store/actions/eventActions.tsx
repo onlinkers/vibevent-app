@@ -2,8 +2,8 @@ import {
   FETCH_ALL_EVENTS_REQUEST,
   FETCH_ALL_EVENTS_SUCCESS,
   FETCH_ALL_EVENTS_FAILURE,
-  EventActionTypes,
-} from "types/store";
+} from "constants/index";
+
 import eventService from "services/eventService";
 
 const fetchAllEventsRequest = () => {

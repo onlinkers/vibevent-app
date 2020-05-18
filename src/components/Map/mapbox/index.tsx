@@ -65,7 +65,7 @@ const Mapbox = React.memo<MapboxProps>(
         // any additional map functionality and listeners should be written
         // in this "useEffect" method
         mapObject.on("load", () => {
-          console.log(events);
+          // console.log(events);
           if (mapContainer.current) {
             setMap(mapObject);
             mapObject.resize();

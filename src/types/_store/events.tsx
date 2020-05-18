@@ -1,8 +1,10 @@
 import { Event } from "types/props";
 
-export const FETCH_ALL_EVENTS_REQUEST = "FETCH_ALL_EVENTS_REQUEST";
-export const FETCH_ALL_EVENTS_SUCCESS = "FETCH_ALL_EVENTS_SUCCESS";
-export const FETCH_ALL_EVENTS_FAILURE = "FETCH_ALL_EVENTS_FAILURE";
+import {
+  FETCH_ALL_EVENTS_REQUEST,
+  FETCH_ALL_EVENTS_FAILURE,
+  FETCH_ALL_EVENTS_SUCCESS,
+} from "constants/";
 
 export interface EventListLoading {
   loading: boolean;

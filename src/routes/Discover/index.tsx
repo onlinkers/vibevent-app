@@ -1,8 +1,6 @@
-/* dependencies */
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-/* components */
 import { MapContext, MapProvider } from "context/MapContext";
 import Map from "components/Map";
 import ExploreBar from "components/layouts/exporeBar";

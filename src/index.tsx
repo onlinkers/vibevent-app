@@ -22,7 +22,7 @@ const composedEnhancers = compose(thunkMiddleWare, reduxDevTools);
 
 const store = createStore(reducers, undefined, composedEnhancers);
 
-store.subscribe(() => console.log(store.getState()));
+// store.subscribe(() => console.log(store.getState()));
 store.dispatch(fetchAllEvents());
 
 ReactDOM.render(
