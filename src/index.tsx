@@ -14,11 +14,16 @@ import { fetchAllEvents } from "store/actions/eventActions";
 import "./index.css";
 
 // possibly abstract this once the amount of middlewares and enhancers grow
-const thunkMiddleWare = applyMiddleware(thunk);
-const reduxDevTools =
+const thunkMiddleware = applyMiddleware(thunk);
+
+// compose with redux dev tools if in 'development' mode and if exists in browser
+const reduxDevTools = process.env.NODE_ENV === "development" &&
   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
   (window as any).__REDUX_DEVTOOLS_EXTENSION__();
-const composedEnhancers = compose(thunkMiddleWare, reduxDevTools);
+
+const composedEnhancers = typeof reduxDevTools === "function"
+  ? compose(thunkMiddleware, reduxDevTools)
+  : compose(thunkMiddleware);
 
 const store = createStore(reducers, undefined, composedEnhancers);
 
