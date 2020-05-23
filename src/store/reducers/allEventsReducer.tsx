@@ -1,4 +1,4 @@
-import { EventListLoading, EventActionTypes } from "types/store";
+import { EventListLoading } from "types/store";
 
 const initState: EventListLoading = {
   loading: false,

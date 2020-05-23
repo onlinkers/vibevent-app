@@ -10,7 +10,7 @@ a {
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 500;
+    z-index: 999;
     box-shadow: 4px 4px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -67,7 +67,7 @@ a {
     position: absolute;
     bottom: 0;
     width: 100%;
-    z-index: 500;
+    z-index: 999;
     box-shadow: 4px 4px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
