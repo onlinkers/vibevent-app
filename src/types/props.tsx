@@ -1,5 +1,5 @@
-export * from "./_types/event";
+export * from "./_props/event";
 
-export * from "./_types/image";
+export * from "./_props/image";
 
-export * from "./_types/venue";
+export * from "./_props/venue";

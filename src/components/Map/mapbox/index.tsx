@@ -17,9 +17,9 @@ const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 // Good resource: https://blog.mapbox.com/mapbox-gl-js-react-764da6cc074a
 
 interface MapboxProps {
-	children?: React.ReactNode
-	functions?: any
-	events: Event[] | []
+  children?: React.ReactNode;
+  functions?: any;
+  events: Event[] | [];
 }
 
 interface EventFeature {
@@ -44,7 +44,6 @@ interface EventFeature {
 // A "TODO" is to determine how often this data needs to change (important for live events)
 const Mapbox = React.memo<MapboxProps>(
   ({ children, functions, events = [] }) => {
-
     const { map, setMap } = useContext(MapContext);
     const mapContainer = useRef(null);
     const [center, setCenter] = useState([-123.1207, 49.2827]);
@@ -183,6 +182,7 @@ const Mapbox = React.memo<MapboxProps>(
         });
 
         mapObject.on("load", () => {
+          // console.log(events);
           if (mapContainer.current) {
             setMap(mapObject);
             mapObject.resize();
