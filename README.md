@@ -23,7 +23,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 
 1. Clone the repository: ```git clone```
-2. Install the packages: ```cd event-discovery-webapp``` and ```npm install```
+2. Install the packages: ```cd event-discovery-app``` and ```npm install```
 3. Setup the [environmental files](#environmental-files)
 
 ### Running
