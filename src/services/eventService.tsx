@@ -16,4 +16,9 @@ export default {
   deleteEvent: ({ id }) => {
     return api().delete(`/event/${id}`);
   },
+
+  // EVENT CATEGORIES
+  getAllEventCategories: () => {
+    return api().get("/events/categories");
+  }
 };

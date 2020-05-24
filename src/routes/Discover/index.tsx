@@ -5,13 +5,15 @@ import { MapContext, MapProvider } from "context/MapContext";
 import Map from "components/Map";
 import ExploreBar from "components/layouts/exporeBar";
 // import CategoryFilter from "components/Map/filters/categoryFilter";
-import { EventsState } from "types/store";
+import { EventsState, EventCategoriesState } from "types/store";
 
 interface DispatchProps {
   eventData: EventsState;
+  eventCategories: EventCategoriesState;
 }
 
-const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
+const Discover: React.FunctionComponent<DispatchProps> = ({ eventData, eventCategories }) => {
+  console.log({ eventCategories });
   return (
     <MapProvider>
       <MapContext.Consumer>
@@ -30,9 +32,10 @@ const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
   );
 };
 
-const mapStateToProps = ({ eventData }) => {
+const mapStateToProps = ({ eventData, eventCategories }) => {
   return {
     eventData: eventData,
+    eventCategories: eventCategories,
   };
 };
 

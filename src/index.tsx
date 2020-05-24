@@ -9,6 +9,7 @@ import * as serviceWorker from "./serviceWorker";
 import Routes from "./routes";
 import reducers from "store/reducers";
 import { fetchAllEvents } from "store/actions/eventActions";
+import { fetchAllEventCategories } from "store/actions/eventCategoryActions";
 
 /* STYLESHEETS */
 import "./index.css";
@@ -29,6 +30,7 @@ const store = createStore(reducers, undefined, composedEnhancers);
 
 // store.subscribe(() => console.log(store.getState()));
 store.dispatch(fetchAllEvents());
+store.dispatch(fetchAllEventCategories());
 
 ReactDOM.render(
   <React.StrictMode>
