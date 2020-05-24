@@ -14,6 +14,6 @@ export default {
     return api().put(`/event/${id}`, payload);
   },
   deleteEvent: ({ id }) => {
-    return api().delete(`/events/${id}`);
+    return api().delete(`/event/${id}`);
   },
 };
