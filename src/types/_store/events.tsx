@@ -2,22 +2,24 @@ import { Event } from "types/props";
 
 import {
   FETCH_ALL_EVENTS_REQUEST,
-  FETCH_ALL_EVENTS_FAILURE,
   FETCH_ALL_EVENTS_SUCCESS,
-} from "constants/";
+  FETCH_ALL_EVENTS_FAILURE,
+} from "constants/index";
 
-export interface EventListLoading {
+export interface EventsPayload {
+  [key: string]: Event
+}
+
+export interface EventsState {
   loading: boolean;
-  events: Event[];
+  events: EventsPayload;
   error: string;
 }
 
-interface FetchAllEventsAction {
+export interface FetchAllEventsAction {
   type:
     | typeof FETCH_ALL_EVENTS_REQUEST
     | typeof FETCH_ALL_EVENTS_SUCCESS
     | typeof FETCH_ALL_EVENTS_FAILURE;
   payload?: any;
 }
-
-export type EventActionTypes = FetchAllEventsAction;

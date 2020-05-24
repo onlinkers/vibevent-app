@@ -4,6 +4,8 @@ import {
   FETCH_ALL_EVENTS_FAILURE,
 } from "constants/index";
 
+import { EventsPayload } from "types/store";
+
 import eventService from "services/eventService";
 
 const fetchAllEventsRequest = () => {
@@ -12,14 +14,14 @@ const fetchAllEventsRequest = () => {
   };
 };
 
-const fetchAllEventsSuccess = (events) => {
+const fetchAllEventsSuccess = (events: EventsPayload) => {
   return {
     type: FETCH_ALL_EVENTS_SUCCESS,
     payload: events,
   };
 };
 
-const fetchAllEventsFailure = (error) => {
+const fetchAllEventsFailure = (error: string) => {
   return {
     type: FETCH_ALL_EVENTS_FAILURE,
     payload: error,
@@ -33,8 +35,7 @@ export const fetchAllEvents = () => {
     eventService
       .getAllEvents()
       .then((response) => {
-        const eventArray = Object.values(response.data);
-        const events = [...eventArray];
+        const events = response.data;
         dispatch(fetchAllEventsSuccess(events));
       })
       .catch((error) => {

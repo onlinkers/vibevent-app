@@ -1,28 +1,33 @@
-import { EventListLoading } from "types/store";
+import { EventsState, FetchAllEventsAction } from "types/store";
+import {
+  FETCH_ALL_EVENTS_REQUEST,
+  FETCH_ALL_EVENTS_SUCCESS,
+  FETCH_ALL_EVENTS_FAILURE,
+} from "constants/index";
 
-const initState: EventListLoading = {
+const initState: EventsState = {
   loading: false,
-  events: [],
+  events: {},
   error: "",
 };
 
-const allEventsReducer = (state = initState, action) => {
+const allEventsReducer = (state = initState, action: FetchAllEventsAction | any) => {
   switch (action.type) {
-    case "FETCH_ALL_EVENTS_REQUEST":
+    case FETCH_ALL_EVENTS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case "FETCH_ALL_EVENTS_SUCCESS":
+    case FETCH_ALL_EVENTS_SUCCESS:
       return {
         loading: false,
         events: action.payload,
         error: "",
       };
-    case "FETCH_ALL_EVENTS_FAILURE":
+    case FETCH_ALL_EVENTS_FAILURE:
       return {
         loading: false,
-        events: [...state.events],
+        events: { ...state.events },
         error: action.payload,
       };
     default:
