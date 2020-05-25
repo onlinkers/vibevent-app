@@ -34,7 +34,8 @@ const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
             />
             <Map
               loaded={loaded && !eventsLoading}
-              events={Object.values(events)}
+              events={events}
+              selectedCategories={selectedCategories}
             />
           </div>
         )}

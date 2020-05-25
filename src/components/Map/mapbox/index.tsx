@@ -10,6 +10,8 @@ import { Event } from "types/props";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./index.css";
 
+import { filterEventMarkersToDelete } from "utils";
+
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
 // Most of the react mapbox wrappers need updating to accommodate for deprecating react functions & packages
@@ -44,7 +46,7 @@ interface EventFeature {
 // A "TODO" is to determine how often this data needs to change (important for live events)
 const Mapbox = React.memo<MapboxProps>(
   ({ children, functions, events = [] }) => {
-    const { map, setMap } = useContext(MapContext);
+    const { map, setMap, eventMarkerObjects, setEventMarkerObjects } = useContext(MapContext);
     const mapContainer = useRef(null);
     const [center, setCenter] = useState([-123.1207, 49.2827]);
     const [zoom, setZoom] = useState(8);
@@ -67,6 +69,7 @@ const Mapbox = React.memo<MapboxProps>(
     // | _|| |_| | .` | (__  | |  | | (_) | .` \__ \
     // |_|  \___/|_|\_|\___| |_| |___\___/|_|\_|___/
     //
+    // http://patorjk.com/software/taag/#p=display&f=Small&t=FUNCTIONS
 
     /**
      * INITIALIZATION FUNCTION
@@ -74,7 +77,7 @@ const Mapbox = React.memo<MapboxProps>(
      * The function is used to allow lookup of events from our database (stored in redux)
      * @param query - the query string entered into the search bar
      */
-    const localEventGeocoder = (query) => {
+    const localEventGeocoder = (query: string) => {
       const matchingFeatures: EventFeature[] = [];
       formattedEvents.features.forEach((event) => {
 
@@ -99,7 +102,9 @@ const Mapbox = React.memo<MapboxProps>(
      * Creates and loads event markers onto the map
      * @param events - array of events we want to load into the map
      */
-    const loadEventMarkers = (events) => {
+    const loadEventMarkers = (events: Event[]) => {
+      const markers = {};
+
       // load the event markers
       events.forEach((event) => {
         // load the react JSX as a DOM element
@@ -114,10 +119,15 @@ const Mapbox = React.memo<MapboxProps>(
         );
 
         // Add the element to the map
-        new mapboxgl.Marker(markerNode, {})
+        const marker = new mapboxgl.Marker(markerNode, {})
           .setLngLat(event.venue.location.coordinates)
           .addTo(map);
+
+        markers[event._id] = marker;
+
       });
+
+      setEventMarkerObjects({ ...eventMarkerObjects, ...markers });
     };
 
     /**
@@ -205,28 +215,48 @@ const Mapbox = React.memo<MapboxProps>(
     // (disable line to overcome exhaustive depts in the previous line)
     
 
-    //    ___  ___ ___ ___    _ _____ ___ ___  _  _ ___ 
-    //   / _ \| _ \ __| _ \  /_\_   _|_ _/ _ \| \| / __|
-    //  | (_) |  _/ _||   / / _ \| |  | | (_) | .` \__ \
-    //   \___/|_| |___|_|_\/_/ \_\_| |___\___/|_|\_|___/
-    //
+    //  _    ___ ___ _____ ___ _  _ ___ ___  ___ 
+    // | |  |_ _/ __|_   _| __| \| | __| _ \/ __|
+    // | |__ | |\__ \ | | | _|| .` | _||   /\__ \
+    // |____|___|___/ |_| |___|_|\_|___|_|_\|___/
+    // 
 
-    // Write out map modification functions here
-    
+    // Change markers according to event list
+    useEffect(() => {
+      // look for markers to delete (reduce need to remove+re-add markers)
+      const results = filterEventMarkersToDelete(eventMarkerObjects, events);
+
+      if(results) {
+        const { markersToDelete, markersLeft, eventIdsToIgnore } = results;
+        // delete markers we don't want
+        markersToDelete.forEach((marker) => {
+          marker.remove();
+        });
+        // reset the marker objects
+        setEventMarkerObjects(markersLeft);
+        
+        // add new markers
+        const eventsToAdd = events.filter((event) => !eventIdsToIgnore.includes(event._id));
+        if(eventsToAdd.length) {
+          loadEventMarkers(eventsToAdd);
+        }
+      }
+    }, [events]); // eslint-disable-line
+    // (disable line to overcome exhaustive depts in the previous line)
 
     //  ___ ___ _  _ ___  ___ ___ 
     // | _ \ __| \| |   \| __| _ \
     // |   / _|| .` | |) | _||   /
     // |_|_\___|_|\_|___/|___|_|_\
     //    
-                     
+
     return (
       <React.Fragment>
         <div className="Mapbox" ref={mapContainer} />
         {map && children}
       </React.Fragment>
     );
-  }
+  },
 );
 
 export default Mapbox;

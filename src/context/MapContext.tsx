@@ -7,6 +7,8 @@ interface ContextProps {
   setMap: Function;
   selectedCategories: string[];
   setSelectedCategories: Function;
+  eventMarkerObjects: { [key: string]: any };
+  setEventMarkerObjects: Function;
 }
 
 interface ProviderProps {
@@ -19,6 +21,8 @@ const MapContext = createContext<ContextProps>({
   setMap: () => {},
   selectedCategories: [],
   setSelectedCategories: () => {},
+  eventMarkerObjects: {},
+  setEventMarkerObjects: () => {},
 });
 
 const MapProvider: React.FunctionComponent<ProviderProps> = ({ children }) => {
@@ -26,12 +30,15 @@ const MapProvider: React.FunctionComponent<ProviderProps> = ({ children }) => {
   // "loaded" stores a boolean that marks 'true' when the mapbox object is stored
   const [map, setMap] = useState<Map | null>(null);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [eventMarkerObjects, setEventMarkerObjects] = useState<{ [key: string]: any }>({});
   const value = {
     loaded: !!map,
     map,
     setMap,
     selectedCategories,
-    setSelectedCategories
+    setSelectedCategories,
+    eventMarkerObjects,
+    setEventMarkerObjects
   };
 
   return <MapContext.Provider value={value}>{children}</MapContext.Provider>;

@@ -7,3 +7,5 @@ export * from "./_utils/arrayAlphabeticalComparer";
 export * from "./_utils/filterArrayByArray";
 
 export * from "./_utils/filterEventsByCategoryKeys";
+
+export * from "./_utils/filterEventMarkersToDelete";
