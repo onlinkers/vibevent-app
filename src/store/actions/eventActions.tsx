@@ -1,16 +1,30 @@
 import {
-  FETCH_ALL_EVENTS_REQUEST,
+  FETCH_EVENT_DATA_REQUEST,
+  FETCH_ALL_EVENT_DATA_SUCCESS,
   FETCH_ALL_EVENTS_SUCCESS,
   FETCH_ALL_EVENTS_FAILURE,
+  FETCH_EVENT_CATEGORIES_SUCCESS,
+  FETCH_EVENT_CATEGORIES_FAILURE,
 } from "constants/index";
 
-import { EventsPayload } from "types/store";
+import {
+  EventsPayload,
+  EventCategoriesPayload
+} from "types/store";
 
 import eventService from "services/eventService";
 
-const fetchAllEventsRequest = () => {
+// ACTIONS
+const fetchEventDataRequest = () => {
   return {
-    type: FETCH_ALL_EVENTS_REQUEST,
+    type: FETCH_EVENT_DATA_REQUEST
+  };
+};
+
+const fetchEventDataSuccess = (events: EventsPayload, eventCategories: EventCategoriesPayload) => {
+  return {
+    type: FETCH_ALL_EVENT_DATA_SUCCESS,
+    payload: { events, eventCategories }
   };
 };
 
@@ -28,10 +42,56 @@ const fetchAllEventsFailure = (error: string) => {
   };
 };
 
-// action creator
+  
+const fetchEventCategoriesSuccess = (eventCategories: EventCategoriesPayload) => {
+  return {
+    type: FETCH_EVENT_CATEGORIES_SUCCESS,
+    payload: eventCategories,
+  };
+};
+
+const fetchEventCategoriesFailure = (error: string) => {
+  return {
+    type: FETCH_EVENT_CATEGORIES_FAILURE,
+    payload: error,
+  };
+};
+
+// ACTION CREATORS
+export const fetchAllEventData = () => {
+  return async (dispatch) => {
+    dispatch(fetchEventDataRequest());
+    let events = {};
+    let eventCategories = {};
+    
+    // Get all events
+    try {
+      const { data } = await eventService.getAllEvents();
+      events = data;
+
+    }
+    catch (error) {
+      dispatch(fetchAllEventsFailure(error.message));
+    }
+    
+    // Get all event categories
+    try {
+      const { data } = await eventService.getAllEventCategories();
+      eventCategories = data;
+    }
+    catch (error) {
+      dispatch(fetchEventCategoriesFailure(error.message));
+      
+    }
+
+    // Eventually, save all the data anyway
+    dispatch(fetchEventDataSuccess(events, eventCategories));
+  };
+};
+
 export const fetchAllEvents = () => {
   return (dispatch) => {
-    dispatch(fetchAllEventsRequest());
+    dispatch(fetchEventDataRequest());
     eventService
       .getAllEvents()
       .then((response) => {
@@ -43,3 +103,19 @@ export const fetchAllEvents = () => {
       });
   };
 };
+
+export const fetchEventCategories = () => {
+  return (dispatch) => {
+    dispatch(fetchEventDataRequest());
+    eventService
+      .getAllEventCategories()
+      .then((response) => {
+        const eventCategories = response.data;
+        dispatch(fetchEventCategoriesSuccess(eventCategories));
+      })
+      .catch((error) => {
+        dispatch(fetchEventCategoriesFailure(error.message));
+      });
+  };
+};
+  
