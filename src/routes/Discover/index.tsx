@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { MapContext, MapProvider } from "context/MapContext";
 import Map from "components/Map";
 import ExploreBar from "components/layouts/exporeBar";
-// import CategoryFilter from "components/Map/filters/categoryFilter";
+import CategoryFilter from "components/Map/filters/categoryFilter";
+
 import { EventDataState } from "types/store";
 
 interface DispatchProps {
@@ -13,16 +14,27 @@ interface DispatchProps {
 
 const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
   console.log({ eventData });
+
+  const {
+    events,
+    eventCategories,
+    loading: eventsLoading
+  } = eventData;
+
   return (
     <MapProvider>
       <MapContext.Consumer>
-        {({ loaded }) => (
+        {({ loaded, selectedCategories, setSelectedCategories }) => (
           <div className="Discover Page">
             <ExploreBar />
-            {/* <CategoryFilter /> */}
+            <CategoryFilter 
+              eventCategoryDefinitions={eventCategories}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+            />
             <Map
-              loaded={loaded && !eventData.loading}
-              events={Object.values(eventData.events)}
+              loaded={loaded && !eventsLoading}
+              events={Object.values(events)}
             />
           </div>
         )}
@@ -32,9 +44,7 @@ const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
 };
 
 const mapStateToProps = ({ eventData }) => {
-  return {
-    eventData: eventData,
-  };
+  return { eventData };
 };
 
 export default connect(mapStateToProps)(Discover);

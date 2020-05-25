@@ -1,0 +1,22 @@
+.CategoryScroller {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    flex-wrap: nowrap;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 25%;
+    width: 40%;
+    z-index: 1;
+}
+
+.CategoryScroller > .category-chip {
+    background: transparent;
+    color: black;
+}
+
+.CategoryScroller > .category-chip--active {
+    background: white;
+    color: black;
+}
