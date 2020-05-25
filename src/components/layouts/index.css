@@ -15,8 +15,7 @@ a {
 }
 
 .explore-title {
-    margin-left: 1em;
-    margin-right: 1em;
+    margin: 1em;
 }
 
 .explore-links {
@@ -35,10 +34,9 @@ a {
 .explore-link {
     color: grey;
     line-height: 2em;
-    margin-right: 1em;
-    margin-left: 1em;
-    margin-bottom: 1em;
+    margin: 1em;
     user-select: none;
+    font-size: 1.25em;
 }
 .active { color: #2351e0; }
 .explore-link-text {
@@ -56,10 +54,11 @@ a {
     height: 2px;
 }
 
-.explore-profile {
+.explore-profile > .anticon {
     /* TODO: Replace with User Profile Icon/Dropdown */
-    line-height: 1.5em;
-    margin-right: 1em;
+    margin: 0.5em;
+    font-size: 2.5em;
+    line-height: 1em;
 }
 
 .mobile-explore {

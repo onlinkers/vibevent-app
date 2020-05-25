@@ -22,6 +22,8 @@ interface Props {
     
 }
 
+const iconStyle = { fontSize: "1.5em", color: "##2351e0" };
+
 const ExploreBar: React.FunctionComponent<Props> = () => {
 
 	const { innerWidth } = window;
@@ -32,7 +34,7 @@ const ExploreBar: React.FunctionComponent<Props> = () => {
 	return (innerWidth >= 800 ? (
 
 		<div className="desktop-explore">
-			<Link to="/"><h3 className="explore-title" color="blue">ONLINKER</h3></Link>
+			<Link to="/"><h2 className="explore-title" color="blue">ONLINKER</h2></Link>
 			<div className="explore-links">
 				<Link to="/event/dashboard">
 					<div className="explore-link">
@@ -59,7 +61,7 @@ const ExploreBar: React.FunctionComponent<Props> = () => {
 					</div>
 				</Link>
 			</div>
-			<div className="explore-profile"><UserOutlined style={{ color: "##2351e0" }}/></div>
+			<div className="explore-profile"><UserOutlined /></div>
 		</div>
 
 	) : ( // TODO: Icons and stuff
@@ -67,17 +69,17 @@ const ExploreBar: React.FunctionComponent<Props> = () => {
 		<div className="mobile-explore">
 			<div className="explore-links explore-links---mobile">
 				<Link to="/event/dashboard">
-					<p className="explore-link"><HomeOutlined style={{ fontSize: "1.5em", color: "##2351e0" }}/></p>
+					<p className="explore-link"><HomeOutlined style={iconStyle}/></p>
 				</Link>
 				<Link to="/discover">
-					<p className="explore-link"><GlobalOutlined style={{ fontSize: "1.5em", color: "##2351e0" }}/></p>
+					<p className="explore-link"><GlobalOutlined style={iconStyle}/></p>
 				</Link>
 				<div className="explore-mobile-spacer" />
 				<Link to="#">
-					<p className="explore-link"><BulbOutlined style={{ fontSize: "1.5em", color: "##2351e0" }}/></p>
+					<p className="explore-link"><BulbOutlined style={iconStyle}/></p>
 				</Link>
 				<Link to="#">
-					<p className="explore-link"><UserOutlined style={{ fontSize: "1.5em", color: "##2351e0" }}/></p>
+					<p className="explore-link"><UserOutlined style={iconStyle}/></p>
 				</Link>
 			</div>
 			<div className="explore-mobile-button"><ExploreButton /></div>
