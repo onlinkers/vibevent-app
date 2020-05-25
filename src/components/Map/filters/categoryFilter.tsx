@@ -3,12 +3,16 @@ import React from "react";
 import "./index.css";
 
 import { EventCategoriesPayload } from "types/store";
-import { filterArrayByArray } from "utils";
+import { arrayAlphabeticalComparer, filterArrayByArray } from "utils";
+
+import { Tag } from "antd";
+const { CheckableTag } = Tag;
 
 interface Props {
     eventCategoryDefinitions: EventCategoriesPayload
     selectedCategories: string[]
     setSelectedCategories: Function
+    loaded: boolean
 }
 
 const CategoryFilter = (props: Props) => {
@@ -18,40 +22,48 @@ const CategoryFilter = (props: Props) => {
     const {
         eventCategoryDefinitions,
         selectedCategories,
+        setSelectedCategories,
+        loaded
     } = props;
 
     const categoryKeys = Object.keys(eventCategoryDefinitions);
     const unselectedCategories = filterArrayByArray(categoryKeys, selectedCategories);
 
-    const addCategory = (event) => {
-        console.log("adding", event);
+    const changeCategory = (add: boolean, key: string) => {
+
+        // duplicate array to overcome component not-rendering
+        let newSelected = [...selectedCategories];
+
+        if(add) newSelected.push(key);
+        else newSelected = newSelected.filter((category) => category !== key);
+        
+        newSelected = newSelected.sort(arrayAlphabeticalComparer(null));
+        setSelectedCategories(newSelected);
     };
 
-    const removeCategory = (event) => {
-        console.log("remove", event);
-    };
-
-    return innerWidth >= 800 ? (
+    return innerWidth >= 800 && loaded ? (
     <div className="CategoryScroller">
         {selectedCategories.map((categoryKey) => 
-            <div
+            <CheckableTag
                 key={categoryKey}
                 // TODO: Import color from styles
                 className="category-chip--active"
-                onClick={removeCategory}
+                onChange={(add) => changeCategory(add, categoryKey)}
+                checked={true}
             >
             { eventCategoryDefinitions[categoryKey] }
-            </div>
+            </CheckableTag>
         )}
         {unselectedCategories.map((categoryKey) => 
-            <div
+            <CheckableTag
                 key={categoryKey}
                 // TODO: Import color from styles
                 className="category-chip"
-                onClick={addCategory}
+                onChange={(add) => changeCategory(add, categoryKey)}
+                checked={false}
             >
             { eventCategoryDefinitions[categoryKey] }
-            </div>
+            </CheckableTag>
         )}
     </div>
     ) : null;

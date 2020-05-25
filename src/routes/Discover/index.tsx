@@ -13,7 +13,6 @@ interface DispatchProps {
 }
 
 const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
-  console.log({ eventData });
 
   const {
     events,
@@ -27,7 +26,8 @@ const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
         {({ loaded, selectedCategories, setSelectedCategories }) => (
           <div className="Discover Page">
             <ExploreBar />
-            <CategoryFilter 
+            <CategoryFilter
+              loaded={loaded && !eventsLoading}
               eventCategoryDefinitions={eventCategories}
               selectedCategories={selectedCategories}
               setSelectedCategories={setSelectedCategories}
