@@ -7,8 +7,9 @@ interface DispatchProps {
 }
 
 const Dashboard: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
-  console.log(eventData);
-  const eventList = eventData.events.map((event) => {
+  const { events } = eventData;
+
+  const eventList = events.map((event) => {
     return (
       <li key={event._id}>
         {event.name}
@@ -20,6 +21,7 @@ const Dashboard: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
       </li>
     );
   });
+
   return (
     <div>
       <div>dashboard</div>
