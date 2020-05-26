@@ -1,33 +1,26 @@
-import React, { useEffect, useState } from "react";
-import Map from "components/Map";
-import ExploreBar from "components/layouts/exporeBar";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 
 import { MapContext, MapProvider } from "context/MapContext";
-import { apiFetch } from "utils";
+import Map from "components/Map";
+import ExploreBar from "components/layouts/exporeBar";
+import { EventListLoading } from "types/store";
 
-import { Event } from "types/props";
+interface DispatchProps {
+  eventData: EventListLoading;
+}
 
-const Discover: React.FunctionComponent = () => {
-  const [events, setEvents] = useState<Event[]>([]);
-  const [eventsLoaded, setEventsLoaded] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      const events = await apiFetch("/events", {});
-      setEvents(Object.values(events));
-      setEventsLoaded(true);
-    };
-
-    fetchEvents();
-  }, []);
-
+const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
   return (
     <MapProvider>
       <MapContext.Consumer>
         {({ loaded }) => (
           <div className="Discover Page">
             <ExploreBar />
-            <Map loaded={loaded && eventsLoaded} events={events} />
+            <Map
+              loaded={loaded && !eventData.loading}
+              events={eventData.events}
+            />
           </div>
         )}
       </MapContext.Consumer>
@@ -35,4 +28,14 @@ const Discover: React.FunctionComponent = () => {
   );
 };
 
-export default Discover;
+const mapStateToProps = ({ eventData }) => {
+  return {
+    eventData: eventData,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Discover);

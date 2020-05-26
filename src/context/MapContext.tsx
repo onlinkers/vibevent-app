@@ -2,13 +2,13 @@ import React, { createContext, useState } from "react";
 import { Map } from "mapbox-gl";
 
 interface ContextProps {
-  setMap: Function
-  map: Map | null
-  loaded: boolean
+  setMap: Function;
+  map: Map | null;
+  loaded: boolean;
 }
 
 interface ProviderProps {
-  children: JSX.Element
+  children: JSX.Element;
 }
 
 const MapContext = createContext<ContextProps>({
