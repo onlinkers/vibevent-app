@@ -23,7 +23,10 @@ export interface EventDataState {
   loading: boolean;
   events: EventsPayload;
   eventCategories: EventCategoriesPayload
-  errors: string[];
+  errors: {
+    events?: string
+    eventCategories?: string,
+  };
 }
 
 // ACTIONS

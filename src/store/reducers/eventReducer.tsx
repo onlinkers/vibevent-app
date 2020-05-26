@@ -12,7 +12,7 @@ const initState: EventDataState = {
   loading: false,
   events: {},
   eventCategories: {},
-  errors: [], // TODO: Better error handling
+  errors: {},
 };
 
 const eventReducer = (state = initState, action: FetchEventDataAction | any) => {
@@ -21,7 +21,7 @@ const eventReducer = (state = initState, action: FetchEventDataAction | any) => 
       return {
         ...state,
         loading: true,
-        errors: [],
+        errors: {},
       };
 
     // ALL DATA
@@ -45,7 +45,7 @@ const eventReducer = (state = initState, action: FetchEventDataAction | any) => 
         ...state,
         loading: false,
         events: { ...state.events },
-        errors: [...state.errors, `ALL EVENTS REQUEST ERROR: ${action.payload}`],
+        errors: { ...state.errors, events: action.payload },
       };
 
     // EVENT CATEGORIES
@@ -59,7 +59,7 @@ const eventReducer = (state = initState, action: FetchEventDataAction | any) => 
       return {
         ...state,
         loading: false,
-        errors: [...state.errors, `EVENT CATEGORY REQUEST ERROR: ${action.payload}`],
+        errors: { ...state.errors, eventCategories: action.payload },
       };
       
     default:
