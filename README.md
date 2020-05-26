@@ -7,7 +7,7 @@ Some libraries used in this app:
 - Router via `react-router`
 - Storage Management via `redux` and `redux-thunk`
 - Component Styles via `ant-d`
-- Maps via `mapbox-gl`
+- Maps via `mapbox-gl` + `mapbox-gl-geocoder`
 - HTTP Requests via `axios`
 
 ## Getting Started

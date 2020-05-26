@@ -224,6 +224,7 @@ const Mapbox = React.memo<MapboxProps>(
     // Change markers according to event list
     useEffect(() => {
       // look for markers to delete (reduce need to remove+re-add markers)
+      // TODO: Instead of deleting, add some more logic to allow "hiding" and "showing" instead.
       const results = filterEventMarkersToDelete(eventMarkerObjects, events);
 
       if(results) {

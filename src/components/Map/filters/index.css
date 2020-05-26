@@ -10,6 +10,13 @@
     width: 40%;
     z-index: 1;
 }
+/* TODO: USE SASS FOR MOBILE VIEW */
+@media only screen and (max-width: 800px) {
+    .CategoryScroller {
+        width: 80%;
+    }
+}
+
 /* Hide scrollbar */
 .CategoryScroller {
     -ms-overflow-style: none;

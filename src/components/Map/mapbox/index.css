@@ -20,8 +20,13 @@
 
 .Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder {
     margin: 0;
-    /* TODO: WIDTH WHEN MOBILE VIEW */
     width: 40%;
+}
+/* TODO: USE SASS FOR MOBILE VIEW */
+@media only screen and (max-width: 800px) {
+    .Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder {
+        width: 80%;
+    }
 }
 
 .Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder {
@@ -37,7 +42,6 @@
     /* TODO: USE SCSS VARIABLES */
     fill: #2351e0;
     position: absolute;
-    margin: 0.5em;
     height: 1.5em;
     width: 1.5em;
 }

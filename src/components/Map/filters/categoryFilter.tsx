@@ -17,8 +17,6 @@ interface Props {
 
 const CategoryFilter = (props: Props) => {
 
-    const { innerWidth } = window;
-
     const {
         eventCategoryDefinitions,
         selectedCategories,
@@ -41,7 +39,7 @@ const CategoryFilter = (props: Props) => {
         setSelectedCategories(newSelected);
     };
 
-    return innerWidth >= 800 && loaded ? (
+    return loaded ? (
     <div className="CategoryScroller">
         {selectedCategories.map((categoryKey) => 
             <CheckableTag

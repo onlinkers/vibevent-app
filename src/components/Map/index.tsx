@@ -21,7 +21,7 @@ const Map = React.memo<Props>(({ loaded, events, selectedCategories }) => {
 	// Allow redirecting from componenets of the map
 	const history = useHistory();
 
-	const redirectToEvent = (eventId) => {
+	const redirectToEvent = (eventId: string) => {
 		history.push(`/event/${eventId}`); 
 	};
 
