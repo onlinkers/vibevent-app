@@ -1,0 +1,22 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-eventdiscoveryapp-dev-82634-authRole",
+            "UnauthRoleArn": "arn:aws:iam::914423157927:role/amplify-eventdiscoveryapp-dev-82634-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::914423157927:role/amplify-eventdiscoveryapp-dev-82634-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-eventdiscoveryapp-dev-82634-deployment",
+            "UnauthRoleName": "amplify-eventdiscoveryapp-dev-82634-unauthRole",
+            "StackName": "amplify-eventdiscoveryapp-dev-82634",
+            "StackId": "arn:aws:cloudformation:us-east-1:914423157927:stack/amplify-eventdiscoveryapp-dev-82634/9efbf4a0-a0f7-11ea-bba8-0e2470ba0d5b",
+            "AmplifyAppId": "d3ho3whkb2jci0"
+        },
+        "categories": {
+            "auth": {
+                "eventdiscvoeryauth": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"658990371350111\",\"client_secret\":\"4d2655ce4c0d6217cfb63d401db8d8da\"},{\"ProviderName\":\"Google\",\"client_id\":\"1019858465630-4j4ipsasphknf5f92a4e0ta6t03q01vb.apps.googleusercontent.com\",\"client_secret\":\"L96bv5Dp8JIR9DjhRKSMPvOe\"}]"
+                }
+            }
+        }
+    }
+}

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import Amplify from "aws-amplify";
 
 /* COMPONENTS */
 import * as serviceWorker from "./serviceWorker";
@@ -12,9 +13,13 @@ import { fetchAllEvents } from "store/actions/eventActions";
 
 /* UTILITIES */
 import { AppProvider } from "context/AppContext";
+import awsconfig from "./aws-exports.js";
 
 /* STYLESHEETS */
 import "./index.css";
+
+// configure amplify
+Amplify.configure(awsconfig);
 
 // possibly abstract this once the amount of middlewares and enhancers grow
 const thunkMiddleware = applyMiddleware(thunk);
