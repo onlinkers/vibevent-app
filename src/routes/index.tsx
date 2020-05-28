@@ -1,21 +1,25 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-// Import all the route wrappers
+import AuthRoute from "./AuthRoute";
+
+// Import all the parent routes
 import Home from "./Home";
 import Events from "./Event";
 import Discover from "./Discover";
 import Auth from "./Authentication";
-import NotFound from "./Authentication/NotFound";
+import NotFound from "./NotFound";
+import Forbidden from "./Forbidden";
 
 const Routes = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact path="/" component={Home}/>
-				<Route path="/discover" component={Discover}/>
-				<Route path="/event" component={Events}/>
-				<Route path="/auth" component={Auth}/>
+				<AuthRoute exact path="/" component={<Discover/>} altComponent={<Home/>}/>
+				<AuthRoute path="/discover" component={<Discover/>}/>
+				<AuthRoute path="/event" component={<Events/>}/>
+				<AuthRoute path="/auth" component={<NotFound/>} altComponent={<Auth/>}/>
+				<Route path="/forbidden" component={Forbidden}/>
 				<Route path="*" component={NotFound}/>
 			</Switch>
 		</BrowserRouter>

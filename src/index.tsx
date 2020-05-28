@@ -10,6 +10,9 @@ import Routes from "./routes";
 import reducers from "store/reducers";
 import { fetchAllEvents } from "store/actions/eventActions";
 
+/* UTILITIES */
+import { AppProvider } from "context/AppContext";
+
 /* STYLESHEETS */
 import "./index.css";
 
@@ -33,9 +36,11 @@ store.dispatch(fetchAllEvents());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <div className="App">
-        <Routes />
-      </div>
+      <AppProvider>
+        <div className="App">
+          <Routes />
+        </div>
+      </AppProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
