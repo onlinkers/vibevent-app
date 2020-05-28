@@ -27,7 +27,7 @@ const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
         {({ loaded, selectedCategories, setSelectedCategories }) => (
           <div className="Discover Page">
             <ExploreBar />
-            {errors.eventCategories ? <CategoryFilter
+            {!errors.eventCategories ? <CategoryFilter
               loaded={loaded && !eventsLoading}
               eventCategoryDefinitions={eventCategories}
               selectedCategories={selectedCategories}

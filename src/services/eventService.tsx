@@ -1,5 +1,6 @@
 import api from "../api";
 
+// TODO: Errror handling with antd message
 export default {
   getAllEvents: () => {
     return api().get("/events");

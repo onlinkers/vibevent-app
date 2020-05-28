@@ -68,7 +68,6 @@ export const fetchAllEventData = () => {
     try {
       const { data } = await eventService.getAllEvents();
       events = data;
-
     }
     catch (error) {
       dispatch(fetchAllEventsFailure(error.message));
@@ -81,7 +80,6 @@ export const fetchAllEventData = () => {
     }
     catch (error) {
       dispatch(fetchEventCategoriesFailure(error.message));
-      
     }
 
     // Eventually, save all the data anyway
@@ -90,32 +88,30 @@ export const fetchAllEventData = () => {
 };
 
 export const fetchAllEvents = () => {
-  return (dispatch) => {
-    dispatch(fetchEventDataRequest());
-    eventService
-      .getAllEvents()
-      .then((response) => {
-        const events = response.data;
-        dispatch(fetchAllEventsSuccess(events));
-      })
-      .catch((error) => {
-        dispatch(fetchAllEventsFailure(error.message));
-      });
+  return async (dispatch) => {
+    try {
+      dispatch(fetchEventDataRequest());
+      const { data } = await eventService.getAllEvents();
+      const events = data;
+      dispatch(fetchAllEventsSuccess(events));
+    }
+    catch(error) {
+      dispatch(fetchAllEventsFailure(error.message));
+    };
   };
 };
 
 export const fetchEventCategories = () => {
-  return (dispatch) => {
-    dispatch(fetchEventDataRequest());
-    eventService
-      .getAllEventCategories()
-      .then((response) => {
-        const eventCategories = response.data;
-        dispatch(fetchEventCategoriesSuccess(eventCategories));
-      })
-      .catch((error) => {
-        dispatch(fetchEventCategoriesFailure(error.message));
-      });
+  return async (dispatch) => {
+    try {
+      dispatch(fetchEventDataRequest());
+      const { data } = await eventService.getAllEventCategories();
+      const eventCategories = data;
+      dispatch(fetchEventCategoriesSuccess(eventCategories));
+    }
+    catch(error) {
+      dispatch(fetchEventCategoriesFailure(error.message));
+    };
   };
 };
   

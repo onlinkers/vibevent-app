@@ -192,7 +192,6 @@ const Mapbox = React.memo<MapboxProps>(
         });
 
         mapObject.on("load", () => {
-          // console.log(events);
           if (mapContainer.current) {
             setMap(mapObject);
             mapObject.resize();
@@ -223,24 +222,27 @@ const Mapbox = React.memo<MapboxProps>(
 
     // Change markers according to event list
     useEffect(() => {
+      if(!map) return;
       // look for markers to delete (reduce need to remove+re-add markers)
       // TODO: Instead of deleting, add some more logic to allow "hiding" and "showing" instead.
       const results = filterEventMarkersToDelete(eventMarkerObjects, events);
 
+      let eventIdsToIgnore: string[] = [];
+
       if(results) {
-        const { markersToDelete, markersLeft, eventIdsToIgnore } = results;
+        const { markersToDelete, markersLeft, eventIdsWithMarkers } = results;
+        eventIdsToIgnore = eventIdsWithMarkers;
         // delete markers we don't want
         markersToDelete.forEach((marker) => {
           marker.remove();
         });
         // reset the marker objects
         setEventMarkerObjects(markersLeft);
-        
-        // add new markers
-        const eventsToAdd = events.filter((event) => !eventIdsToIgnore.includes(event._id));
-        if(eventsToAdd.length) {
-          loadEventMarkers(eventsToAdd);
-        }
+      }
+      // add new markers
+      const eventsToAdd = events.filter((event) => !eventIdsToIgnore.includes(event._id));
+      if(eventsToAdd.length) {
+        loadEventMarkers(eventsToAdd);
       }
     }, [events]); // eslint-disable-line
     // (disable line to overcome exhaustive depts in the previous line)
