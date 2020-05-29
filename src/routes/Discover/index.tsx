@@ -15,11 +15,15 @@ interface DispatchProps {
 const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
 
   const {
-    events,
-    eventCategories,
+    events: e,
+    eventCategories: ec,
     loading: eventsLoading,
     errors
   } = eventData;
+
+  // Netlify temporary fix for when events and eventcategories are strings
+  const events = typeof e === "object" && e !== null ? e : {};
+  const eventCategories = typeof ec === "object" && ec !== null ? ec : {};
 
   return (
     <MapProvider>

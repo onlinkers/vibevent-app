@@ -49,6 +49,7 @@
     width: -webkit-fill-available;
     font-size: inherit;
     padding-left: 2.5em;
+    margin: 0;
 }
 .Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder > input:focus {
     outline-width: 0;
