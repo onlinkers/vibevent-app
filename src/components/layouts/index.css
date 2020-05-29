@@ -10,13 +10,12 @@ a {
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 500;
+    z-index: 999;
     box-shadow: 4px 4px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .explore-title {
-    margin-left: 1em;
-    margin-right: 1em;
+    margin: 1em;
 }
 
 .explore-links {
@@ -35,10 +34,9 @@ a {
 .explore-link {
     color: grey;
     line-height: 2em;
-    margin-right: 1em;
-    margin-left: 1em;
-    margin-bottom: 1em;
+    margin: 1em;
     user-select: none;
+    font-size: 1.1em;
 }
 .active { color: #2351e0; }
 .explore-link-text {
@@ -56,10 +54,11 @@ a {
     height: 2px;
 }
 
-.explore-profile {
+.explore-profile > .anticon {
     /* TODO: Replace with User Profile Icon/Dropdown */
-    line-height: 1.5em;
-    margin-right: 1em;
+    margin: 0.5em;
+    font-size: 2.5em;
+    line-height: 1em;
 }
 
 .mobile-explore {
@@ -67,7 +66,7 @@ a {
     position: absolute;
     bottom: 0;
     width: 100%;
-    z-index: 500;
+    z-index: 999;
     box-shadow: 4px 4px 5px 5px rgba(0, 0, 0, 0.2);
 }
 

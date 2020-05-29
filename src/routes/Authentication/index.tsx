@@ -6,16 +6,16 @@ import ConfirmSignup from "./ConfirmSignUp";
 import AuthRedirect from "./AuthRedirect";
 
 const Authentication = () => {
-	return (
-		<Switch>
-			<Route path={"/auth/signup"} component={SignupForm}/>
-			<Route path={"/auth/login"} component={LoginForm}/>
-			<Route path={"/auth/confirm"} component={ConfirmSignup}/>
-			<Route path={"/auth/redirect"} component={AuthRedirect}/>
-			<Redirect from="/auth" to="/auth/login"/>
-		</Switch>
+  return (
+    <Switch>
+      <Route path={"/auth/signup"} component={SignupForm}/>
+      <Route path={"/auth/login"} component={LoginForm}/>
+      <Route path={"/auth/confirm"} component={ConfirmSignup}/>
+      <Route path={"/auth/redirect"} component={AuthRedirect}/>
+      <Redirect from="/auth" to="/auth/login"/>
+    </Switch>
 	
-	);
+  );
 };
 
 export default Authentication;
