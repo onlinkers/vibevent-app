@@ -3,15 +3,15 @@ import { useParams } from "react-router-dom";
 
 const EventDetails = () => {
 
-	const { eventId } = useParams();
+  const { eventId } = useParams();
 
-	// TODO: Get information about the single event
+  // TODO: Get information about the single event
 
-	return (
-		<div>
+  return (
+    <div>
             Event Details for event: {eventId}
-		</div>
-	);
+    </div>
+  );
 };
 
 export default EventDetails;

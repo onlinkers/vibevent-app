@@ -33,8 +33,7 @@ export const apiFetch = async (path, options) => {
     let url = `${BASE_URL}${path}`;
 
     // Check if a method was provided
-    if (!options.method && options.body)
-      throw new Error("A method was not provided for the request");
+    if(!options.method && options.body) throw new Error("A method was not provided for the request"); 
     const method = options.method || "GET"; // if not determined, default to 'GET'
 
     // Check if extra headers were provided
@@ -44,7 +43,7 @@ export const apiFetch = async (path, options) => {
     };
 
     // Check if params was provided and add to url
-    if (options.params) url += encodeParams(options.params);
+    if(options.params) url += encodeParams(options.params);
 
     // Check if a body was provided
     const body = options.body || null;

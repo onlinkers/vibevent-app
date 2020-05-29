@@ -1,5 +1,6 @@
 import api from "../api";
 
+// TODO: Errror handling with antd message
 export default {
   getAllEvents: () => {
     return api().get("/events");
@@ -16,4 +17,9 @@ export default {
   deleteEvent: ({ id }) => {
     return api().delete(`/event/${id}`);
   },
+
+  // EVENT CATEGORIES
+  getAllEventCategories: () => {
+    return api().get("/events/categories");
+  }
 };
