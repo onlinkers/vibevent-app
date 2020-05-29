@@ -6,8 +6,8 @@
  * before being passed as arguments of the function
  */
 export const filterArrayByArray = (subjectArray: any[], filterArray: any[] = []) => {
-    if(!filterArray.length) return subjectArray;
-    return subjectArray.filter((entry) => {
-        return !filterArray.includes(entry);
-    });
+  if(!filterArray.length) return subjectArray;
+  return subjectArray.filter((entry) => {
+    return !filterArray.includes(entry);
+  });
 };

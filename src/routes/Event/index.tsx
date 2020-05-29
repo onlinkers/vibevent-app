@@ -6,11 +6,11 @@ import EventDetails from "./EventDetails";
 import EventCreate from "./EventCreate";
 
 const Events = () => (
-	<Switch>
-		<Route path="/event/dashboard" component={EventDashboard}/>
-		<Route path="/event/create" component={EventCreate}/>
-		<Route path="/event/:eventId" component={EventDetails}/>
-	</Switch>
+  <Switch>
+    <Route path="/event/dashboard" component={EventDashboard}/>
+    <Route path="/event/create" component={EventCreate}/>
+    <Route path="/event/:eventId" component={EventDetails}/>
+  </Switch>
 );
 
 export default Events;

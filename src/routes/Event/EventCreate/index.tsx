@@ -1,11 +1,11 @@
 import React from "react";
 
 const EventCreate = () => {
-	return (
-		<div>
+  return (
+    <div>
             Event Creation
-		</div>
-	);
+    </div>
+  );
 };
 
 export default EventCreate;

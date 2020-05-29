@@ -18,42 +18,42 @@ interface Props {
 // Specifically, the component should handle loading logic, filters, and rendering
 const Map = React.memo<Props>(({ loaded, events, selectedCategories, error }) => {
 
-	const [filteredEvents, setFilteredEvents] = useState(Object.values(events));
+  const [filteredEvents, setFilteredEvents] = useState(Object.values(events));
 
-	// Allow redirecting from componenets of the map
-	const history = useHistory();
+  // Allow redirecting from componenets of the map
+  const history = useHistory();
 
-	const redirectToEvent = (eventId: string) => {
-		history.push(`/event/${eventId}`); 
-	};
+  const redirectToEvent = (eventId: string) => {
+    history.push(`/event/${eventId}`); 
+  };
 
-	const refreshPage = () => {
-		// A lil react-router hack to refresh the page
-		history.push("/");
-		history.goBack();
-	};
+  const refreshPage = () => {
+    // A lil react-router hack to refresh the page
+    history.push("/");
+    history.goBack();
+  };
 
-	useEffect(() => {
-		const eventsArray = Object.values(events);
-		setFilteredEvents(filterEventsByCategoryKeys(eventsArray, selectedCategories));
+  useEffect(() => {
+    const eventsArray = Object.values(events);
+    setFilteredEvents(filterEventsByCategoryKeys(eventsArray, selectedCategories));
 	}, [events, selectedCategories]); // eslint-disable-line
-	// (disable line to overcome exhaustive depts in the previous line)
+  // (disable line to overcome exhaustive depts in the previous line)
 	
-	return (
-		<React.Fragment>
-			{!loaded && <div className="Page Loader">Loading...</div>}
-			{loaded && error && <div className="Page Error">
-				<div onClick={refreshPage}><ReloadOutlined /></div>
-				<div>{error}</div>
-			</div>}
-			<Mapbox
-				events={filteredEvents}
-				functions={{
-					redirectToEvent
-				}}
-			/>
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      {!loaded && <div className="Page Loader">Loading...</div>}
+      {loaded && error && <div className="Page Error">
+        <div onClick={refreshPage}><ReloadOutlined /></div>
+        <div>{error}</div>
+      </div>}
+      <Mapbox
+        events={filteredEvents}
+        functions={{
+          redirectToEvent
+        }}
+      />
+    </React.Fragment>
+  );
 });
 
 export default Map;
