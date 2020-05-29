@@ -5,7 +5,7 @@ import SignupForm from "./SignupForm";
 import ConfirmSignup from "./ConfirmSignUp";
 import AuthRedirect from "./AuthRedirect";
 
-const Auth = () => {
+const Authentication = () => {
 	return (
 		<Switch>
 			<Route path={"/auth/signup"} component={SignupForm}/>
@@ -18,4 +18,4 @@ const Auth = () => {
 	);
 };
 
-export default Auth;
+export default Authentication;

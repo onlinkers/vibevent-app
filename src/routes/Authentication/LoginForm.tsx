@@ -7,7 +7,6 @@ import TextInput from "components/forms/inputs/textInput";
 
 import { AppContext } from "context/AppContext";
 
-
 import "./index.css";
 
 const LoginForm: React.FunctionComponent = () => {
@@ -28,9 +27,9 @@ const LoginForm: React.FunctionComponent = () => {
 			// Save the session tokens to localstorage
 			// TODO: Use cookies instead
 			// https://stackoverflow.com/questions/48983708/where-to-store-access-token-in-react-js
-			localStorage.setItem("cognitoAccessToken", session.accessToken);
-			localStorage.setItem("cognitoIdToken", session.idToken);
-			localStorage.setItem("cognitoRefreshToken", session.refreshToken);
+			localStorage.setItem("cognitoAccessToken", JSON.stringify(session.accessToken));
+			localStorage.setItem("cognitoIdToken", JSON.stringify(session.idToken));
+			localStorage.setItem("cognitoRefreshToken", JSON.stringify(session.refreshToken));
 
 			setIsAuthenticated(true);
 			setIsAuthenticating(false);

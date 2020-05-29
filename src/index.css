@@ -42,3 +42,25 @@ code {
 	opacity: 60%;
 	z-index: 999;
 }
+
+.Error {
+	background: rgba(200, 200, 200, 0.2);
+	position: absolute;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	font-size: 3em;
+	justify-content: center;
+	text-align: center;
+	left: 0;
+	top: 0;
+	user-select: none;
+	z-index: 500;
+	padding: 10%;
+}
+
+@media (max-width: 800px) {
+	.Error {
+		font-size: 2em;
+	}
+}

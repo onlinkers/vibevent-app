@@ -5,6 +5,7 @@ import {
   FETCH_USER_DATA_SUCCESS,
   FETCH_USER_DATA_FAILURE,
   SAVE_USER_DATA,
+  CLEAR_USER_DATA,
   SAVE_COGNITO_USER
 } from "constants/index";
 
@@ -38,9 +39,9 @@ export interface FetchUserDataAction {
   payload?: UserGetPayload;
 }
 
-export interface SaveUserDataAction {
-  type: typeof SAVE_USER_DATA;
-  payload: UserCreatePayload;
+export interface UpdateUserDataAction {
+  type: typeof SAVE_USER_DATA | typeof CLEAR_USER_DATA;
+  payload?: UserCreatePayload;
 }
 
 export interface SaveCognitoUserAction {

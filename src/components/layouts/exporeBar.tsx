@@ -59,7 +59,7 @@ const ExploreBar: React.FunctionComponent<Props> = () => {
 					</div>
 				</Link>
 			</div>
-			<div className="explore-profile"><UserOutlined style={{ color: "##2351e0" }}/></div>
+			<Link to="/profile"><div className="explore-profile"><UserOutlined style={{ color: "##2351e0" }}/></div></Link>
 		</div>
 
 	) : ( // TODO: Icons and stuff
@@ -76,7 +76,7 @@ const ExploreBar: React.FunctionComponent<Props> = () => {
 				<Link to="#">
 					<p className="explore-link"><BulbOutlined style={{ fontSize: "1.5em", color: "##2351e0" }}/></p>
 				</Link>
-				<Link to="#">
+				<Link to="/profile">
 					<p className="explore-link"><UserOutlined style={{ fontSize: "1.5em", color: "##2351e0" }}/></p>
 				</Link>
 			</div>

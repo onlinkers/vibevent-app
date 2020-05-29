@@ -1,14 +1,15 @@
 import {
   UserDataState,
   FetchUserDataAction,
-  SaveUserDataAction,
-  SaveCognitoUserAction
+  SaveCognitoUserAction,
+  UpdateUserDataAction
 } from "types/store";
 import {
     FETCH_USER_DATA_REQUEST,
     FETCH_USER_DATA_SUCCESS,
     FETCH_USER_DATA_FAILURE,
     SAVE_USER_DATA,
+    CLEAR_USER_DATA,
     SAVE_COGNITO_USER
 } from "constants/index";
 
@@ -19,7 +20,7 @@ const initState: UserDataState = {
   error: ""
 };
 
-const userReducer = (state = initState, action: FetchUserDataAction | SaveUserDataAction | SaveCognitoUserAction) => {
+const userReducer = (state = initState, action: FetchUserDataAction | UpdateUserDataAction | SaveCognitoUserAction) => {
   switch (action.type) {
     case FETCH_USER_DATA_REQUEST:
       return {
@@ -37,14 +38,19 @@ const userReducer = (state = initState, action: FetchUserDataAction | SaveUserDa
       return {
         ...state,
         loading: false,
-        user: {},
         error: action.payload,
       };
     case SAVE_USER_DATA:
       return {
         ...state,
-        user: { ...action.payload.data },
-        cognitoUser: action.payload.cognitoUser
+        user: { ...action.payload?.data },
+        cognitoUser: action.payload?.cognitoUser
+      };
+    case CLEAR_USER_DATA:
+      return {
+        ...state,
+        user: {},
+        cognitoUser: {}
       };
     case SAVE_COGNITO_USER:
       return {

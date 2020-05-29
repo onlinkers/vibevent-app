@@ -4,6 +4,7 @@ import {
     FETCH_USER_DATA_SUCCESS,
     FETCH_USER_DATA_FAILURE,
     SAVE_USER_DATA,
+    CLEAR_USER_DATA,
     SAVE_COGNITO_USER
 } from "constants/index";
   
@@ -41,6 +42,12 @@ export const saveCognitoUser = (cognitoUser: any) => {
     return {
         type: SAVE_COGNITO_USER,
         payload: cognitoUser,
+    };
+};
+
+export const clearUserData = () => {
+    return {
+        type: CLEAR_USER_DATA
     };
 };
 

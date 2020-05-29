@@ -4,7 +4,7 @@ import api from "../api";
 
 export default {
   getUserData: ({ id }) => {
-    return api().get(`/user/${id}`);
+    return api().get(`/users/${id}`);
   },
   createUser: (payload) => {
     return api().post("/user", payload);
