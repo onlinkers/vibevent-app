@@ -22,6 +22,8 @@
     opacity: 0;
     transform: translateY(100%);
     transition: all 0.2s;
+    user-select: none;
+    pointer-events: none;
 }
 .formitem.active > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .placeholder--small.active {
     opacity: 1;

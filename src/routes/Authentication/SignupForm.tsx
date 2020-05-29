@@ -1,16 +1,47 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
 import { Form, Button } from "antd";
 import TextInput from "components/forms/inputs/textInput";
 
+import UserService from "services/userService";
+
 import "./index.css";
 
-const SignupForm: React.FunctionComponent = () => {
+interface Props {
+}
+
+const SignupForm: React.FunctionComponent<Props> = () => {
+
+	const history = useHistory();
 
 	const signUp = async (formValues) => {
-		const { email, password } = formValues;
+		const {
+			firstName,
+			lastName,
+			email,
+			password
+		} = formValues;
+
+		// Save to the database first
+		const { data: { userId } } = await UserService.createUser({
+			firstName, lastName, email
+		});
+
+		// Sign up to Cognito userpool
+		await Auth.signUp({
+			username: email,
+			password,
+			attributes: {
+				name: `${firstName} ${lastName}`,
+				email,
+				"custom:mongoid": userId
+			}
+		});
+
+		history.push(`/auth/confirm?email=${email}`);
+
 	};
 
 	return (
@@ -29,6 +60,22 @@ const SignupForm: React.FunctionComponent = () => {
 					</div>
 
 					<div className="content">
+						<TextInput
+							name="firstName"
+							label="First Name"
+							hasFeedback
+							rules={[
+								{
+									required: true,
+									message: "A Name is required!",
+								},
+							]}
+						/>
+						<TextInput
+							name="lastName"
+							label="Last Name (optional)"
+							hasFeedback
+						/>
 						<TextInput
 							name="email"
 							label="Email"
@@ -58,19 +105,19 @@ const SignupForm: React.FunctionComponent = () => {
 								{
 									validator: (rule, value) => {
 										const mismatches: string[] = [];
-										if(!value.match(/[0-9]/)) {
+										if(value && !value.match(/[0-9]/)) {
 											mismatches.push("1 numeric character");
 										}
-										if(!value.match(/[a-z]/)) {
+										if(value && !value.match(/[a-z]/)) {
 											mismatches.push("1 lowercase letter");
 										}
-										if(!value.match(/[A-Z]/)) {
+										if(value && !value.match(/[A-Z]/)) {
 											mismatches.push("1 uppercase letter");
 										}
-										if(!value.match(/[*.!@#$%^&(){}[\]:;<>,.?/~_+\-=|]/)) {
+										if(value && !value.match(/[*.!@#$%^&(){}[\]:;<>,.?/~_+\-=|]/)) {
 											mismatches.push("1 special character");
 										}
-										if(value.length < 8) {
+										if(value && value.length < 8) {
 											mismatches.push("and must be 8 characters or longer");
 										}
 										if(mismatches.length) return Promise.reject(`Your password must contain at least: ${mismatches.join(", ")}!`);
@@ -110,5 +157,6 @@ const SignupForm: React.FunctionComponent = () => {
 		</div>
 	);
 };
+
 
 export default SignupForm;

@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:center;
+    align-items: center;
 
 }
 .header {
@@ -20,12 +20,17 @@
     font-size: 4em;
     margin-bottom: 0;
 }
+.sub-title {
+    color: grey;
+}
 .description {
     color: lightgrey;
 }
 .content {
     width: 40%;
     max-width: 500px;
+    max-height: 50%;
+    overflow-y: scroll;
 }
 
 .footer {
@@ -35,9 +40,10 @@
     height: 20vh;
     width: 100%;
 }
-button {
+.ant-btn {
     width: 40%;
     max-width: 500px;
+    margin-bottom: 0.5em;
 }
 @media (max-width: 800px) {
     .AuthForm {
@@ -52,10 +58,7 @@ button {
     .header {
         width: 75%;
     }
-    .title {
-        text-align: left;
-    }
-    .description {
+    .title, .description, .sub-title {
         text-align: left;
     }
 
@@ -63,7 +66,7 @@ button {
         width: 100%;
     }
 
-    button {
+    .ant-btn {
         width: 80%;
     }
 }

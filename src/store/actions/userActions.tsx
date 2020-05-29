@@ -3,7 +3,8 @@ import {
     FETCH_USER_DATA_REQUEST,
     FETCH_USER_DATA_SUCCESS,
     FETCH_USER_DATA_FAILURE,
-    SAVE_USER_DATA
+    SAVE_USER_DATA,
+    SAVE_COGNITO_USER
 } from "constants/index";
   
 import userService from "services/userService";
@@ -33,6 +34,13 @@ export const saveUserData = (userData: UserCreatePayload) => {
     return {
         type: SAVE_USER_DATA,
         payload: userData,
+    };
+};
+
+export const saveCognitoUser = (cognitoUser: any) => {
+    return {
+        type: SAVE_COGNITO_USER,
+        payload: cognitoUser,
     };
 };
 
