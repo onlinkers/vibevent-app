@@ -17,6 +17,7 @@ import awsconfig from "./aws-exports.js";
 
 /* STYLESHEETS */
 import "./index.css";
+import "antd/dist/antd.css";
 
 // configure amplify
 Amplify.configure(awsconfig);
@@ -39,16 +40,16 @@ const store = createStore(reducers, undefined, composedEnhancers);
 store.dispatch(fetchAllEvents());
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <AppProvider>
-        <div className="App">
-          <Routes />
-        </div>
-      </AppProvider>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  // <React.StrictMode>
+  <Provider store={store}>
+    <AppProvider>
+      <div className="App">
+        <Routes />
+      </div>
+    </AppProvider>
+  </Provider>
+  // </React.StrictMode>
+  , document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
