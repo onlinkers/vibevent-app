@@ -7,10 +7,7 @@ import { Form, Button } from "antd";
 import { FormInstance } from "antd/lib/form";
 import TextInput from "components/forms/inputs/textInput";
 
-interface Props {
-}
-
-const ConfirmSignUp: React.FunctionComponent<Props> = () => {
+const ConfirmSignUp: React.FunctionComponent = () => {
 
     const history = useHistory();
     const location = useLocation();

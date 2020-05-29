@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
-import { Form, Button } from "antd";
+import { Form, Button, message } from "antd";
 import TextInput from "components/forms/inputs/textInput";
 
 import UserService from "services/userService";
@@ -17,31 +17,34 @@ const SignupForm: React.FunctionComponent<Props> = () => {
 	const history = useHistory();
 
 	const signUp = async (formValues) => {
-		const {
-			firstName,
-			lastName,
-			email,
-			password
-		} = formValues;
-
-		// Save to the database first
-		const { data: { userId } } = await UserService.createUser({
-			firstName, lastName, email
-		});
-
-		// Sign up to Cognito userpool
-		await Auth.signUp({
-			username: email,
-			password,
-			attributes: {
-				name: `${firstName} ${lastName}`,
+		try {
+			const {
+				firstName,
+				lastName,
 				email,
-				"custom:mongoid": userId
-			}
-		});
-
-		history.push(`/auth/confirm?email=${email}`);
-
+				password
+			} = formValues;
+	
+			// Save to the database first
+			const { data: { userId } } = await UserService.createUser({
+				firstName, lastName, email
+			});
+	
+			// Sign up to Cognito userpool
+			await Auth.signUp({
+				username: email,
+				password,
+				attributes: {
+					name: `${firstName} ${lastName}`,
+					email,
+					"custom:mongoid": userId
+				}
+			});
+	
+			history.push(`/auth/confirm?email=${email}`);
+		} catch(err) {
+			message.error(err.mesage);
+		}
 	};
 
 	return (
