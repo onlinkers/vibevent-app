@@ -27,10 +27,10 @@ const AppProvider: React.FunctionComponent<ProviderProps> = ({ children }) => {
   const [isAuthenticating, setIsAuthenticating] = useState<Boolean>(true);
   const value = {
     session: {
-        isAuthenticated,
-        setIsAuthenticated,
-        isAuthenticating,
-        setIsAuthenticating
+      isAuthenticated,
+      setIsAuthenticated,
+      isAuthenticating,
+      setIsAuthenticating
     }
   };
 

@@ -5,12 +5,12 @@ import {
   UpdateUserDataAction
 } from "types/store";
 import {
-    FETCH_USER_DATA_REQUEST,
-    FETCH_USER_DATA_SUCCESS,
-    FETCH_USER_DATA_FAILURE,
-    SAVE_USER_DATA,
-    CLEAR_USER_DATA,
-    SAVE_COGNITO_USER
+  FETCH_USER_DATA_REQUEST,
+  FETCH_USER_DATA_SUCCESS,
+  FETCH_USER_DATA_FAILURE,
+  SAVE_USER_DATA,
+  CLEAR_USER_DATA,
+  SAVE_COGNITO_USER
 } from "constants/index";
 
 const initState: UserDataState = {

@@ -23,10 +23,10 @@ const AuthRoute: React.FunctionComponent<Props> = ({ component, altComponent, re
       isAuthenticated === true
         ? component
           ? component
-            : redirect ? <Redirect to='/' /> : <NotFound />
+          : redirect ? <Redirect to='/' /> : <NotFound />
         : altComponent
           ? altComponent 
-            : redirect ? <Redirect to='/' /> : <Forbidden />
+          : redirect ? <Redirect to='/' /> : <Forbidden />
     )} />
   );
 };
