@@ -15,7 +15,7 @@ interface Props {
 }
 
 // The "Map" component will serve as a wrapper that handles higher-order view logic
-// Speciffically, the component should handle loading logic, filters, and rendering
+// Specifically, the component should handle loading logic, filters, and rendering
 const Map = React.memo<Props>(({ loaded, events, selectedCategories, error }) => {
 
 	const [filteredEvents, setFilteredEvents] = useState(Object.values(events));

@@ -10,7 +10,7 @@
     width: 40%;
     z-index: 1;
 }
-/* TODO: USE SASS FOR MOBILE VIEW */
+/* TODO: Mobile View */
 @media only screen and (max-width: 800px) {
     .CategoryScroller {
         width: 80%;
@@ -32,6 +32,7 @@
 
 .CategoryScroller > .category-chip--active {
     color: white;
+    /* TODO: Mobile View */
     background: #2351f4;
 }
 

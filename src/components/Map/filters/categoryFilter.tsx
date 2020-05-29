@@ -35,7 +35,7 @@ const CategoryFilter = (props: Props) => {
         if(add) newSelected.push(key);
         else newSelected = newSelected.filter((category) => category !== key);
         
-        newSelected = newSelected.sort(arrayAlphabeticalComparer(null));
+        newSelected = newSelected.sort(arrayAlphabeticalComparer());
         setSelectedCategories(newSelected);
     };
 

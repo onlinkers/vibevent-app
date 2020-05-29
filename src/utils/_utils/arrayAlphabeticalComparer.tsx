@@ -1,5 +1,9 @@
-
-export const arrayAlphabeticalComparer = (property: string | null) => (a: string, b: string) => {
+/**
+ * Helper function that gets plugged into a `.sort()` array function.
+ * The alphabeticalComparer hepls sort array entries by their alphabetical order
+ * @param property - optional property field for if we are comparing two arrays of objects
+ */
+export const arrayAlphabeticalComparer = (property?: string) => (a: string, b: string) => {
     let top, bot;
     if(property) {
         top = a[property] ? a[property].toLowerCase() : "";

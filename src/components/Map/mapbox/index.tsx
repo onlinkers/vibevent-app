@@ -145,7 +145,7 @@ const Mapbox = React.memo<MapboxProps>(
         marker: true,
         render: (item: EventFeature) => {
 
-          // Check if an event or palce
+          // Check if an event or place
           const isEvent = item["place_type"].includes("custom_event");
 
           // for mapbox places, "place_name" tends to contain the text itself. remove to clean it.
@@ -157,8 +157,8 @@ const Mapbox = React.memo<MapboxProps>(
           }
 
           // "maki" property is used to find the appripriate mapbox icon
-          // TODO: check if 'event' or 'place' and add appropriate icons
-          const icon = item.properties.maki || "marker";
+          // TODO: better event icons
+          const icon = isEvent ? "star" : item.properties.maki || "marker";
 
           // Need to return a string
           return `<div>
@@ -201,7 +201,7 @@ const Mapbox = React.memo<MapboxProps>(
     }, []); // eslint-disable-line
     // (disable line to overcome exhaustive depts in the previous line)
 
-    // any additional map functionality and listeners should be written
+    // any additional map functionality and initializations should be written
     // in this "useEffect" method
     useEffect(() => {
 

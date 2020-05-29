@@ -15,11 +15,13 @@ code {
 .App {
 	height: 100vh;
 	width: 100vw;
+	overflow: hidden;
 }
 
 .Page {
 	height: 100%;
 	width: 100%;
+	position: relative;
 }
 
 /* Should extend "Page" */
@@ -30,6 +32,7 @@ code {
 	display: flex;
 	justify-content: center;
 	text-align: center;
+	position: relative;
 }
 
 .Loader {

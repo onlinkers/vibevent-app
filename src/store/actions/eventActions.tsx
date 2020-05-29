@@ -58,6 +58,8 @@ const fetchEventCategoriesFailure = (error: string) => {
 };
 
 // ACTION CREATORS
+
+// Fetch all events + event categories
 export const fetchAllEventData = () => {
   return async (dispatch) => {
     dispatch(fetchEventDataRequest());
@@ -87,6 +89,7 @@ export const fetchAllEventData = () => {
   };
 };
 
+// Only get events
 export const fetchAllEvents = () => {
   return async (dispatch) => {
     try {
@@ -101,6 +104,7 @@ export const fetchAllEvents = () => {
   };
 };
 
+// Only get event categories
 export const fetchEventCategories = () => {
   return async (dispatch) => {
     try {
