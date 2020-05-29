@@ -1,3 +1,3 @@
-export * from "constants/_event/eventDetails";
+export * from "./_event/eventDetails";
 
-export * from "constants/_store/_eventActions";
+export * from "./_actions/eventActions";

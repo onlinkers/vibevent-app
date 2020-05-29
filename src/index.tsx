@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 import * as serviceWorker from "./serviceWorker";
 import Routes from "./routes";
 import reducers from "store/reducers";
-import { fetchAllEvents } from "store/actions/eventActions";
+import { fetchAllEventData } from "store/actions/eventActions";
 
 /* STYLESHEETS */
 import "./index.css";
@@ -28,7 +28,7 @@ const composedEnhancers = typeof reduxDevTools === "function"
 const store = createStore(reducers, undefined, composedEnhancers);
 
 // store.subscribe(() => console.log(store.getState()));
-store.dispatch(fetchAllEvents());
+store.dispatch(fetchAllEventData());
 
 ReactDOM.render(
   <React.StrictMode>

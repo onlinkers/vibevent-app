@@ -1,23 +1,42 @@
 import { Event } from "types/props";
 
 import {
-  FETCH_ALL_EVENTS_REQUEST,
-  FETCH_ALL_EVENTS_FAILURE,
+  FETCH_EVENT_DATA_REQUEST,
+  FETCH_ALL_EVENT_DATA_SUCCESS,
   FETCH_ALL_EVENTS_SUCCESS,
-} from "constants/";
+  FETCH_ALL_EVENTS_FAILURE,
+  FETCH_EVENT_CATEGORIES_SUCCESS,
+  FETCH_EVENT_CATEGORIES_FAILURE,
+} from "constants/index";
 
-export interface EventListLoading {
-  loading: boolean;
-  events: Event[];
-  error: string;
+// PAYLOAD
+export interface EventsPayload {
+  [key: string]: Event
 }
 
-interface FetchAllEventsAction {
+export interface EventCategoriesPayload {
+  [key: string]: string
+}
+
+// STORE STATE
+export interface EventDataState {
+  loading: boolean;
+  events: EventsPayload;
+  eventCategories: EventCategoriesPayload
+  errors: {
+    events?: string
+    eventCategories?: string,
+  };
+}
+
+// ACTIONS
+export interface FetchEventDataAction {
   type:
-    | typeof FETCH_ALL_EVENTS_REQUEST
+    | typeof FETCH_EVENT_DATA_REQUEST
+    | typeof FETCH_ALL_EVENT_DATA_SUCCESS
     | typeof FETCH_ALL_EVENTS_SUCCESS
-    | typeof FETCH_ALL_EVENTS_FAILURE;
+    | typeof FETCH_ALL_EVENTS_FAILURE
+    | typeof FETCH_EVENT_CATEGORIES_SUCCESS
+    | typeof FETCH_EVENT_CATEGORIES_FAILURE;
   payload?: any;
 }
-
-export type EventActionTypes = FetchAllEventsAction;
