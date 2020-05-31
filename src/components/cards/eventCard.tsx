@@ -27,6 +27,7 @@ interface Props {
   loading?: boolean;
   width?: string;
   size?: string;
+  refetch?: Function;
   [key: string]: any;
 }
 
@@ -39,6 +40,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
     loading = false,
     width = "auto",
     size,
+    refetch,
     ...rest
   } = props;
 
@@ -52,9 +54,9 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
     history.push(`/event/${eventId}/edit`);
   };
 
-  const deleteEvent = (eventId) => {
-    eventService.deleteEvent({ id: eventId });
-    
+  const deleteEvent = async (eventId) => {
+    await eventService.deleteEvent({ id: eventId });
+    refetch && await refetch();
   };
 
   const imageSource = event?.media?.coverPhoto?.baseSrc || DefaultImage;

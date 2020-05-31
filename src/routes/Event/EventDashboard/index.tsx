@@ -44,7 +44,12 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
         <Row gutter={[16, 16]} className="dashboard-row">
           {eventsArray.map((event) => ( 
             <Col key={event._id} span={4} className="dashboard-col">
-              <EventCard variant="detailed" event={event} loading={!!eventsError || loading}/>
+              <EventCard
+                variant="detailed"
+                event={event}
+                loading={!!eventsError || loading}
+                refetch={fetchAllEvents}
+              />
             </Col>
           ))}
         </Row>
