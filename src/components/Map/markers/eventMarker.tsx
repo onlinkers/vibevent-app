@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Event } from "types/props";
-import DefaultImage from "assets/media/no-image-default.png";
+import DefaultImage from "assets/media/default-image.png";
 import "./index.css";
 
 interface Props {

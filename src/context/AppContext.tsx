@@ -2,9 +2,9 @@ import React, { createContext, useState } from "react";
 
 interface ContextProps {
   session: {
-    isAuthenticated: Boolean;
+    isAuthenticated: boolean;
     setIsAuthenticated: Function;
-    isAuthenticating: Boolean;
+    isAuthenticating: boolean;
     setIsAuthenticating: Function;
   };
 }
@@ -23,8 +23,8 @@ const AppContext = createContext<ContextProps>({
 });
 
 const AppProvider: React.FunctionComponent<ProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<Boolean>(false);
-  const [isAuthenticating, setIsAuthenticating] = useState<Boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticating, setIsAuthenticating] = useState<boolean>(false);
   const value = {
     session: {
       isAuthenticated,

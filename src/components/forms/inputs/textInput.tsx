@@ -19,7 +19,7 @@ interface Props {
       | "Search"
       | "TextArea"
       | null;
-  active: Boolean;
+  active: boolean;
   setActive: Function;
   [x: string]: any;
 }

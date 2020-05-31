@@ -23,8 +23,8 @@ const AuthRoute: React.FunctionComponent<Props> = ({ component, altComponent, re
   // 2) user is currently still authenticating
   // TODO: There is probably a better way of doing this
   return (
-    <Route {...rest} render={() => (
-      isAuthenticated === true && !isAuthenticating
+    <Route {...rest} render={() => isAuthenticating ? null : (
+      isAuthenticated === true
         ? component
           ? component
           : redirect ? <Redirect to='/' /> : <NotFound />

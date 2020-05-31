@@ -2,12 +2,13 @@ import api from "../api";
 import { apiErrorHandler } from "./_errorHandlers";
 
 export default {
-  getUsersByIds: async ({ ids }) => {
+  getUsersByIds: async ({ ids, withEvents = true }) => {
     try {
       // check if ids is still an array
       let userIds = ids;
       if(typeof ids !== "string") userIds = ids.join(",");
-      const results = await api().get(`/users/${userIds}`);
+      const url = withEvents ? `/users/${userIds}?withEvents=true` : `/users/${userIds}?withEvents=false`;
+      const results = await api().get(url);
       return results;
     } catch(err) {
       apiErrorHandler(err);
@@ -23,9 +24,18 @@ export default {
       throw err;
     }
   },
-  updateUser: async ({ id, payload }) => {
+  setUser: async ({ id, payload }) => {
     try {
       const results = await api().put(`/user/${id}`, payload);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
+  },
+  updateUser: async ({ id, payload }) => {
+    try {
+      const results = await api().patch(`/user/${id}`, payload);
       return results;
     } catch(err) {
       apiErrorHandler(err);

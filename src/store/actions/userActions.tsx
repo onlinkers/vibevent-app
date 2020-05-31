@@ -57,8 +57,9 @@ export const fetchUserData = (id) => {
   return async (dispatch) => {
     try {
       dispatch(fetchUserDataRequest());
-      const response = await userService.getUsersByIds({ ids: id });
-      const user = response.data;
+      // need to always get full event data when saving to redux
+      const { data } = await userService.getUsersByIds({ ids: id, withEvents: true });
+      const user = data[id];
       dispatch(fetchUserDataSuccess(user));
     }
     catch(error) {

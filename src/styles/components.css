@@ -1,7 +1,3 @@
-.text--unselectable {
-    user-select: none;
-}
-
 .button--clickable {
     cursor: pointer;
     transition: all 0.2s;
