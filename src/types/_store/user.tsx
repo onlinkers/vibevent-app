@@ -14,7 +14,7 @@ import {
 export type UserGetPayload = User;
 
 export interface UserCreatePayload {
-  id?: string;
+  _id?: string;
   firstName: string;
   lastName?: string;
   email: string;

@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
@@ -6,14 +7,21 @@ import { message } from "antd";
 import Form, { TextInput } from "components/forms";
 
 import { AppContext } from "context/AppContext";
+import { saveUserData, saveCognitoUser } from "store/actions/userActions";
 
 import "./index.css";
 
-const LoginForm: React.FunctionComponent = () => {
+interface Props {
+  saveUserData: Function;
+  saveCognitoUser: Function;
+}
+
+const LoginForm: React.FunctionComponent<Props> = (props) => {
 
   const history = useHistory();
   const { session } = useContext(AppContext);
   const { setIsAuthenticating, setIsAuthenticated } = session;
+  const { saveUserData, saveCognitoUser } = props;
 
   const logIn = async (formValues) => {
     const { email, password } = formValues;
@@ -22,6 +30,13 @@ const LoginForm: React.FunctionComponent = () => {
     setIsAuthenticating(true);
     const user = await Auth.signIn(email, password);
     const session = user.signInUserSession;
+
+    saveUserData({
+      _id: user.attributes["custom:mongoid"],
+      email: user.attributes.email,
+      firstName: user.attributes.name,
+    });
+    saveCognitoUser(user);
 
     // Save the session tokens to localstorage
     // TODO: Use cookies instead
@@ -90,4 +105,11 @@ const LoginForm: React.FunctionComponent = () => {
   );
 };
 
-export default LoginForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveUserData: (payload) => dispatch(saveUserData(payload)),
+    saveCognitoUser: (payload) => dispatch(saveCognitoUser(payload))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(LoginForm);

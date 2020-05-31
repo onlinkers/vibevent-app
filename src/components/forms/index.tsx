@@ -35,7 +35,6 @@ const Form: React.FunctionComponent<Props> = ({ children, ...props }) => {
       setIsSubmitting(true);
       const result = await onSubmit(formValues);
       setIsSubmitting(false);
-      console.log({ result });
       onFinish(result);
     }
     catch(err) {

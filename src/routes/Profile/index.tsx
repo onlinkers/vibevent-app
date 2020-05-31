@@ -57,7 +57,7 @@ const Profile: React.FunctionComponent<Props> = (props) => {
 
   useEffect(() => {
     if(userId) fetchUserData(userId);
-  }, [fetchUserData, userId]);
+  });
 
   const isLoaded = !loading && !error;
 
