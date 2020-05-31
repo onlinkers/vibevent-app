@@ -1,3 +1,4 @@
+import { CognitoUser } from "@aws-amplify/auth";
 import { UserGetPayload, UserCreatePayload } from "types/store";
 import {
   FETCH_USER_DATA_REQUEST,
@@ -38,7 +39,7 @@ export const saveUserData = (userData: UserCreatePayload) => {
   };
 };
 
-export const saveCognitoUser = (cognitoUser: any) => {
+export const saveCognitoUser = (cognitoUser: CognitoUser) => {
   return {
     type: SAVE_COGNITO_USER,
     payload: cognitoUser,

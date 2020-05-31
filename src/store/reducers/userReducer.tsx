@@ -43,8 +43,7 @@ const userReducer = (state = initState, action: FetchUserDataAction | UpdateUser
     case SAVE_USER_DATA:
       return {
         ...state,
-        user: { ...action.payload?.data },
-        cognitoUser: action.payload?.cognitoUser
+        user: { ...action.payload }
       };
     case CLEAR_USER_DATA:
       return {

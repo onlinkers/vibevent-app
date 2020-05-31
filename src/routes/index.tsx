@@ -14,13 +14,16 @@ import Forbidden from "./Forbidden";
 
 import AuthRoute from "./AuthRoute";
 import { AppContext } from "context/AppContext";
-import { saveUserData } from "store/actions/userActions";
+import { saveUserData, saveCognitoUser } from "store/actions/userActions";
 
 interface Props {
-	saveUserData: Function;
+  saveUserData: Function;
+  saveCognitoUser: Function;
 }
 
-const Routes: React.FunctionComponent<Props> = ({ saveUserData }) => {
+const Routes: React.FunctionComponent<Props> = (props) => {
+
+  const { saveUserData, saveCognitoUser } = props;
 
   const { session } = useContext(AppContext);
   const { isAuthenticating, isAuthenticated, setIsAuthenticating, setIsAuthenticated } = session;
@@ -43,13 +46,12 @@ const Routes: React.FunctionComponent<Props> = ({ saveUserData }) => {
 
     const loadUser = async () => {
       const user = await Auth.currentAuthenticatedUser();
-      saveUserData({ data:
-        {
-          _id: user.attributes["custom:mongoid"],
-          email: user.attributes.email,
-          firstName: user.attributes.name,
-        }
+      saveUserData({
+        _id: user.attributes["custom:mongoid"],
+        email: user.attributes.email,
+        firstName: user.attributes.name,
       });
+      saveCognitoUser(user);
     };
 
     const handleNoSession = () => {
@@ -98,7 +100,8 @@ const Routes: React.FunctionComponent<Props> = ({ saveUserData }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveUserData: (payload) => dispatch(saveUserData(payload))
+    saveUserData: (payload) => dispatch(saveUserData(payload)),
+    saveCognitoUser: (payload) => dispatch(saveCognitoUser(payload))
   };
 };
 

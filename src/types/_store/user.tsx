@@ -1,3 +1,4 @@
+import { CognitoUser } from "@aws-amplify/auth";
 import { User, Image } from "types/props";
 
 import {
@@ -13,21 +14,18 @@ import {
 export type UserGetPayload = User;
 
 export interface UserCreatePayload {
-  data: {
-    id?: string;
-    firstName: string;
-    lastName?: string;
-    email: string;
-    profilePhoto?: Image;
-  }
-  cognitoUser?: any;
+  id?: string;
+  firstName: string;
+  lastName?: string;
+  email: string;
+  profilePhoto?: Image;
 }
 
 // STORE STATE
 export interface UserDataState {
   loading: boolean;
   user: User | {};
-  cognitoUser?: any;
+  cognitoUser: CognitoUser | {};
   error: string;
 }
 
