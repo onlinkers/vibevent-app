@@ -1,0 +1,65 @@
+.form-item {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input,
+.formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input-password {
+    border-radius: 0.5em;
+    height: 3.5em;
+    background: transparent;
+}
+.formitem.active > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input,
+.formitem.active > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input-password {
+    padding-top: 1em;
+}
+
+.formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .placeholder--small {
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    font-size: 0.8em;
+    z-index: 1;
+    padding-left: 1em;
+    font-weight: bold;
+    color: #2351F4;
+    /* TODO: Import color from styles */
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.2s;
+    user-select: none;
+    pointer-events: none;
+}
+.formitem.active > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .placeholder--small.active {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: all 0.2s;
+}
+
+.ant-form-item-explain {
+    text-align: left;
+}
+
+/* TODO: Mobile View */
+@media (max-width: 800px) {
+
+    .formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input,
+    .formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input-password {
+        border-top-left-radius: 0%;
+        border-bottom-left-radius: 0%;
+        border: 0;
+    }
+    .formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input,
+    .formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input-password {
+        padding-left: 2em;
+    }
+
+    .formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .placeholder--small {
+        padding-left: 3em;
+    }
+
+    .ant-form-item-explain {
+        text-align: left;
+        padding-left: 2em;
+    }
+}

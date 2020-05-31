@@ -1,0 +1,13 @@
+.ant-card-body > .ant-card-meta > .ant-card-meta-detail > .ant-card-meta-description {
+    text-overflow: ellipsis;
+}
+.event-card-small > .ant-card-body > .ant-card-meta > .ant-card-meta-detail > .ant-card-meta-description {
+    height: 5em;
+}
+
+.ant-card-cover > img {
+    object-fit: cover;
+}
+.event-card-small > .ant-card-cover > img {
+    height: 5em;
+}

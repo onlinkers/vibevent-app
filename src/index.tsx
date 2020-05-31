@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import Amplify from "aws-amplify";
 
 /* COMPONENTS */
 import * as serviceWorker from "./serviceWorker";
@@ -10,8 +11,20 @@ import Routes from "./routes";
 import reducers from "store/reducers";
 import { fetchAllEventData } from "store/actions/eventActions";
 
+/* UTILITIES */
+import { AppProvider } from "context/AppContext";
+import awsconfig from "./aws-config.js";
+
 /* STYLESHEETS */
 import "./index.css";
+import "./styles/antd-overwrites.css";
+import "./styles/components.css";
+import "./styles/layout.css";
+import "./styles/typography.css";
+import "antd/dist/antd.css";
+
+// configure amplify
+Amplify.configure(awsconfig);
 
 // possibly abstract this once the amount of middlewares and enhancers grow
 const thunkMiddleware = applyMiddleware(thunk);
@@ -31,14 +44,16 @@ const store = createStore(reducers, undefined, composedEnhancers);
 store.dispatch(fetchAllEventData());
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <AppProvider>
       <div className="App">
         <Routes />
       </div>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+    </AppProvider>
+  </Provider>
+  // </React.StrictMode>
+  , document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

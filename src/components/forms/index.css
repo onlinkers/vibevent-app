@@ -1,0 +1,74 @@
+/* .AuthForm {
+} */
+
+.topWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.header {
+    margin-bottom: 3em;
+}
+.title {
+    font-size: 4em;
+    margin-bottom: 0;
+}
+.sub-title {
+    color: grey;
+}
+.description {
+    color: lightgrey;
+}
+.content {
+    width: 40%;
+    max-width: 500px;
+    max-height: 50%;
+    overflow-y: scroll;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 20vh;
+    width: 100%;
+}
+.ant-btn {
+    width: 40%;
+    max-width: 500px;
+    margin-bottom: 0.5em;
+}
+
+/* TODO: Mobile View */
+@media (max-width: 800px) {
+    .AuthForm {
+        width: 100%;
+
+    }
+    .ant-row {
+        left: 0;
+        width: 80%;
+    }
+
+    .header {
+        width: 75%;
+    }
+    .title, .description, .sub-title {
+        text-align: left;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .ant-btn {
+        width: 80%;
+    }
+}
