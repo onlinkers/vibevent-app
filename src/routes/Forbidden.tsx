@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // For redirecting from PrivateRoute
 const Forbidden = () => {
+  const history = useHistory();
   return (     
     <div className="Page--center" style={{ flexDirection: "column" }}>
       <h1>403: Forbidden</h1>
@@ -11,7 +12,8 @@ const Forbidden = () => {
         <br />
                 Please log in with a different account with admin privileges
       </p>
-      <Link to="/"><button color="primary">Home</button></Link>
+      <Link to="/auth/login"><button color="primary">Log In</button></Link>
+      <p><button color="primary" onClick={() => history.goBack()}>Go Back</button></p>
     </div>   
   );
 };

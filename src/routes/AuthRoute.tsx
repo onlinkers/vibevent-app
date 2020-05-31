@@ -16,11 +16,15 @@ interface Props {
 const AuthRoute: React.FunctionComponent<Props> = ({ component, altComponent, redirect, ...rest }) => {
 
   const { session } = useContext(AppContext);
-  const { isAuthenticated } = session;
+  const { isAuthenticated, isAuthenticating } = session;
  
+  // Do not load authenticated routes if:
+  // 1) user is not authenticated
+  // 2) user is currently still authenticating
+  // TODO: There is probably a better way of doing this
   return (
     <Route {...rest} render={() => (
-      isAuthenticated === true
+      isAuthenticated === true && !isAuthenticating
         ? component
           ? component
           : redirect ? <Redirect to='/' /> : <NotFound />

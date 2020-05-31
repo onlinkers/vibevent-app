@@ -30,30 +30,6 @@ const Routes: React.FunctionComponent<Props> = (props) => {
 
   // Load user session
   useEffect(() => {
-
-    // save session data to local storage (for API calls)
-    const saveToLocalStorage = (session) => {
-      if(session.accessToken) localStorage.setItem("cognitoAccessToken", JSON.stringify(session.accessToken));
-      if(session.idToken) localStorage.setItem("cognitoIdToken", JSON.stringify(session.idToken));
-      if(session.refreshToken) localStorage.setItem("cognitoRefreshToken", JSON.stringify(session.refreshToken));
-    };
-
-    // load the current session from Cognito and
-    const loadSession = async () => {
-      const session = await Auth.currentSession();
-      return session;
-    };
-
-    const loadUser = async () => {
-      const user = await Auth.currentAuthenticatedUser();
-      saveUserData({
-        _id: user.attributes["custom:mongoid"],
-        email: user.attributes.email,
-        firstName: user.attributes.name,
-      });
-      saveCognitoUser(user);
-    };
-
     const handleNoSession = () => {
       setIsAuthenticating(false);
       setIsAuthenticated(false);
@@ -63,22 +39,49 @@ const Routes: React.FunctionComponent<Props> = (props) => {
       setIsAuthenticating(false);
       setIsAuthenticated(true);
     };
-	
-    // Check if already authenticated
-    if(!isAuthenticated) {
-      setIsAuthenticating(true);
-	
-      // Run
-      loadSession()
-        .then(saveToLocalStorage)
-        .then(loadUser)
-        .then(handleHasSession)
-        .catch(handleNoSession);
-    }
 
+    try {
+      // save session data to local storage (for API calls)
+      const saveToLocalStorage = (session) => {
+        if(session.accessToken) localStorage.setItem("cognitoAccessToken", JSON.stringify(session.accessToken));
+        if(session.idToken) localStorage.setItem("cognitoIdToken", JSON.stringify(session.idToken));
+        if(session.refreshToken) localStorage.setItem("cognitoRefreshToken", JSON.stringify(session.refreshToken));
+      };
+
+      // load the current session from Cognito and
+      const loadSession = async () => {
+        const session = await Auth.currentSession();
+        return session;
+      };
+
+      const loadUser = async () => {
+        const user = await Auth.currentAuthenticatedUser();
+        saveUserData({
+          _id: user.attributes["custom:mongoid"],
+          email: user.attributes.email,
+          firstName: user.attributes.name,
+        });
+        saveCognitoUser(user);
+      };
+
+      // Check if already authenticated or is still authenticating
+      if(!isAuthenticated && !isAuthenticating) {
+        setIsAuthenticating(true);
+    
+        // Run
+        loadSession()
+          .then(saveToLocalStorage)
+          .then(loadUser)
+          .then(handleHasSession)
+          .catch(handleNoSession);
+      }
+    } catch(error) {
+      // console.log("Not logged in!", error.message);
+      handleNoSession();
+    }
 	}, []); // eslint-disable-line
 
-  return isAuthenticating ? null : (
+  return (
     <BrowserRouter>
       <Switch>
         {/* DOUBLE ROUTES */}
