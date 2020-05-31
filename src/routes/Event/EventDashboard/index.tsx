@@ -1,35 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import ExploreBar from "components/layouts/exporeBar";
+import { Col, Row } from "antd";
+import EventCard from "components/cards/eventCard";
 
 import "./index.css";
 
 import { EventsPayload } from "types/store";
+import { fetchAllEvents } from "store/actions/eventActions";
 
 interface Props {
   events: EventsPayload;
+  loading: boolean;
+  errors: {
+    events?: string;
+    eventCategories?: string;
+  }
+  fetchAllEvents: Function;
 }
 
-const EventDashboard: React.FunctionComponent<Props> = ({ events }) => {
+const EventDashboard: React.FunctionComponent<Props> = (props) => {
+  
+  const {
+    events,
+    loading,
+    errors,
+    fetchAllEvents
+  } = props;
   
   const eventsArray = Object.values(events);
+  const { events: eventsError } = errors;
 
+  useEffect(() => {
+    fetchAllEvents();
+  }, []); // eslint-disable-line
+
+  // TODO: Lazy loading (don't load all events, you'll die)
   return (
     <React.Fragment>
       <ExploreBar />
       <div className="Page Page--explore EventDashboard">
-        <div>Dashboard</div>
-        <ul>
+        <Row gutter={[16, 16]} className="dashboard-row">
           {eventsArray.map((event) => ( 
-            <li key={event._id}>
-              <div>{event.name}</div>
-              <div>{event.description}</div>
-              <div>{event.venue.name}</div>
-              <div>{event.endDate}</div>
-            </li>
+            <Col key={event._id} span={4} className="dashboard-col">
+              <EventCard variant="detailed" event={event} loading={!!eventsError || loading}/>
+            </Col>
           ))}
-        </ul>
+        </Row>
       </div>
     </React.Fragment>
   );
@@ -37,8 +55,16 @@ const EventDashboard: React.FunctionComponent<Props> = ({ events }) => {
 
 const mapStateToProps = ({ eventData }) => {
   return {
-    events: eventData.events
+    events: eventData.events,
+    loading: eventData.loading,
+    errors: eventData.errors
   };
 };
 
-export default connect(mapStateToProps, null)(EventDashboard);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllEvents: () => dispatch(fetchAllEvents()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventDashboard);

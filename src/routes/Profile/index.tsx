@@ -188,7 +188,7 @@ const Profile: React.FunctionComponent<Props> = (props) => {
               <Collapse defaultActiveKey={[]} className="events-panel">
                 <Collapse.Panel header="Events You&apos;ve Created:" key="created">
                   {eventsCreated && eventsCreated.map((event) =>
-                    <EventCard key={event._id} event={event} width="10em" size="small" bordered />
+                    <EventCard key={event._id} variant="brief" event={event} width="10em" size="small" bordered />
                   )}
                   {(!eventsCreated || !eventsCreated.length) &&
                     <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}>
