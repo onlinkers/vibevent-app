@@ -9,8 +9,6 @@ import Form, { TextInput } from "components/forms";
 import { AppContext } from "context/AppContext";
 import { saveUserData, saveCognitoUser } from "store/actions/userActions";
 
-import "./index.css";
-
 interface Props {
   saveUserData: Function;
   saveCognitoUser: Function;

@@ -6,8 +6,6 @@ import Form, { TextInput } from "components/forms";
 
 import UserService from "services/userService";
 
-import "./index.css";
-
 interface Props {
 }
 
