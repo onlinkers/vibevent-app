@@ -13,7 +13,7 @@ import { fetchAllEventData } from "store/actions/eventActions";
 
 /* UTILITIES */
 import { AppProvider } from "context/AppContext";
-import awsconfig from "./aws-exports.js";
+import awsconfig from "./aws-config.js";
 
 /* STYLESHEETS */
 import "./index.css";
