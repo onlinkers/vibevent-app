@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Auth } from "aws-amplify";
 
@@ -64,10 +64,8 @@ const Routes: React.FunctionComponent<Props> = (props) => {
         saveCognitoUser(user);
       };
 
-      // Check if already authenticated or is still authenticating
-      if(!isAuthenticated && !isAuthenticating) {
-        setIsAuthenticating(true);
-    
+      // Check if already authenticated
+      if(!isAuthenticated) {
         // Run
         loadSession()
           .then(saveToLocalStorage)
@@ -81,11 +79,11 @@ const Routes: React.FunctionComponent<Props> = (props) => {
     }
 	}, []); // eslint-disable-line
 
-  return (
+  return isAuthenticating ? null : (
     <BrowserRouter>
       <Switch>
         {/* DOUBLE ROUTES */}
-        <AuthRoute exact path="/" component={<Discover/>} altComponent={<Home/>}/>
+        <AuthRoute exact path="/" component={<Redirect to="/discover"/>} altComponent={<Home/>}/>
         <AuthRoute path="/profile" component={<Profile/>}/>
 
         {/* AUTHENTICATION */}

@@ -17,14 +17,14 @@
 }
 
 .Page--explore {
-	max-height: 90vh;
-	margin-top: 10vh;
+	max-height: calc(100vh - 5em);
+	margin-top: 5em;
 }
 /* TODO: Mobile View */
 @media (max-width: 800px) {
 	.Page--explore {
 		margin-top: 0;
-		max-height: calc(100% - 4em);
+		max-height: calc(100vh - 4em);
 		margin-bottom: 4em;
 	}
 }

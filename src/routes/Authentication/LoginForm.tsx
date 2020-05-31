@@ -17,14 +17,13 @@ const LoginForm: React.FunctionComponent<Props> = (props) => {
 
   const history = useHistory();
   const { session } = useContext(AppContext);
-  const { setIsAuthenticating, setIsAuthenticated } = session;
+  const { setIsAuthenticated } = session;
   const { saveUserData, saveCognitoUser } = props;
 
   const logIn = async (formValues) => {
     const { email, password } = formValues;
     if(!email || !password) return null;
 
-    setIsAuthenticating(true);
     const user = await Auth.signIn(email, password);
     const session = user.signInUserSession;
 
@@ -46,12 +45,10 @@ const LoginForm: React.FunctionComponent<Props> = (props) => {
 
   const logInComplete = async () => {
     setIsAuthenticated(true);
-    setIsAuthenticating(false);
     history.push("/");
   };
 
   const logInFail = () => {
-    setIsAuthenticating(false);
     setIsAuthenticated(false);
   };
 
