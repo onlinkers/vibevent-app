@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 
 import { Button } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import { User } from "types/props";
+import ExploreBar from "components/layouts/exporeBar";
 
+import { User } from "types/props";
 import "./index.css";
 
 import { AppContext } from "context/AppContext";
@@ -38,7 +39,7 @@ const Profile: React.FunctionComponent<Props> = (props) => {
     
   const refreshPage = () => {
     // A lil react-router hack to refresh the page
-    history.push("/");
+    history.push("/empty");
     history.goBack();
   };
 
@@ -57,19 +58,24 @@ const Profile: React.FunctionComponent<Props> = (props) => {
 
   useEffect(() => {
     if(userId) fetchUserData(userId);
-  });
+  }, []); // eslint-disable-line
 
   const isLoaded = !loading && !error;
 
-  return isLoaded ? (
+  return (
     <div className="Page--center Profile">
-      <div className="notes">{JSON.stringify(user)}</div>
-      <Button onClick={logOut}>LogOut</Button>
-    </div>
-  ) : (
-    <div className="Page Error">
-      <div onClick={refreshPage}><ReloadOutlined /></div>
-      <div>{error}</div>
+      <ExploreBar />
+      {isLoaded ? (
+        <React.Fragment>
+          <div className="notes">{JSON.stringify(user)}</div>
+          <Button className="button--clickable" onClick={logOut}>LogOut</Button>
+        </React.Fragment>
+      ) : (
+        <div className="Page Error">
+          <div onClick={refreshPage}><ReloadOutlined /></div>
+          <div className="text--unselectable">{error}</div>
+        </div>
+      )}
     </div>
   );
 };

@@ -57,7 +57,7 @@ export const fetchUserData = (id) => {
   return async (dispatch) => {
     try {
       dispatch(fetchUserDataRequest());
-      const response = await userService.getUserData({ id });
+      const response = await userService.getUsersByIds({ ids: id });
       const user = response.data;
       dispatch(fetchUserDataSuccess(user));
     }

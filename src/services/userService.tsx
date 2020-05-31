@@ -1,25 +1,44 @@
 import api from "../api";
-import { message } from "antd";
-// TODO: Error handling with antd message
-// Enhanced try/catch stuff
+import { apiErrorHandler } from "./_errorHandlers";
 
 export default {
-  getUserData: ({ id }) => {
-    return api().get(`/users/${id}`);
+  getUsersByIds: async ({ ids }) => {
+    try {
+      // check if ids is still an array
+      let userIds = ids;
+      if(typeof ids !== "string") userIds = ids.join(",");
+      const results = await api().get(`/users/${userIds}`);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
   },
   createUser: async (payload) => {
     try {
       const results = await api().post("/user", payload);
       return results;
     } catch(err) {
-      message.error(`API ERROR: ${err.response.data.name}`);
+      apiErrorHandler(err);
       throw err;
     }
   },
-  updateUser: ({ id, payload }) => {
-    return api().put(`/user/${id}`, payload);
+  updateUser: async ({ id, payload }) => {
+    try {
+      const results = await api().put(`/user/${id}`, payload);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
   },
-  deleteUser: ({ id }) => {
-    return api().delete(`/user/${id}`);
+  deleteUser: async ({ id }) => {
+    try {
+      const results = await api().delete(`/user/${id}`);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
   },
 };

@@ -29,7 +29,7 @@ const Map = React.memo<Props>(({ loaded, events, selectedCategories, error }) =>
 
   const refreshPage = () => {
     // A lil react-router hack to refresh the page
-    history.push("/");
+    history.push("/empty");
     history.goBack();
   };
 
@@ -43,8 +43,8 @@ const Map = React.memo<Props>(({ loaded, events, selectedCategories, error }) =>
     <React.Fragment>
       {!loaded && <div className="Page Loader">Loading...</div>}
       {loaded && error && <div className="Page Error">
-        <div onClick={refreshPage}><ReloadOutlined /></div>
-        <div>{error}</div>
+        <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
+        <div className="text--unselectable">{error}</div>
       </div>}
       <Mapbox
         events={filteredEvents}

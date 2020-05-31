@@ -16,13 +16,14 @@ const EXPLORE_STATES = {
   DISCOVER: "/discover",
   MOMENTS: "/moments",
   CREATE: "/event/create",
+  PROFILE: "/profile"
 };
 
 interface Props {
     
 }
 
-const iconStyle = { fontSize: "1.5em", color: "##2351e0" };
+const iconStyle = { fontSize: "1.5em", color: "#2351e0" };
 
 const ExploreBar: React.FunctionComponent<Props> = () => {
 
@@ -64,7 +65,9 @@ const ExploreBar: React.FunctionComponent<Props> = () => {
       {/* TODO: Import color from styles */}
 
 
-      <Link to="/profile"><div className="explore-profile"><UserOutlined style={{ color: "##2351e0" }}/></div></Link>
+      <Link to="/profile"><div className="explore-profile">
+        <UserOutlined style={pathname.includes(EXPLORE_STATES.PROFILE) ? { color: "#2351e0" } : { color: "#000" }}/>
+      </div></Link>
     </div>
 
   ) : ( // TODO: Icons and stuff

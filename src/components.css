@@ -1,0 +1,12 @@
+.text--unselectable {
+    user-select: none;
+}
+
+.button--clickable {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.button--clickable:hover {
+    transform: scale(1.1);
+    transition: all 0.2s;
+}

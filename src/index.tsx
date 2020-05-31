@@ -17,6 +17,7 @@ import awsconfig from "./aws-config.js";
 
 /* STYLESHEETS */
 import "./index.css";
+import "./components.css";
 import "antd/dist/antd.css";
 
 // configure amplify

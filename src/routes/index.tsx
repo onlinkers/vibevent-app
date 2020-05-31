@@ -95,6 +95,7 @@ const Routes: React.FunctionComponent<Props> = (props) => {
         <Route path="/event" component={Events}/>
         <Route path="/discover" component={Discover}/>
         <Route path="/forbidden" component={Forbidden}/>
+        <Route path="/empty" render={() => <div></div>}/>
         <Route path="*" component={NotFound}/>
       </Switch>
     </BrowserRouter>

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
-import { message } from "antd";
 import Form, { TextInput } from "components/forms";
 
 import { AppContext } from "context/AppContext";
