@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
-import { Form, Button, message } from "antd";
-import TextInput from "components/forms/inputs/textInput";
+import { message } from "antd";
+import Form, { TextInput } from "components/forms";
 
 import { AppContext } from "context/AppContext";
 
@@ -16,73 +16,75 @@ const LoginForm: React.FunctionComponent = () => {
   const { setIsAuthenticating, setIsAuthenticated } = session;
 
   const logIn = async (formValues) => {
-    try {
-      const { email, password } = formValues;
-      if(!email || !password) return null;
+    const { email, password } = formValues;
+    if(!email || !password) return null;
 
-      setIsAuthenticating(true);
-      const user = await Auth.signIn(email, password);
-      const session = user.signInUserSession;
+    setIsAuthenticating(true);
+    const user = await Auth.signIn(email, password);
+    const session = user.signInUserSession;
 
-      // Save the session tokens to localstorage
-      // TODO: Use cookies instead
-      // https://stackoverflow.com/questions/48983708/where-to-store-access-token-in-react-js
-      localStorage.setItem("cognitoAccessToken", JSON.stringify(session.accessToken));
-      localStorage.setItem("cognitoIdToken", JSON.stringify(session.idToken));
-      localStorage.setItem("cognitoRefreshToken", JSON.stringify(session.refreshToken));
+    // Save the session tokens to localstorage
+    // TODO: Use cookies instead
+    // https://stackoverflow.com/questions/48983708/where-to-store-access-token-in-react-js
+    localStorage.setItem("cognitoAccessToken", JSON.stringify(session.accessToken));
+    localStorage.setItem("cognitoIdToken", JSON.stringify(session.idToken));
+    localStorage.setItem("cognitoRefreshToken", JSON.stringify(session.refreshToken));
 
-      setIsAuthenticated(true);
-      setIsAuthenticating(false);
-      history.push("/");
-    } catch(err) {
-      message.error(err.mesage);
-    }
+  };
+
+  const logInComplete = async () => {
+    setIsAuthenticated(true);
+    setIsAuthenticating(false);
+    history.push("/");
+  };
+
+  const logInFail = (err) => {
+    setIsAuthenticating(false);
+    setIsAuthenticated(false);
+    message.error(err.message);
   };
 
   return (
     <div className="Page--center">
       <Form
+        title="Log In"
+        description="Log into your account!"
+        submitText="Log In"
+        extraButtons={<p>Don&apos;t have an account? <Link to="/auth/signup">Sign Up</Link></p>}
         name="basic"
         className="AuthForm SignupForm"
         size="large"
         layout="horizontal"
-        onFinish={logIn}
+        scrollToFirstError={true}
+        onSubmit={logIn}
+        onFinish={logInComplete}
+        onFail={logInFail}
       >
-        <div className="topWrapper">
-          <div className="header">
-            <h1 className="title">Log In</h1>
-            <h4 className="description">Log into your account!</h4>
-          </div>
-					
-          <div className="content">
-            <TextInput
-              name="email"
-              label="Email"
-              rules={[
-                {
-                  required: true,
-                  message: "Enter your email!",
-                },
-              ]}
-            />
-            <TextInput
-              name="password"
-              variant="Password"
-              label="Password"
-              rules={[
-                {
-                  required: true,
-                  message: "Enter your password!",
-                },
-              ]}
-            />
-          </div>
-        </div>
-
-        <div className="footer">
-          <Button type="primary" htmlType="submit">Log In</Button>
-          <p>Don&apos;t have an account? <Link to="/auth/signup">Sign Up</Link></p>
-        </div>
+        <TextInput
+          name="email"
+          label="Email"
+          rules={[
+            {
+              required: true,
+              message: "Enter your email!",
+            },
+            {
+              type: "email",
+              message: "Email is not valid!",
+            }
+          ]}
+        />
+        <TextInput
+          name="password"
+          variant="Password"
+          label="Password"
+          rules={[
+            {
+              required: true,
+              message: "Enter your password!",
+            },
+          ]}
+        />
       </Form>
     </div>
   );

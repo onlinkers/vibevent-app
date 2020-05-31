@@ -31,12 +31,12 @@ const InputWrapper: React.FunctionComponent<WrapperProps> = (props) => {
 
   return (
     <AntForm.Item className={active ? "formitem active" : "formitem"} {...rest}>
-      <TextInput label={label} variant={variant} active={active} setActive={setActive}/>
+      <Input label={label} variant={variant} active={active} setActive={setActive}/>
     </AntForm.Item>
   );
 };
 
-const TextInput: React.FunctionComponent<Props> = (props) => {
+const Input: React.FunctionComponent<Props> = (props) => {
 
   const { variant, label, value, onChange, active, setActive } = props;
 
@@ -64,4 +64,5 @@ const TextInput: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-export default InputWrapper;
+const TextInput = InputWrapper;
+export default TextInput;
