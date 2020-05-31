@@ -94,7 +94,6 @@ const SignupForm: React.FunctionComponent<Props> = () => {
                 }
               ]}
             />
-
             <TextInput
               name="password"
               label="Password"
@@ -129,7 +128,6 @@ const SignupForm: React.FunctionComponent<Props> = () => {
                 }
               ]}
             />
-
             <TextInput
               name="passwordConfirm"
               label="Confirm Password"

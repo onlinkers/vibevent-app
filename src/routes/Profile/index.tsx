@@ -33,7 +33,7 @@ const Profile: React.FunctionComponent<Props> = (props) => {
     const { _id: userId } = user;
 
     const history = useHistory();
-	const { session } = useContext(AppContext);
+    const { session } = useContext(AppContext);
     const { setIsAuthenticated } = session;
     
     const refreshPage = () => {

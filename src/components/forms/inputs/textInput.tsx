@@ -18,7 +18,7 @@ interface Props {
         | "Password"
         | "Search"
         | "TextArea"
-        | "";
+        | null;
     active: Boolean;
     setActive: Function;
     [x: string]: any;
@@ -26,7 +26,7 @@ interface Props {
 
 const InputWrapper: React.FunctionComponent<WrapperProps> = (props) => {
 
-    const { label, variant = "", ...rest } = props;
+    const { label, variant = null, ...rest } = props;
     const [active, setActive] = useState(false);
 
     return (
@@ -38,7 +38,7 @@ const InputWrapper: React.FunctionComponent<WrapperProps> = (props) => {
 
 const TextInput: React.FunctionComponent<Props> = (props) => {
 
-    const { variant = "", label, value, onChange, active, setActive } = props;
+    const { variant, label, value, onChange, active, setActive } = props;
 
     const [val, setVal] = useState<any>("");
 

@@ -61,6 +61,9 @@ const ExploreBar: React.FunctionComponent<Props> = () => {
           </div>
         </Link>
       </div>
+      {/* TODO: Import color from styles */}
+
+
       <Link to="/profile"><div className="explore-profile"><UserOutlined style={{ color: "##2351e0" }}/></div></Link>
     </div>
 
