@@ -29,6 +29,15 @@ const Form: React.FunctionComponent<Props> = ({ children, ...props }) => {
   } = props;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formInstance] = AntForm.useForm();
+
+  const validate = (validations) => {
+    const errorFields = validations.errorFields.map((value) => value.name);
+    // antd needs to be fixed for nested items
+    // const firstError = errorFields[0];
+    // formInstance.scrollToField(firstError);
+    message.error(`Error validating the following fields: ${errorFields.join(", ")}`);
+  };
 
   const submit = async (formValues) => {
     try {
@@ -46,7 +55,9 @@ const Form: React.FunctionComponent<Props> = ({ children, ...props }) => {
 
   return (
     <AntForm
+      form={formInstance}
       onFinish={submit}
+      onFinishFailed={validate}
       {...rest}
     >
       <div className="topWrapper">

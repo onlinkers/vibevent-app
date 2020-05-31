@@ -51,10 +51,9 @@ const LoginForm: React.FunctionComponent<Props> = (props) => {
     history.push("/");
   };
 
-  const logInFail = (err) => {
+  const logInFail = () => {
     setIsAuthenticating(false);
     setIsAuthenticated(false);
-    message.error(err.message);
   };
 
   return (

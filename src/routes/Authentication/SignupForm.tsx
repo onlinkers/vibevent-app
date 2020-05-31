@@ -4,7 +4,7 @@ import { Auth } from "aws-amplify";
 
 import Form, { TextInput } from "components/forms";
 
-import UserService from "services/userService";
+import userService from "services/userService";
 
 interface Props {
 }
@@ -23,7 +23,7 @@ const SignupForm: React.FunctionComponent<Props> = () => {
 
     // Save to the database first
     // "email already used" errors will be thrown here
-    const { data } = await UserService.createUser({
+    const { data } = await userService.createUser({
       firstName, lastName, email
     });
     const userId = data.userId;
