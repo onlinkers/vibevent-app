@@ -49,7 +49,8 @@ const userReducer = (state = initState, action: FetchUserDataAction | UpdateUser
       return {
         ...state,
         user: {},
-        cognitoUser: {}
+        cognitoUser: {},
+        error: ""
       };
     case SAVE_COGNITO_USER:
       return {

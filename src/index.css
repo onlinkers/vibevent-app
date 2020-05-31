@@ -65,6 +65,7 @@ code {
 	z-index: 500;
 }
 
+/* TODO: Mobile View */
 @media (max-width: 800px) {
 	.Error {
 		font-size: 2em;

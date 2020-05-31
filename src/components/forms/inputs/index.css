@@ -1,3 +1,8 @@
+.form-item {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
 .formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input,
 .formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input-password {
     border-radius: 0.5em;
@@ -18,7 +23,7 @@
     padding-left: 1em;
     font-weight: bold;
     color: #2351F4;
-    /* TODO: import colors */
+    /* TODO: Import color from styles */
     opacity: 0;
     transform: translateY(100%);
     transition: all 0.2s;
@@ -35,6 +40,7 @@
     text-align: left;
 }
 
+/* TODO: Mobile View */
 @media (max-width: 800px) {
 
     .formitem > .ant-form-item-control > .ant-form-item-control-input > .ant-form-item-control-input-content > .ant-input,

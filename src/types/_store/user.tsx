@@ -44,5 +44,5 @@ export interface UpdateUserDataAction {
 
 export interface SaveCognitoUserAction {
   type: typeof SAVE_COGNITO_USER;
-  payload: any;
+  payload: CognitoUser;
 }

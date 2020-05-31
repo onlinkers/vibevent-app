@@ -45,6 +45,8 @@
     max-width: 500px;
     margin-bottom: 0.5em;
 }
+
+/* TODO: Mobile View */
 @media (max-width: 800px) {
     .AuthForm {
         width: 100%;
