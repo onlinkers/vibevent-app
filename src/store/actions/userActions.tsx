@@ -60,6 +60,7 @@ export const fetchUserData = (id) => {
       // need to always get full event data when saving to redux
       const { data } = await userService.getUsersByIds({ ids: id, withEvents: true });
       const user = data[id];
+      if(!user) throw new Error("User data could not be found in the database!");
       dispatch(fetchUserDataSuccess(user));
     }
     catch(error) {

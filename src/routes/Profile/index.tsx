@@ -200,7 +200,7 @@ const Profile: React.FunctionComponent<Props> = (props) => {
               <Collapse defaultActiveKey={[]} className="events-panel">
                 <Collapse.Panel header="Events You&apos;ve Been Involved With:" key="created">
                   {eventsInvolved && eventsInvolved.map((event) =>
-                    <EventCard key={event._id} event={event} width="10em" size="small" bordered />
+                    <EventCard key={event._id} variant="brief" event={event} width="10em" size="small" bordered />
                   )}
                   {(!eventsInvolved || !eventsInvolved.length) &&
                     <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}>
@@ -215,6 +215,7 @@ const Profile: React.FunctionComponent<Props> = (props) => {
           <div className="Page Error">
             <div onClick={refreshPage}><ReloadOutlined /></div>
             <div className="text--unselectable">{error}</div>
+            <Button className="button--clickable" onClick={logOut}>Log Out</Button>
           </div>
         )}
       </div>
