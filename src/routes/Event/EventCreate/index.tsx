@@ -38,7 +38,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
   const {
     eventCategories,
     loading,
-    errors,
+    // errors,
     userId
   } = props;
 
@@ -185,7 +185,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
               <Input />
             </Form.Item>
 
-            <Form.Item label="Select">
+            <Form.Item name="categories" label="Select">
               <Select mode="multiple" className="category-select">
                 {Object.keys(eventCategories).map((categoryKey) => (
                   <Select.Option

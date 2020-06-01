@@ -32,9 +32,18 @@ export default {
       throw err;
     }
   },
-  updateEvent: async ({ id, payload }) => {
+  setEvent: async ({ id, payload }) => {
     try {
       const results = await api().put(`/event/${id}`, payload);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
+  },
+  updateEvent: async ({ id, payload }) => {
+    try {
+      const results = await api().patch(`/event/${id}`, payload);
       return results;
     } catch(err) {
       apiErrorHandler(err);
