@@ -5,6 +5,7 @@ import EventCard from "components/cards/eventCard";
 
 import { User } from "types/props";
 
+import "./index.css";
 import DefaultAvatar from "assets/media/default-avatar.png";
 
 interface Props {
@@ -44,12 +45,12 @@ const ProfileDetails = (props: Props) => {
 
   const { _id: userId } = user;
 
-  const save = () => {
+  const save = async () => {
     // need to turn into an array of strings first
     const eventsInvolvedIds = eventsInvolved?.map((event) => event._id);
     const eventsCreatedIds = eventsCreated?.map((event) => event._id);
 
-    onSave({
+    await onSave({
       id: userId,
       payload: {
         email,
@@ -60,6 +61,8 @@ const ProfileDetails = (props: Props) => {
         eventsCreated: eventsCreatedIds
       }
     });
+    setEditable(false);
+
   };
 
   const cancel = () => {

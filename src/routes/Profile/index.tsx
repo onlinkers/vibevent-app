@@ -3,7 +3,7 @@ import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { Button } from "antd";
+import { Button, message } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import ExploreBar from "components/layouts/exporeBar";
 import ProfileDetails from "./ProfileDetails";
@@ -38,8 +38,9 @@ const Profile: React.FunctionComponent<Props> = (props) => {
   const { session } = useContext(AppContext);
   const { setIsAuthenticated } = session;
 
-  const handleSave = (payload) => {
-    userService.setUser(payload);
+  const handleSave = async (payload) => {
+    await userService.setUser(payload);
+    message.success("User saved!");
   };
     
   const refreshPage = () => {
