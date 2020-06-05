@@ -22,7 +22,6 @@ interface Props {
     events?: string
     eventCategories?: string,
   };
-  userId: string;
 }
 
 const EventEdit: React.FunctionComponent<Props> = (props) => {
@@ -34,8 +33,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
     events,
     eventCategories,
     loading,
-    // errors,
-    // userId
+    // errors
   } = props;
 
   const [eventLoaded, setEventLoaded] = useState(false);
@@ -139,13 +137,12 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
   ) : null;
 };
 
-const mapStateToProps = ({ eventData, userData }) => {
+const mapStateToProps = ({ eventData }) => {
   return {
     events: eventData.events,
     eventCategories: eventData.eventCategories,
     loading: eventData.loading,
-    errors: eventData.errors,
-    userId: userData.user._id
+    errors: eventData.errors
   };
 };
 
