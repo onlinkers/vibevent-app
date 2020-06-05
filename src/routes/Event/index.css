@@ -5,28 +5,3 @@
 .EventForm > .ant-form {
     width: 80%;
 }
-
-.category-select-option > .ant-select-item-option-content,
-.category-select > .ant-select-selector > .ant-select-selection-item > .ant-select-selection-item-content {
-    text-transform: capitalize;
-}
-
-/* SEARCH INPUT */
-#venue > .mapboxgl-ctrl > .mapboxgl-ctrl-geocoder--pin-right,
-#venue > .mapboxgl-ctrl > .mapboxgl-ctrl-geocoder--icon {
-    display: none;
-}
-#venue > .mapboxgl-ctrl > .suggestions-wrapper > .suggestions {
-    list-style-type: none;
-    padding-inline-start: 1em;
-    padding-inline-end: 1em;
-    font-size: 1em;
-}
-#venue > .mapboxgl-ctrl > .suggestions-wrapper > .suggestions > li {
-    border: 1px lightgrey solid;
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
-}
-#venue > .mapboxgl-ctrl > .suggestions-wrapper > .suggestions > li:hover {
-    background: ghostwhite;
-}
