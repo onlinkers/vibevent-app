@@ -28,8 +28,9 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     errors,
     fetchAllEvents
   } = props;
-  
-  const eventsArray = Object.values(events);
+
+  // Netlify temporary fix for when events and eventcategories are strings
+  const eventsArray = typeof events === "object" && events !== null ? Object.values(events) : [];
   const { events: eventsError } = errors;
 
   useEffect(() => {
