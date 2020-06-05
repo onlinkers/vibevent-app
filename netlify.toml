@@ -13,16 +13,16 @@
 # [build]
 #   base    = ""
 #   publish = "build"
-#   command = "REACT_APP_STAGE=dev npm run build"
+#   command = "NODE_ENV=production npm run build"
 
 # Production context: All deploys to the main repository branch will inherit these settings.
-# [context.production]
-#   command = "REACT_APP_STAGE=prod npm run build"
+[context.production]
+    command = "NODE_ENV=production npm run build"
 
 # Deploy Preview context: All deploy previews will inherit these settings
-# [context.deploy-preview]
-#   command = "REACT_APP_STAGE=dev npm run build"
+[context.deploy-preview]
+    command = "NODE_ENV=development npm run build"
 
 # Branch Deploy context: All deploys that are not in an active deploy preview will inherit these settings
 # [context.branch-deploy]
-#   command = "REACT_APP_STAGE=dev npm run build"
+#   command = "NODE_ENV=development npm run build"

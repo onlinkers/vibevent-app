@@ -12,7 +12,7 @@ export const apiErrorHandler = (err) => {
   // if the API could not be reached
   else if(!err.response && err.config) errorMessage = "NETWORK ERROR: API could not be reached/errored out!";
   // if the endpoint is available (and gettting a string response)
-  else if(err.response.data === "string") errorMessage = `API ${err.response.status} ERROR for ${REQUEST}: ${err.response.data.name} - ${err.response.data.message}`;
+  else if(err.response && err.response.data === "error") errorMessage = `API ${err.response.status} ERROR: ${err.response.statusText}`;
   // if other endpoint error
   else if(err.response) errorMessage = `API ${err.response.status} ERROR for ${REQUEST}: ${err.response.data.name} - ${err.response.data.message}`;
   // if axios error
