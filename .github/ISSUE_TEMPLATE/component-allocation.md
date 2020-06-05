@@ -2,7 +2,7 @@
 name: Component Allocation
 about: Assign a team member a component to work on.
 title: "[Component]"
-labels: ''
+labels: new feature
 assignees: ''
 
 ---
