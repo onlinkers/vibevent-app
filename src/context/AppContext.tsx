@@ -24,7 +24,7 @@ const AppContext = createContext<ContextProps>({
 
 const AppProvider: React.FunctionComponent<ProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [isAuthenticating, setIsAuthenticating] = useState<boolean>(false);
+  const [isAuthenticating, setIsAuthenticating] = useState<boolean>(true);
   const value = {
     session: {
       isAuthenticated,

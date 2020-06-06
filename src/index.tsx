@@ -60,3 +60,6 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+// Finally, log for debugging and development purposes
+console.log(`Running app in ${process.env.NODE_ENV} environment`); // eslint-disable-line

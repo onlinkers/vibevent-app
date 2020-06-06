@@ -7,8 +7,12 @@ const encodeParams = (params) => {
   const paramKeys = Object.keys(params);
   const paramString = paramKeys.map((key) => {
     const value = key && params[key];
-    if(!key || !value || (typeof value !== "string" && typeof value !== "boolean")) {
-      throw new Error(`Invalid url params: ${JSON.stringify(params)}`); 
+    if (
+      !key ||
+      !value ||
+      (typeof value !== "string" && typeof value !== "boolean")
+    ) {
+      throw new Error(`Invalid url params: ${JSON.stringify(params)}`);
     }
     return `${encodeURIComponent(key)}=${encodeURIComponent(value.toString())}`;
   });
@@ -24,9 +28,7 @@ const encodeParams = (params) => {
  */
 
 export const apiFetch = async (path, options) => {
-
   try {
-
     // Form the base url
     let url = `${BASE_URL}${path}`;
 
@@ -37,7 +39,7 @@ export const apiFetch = async (path, options) => {
     // Check if extra headers were provided
     const headers = {
       ...DEFAULT_HEADERS,
-      ...(options.headers || {})
+      ...(options.headers || {}),
     };
 
     // Check if params was provided and add to url
@@ -47,27 +49,19 @@ export const apiFetch = async (path, options) => {
     const body = options.body || null;
 
     return fetch(url, {
-
       method,
       headers,
-      body
-
-    }).then(async (result) => {
-    
-      if (!result) return null;
-      const data = await result.json();
-      return data;
-    
-    }).catch((error) => {
-
-      throw error;
-
-    });
-
-  } catch(err) {
-
+      body,
+    })
+      .then(async (result) => {
+        if (!result) return null;
+        const data = await result.json();
+        return data;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  } catch (err) {
     alert(err.message);
-
   }
-    
 };
