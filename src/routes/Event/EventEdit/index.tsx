@@ -5,8 +5,9 @@ import moment from "moment";
 
 import {
   message,
-  Button
+  Button,
 } from "antd";
+import { ReloadOutlined } from "@ant-design/icons";
 import ExploreBar from "components/layouts/exporeBar";
 import EventForm from "components/forms/EventForm";
 
@@ -33,11 +34,16 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
     events,
     eventCategories,
     loading,
-    // errors
+    errors
   } = props;
 
   const [eventLoaded, setEventLoaded] = useState(false);
   const [thisEvent, setThisEvent] = useState<any | null>(null);
+
+  const refreshPage = () => {
+    history.push("/empty");
+    history.goBack();
+  };
 
   const handleSubmit = async (formValues) => {
 
@@ -100,41 +106,51 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
     
   }, []); // eslint-disable-line
 
-  return eventLoaded ? (
+  const hasErrors = errors.events || events.eventCategories;
+  const loaded = eventLoaded && !loading;
+
+  return (
     <React.Fragment>
       <ExploreBar />
-      { thisEvent ? (
-        <div className="Page--center Page--explore EventForm">
-          <h1>Edit your event!</h1>
-          <EventForm
-            mode="EDIT"
-            loading={loading}
-            onSubmit={handleSubmit}
-            eventCategories={eventCategories}
-            initialValues={thisEvent ? {
-              name: thisEvent.name,
-              startDate: moment(thisEvent.startDate),
-              endDate: moment(thisEvent.endDate),
-              price: thisEvent.price,
-              description: thisEvent.description,
-              categories: thisEvent.categories,
-              ticketLink: thisEvent.links?.ticket,
-              venue: thisEvent.venue.name,
-              venueCoordinates: thisEvent.venue.location,
-              coverPhoto: thisEvent.media?.coverPhoto?.baseSrc,
-              tags: thisEvent.tags?.hostTags
-            } : {}}
-          />
+      {!loaded && <div className="Page Loader">Loading...</div>}
+      {loaded && (hasErrors ? (
+        <div className="Page Error">
+          <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
+          <div className="text--unselectable">{errors[0]}</div>
+          <div className="text--unselectable">{errors[1]}</div>
         </div>
       ) : (
-        <div className="Page Error">
-          <div className="text--unselectable">Data on the event you are trying to edit does not exist!</div>
-          <Button type="primary" className="button--clickable" onClick={() => history.push("/event/create")}>Create a new event.</Button>
-          <Button className="button--clickable" onClick={() => history.goBack()}>Go back.</Button>
-        </div>
-      )}
+        thisEvent ? (
+          <div className="Page--center Page--explore EventForm">
+            <h1>Edit your event!</h1>
+            <EventForm
+              mode="EDIT"
+              onSubmit={handleSubmit}
+              eventCategories={eventCategories}
+              initialValues={{
+                name: thisEvent.name,
+                startDate: moment(thisEvent.startDate),
+                endDate: moment(thisEvent.endDate),
+                price: thisEvent.price,
+                description: thisEvent.description,
+                categories: thisEvent.categories,
+                ticketLink: thisEvent.links?.ticket,
+                venue: thisEvent.venue.name,
+                venueCoordinates: thisEvent.venue.location,
+                coverPhoto: thisEvent.media?.coverPhoto?.baseSrc,
+                tags: thisEvent.tags?.hostTags
+              }}
+            />
+          </div>
+        ) : (
+          <div className="Page Error">
+            <div className="text--unselectable">Data on the event you are trying to edit does not exist!</div>
+            <Button type="primary" className="button--clickable" onClick={() => history.push("/event/create")}>Create a new event.</Button>
+            <Button className="button--clickable" onClick={() => history.goBack()}>Go back.</Button>
+          </div>
+        )))}
     </React.Fragment>
-  ) : null;
+  );
 };
 
 const mapStateToProps = ({ eventData }) => {

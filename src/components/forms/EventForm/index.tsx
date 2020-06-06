@@ -8,7 +8,6 @@ import {
   Select,
   DatePicker,
   InputNumber,
-  Skeleton,
 } from "antd";
 
 import "./index.css";
@@ -16,7 +15,6 @@ import { EventCategoriesPayload } from "types/store";
 
 interface Props {
     mode: "CREATE" | "EDIT";
-    loading: Boolean;
     onSubmit: Function;
     eventCategories: EventCategoriesPayload;
     initialValues?: any;
@@ -26,7 +24,7 @@ const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const EventForm: React.FunctionComponent<Props> = (props) => {
 
-  const { loading, onSubmit, eventCategories, initialValues } = props;
+  const { onSubmit, eventCategories, initialValues } = props;
   const initialVenueCoordinates = (initialValues && initialValues.venueCoordinates) || null;
 
   const [form] = Form.useForm();
@@ -51,7 +49,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
   };
 
   useEffect(() => {
-    if(!loading && !loaded) {
+    if(!loaded) {
       // Initialize the geocoder in the form
       const geocoder = new MapboxGeocoder({
         accessToken: MAPBOX_TOKEN,
@@ -71,9 +69,9 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
         form.setFieldsValue({ venue: placeName });
       });
     }
-  }, [loading]); // eslint-disable-line
+  }, []); // eslint-disable-line
 
-  return loading ? <Skeleton active /> : (
+  return (
     <Form
       form={form}
       labelCol={{ span: 4 }}

@@ -23,7 +23,7 @@ import eventService from "services/eventService";
 interface Props {
   event?: Event;
   favorited?: boolean;
-  variant?: "detailed" | "brief" | "template";
+  variant?: "detailed" | "brief";
   loading?: boolean;
   width?: string;
   size?: string;
@@ -116,22 +116,6 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
           <Card.Meta
             title={event?.name}
             description={event?.description}
-          ></Card.Meta>
-        </Skeleton>
-      </Card>
-    );
-  }
-  else if(variant === "template") {
-    return (
-      <Card
-        className={className}
-        style={{ width, minWidth: width }}
-        cover={imageSource && <img src={imageSource} alt="event-cover"/>}
-        {...rest}
-      >
-        <Skeleton loading={true} title paragraph={false}>
-          <Card.Meta
-            title="template"
           ></Card.Meta>
         </Skeleton>
       </Card>

@@ -67,15 +67,17 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
   return (
     <React.Fragment>
       <ExploreBar />
-      <div className="Page--center Page--explore EventForm">
-        <h1>Create Your Event!</h1>
-        <EventForm
-          mode="CREATE"
-          loading={loading}
-          onSubmit={handleSubmit}
-          eventCategories={eventCategories}
-        />
-      </div>
+      {loading && <div className="Page Loader">Loading...</div>}
+      {!loading && (
+        <div className="Page--center Page--explore EventForm">
+          <h1>Create Your Event!</h1>
+          <EventForm
+            mode="CREATE"
+            onSubmit={handleSubmit}
+            eventCategories={eventCategories}
+          />
+        </div>
+      )}
     </React.Fragment>
   );
 };

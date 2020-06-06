@@ -70,30 +70,26 @@ const Profile: React.FunctionComponent<Props> = (props) => {
     if(userId) fetchUserData(userId);
   }, []); // eslint-disable-line
 
-  const isLoaded = !loading && !error;
-
-  // Netlify temporary fix for when events and eventcategories are strings
-  const userValid = typeof user === "object" && user !== null ? true : false;
-
-  return (
+  return loading ? null : (
     <React.Fragment>
       <ExploreBar />
-      <div className="Page Page--explore">
-        {userValid && isLoaded ? (
+      {loading && <div className="Page Loader">Loading...</div>}
+      {!loading && (error ? (
+        <div className="Page Error">
+          <div onClick={refreshPage}><ReloadOutlined /></div>
+          <div className="text--unselectable">{error}</div>
+          <Button className="button--clickable" onClick={logOut}>Log Out</Button>
+        </div>
+      ) : (
+        <div className="Page Page--explore">
           <ProfileDetails
             user={user}
             onSave={handleSave}
             redirectEvents={redirectEvents}
             logOut={logOut}
           />
-        ) : (
-          <div className="Page Error">
-            <div onClick={refreshPage}><ReloadOutlined /></div>
-            <div className="text--unselectable">{error}</div>
-            <Button className="button--clickable" onClick={logOut}>Log Out</Button>
-          </div>
-        )}
-      </div>
+        </div>
+      ))}
     </React.Fragment>
   );
 };
