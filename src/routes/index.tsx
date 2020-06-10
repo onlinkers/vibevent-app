@@ -43,9 +43,9 @@ const Routes: React.FunctionComponent<Props> = (props) => {
     try {
       // save session data to local storage (for API calls)
       const saveToLocalStorage = (session) => {
-        if(session.accessToken) localStorage.setItem("cognitoAccessToken", JSON.stringify(session.accessToken));
-        if(session.idToken) localStorage.setItem("cognitoIdToken", JSON.stringify(session.idToken));
-        if(session.refreshToken) localStorage.setItem("cognitoRefreshToken", JSON.stringify(session.refreshToken));
+        if(session.accessToken) localStorage.setItem("cognitoAccessToken", session.accessToken.jwtToken);
+        if(session.idToken) localStorage.setItem("cognitoIdToken", session.idToken.jwtToken);
+        if(session.refreshToken) localStorage.setItem("cognitoRefreshToken", session.refreshToken.token);
       };
 
       // load the current session from Cognito and

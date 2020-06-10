@@ -37,9 +37,9 @@ const LoginForm: React.FunctionComponent<Props> = (props) => {
     // Save the session tokens to localstorage
     // TODO: Use cookies instead
     // https://stackoverflow.com/questions/48983708/where-to-store-access-token-in-react-js
-    localStorage.setItem("cognitoAccessToken", JSON.stringify(session.accessToken));
-    localStorage.setItem("cognitoIdToken", JSON.stringify(session.idToken));
-    localStorage.setItem("cognitoRefreshToken", JSON.stringify(session.refreshToken));
+    localStorage.setItem("cognitoAccessToken", session.accessToken.jwtToken);
+    localStorage.setItem("cognitoIdToken", session.idToken.jwtToken);
+    localStorage.setItem("cognitoRefreshToken", session.refreshToken.token);
 
   };
 
