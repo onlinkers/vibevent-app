@@ -39,6 +39,7 @@ const ProfileDetails = (props: Props) => {
 
   const [editable, setEditable] = useState(false);
   // original input states
+  const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
@@ -53,6 +54,7 @@ const ProfileDetails = (props: Props) => {
     await onSave({
       id: userId,
       payload: {
+        username,
         email,
         firstName,
         lastName,
@@ -66,6 +68,7 @@ const ProfileDetails = (props: Props) => {
   };
 
   const cancel = () => {
+    setUsername(user.username);
     setEmail(user.email);
     setFirstName(user.firstName);
     setLastName(user.lastName);
@@ -105,6 +108,14 @@ const ProfileDetails = (props: Props) => {
             className={editable ? "editable--active" : "editable"}
             editable={editable ? { editing: true, onChange: setLastName } : false}
           >{lastName}
+          </Typography.Text>
+        </h3>
+        <h3>
+          <span className="label">Username:</span>
+          <Typography.Text
+            className={editable ? "editable--active" : "editable"}
+            editable={editable ? { editing: true, onChange: setUsername } : false}
+          >{username}
           </Typography.Text>
         </h3>
         <h3>
