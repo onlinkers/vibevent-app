@@ -15,6 +15,7 @@ axiosInstance.interceptors.response.use((response) => {
 
   // Deal with Netlify error where API calls return 200 status but no data
   if(typeof response.data === "string" && response.data.includes("doctype")) {
+    console.log("recieved", response); // eslint-disable-line
     throw ({
       response: {
         config: response.config,
