@@ -17,6 +17,7 @@ export interface UserCreatePayload {
   _id?: string;
   firstName: string;
   lastName?: string;
+  username: string;
   email: string;
   profilePhoto?: Image;
 }

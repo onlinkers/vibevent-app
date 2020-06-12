@@ -17,6 +17,7 @@ const SignupForm: React.FunctionComponent<Props> = () => {
     const {
       firstName,
       lastName,
+      username,
       email,
       password
     } = formValues;
@@ -24,7 +25,7 @@ const SignupForm: React.FunctionComponent<Props> = () => {
     // Save to the database first
     // "email already used" errors will be thrown here
     const { data } = await userService.createUser({
-      firstName, lastName, email
+      firstName, lastName, username, email
     });
     const userId = data.userId;
 	
@@ -33,8 +34,10 @@ const SignupForm: React.FunctionComponent<Props> = () => {
       username: email,
       password,
       attributes: {
-        name: `${firstName} ${lastName}`,
+        given_name: firstName,
+        family_name: lastName || "",
         email,
+        preferred_username: username || "",
         "custom:mongoid": userId
       }
     });
@@ -72,6 +75,10 @@ const SignupForm: React.FunctionComponent<Props> = () => {
           name="lastName"
           label="Last Name (optional)"
           hasFeedback
+        />
+        <TextInput
+          name="username"
+          label="Username (optional)"
         />
         <TextInput
           name="email"

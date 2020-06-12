@@ -12,6 +12,8 @@ import Authentication from "./Authentication";
 import NotFound from "./NotFound";
 import Forbidden from "./Forbidden";
 
+import { message } from "antd";
+
 import AuthRoute from "./AuthRoute";
 import { AppContext } from "context/AppContext";
 import { saveUserData, saveCognitoUser } from "store/actions/userActions";
@@ -43,9 +45,9 @@ const Routes: React.FunctionComponent<Props> = (props) => {
     try {
       // save session data to local storage (for API calls)
       const saveToLocalStorage = (session) => {
-        if(session.accessToken) localStorage.setItem("cognitoAccessToken", JSON.stringify(session.accessToken));
-        if(session.idToken) localStorage.setItem("cognitoIdToken", JSON.stringify(session.idToken));
-        if(session.refreshToken) localStorage.setItem("cognitoRefreshToken", JSON.stringify(session.refreshToken));
+        if(session.accessToken) localStorage.setItem("cognitoAccessToken", session.accessToken.jwtToken);
+        if(session.idToken) localStorage.setItem("cognitoIdToken", session.idToken.jwtToken);
+        if(session.refreshToken) localStorage.setItem("cognitoRefreshToken", session.refreshToken.token);
       };
 
       // load the current session from Cognito and
@@ -56,11 +58,17 @@ const Routes: React.FunctionComponent<Props> = (props) => {
 
       const loadUser = async () => {
         const user = await Auth.currentAuthenticatedUser();
-        saveUserData({
-          _id: user.attributes["custom:mongoid"],
-          email: user.attributes.email,
-          firstName: user.attributes.name,
-        });
+        if(!user.attributes) {
+          message.error("There is a problem with the current Cognito user! It does not contain your id.");
+        } else {
+          saveUserData({
+            _id: user.attributes["custom:mongoid"],
+            username: user.attributes.preferred_username,
+            email: user.attributes.email,
+            firstName: user.attributes.given_name,
+            lastName: user.attributes.family_name,
+          });
+        }
         saveCognitoUser(user);
       };
 

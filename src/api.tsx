@@ -10,11 +10,12 @@ const axiosInstance = axios.create({
   },
 });
 
+// Response Interceptor
 axiosInstance.interceptors.response.use((response) => {
-  // Do something with response data
 
-  // Netlify error where API calls return 200 status but no data
+  // Deal with Netlify error where API calls return 200 status but no data
   if(typeof response.data === "string" && response.data.includes("doctype")) {
+    console.log("recieved", response); // eslint-disable-line
     throw ({
       response: {
         config: response.config,
@@ -30,6 +31,16 @@ axiosInstance.interceptors.response.use((response) => {
 }, (error) => {
   // Do something with response error
   return Promise.reject(error);
+});
+
+// Request Interceptor
+axiosInstance.interceptors.request.use(function (config) {
+  // get the id token from local storage
+  const rawToken = localStorage.getItem("cognitoIdToken");
+  const token = `Bearer ${rawToken}`;
+  config.headers.Authorization =  token;
+
+  return config;
 });
 
 export default axiosInstance;

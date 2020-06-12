@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
+import { message } from "antd";
 import Form, { TextInput } from "components/forms";
 
 import { AppContext } from "context/AppContext";
@@ -27,19 +28,26 @@ const LoginForm: React.FunctionComponent<Props> = (props) => {
     const user = await Auth.signIn(email, password);
     const session = user.signInUserSession;
 
-    saveUserData({
-      _id: user.attributes["custom:mongoid"],
-      email: user.attributes.email,
-      firstName: user.attributes.name,
-    });
+    if(!user.attributes) {
+      message.error("There is a problem with the current Cognito user! It does not contain your id.");
+    }
+    else {
+      saveUserData({
+        _id: user.attributes["custom:mongoid"],
+        username: user.attributes.preferred_username,
+        email: user.attributes.email,
+        firstName: user.attributes.given_name,
+        lastName: user.attributes.family_name
+      });
+    }
     saveCognitoUser(user);
 
     // Save the session tokens to localstorage
     // TODO: Use cookies instead
     // https://stackoverflow.com/questions/48983708/where-to-store-access-token-in-react-js
-    localStorage.setItem("cognitoAccessToken", JSON.stringify(session.accessToken));
-    localStorage.setItem("cognitoIdToken", JSON.stringify(session.idToken));
-    localStorage.setItem("cognitoRefreshToken", JSON.stringify(session.refreshToken));
+    localStorage.setItem("cognitoAccessToken", session.accessToken.jwtToken);
+    localStorage.setItem("cognitoIdToken", session.idToken.jwtToken);
+    localStorage.setItem("cognitoRefreshToken", session.refreshToken.token);
 
   };
 
