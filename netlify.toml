@@ -20,12 +20,12 @@
 [context.production]
     command = "NODE_ENV=production npm run build"
 [context.production.environment]
-    NODE_ENV = "production"
+    NODE_ENV = "stage"
 
 # Deploy Preview context: All deploy previews will inherit these settings
 # We want deploy previews to use NODE_ENV development
 [context.deploy-preview]
-    command = "NODE_ENV=development npm run build"
+    command = "npm run build"
 [context.deploy-preview.environment]
     NODE_ENV = "development"
 
