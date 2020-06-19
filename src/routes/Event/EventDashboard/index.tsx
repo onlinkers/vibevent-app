@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -18,21 +18,15 @@ interface Props {
   errors: {
     events?: string;
     eventCategories?: string;
-  }
+  };
   fetchAllEvents: Function;
 }
 
 const EventDashboard: React.FunctionComponent<Props> = (props) => {
-  
-  const {
-    events,
-    loading,
-    errors,
-    fetchAllEvents
-  } = props;
+  const { events, loading, errors, fetchAllEvents } = props;
 
   const eventsArray = Object.values(events);
-  
+
   const history = useHistory();
 
   const refreshPage = () => {
@@ -44,6 +38,17 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     fetchAllEvents();
   }, []); // eslint-disable-line
 
+  const [isDesktop, setisDesktop] = useState(false);
+
+  const updateSize = () => {
+    setisDesktop(window.innerWidth > 1400);
+  };
+
+  useEffect(() => {
+    updateSize();
+    window.addEventListener("resize", updateSize);
+  }, [isDesktop]);
+
   const hasErrors = errors.events || events.eventCategories;
 
   // TODO: Lazy loading (don't load all events, you'll die)
@@ -53,7 +58,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
       {loading && (
         <div className="Page Page--explore EventDashboard">
           <Row gutter={[16, 16]} className="dashboard-row">
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => ( 
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
               <Col key={num} span={4} className="dashboard-col">
                 <EventCard variant="detailed" loading={true} />
               </Col>
@@ -61,27 +66,38 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
           </Row>
         </div>
       )}
-      {!loading && (hasErrors ? (
-        <div className="Page Error">
-          <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
-          <div className="text--unselectable">{errors.events}</div>
-          <div className="text--unselectable">{errors.eventCategories}</div>
-        </div>
-      ) : (
-        <div className="Page Page--explore EventDashboard">
-          <Row gutter={[16, 16]} className="dashboard-row">
-            {eventsArray.map((event) => ( 
-              <Col key={event._id} span={4} className="dashboard-col">
-                <EventCard
-                  variant="detailed"
-                  event={event}
-                  refetch={fetchAllEvents}
-                />
-              </Col>
-            ))}
-          </Row>
-        </div>
-      ))}
+      {!loading &&
+        (hasErrors ? (
+          <div className="Page Error">
+            <div onClick={refreshPage} className="button--clickable">
+              <ReloadOutlined />
+            </div>
+            <div className="text--unselectable">{errors.events}</div>
+            <div className="text--unselectable">{errors.eventCategories}</div>
+          </div>
+        ) : (
+          <div className="Page Page--explore EventDashboard">
+            {/* <Row gutter={[16, 16]} className="dashboard-row">
+              {eventsArray.map((event) => (
+                <Col key={event._id} span={4} className="dashboard-col">
+                  <EventCard
+                    variant="detailed"
+                    event={event}
+                    refetch={fetchAllEvents}
+                  />
+                </Col>
+              ))}
+            </Row> */}
+            {isDesktop ? (
+              <>
+                <h1>Online Experiences</h1>
+                <div className="events-frame"></div>
+              </>
+            ) : (
+              ""
+            )}
+          </div>
+        ))}
     </React.Fragment>
   );
 };
@@ -90,7 +106,7 @@ const mapStateToProps = ({ eventData }) => {
   return {
     events: eventData.events,
     loading: eventData.loading,
-    errors: eventData.errors
+    errors: eventData.errors,
   };
 };
 
