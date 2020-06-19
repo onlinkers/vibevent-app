@@ -6,6 +6,7 @@ import ExploreBar from "components/layouts/exporeBar";
 import { Col, Row } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import EventCard from "components/cards/eventCard";
+import EventCardLD from "components/cards/eventCardLargeDesktop";
 
 import "./index.css";
 
@@ -54,7 +55,6 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
     <React.Fragment>
-      <ExploreBar />
       {loading && (
         <div className="Page Page--explore EventDashboard">
           <Row gutter={[16, 16]} className="dashboard-row">
@@ -91,7 +91,15 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             {isDesktop ? (
               <>
                 <h1>Online Experiences</h1>
-                <div className="events-frame"></div>
+                <div className="events-frame">
+                  {[0, 1, 2].map((id) => {
+                    return (
+                      <EventCardLD key="id" className="event-card">
+                        test
+                      </EventCardLD>
+                    );
+                  })}
+                </div>
               </>
             ) : (
               ""
