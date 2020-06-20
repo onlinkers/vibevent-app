@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Event } from "types/props";
+import { stringifyTags } from "utils/index";
 
 interface Props {
   event: Event;
@@ -34,7 +35,14 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
           </h3>
           <div className="title-tags">
             <h3 className="event-title">{event.name}</h3>
-            <p className="event-tags">Online • Cuisines • Creative</p>
+            {/* <p className="event-tags">
+              {event.tags?.hostTags.map((tag) => {
+                return <>{tag} • </>;
+              })}
+            </p> */}
+            <p className="event-tags">
+              {event.tags?.hostTags ? stringifyTags(event.tags?.hostTags) : ""}
+            </p>
           </div>
           <button
             className={"save-btn " + (isSaved ? "save-btn--active" : "")}
