@@ -27,6 +27,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const { events, loading, errors, fetchAllEvents } = props;
 
   const eventsArray = Object.values(events);
+  console.log(eventsArray);
 
   const history = useHistory();
 
@@ -56,7 +57,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   return (
     <React.Fragment>
       {loading && (
-        <div className="Page Page--explore EventDashboard">
+        <div className="Page EventDashboard">
           <Row gutter={[16, 16]} className="dashboard-row">
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
               <Col key={num} span={4} className="dashboard-col">
@@ -76,7 +77,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="text--unselectable">{errors.eventCategories}</div>
           </div>
         ) : (
-          <div className="Page Page--explore EventDashboard">
+          <div className="Page EventDashboard">
             {/* <Row gutter={[16, 16]} className="dashboard-row">
               {eventsArray.map((event) => (
                 <Col key={event._id} span={4} className="dashboard-col">
@@ -92,13 +93,18 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
               <>
                 <h1>Online Experiences</h1>
                 <div className="events-frame">
-                  {[0, 1, 2].map((id) => {
+                  {eventsArray.map((event) => {
                     return (
-                      <EventCardLD key="id" className="event-card">
+                      <EventCardLD
+                        event={event}
+                        key={event._id}
+                        className="event-card"
+                      >
                         test
                       </EventCardLD>
                     );
                   })}
+                  <div className="gradient-fade"></div>
                 </div>
               </>
             ) : (

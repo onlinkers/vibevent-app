@@ -32,6 +32,7 @@
   border-radius: 10px;
   margin: 0.5em;
   white-space: normal;
+  overflow: hidden;
 }
 
 .event-description {
@@ -68,20 +69,33 @@
   margin: 0;
 }
 
+.event-image {
+  height: 70%;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+
+.event-image__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .save-btn {
   width: 25%;
   height: 50%;
   background-color: white;
-  border: 2px solid #FF1D58;
+  border: 2px solid #ff1d58;
   border-radius: 10px;
-  color: #FF1D58;
+  color: #ff1d58;
   /* padding: 0.25em 2em; */
   font-weight: bold;
   outline: none;
 }
 
 .save-btn--active {
-  background-color: #FF1D58;
+  background-color: #ff1d58;
   color: white;
 }
 
@@ -90,4 +104,5 @@
   font-size: 1.25em;
 }
 
-.date {}
+.date {
+}

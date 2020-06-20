@@ -11,6 +11,7 @@
     "antd": "^4.2.5",
     "aws-amplify": "^3.0.13",
     "axios": "^0.19.2",
+    "framer-motion": "^1.11.1",
     "mapbox-gl": "^1.10.0",
     "moment": "^2.26.0",
     "query-string": "^6.12.1",
