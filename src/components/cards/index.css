@@ -24,7 +24,6 @@
 
 .event-card-ld {
   display: flex;
-  background: black;
   min-width: 400px;
   height: 300px;
   position: relative;
@@ -80,6 +79,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .save-btn {
@@ -104,5 +104,4 @@
   font-size: 1.25em;
 }
 
-.date {
-}
+.date {}

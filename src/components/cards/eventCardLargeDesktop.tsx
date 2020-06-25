@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Event } from "types/props";
 import { stringifyTags } from "utils/index";
+import { motion } from "framer-motion";
 
 interface Props {
   event: Event;
@@ -19,7 +20,7 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
 
   return (
     <React.Fragment>
-      <div className="event-card-ld">
+      <motion.div className="event-card-ld">
         <div className="event-image">
           <img
             src={event.media?.coverPhoto?.baseSrc}
@@ -54,7 +55,7 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
             {isSaved ? "Saved" : "Save"}
           </button>
         </div>
-      </div>
+      </motion.div>
     </React.Fragment>
   );
 };

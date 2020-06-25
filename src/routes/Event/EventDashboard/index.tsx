@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { motion } from "framer-motion";
 
 import ExploreBar from "components/layouts/exporeBar";
 import { Col, Row } from "antd";
@@ -27,7 +29,6 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const { events, loading, errors, fetchAllEvents } = props;
 
   const eventsArray = Object.values(events);
-  console.log(eventsArray);
 
   const history = useHistory();
 
@@ -92,20 +93,26 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             {isDesktop ? (
               <>
                 <h1>Online Experiences</h1>
-                <div className="events-frame">
-                  {eventsArray.map((event) => {
-                    return (
-                      <EventCardLD
-                        event={event}
-                        key={event._id}
-                        className="event-card"
-                      >
-                        test
-                      </EventCardLD>
-                    );
-                  })}
+                <motion.div className="events-frame">
+                  <motion.div
+                    className="events-draggable"
+                    drag="x"
+                    dragConstraints={{ left: -600, right: 0 }}
+                  >
+                    {eventsArray.map((event) => {
+                      return (
+                        <EventCardLD
+                          event={event}
+                          key={event._id}
+                          className="event-card"
+                        >
+                          test
+                        </EventCardLD>
+                      );
+                    })}
+                  </motion.div>
                   <div className="gradient-fade"></div>
-                </div>
+                </motion.div>
               </>
             ) : (
               ""
