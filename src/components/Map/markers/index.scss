@@ -1,0 +1,23 @@
+.event-marker {
+    max-width: 20vh;
+    width: 60px;
+    overflow: hidden;
+    transition: all 0.2s;
+
+    &__image {
+        width: 56%;
+        height: 56%;
+        border-radius: 50%;
+        object-fit: cover;
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 22%;
+        margin-top: 11%;
+    }
+
+    &:hover {
+        transition: all 0.2s;
+        transform: scale(1.2);
+    }
+}

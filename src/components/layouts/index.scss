@@ -1,0 +1,93 @@
+.desktop-explore, .mobile-explore {
+    background: white;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    box-shadow: 4px 4px 5px 5px rgba(0, 0, 0, 0.2);
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .explore-title {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    .explore-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+
+        .explore-link {
+            color: grey;
+            line-height: 3em;
+            margin-right: 1em;
+            margin-left: 1em;
+            margin-bottom: 1em;
+            user-select: none;
+        }
+
+        .explore-link-text {
+            font-size: 1.2em;
+            user-select: none;
+            margin-bottom: 0.2em;
+            transition: 0.2s;
+
+            &:hover {
+                transition: 0.2s;
+                transform: scale(1.1);
+            }
+        }
+        .explore-link-line {
+            background: $primary-alt;
+            width: 100%;
+            height: 2px;
+        }
+
+        .explore-mobile-spacer {
+            width: 10%;
+        }
+
+        &--mobile {
+            @extend .explore-links;
+            justify-content: space-around;
+        }
+    }
+
+    /* Doesn't need hover anims because it's in mobile view */
+    .explore-mobile-button {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 0) scale(1.2);
+        transition: 0.2s;   
+    }
+
+    .active { color: $primary-alt; }
+
+    .explore-profile {
+        /* TODO: Replace with User Profile Icon/Dropdown */
+        display: flex;
+        align-items: center;
+        line-height: 3em;
+        margin-right: 1em;
+    }
+
+    .anticon {
+        font-size: 2.5em;
+        color: $primary-alt;
+    }
+
+}
+
+.desktop-explore {
+    display: flex;
+    flex-direction: row;
+    top: 0;
+}
+.mobile-explore {
+    bottom: 0;
+}

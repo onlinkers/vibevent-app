@@ -7,7 +7,7 @@ Some libraries used in this app:
 - Router via `react-router`
 - Storage Management via `redux` and `redux-thunk`
 - Component Styles via `ant-d`
-- Maps via `mapbox-gl`
+- Maps via `mapbox-gl` + `mapbox-gl-geocoder`
 - HTTP Requests via `axios`
 
 ## Getting Started
@@ -23,7 +23,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 
 1. Clone the repository: ```git clone```
-2. Install the packages: ```cd event-discovery-webapp``` and ```npm install```
+2. Install the packages: ```cd event-discovery-app``` and ```npm install```
 3. Setup the [environmental files](#environmental-files)
 
 ### Running
@@ -32,7 +32,9 @@ Start the web app by running
 
 ```npm start```
 
-This should open a browser tab with the URL: "http://localhost:8000". The port 8000 may differ if you are running multiple instances of the app, but in general 800x. If a browser tab isn't opened, simply look through the logs on the CLI to find the address. 
+This should open a browser tab with the URL: "http://localhost:8000". The port 8000 may differ if you are running multiple instances of the app, but in general 800x. If a browser tab isn't opened, simply look through the logs on the CLI to find the address.
+
+Depending on the environmental file setup, you may/may not need to run the api alongside the application. For more information about environmental files, see [environmental files](#environmental-files)
 
 ## Development
 
@@ -54,7 +56,11 @@ Further good coding practices can be addressed by reading [this](https://github.
 
 A dotenv (`.env`) environmental file needs to be created at `root`
 
-> You can do this easily by copying and renaming `.env.default`
+> You can do this easily by copying and renaming one of the existing files, such as `.env.default`
+
+- `.env.default` will rely on a local development space, and require the API to be running locally alongside the app
+- `.env.stage` will rely on an external instance of the API to be running, which makes use of the stage database
+- (WITH CAUTION) `.env.prod` will also rely on an external instance of the API to be running, which makes use of the production database
 
 ### Components and Utilities
 

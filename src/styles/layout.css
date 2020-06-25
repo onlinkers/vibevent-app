@@ -1,0 +1,76 @@
+/* PAGES */
+.Page {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+/* Should extend "Page" */
+.Page--center {
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	position: relative;
+}
+
+.Page--explore {
+	max-height: calc(100vh - 5em);
+	margin-top: 5em;
+}
+/* TODO: Mobile View */
+@media (max-width: 800px) {
+	.Page--explore {
+		margin-top: 0;
+		max-height: calc(100vh - 4em);
+		margin-bottom: 4em;
+	}
+}
+
+.Loader {
+	background: white;
+	position: absolute;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	left: 0;
+	top: 0;
+	opacity: 60%;
+	user-select: none;
+	z-index: 500;
+}
+
+.Error {
+	background: lightgrey;
+	position: absolute;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	font-size: 3em;
+	justify-content: center;
+	text-align: center;
+	left: 0;
+	top: 0;
+	opacity: 60%;
+	z-index: 500;
+}
+
+/* TODO: Mobile View */
+@media (max-width: 800px) {
+	.Error {
+		font-size: 2em;
+	}
+}
+
+/* PAGE CONTENT */
+.row {
+	display: flex;
+	flex-direction: row;
+}
+.col-2 {
+	flex: 50%;
+}

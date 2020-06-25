@@ -1,0 +1,34 @@
+# Always redirect any request to our index.html
+# and return the status code 200
+[[redirects]]
+    from    = "/*"
+    to      = "/index.html"
+    status  = 200
+
+# Global settings applied to the whole site.
+# “base” is the directory to change to before starting build
+# “publish” is the directory to publish (relative to root of your repo)
+# “command” is your build command
+
+# [build]
+#   base    = ""
+#   publish = "build"
+#   command = "NODE_ENV=production npm run build"
+
+# Production context: All deploys to the main repository branch will inherit these settings.
+# Master branch will use the production stage (to change to stage)
+[context.production]
+    command = "NODE_ENV=production npm run build"
+[context.production.environment]
+    NODE_ENV = "stage"
+
+# Deploy Preview context: All deploy previews will inherit these settings
+# We want deploy previews to use NODE_ENV development
+[context.deploy-preview]
+    command = "npm run build"
+[context.deploy-preview.environment]
+    NODE_ENV = "development"
+
+# Branch Deploy context: All deploys that are not in an active deploy preview will inherit these settings
+# [context.branch-deploy]
+#   command = "NODE_ENV=development npm run build"

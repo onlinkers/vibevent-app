@@ -1,27 +1,45 @@
-/* dependencies */
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
-/* components */
 import { MapContext, MapProvider } from "context/MapContext";
 import Map from "components/Map";
 import ExploreBar from "components/layouts/exporeBar";
-import { EventListLoading } from "types/store";
+import CategoryFilter from "components/Map/filters/categoryFilter";
+
+import { EventDataState } from "types/store";
 
 interface DispatchProps {
-  eventData: EventListLoading;
+  eventData: EventDataState;
 }
 
 const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
+
+  const {
+    events: e,
+    eventCategories,
+    loading: eventsLoading,
+    errors
+  } = eventData;
+
+  const events = errors.events ? {} : e;
+
   return (
     <MapProvider>
       <MapContext.Consumer>
-        {({ loaded }) => (
+        {({ loaded, selectedCategories, setSelectedCategories }) => (
           <div className="Discover Page">
             <ExploreBar />
+            {!errors.eventCategories ? <CategoryFilter
+              loaded={loaded && !eventsLoading}
+              eventCategoryDefinitions={eventCategories}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+            /> : null}
             <Map
-              loaded={loaded && !eventData.loading}
-              events={eventData.events}
+              loaded={loaded && !eventsLoading}
+              events={events}
+              selectedCategories={selectedCategories}
+              error={errors.events || null}
             />
           </div>
         )}
@@ -31,13 +49,7 @@ const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
 };
 
 const mapStateToProps = ({ eventData }) => {
-  return {
-    eventData: eventData,
-  };
+  return { eventData };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Discover);
+export default connect(mapStateToProps)(Discover);

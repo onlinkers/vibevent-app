@@ -1,19 +1,73 @@
 import api from "../api";
+import { apiErrorHandler } from "./_errorHandlers";
 
 export default {
-  getAllEvents: () => {
-    return api().get("/events");
+  getAllEvents: async () => {
+    try {
+      const results = await api.get("/events");
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
   },
-  getEvent: ({ ids }) => {
-    return api().get(`/events/${ids}`);
+  getEventsByIds: async ({ ids }) => {
+    try {
+      // check if ids is still an array
+      let eventIds = ids;
+      if(typeof ids !== "string") eventIds = ids.join(",");
+      const results = await api.get(`/events/${eventIds}`);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
   },
-  createEvent: (payload) => {
-    return api().post("/event", payload);
+  createEvent: async (payload) => {
+    try {
+      const results = await api.post("/event", payload);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
   },
-  updateEvent: ({ id, payload }) => {
-    return api().put(`/event/${id}`, payload);
+  setEvent: async ({ id, payload }) => {
+    try {
+      const results = await api.put(`/event/${id}`, payload);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
   },
-  deleteEvent: ({ id }) => {
-    return api().delete(`/events/${id}`);
+  updateEvent: async ({ id, payload }) => {
+    try {
+      const results = await api.patch(`/event/${id}`, payload);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
   },
+  deleteEvent: async ({ id }) => {
+    try {
+      const results = await api.delete(`/event/${id}`);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
+  },
+
+  // EVENT CATEGORIES
+  getAllEventCategories: async () => {
+    try {
+      const results = await api.get("/events/categories");
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
+  }
 };

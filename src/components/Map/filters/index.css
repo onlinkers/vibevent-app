@@ -1,0 +1,42 @@
+.CategoryScroller {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 22%;
+    width: 40%;
+    z-index: 1;
+}
+/* TODO: Mobile View */
+@media only screen and (max-width: 800px) {
+    .CategoryScroller {
+        width: 80%;
+    }
+}
+
+/* Hide scrollbar */
+.CategoryScroller {
+    -ms-overflow-style: none;
+}
+.CategoryScroller::-webkit-scrollbar {
+    display: none;
+}
+
+.CategoryScroller > .category-chip {
+    color: black;
+    background: transparent;
+}
+
+.CategoryScroller > .category-chip--active {
+    color: white;
+    /* TODO: Mobile View */
+    background: #2351f4;
+}
+
+.CategoryScroller > .ant-tag {
+    user-select: none;
+    text-transform: capitalize;
+}

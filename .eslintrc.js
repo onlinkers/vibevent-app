@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     browser: true,
+    node: true,
     es6: true,
   },
   extends: [
@@ -42,7 +43,18 @@ module.exports = {
     "no-unused-vars": 0,
     "@typescript-eslint/no-unused-vars": 1,
     "comma-dangle": [1, "only-multiline"],
-    indent: [1, "tab"] | [2, 2],
+    indent: [2, 2, {
+      "SwitchCase": 1,
+      "VariableDeclarator": "first",
+      // "outerIIFEBody": 1,
+      // "MemberExpression": 1,
+      // "ArrayExpression": 1,
+      // "ObjectExpression": 1,
+      // "ImportDeclaration": 1,
+      // "flatTernaryExpressions": false,
+      // "offsetTernaryExpressions": false,
+      // "ignoreComments": false
+    }],
     "no-mixed-spaces-and-tabs": 1,
     "object-curly-spacing": [
       1,

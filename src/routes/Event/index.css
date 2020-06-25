@@ -1,0 +1,7 @@
+.EventForm {
+    display: flex;
+    flex-direction: column;
+}
+.EventForm > .ant-form {
+    width: 80%;
+}

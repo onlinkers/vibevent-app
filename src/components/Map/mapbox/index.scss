@@ -1,0 +1,85 @@
+.Mapbox {
+    height: 100%;
+    width: 100%;
+}
+
+.mapboxgl-canvas {
+    height: 100%;
+    width: 100%;
+}
+
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right {
+    position: absolute;
+    right: 0;
+    top: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder {
+    margin: 0;
+    width: 40%;
+}
+/* TODO: Mobile View */
+@media only screen and (max-width: 800px) {
+    .Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder {
+        width: 80%;
+    }
+}
+
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder {
+    background-color: white;
+    border-radius: 0.5em;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+
+    font-size: 1.2em;
+    padding: 0.75em;
+    margin: 0;
+}
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder > .mapboxgl-ctrl-geocoder--icon {
+    /* TODO: Import color from styles */
+    fill: #2351e0;
+    position: absolute;
+    height: 1.5em;
+    width: 1.5em;
+}
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder > input {
+    border: unset;
+    width: -webkit-fill-available;
+    font-size: inherit;
+    padding-left: 2.5em;
+    margin: 0;
+}
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder > input:focus {
+    outline-width: 0;
+}
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder > .mapboxgl-ctrl-geocoder--pin-right {
+    display: none;
+}
+
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder > .suggestions-wrapper > .suggestions {
+    list-style-type: none;
+    padding-inline-start: 1em;
+    padding-inline-end: 1em;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    font-size: 1em;
+}
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder > .suggestions-wrapper > .suggestions > li {
+    margin-bottom: 1em;
+    user-select: none;
+    cursor: pointer;
+    opacity: 0.5;
+}
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder > .suggestions-wrapper > .suggestions > li:hover {
+    opacity: 1;
+}
+.Mapbox > .mapboxgl-control-container > .mapboxgl-ctrl-top-right > .mapboxgl-ctrl-geocoder > .suggestions-wrapper > .suggestions > li > a {
+    color: unset;
+}
+
+/* Hack to make "flyTo" markers invisible to selection */
+.mapboxgl-marker-anchor-center:not(.custom-mapbox-event-marker) {
+    pointer-events: none;
+}

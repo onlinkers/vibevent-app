@@ -1,0 +1,3 @@
+.text--unselectable {
+    user-select: none;
+}
