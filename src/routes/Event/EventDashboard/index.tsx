@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
@@ -52,6 +52,8 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     window.addEventListener("resize", updateSize);
   }, [isDesktop]);
 
+  const constraintsRef = useRef(null);
+
   const hasErrors = errors.events || events.eventCategories;
 
   // TODO: Lazy loading (don't load all events, you'll die)
@@ -97,7 +99,11 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                   <motion.div
                     className="events-draggable"
                     drag="x"
-                    dragConstraints={{ left: -600, right: 0 }}
+                    dragConstraints={{
+                      left: -window.innerWidth / 2,
+                      right: 0,
+                    }}
+                    dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
                   >
                     {eventsArray.map((event) => {
                       return (
