@@ -16,7 +16,7 @@ import { AppProvider } from "context/AppContext";
 import awsconfig from "./aws-config.js";
 
 /* STYLESHEETS */
-import "./index.css";
+import "./index.scss";
 import "./styles/antd-overwrites.css";
 import "./styles/components.css";
 import "./styles/layout.css";
@@ -30,13 +30,15 @@ Amplify.configure(awsconfig);
 const thunkMiddleware = applyMiddleware(thunk);
 
 // compose with redux dev tools if in 'development' mode and if exists in browser
-const reduxDevTools = process.env.NODE_ENV === "development" &&
+const reduxDevTools =
+  process.env.NODE_ENV === "development" &&
   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
   (window as any).__REDUX_DEVTOOLS_EXTENSION__();
 
-const composedEnhancers = typeof reduxDevTools === "function"
-  ? compose(thunkMiddleware, reduxDevTools)
-  : compose(thunkMiddleware);
+const composedEnhancers =
+  typeof reduxDevTools === "function"
+    ? compose(thunkMiddleware, reduxDevTools)
+    : compose(thunkMiddleware);
 
 const store = createStore(reducers, undefined, composedEnhancers);
 
@@ -51,9 +53,9 @@ ReactDOM.render(
         <Routes />
       </div>
     </AppProvider>
-  </Provider>
+  </Provider>,
   // </React.StrictMode>
-  , document.getElementById("root")
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
