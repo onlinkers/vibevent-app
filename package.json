@@ -13,8 +13,10 @@
     "axios": "^0.19.2",
     "mapbox-gl": "^1.10.0",
     "moment": "^2.26.0",
+    "node-sass": "^4.14.1",
     "query-string": "^6.12.1",
     "react": "^16.13.1",
+    "react-app-rewired": "^2.1.6",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
@@ -24,9 +26,9 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "lint": "eslint . --ext js,jsx,ts,tsx --fix",
     "precommit-msg": "echo 'Running pre-commit checks...' && exit 0",
     "precommit-lint": "lint-staged"
