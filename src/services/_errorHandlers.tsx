@@ -8,7 +8,7 @@ export const apiErrorHandler = (err) => {
   let errorMessage = `UNDEFINED ERROR for ${REQUEST}! ${err.message}`;
 
   // If in production stage
-  if(process.env.USER_LOGS) errorMessage = "An error occured! Please contact our customer service team if problem persists.";
+  if(!process.env.DEV_LOGS) errorMessage = "An error occured! Please contact our customer service team if problem persists.";
   // if the API could not be reached
   else if(!err.response && err.config) errorMessage = "NETWORK ERROR: API could not be reached/errored out!";
   // if the endpoint is available (and gettting a string response)

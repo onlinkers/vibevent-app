@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext, useState } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import ReactDOM from "react-dom";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
@@ -48,8 +48,13 @@ const Mapbox = React.memo<MapboxProps>(
   ({ children, functions, events = [] }) => {
     const { map, setMap, eventMarkerObjects, setEventMarkerObjects } = useContext(MapContext);
     const mapContainer = useRef(null);
-    const [center, setCenter] = useState([-123.1207, 49.2827]);
-    const [zoom, setZoom] = useState(8);
+
+    // TODO: create functions with mapbox listeners
+    // const [center, setCenter] = useState([-123.1207, 49.2827]);
+    // const [zoom, setZoom] = useState(8);
+    const center = [-123.1207, 49.2827];
+    const zoom = 8;
+    // remove the two lines above after
     
     const formattedEvents = {
       features: events.map((event) => (event && {
