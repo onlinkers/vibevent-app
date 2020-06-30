@@ -81,48 +81,33 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
           </div>
         ) : (
           <div className="Page EventDashboard">
-            {/* <Row gutter={[16, 16]} className="dashboard-row">
-              {eventsArray.map((event) => (
-                <Col key={event._id} span={4} className="dashboard-col">
-                  <EventCard
-                    variant="detailed"
-                    event={event}
-                    refetch={fetchAllEvents}
-                  />
-                </Col>
-              ))}
-            </Row> */}
-            {isDesktop ? (
-              <>
-                <h1>Online Experiences</h1>
-                <motion.div className="events-frame">
-                  <motion.div
-                    className="events-draggable"
-                    drag="x"
-                    dragConstraints={{
-                      left: -window.innerWidth / 2,
-                      right: 0,
-                    }}
-                    dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
-                  >
-                    {eventsArray.map((event) => {
-                      return (
-                        <EventCardLD
-                          event={event}
-                          key={event._id}
-                          className="event-card"
-                        >
-                          test
-                        </EventCardLD>
-                      );
-                    })}
-                  </motion.div>
-                  <div className="gradient-fade"></div>
+            <>
+              <h1>Online Experiences</h1>
+              <motion.div className="events-frame">
+                <motion.div
+                  className="events-draggable"
+                  drag="x"
+                  dragConstraints={{
+                    left: -window.innerWidth / 2,
+                    right: 0,
+                  }}
+                  dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
+                >
+                  {eventsArray.map((event) => {
+                    return (
+                      <EventCardLD
+                        event={event}
+                        key={event._id}
+                        className="event-card"
+                      >
+                        test
+                      </EventCardLD>
+                    );
+                  })}
                 </motion.div>
-              </>
-            ) : (
-              ""
-            )}
+                <div className="gradient-fade"></div>
+              </motion.div>
+            </>
           </div>
         ))}
     </React.Fragment>

@@ -16,16 +16,32 @@ $background-dark: #1f2845;
 $success: #10dc60;
 
 :export {
-    dark: $dark;
-    primary: $primary;
-    secondary: $secondary;
-    background: $background;
-    
-    primaryAlt: $primary-alt;
-    
-    /* DARKMODE COLORS */
-    light: $light;
-    primaryDark: $primary-dark;
-    secondaryDark: $secondary-dark;
-    backgroundDark: $background-dark;
+  dark: $dark;
+  primary: $primary;
+  secondary: $secondary;
+  background: $background;
+
+  primaryAlt: $primary-alt;
+
+  /* DARKMODE COLORS */
+  light: $light;
+  primaryDark: $primary-dark;
+  secondaryDark: $secondary-dark;
+  backgroundDark: $background-dark;
 }
+
+$gray1: #f6f6f7;
+$gray2: #efefef;
+$gray3: #bdbdbd;
+$gray4: #828282;
+$gray5: #4f4f4f;
+$gray6: #333333;
+$dark-navy: #011627;
+
+$light: #fff;
+$dark: #000;
+$secondary: #a5a7bd;
+$red1: #ff1d58;
+$red2: #ff4e63;
+$blue1: #4868f8;
+$blue2: #4e9fff;

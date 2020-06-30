@@ -1,0 +1,21 @@
+@mixin card-desktop-title {
+  @include desktop {
+    font-family: $card-desktop;
+    font-weight: bold;
+    font-size: 1em;
+  }
+}
+
+@mixin card-desktop-secondary {
+  @include desktop {
+    font-family: $card-desktop;
+    font-size: 0.876em;
+  }
+}
+
+@mixin card-desktop-month {
+  @include desktop {
+    font-weight: bold;
+    font-size: 1em;
+  }
+}

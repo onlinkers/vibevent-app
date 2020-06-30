@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Event } from "types/props";
 import { stringifyTags } from "utils/index";
 import { motion } from "framer-motion";
+import "./index.scss";
 
 interface Props {
   event: Event;
@@ -30,19 +31,14 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
         </div>
         <div className="event-description">
           <h3 className="event-date">
-            <span className="month">June</span>
+            <span className="month">JUN</span>
             <br />
-            <span className="date">1</span>
+            <span className="date">01</span>
           </h3>
-          <div className="title-tags">
+          <div className="event-title-hosts">
             <h3 className="event-title">{event.name}</h3>
-            {/* <p className="event-tags">
-              {event.tags?.hostTags.map((tag) => {
-                return <>{tag} • </>;
-              })}
-            </p> */}
-            <p className="event-tags">
-              {event.tags?.hostTags ? stringifyTags(event.tags?.hostTags) : ""}
+            <p className="event-host">
+              {event.hosts ? event.hosts[0] : "UBC SISA"}
             </p>
           </div>
           <button

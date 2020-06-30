@@ -1,0 +1,111 @@
+/* .ant-card-body>.ant-card-meta>.ant-card-meta-detail>.ant-card-meta-description {
+  text-overflow: ellipsis;
+}
+
+.event-card>.ant-card-body>.ant-card-meta>.ant-card-meta-detail>.ant-card-meta-description {
+  height: 14em;
+}
+
+.event-card-small>.ant-card-body>.ant-card-meta>.ant-card-meta-detail>.ant-card-meta-description {
+  height: 5em;
+}
+
+.ant-card-cover>img {
+  object-fit: cover;
+}
+
+.event-card>.ant-card-cover>img {
+  height: 10em;
+}
+
+.event-card-small>.ant-card-cover>img {
+  height: 5em;
+} */
+
+.event-card-ld {
+  display: flex;
+  min-width: 40%;
+  min-height: 30vh;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  margin: 0.5em;
+  white-space: normal;
+  overflow: hidden;
+  font-family: $card-desktop;
+
+  .event-image {
+    height: 70%;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+
+    .event-image__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+  }
+
+  .event-description {
+    position: absolute;
+    bottom: 0;
+    background: white;
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 2% 5%;
+
+    .event-date {
+      text-align: center;
+      width: 15%;
+      margin: 0;
+
+      .month {
+        @include card-desktop-month;
+      }
+
+      .date {
+      }
+    }
+
+    .event-title-hosts {
+      width: 60%;
+      height: 100%;
+      padding: 0 2.5%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .event-title {
+        @include card-desktop-title;
+        margin: 0;
+      }
+
+      .event-host {
+        @include card-desktop-secondary;
+        margin: 0;
+      }
+    }
+
+    .save-btn {
+      width: 25%;
+      height: 50%;
+      background-color: white;
+      border: 2px solid #ff1d58;
+      border-radius: 10px;
+      color: #ff1d58;
+      /* padding: 0.25em 2em; */
+      font-weight: bold;
+      outline: none;
+    }
+
+    .save-btn--active {
+      background-color: #ff1d58;
+      color: white;
+    }
+  }
+}
