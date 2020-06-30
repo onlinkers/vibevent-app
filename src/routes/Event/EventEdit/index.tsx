@@ -116,8 +116,8 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
       {loaded && (hasErrors ? (
         <div className="Page Error">
           <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
-          <div className="text--unselectable">{errors[0]}</div>
-          <div className="text--unselectable">{errors[1]}</div>
+          <div className="t--unselectable">{errors[0]}</div>
+          <div className="t--unselectable">{errors[1]}</div>
         </div>
       ) : (
         thisEvent ? (
@@ -144,7 +144,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
           </div>
         ) : (
           <div className="Page Error">
-            <div className="text--unselectable">Data on the event you are trying to edit does not exist!</div>
+            <div className="t--unselectable">Data on the event you are trying to edit does not exist!</div>
             <Button type="primary" className="button--clickable" onClick={() => history.push("/event/create")}>Create a new event.</Button>
             <Button className="button--clickable" onClick={() => history.goBack()}>Go back.</Button>
           </div>

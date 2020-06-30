@@ -44,7 +44,7 @@ const Map = React.memo<Props>(({ loaded, events, selectedCategories, error }) =>
       {!loaded && <div className="Page Loader">Loading...</div>}
       {loaded && error && <div className="Page Error">
         <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
-        <div className="text--unselectable">{error}</div>
+        <div className="t--unselectable">{error}</div>
       </div>}
       <Mapbox
         events={filteredEvents}

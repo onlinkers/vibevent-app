@@ -64,8 +64,8 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
       {!loading && (hasErrors ? (
         <div className="Page Error">
           <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
-          <div className="text--unselectable">{errors.events}</div>
-          <div className="text--unselectable">{errors.eventCategories}</div>
+          <div className="t--unselectable">{errors.events}</div>
+          <div className="t--unselectable">{errors.eventCategories}</div>
         </div>
       ) : (
         <div className="Page Page--explore EventDashboard">

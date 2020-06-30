@@ -38,5 +38,6 @@
 
 .CategoryScroller > .ant-tag {
     user-select: none;
+    /* TODO: extend 't--capitalize' */
     text-transform: capitalize;
 }
