@@ -2,20 +2,36 @@
   @include desktop {
     font-family: $card-desktop;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1.125em;
+    line-height: 125%;
   }
 }
 
 @mixin card-desktop-secondary {
+  color: $secondary;
   @include desktop {
     font-family: $card-desktop;
-    font-size: 0.876em;
+    font-size: 0.875em;
   }
 }
 
 @mixin card-desktop-month {
   @include desktop {
     font-weight: bold;
-    font-size: 1em;
+    font-size: 0.875em;
+  }
+}
+
+@mixin card-desktop-date {
+  @include desktop {
+    font-weight: bold;
+    font-size: 1.75em;
+  }
+}
+
+@mixin card-save-btn {
+  @include desktop {
+    font-weight: bold;
+    font-weight: 0.875em;
   }
 }

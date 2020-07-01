@@ -1,34 +1,34 @@
-/* LIGHTMODE COLORS */
-$dark: #1f2845;
-$primary: #4868f8;
-$secondary: #939dbe;
-$background: #f5f6fa;
+// /* LIGHTMODE COLORS */
+// $dark: #1f2845;
+// $primary: #4868f8;
+// $secondary: #939dbe;
+// $background: #f5f6fa;
 
-$primary-alt: #2351f4;
+// $primary-alt: #2351f4;
 
-/* DARKMODE COLORS */
-$light: #f5f6fa;
-$primary-dark: #2351f4;
-$secondary-dark: #c4ceef;
-$background-dark: #1f2845;
+// /* DARKMODE COLORS */
+// $light: #f5f6fa;
+// $primary-dark: #2351f4;
+// $secondary-dark: #c4ceef;
+// $background-dark: #1f2845;
 
-/* GENERAL COLORS */
-$success: #10dc60;
+// /* GENERAL COLORS */
+// $success: #10dc60;
 
-:export {
-  dark: $dark;
-  primary: $primary;
-  secondary: $secondary;
-  background: $background;
+// :export {
+//   dark: $dark;
+//   primary: $primary;
+//   secondary: $secondary;
+//   background: $background;
 
-  primaryAlt: $primary-alt;
+//   primaryAlt: $primary-alt;
 
-  /* DARKMODE COLORS */
-  light: $light;
-  primaryDark: $primary-dark;
-  secondaryDark: $secondary-dark;
-  backgroundDark: $background-dark;
-}
+//   /* DARKMODE COLORS */
+//   light: $light;
+//   primaryDark: $primary-dark;
+//   secondaryDark: $secondary-dark;
+//   backgroundDark: $background-dark;
+// }
 
 $gray1: #f6f6f7;
 $gray2: #efefef;

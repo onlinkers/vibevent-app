@@ -2,7 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useElementScroll,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 
 import ExploreBar from "components/layouts/exporeBar";
 import { Col, Row } from "antd";
@@ -10,7 +15,7 @@ import { ReloadOutlined } from "@ant-design/icons";
 import EventCard from "components/cards/eventCard";
 import EventCardLD from "components/cards/eventCardLargeDesktop";
 
-import "./index.css";
+import "./index.scss";
 
 import { EventsPayload } from "types/store";
 import { fetchAllEvents } from "store/actions/eventActions";
@@ -41,25 +46,15 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     fetchAllEvents();
   }, []); // eslint-disable-line
 
-  const [isDesktop, setisDesktop] = useState(false);
-
-  const updateSize = () => {
-    setisDesktop(window.innerWidth > 1400);
-  };
-
-  useEffect(() => {
-    updateSize();
-    window.addEventListener("resize", updateSize);
-  }, [isDesktop]);
-
-  const constraintsRef = useRef(null);
-
   const hasErrors = errors.events || events.eventCategories;
+
+  const x = useMotionValue(100);
+  const opacity = useTransform(x, [0, (-window.innerWidth / 2) * 1.2], [1, 0]);
 
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
     <React.Fragment>
-      {loading && (
+      {/* {loading && (
         <div className="Page EventDashboard">
           <Row gutter={[16, 16]} className="dashboard-row">
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
@@ -80,36 +75,41 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="text--unselectable">{errors.eventCategories}</div>
           </div>
         ) : (
-          <div className="Page EventDashboard">
-            <>
-              <h1>Online Experiences</h1>
-              <motion.div className="events-frame">
-                <motion.div
-                  className="events-draggable"
-                  drag="x"
-                  dragConstraints={{
-                    left: -window.innerWidth / 2,
-                    right: 0,
-                  }}
-                  dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
-                >
-                  {eventsArray.map((event) => {
-                    return (
-                      <EventCardLD
-                        event={event}
-                        key={event._id}
-                        className="event-card"
-                      >
-                        test
-                      </EventCardLD>
-                    );
-                  })}
-                </motion.div>
-                <div className="gradient-fade"></div>
+          ""
+        ))} */}
+      <div className="Page EventDashboard">
+        <div className="events-scroll">
+          <div className="event-category">
+            <h1>Online Experiences</h1>
+            <div className="events-frame">
+              <motion.div
+                className="events-draggable"
+                drag="x"
+                dragConstraints={{
+                  left: (-window.innerWidth / 2) * 1.2,
+                  right: 0,
+                }}
+                dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
+                style={{ x }}
+              >
+                {eventsArray.map((event) => {
+                  return (
+                    <EventCardLD
+                      event={event}
+                      key={event._id}
+                      className="event-card"
+                    ></EventCardLD>
+                  );
+                })}
               </motion.div>
-            </>
+              <motion.div
+                className="gradient-fade"
+                style={{ opacity }}
+              ></motion.div>
+            </div>
           </div>
-        ))}
+        </div>
+      </div>
     </React.Fragment>
   );
 };
