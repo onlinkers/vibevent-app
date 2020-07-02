@@ -20,8 +20,15 @@ export default class SearchTools extends React.Component {
   render() {
     return (
       <div className="search-tools">
-        <QuickToolCard />
-        <PreviewCard />
+        <div className="search-quick-tools">
+          <QuickToolCard />
+          <QuickToolCard />
+          <QuickToolCard />
+          <QuickToolCard />
+        </div>
+        <div className="search-preview">
+          <PreviewCard />
+        </div>
       </div>
     );
   }
