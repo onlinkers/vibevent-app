@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
-import "./sidebar.scss";
-import MenuToggle from "components/svg/MenuToggle";
-
+import { Link } from "react-router-dom";
 import { motion, useCycle } from "framer-motion";
 import useDimensions from "react-use-dimensions";
-import { NONAME } from "dns";
+
+import "./sidebar.scss";
+import MenuToggle from "components/svg/MenuToggle";
 
 interface Props {}
 
@@ -48,7 +48,16 @@ const navVariants = {
   },
 };
 
-const links = ["Dashboard", "Discover"];
+const routes = [
+  {
+    label: "Dashboard",
+    route: "/event/dashboard",
+  },
+  {
+    label: "Discover",
+    route: "/discover",
+  },
+];
 
 const Navigation = ({ list }) => {
   return (
@@ -56,9 +65,16 @@ const Navigation = ({ list }) => {
       {list.map((item) => {
         return (
           <>
-            <motion.li variants={navVariants} className="navlink">
-              {item}
-            </motion.li>
+            <Link to={item.route}>
+              <motion.li
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.98 }}
+                variants={navVariants}
+                className="navlink"
+              >
+                {item.label}
+              </motion.li>
+            </Link>
           </>
         );
       })}
@@ -80,7 +96,7 @@ const Sidebar: React.FunctionComponent<Props> = () => {
         ref={containerRef}
         variants={sidebarVariants}
       >
-        <Navigation list={links} />
+        <Navigation list={routes} />
         <MenuToggle toggle={() => toggleOpen()} />
       </motion.nav>
     </>
