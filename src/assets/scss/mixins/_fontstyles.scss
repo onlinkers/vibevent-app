@@ -1,6 +1,6 @@
 @mixin card-desktop-title {
   @include desktop {
-    font-family: $card-desktop;
+    font-family: $primary-label;
     font-weight: bold;
     font-size: 1.125em;
     line-height: 125%;
@@ -10,7 +10,7 @@
 @mixin card-desktop-secondary {
   color: $secondary;
   @include desktop {
-    font-family: $card-desktop;
+    font-family: $primary-label;
     font-size: 0.875em;
   }
 }
@@ -39,7 +39,7 @@
 @mixin event-category-title {
   @include desktop {
     font-weight: bold;
-    font-family: $card-desktop;
+    font-family: $primary-label;
     font-size: 2.5em;
   }
 }

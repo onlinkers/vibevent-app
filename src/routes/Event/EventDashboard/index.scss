@@ -59,6 +59,7 @@
     .events-category {
       h1 {
         @include event-category-title;
+        user-select: none;
       }
       h1:first-child {
         margin-top: 10%;

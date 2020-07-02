@@ -5,4 +5,31 @@
   height: 100vh;
   width: 5%;
   background: white;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.navlinks,
+.navlink {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navlinks {
+  position: absolute;
+  top: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navlink {
+  font-family: $primary-label;
+  font-weight: bold;
+  font-size: 2em;
+  color: $dark;
+  margin: 5% 0;
+  cursor: pointer;
+  user-select: none;
 }
