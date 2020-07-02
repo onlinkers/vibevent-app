@@ -31,7 +31,6 @@ const sidebarVariants = {
 
 const navVariants = {
   open: {
-    "pointer-events": "auto",
     x: 50,
     opacity: 1,
     transition: {
@@ -39,7 +38,6 @@ const navVariants = {
     },
   },
   closed: {
-    "pointer-events": "none",
     x: 0,
     opacity: 0,
     transition: {
@@ -59,18 +57,22 @@ const routes = [
   },
 ];
 
-const Navigation = ({ list }) => {
+const Navigation = ({ list, isOpen }) => {
   return (
     <motion.ul className="navlinks">
       {list.map((item) => {
         return (
           <>
-            <Link to={item.route}>
+            <Link
+              to={item.route}
+              style={!isOpen ? { pointerEvents: "none" } : {}}
+            >
               <motion.li
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.98 }}
                 variants={navVariants}
                 className="navlink"
+                key={item.name}
               >
                 {item.label}
               </motion.li>
@@ -96,7 +98,7 @@ const Sidebar: React.FunctionComponent<Props> = () => {
         ref={containerRef}
         variants={sidebarVariants}
       >
-        <Navigation list={routes} />
+        <Navigation list={routes} isOpen={isOpen} />
         <MenuToggle toggle={() => toggleOpen()} />
       </motion.nav>
     </>
