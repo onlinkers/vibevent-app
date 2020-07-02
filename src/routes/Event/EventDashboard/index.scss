@@ -46,10 +46,24 @@
 
 .EventDashboard {
   overflow-y: scroll;
+  background: url(../../../assets/media/dashboard-backdrop.jpg);
   background-color: #f6f6f7;
+  background-position: right bottom;
+  background-repeat: no-repeat;
 
   .events-scroll {
     width: 40%;
+    position: absolute;
+    left: 10%;
+
+    .events-category {
+      h1 {
+        @include event-category-title;
+      }
+      h1:first-child {
+        margin-top: 10%;
+      }
+    }
   }
 }
 
@@ -59,6 +73,7 @@
   width: 100%;
   overflow: auto;
   white-space: nowrap;
+  position: relative;
 }
 
 .events-draggable {
@@ -66,7 +81,6 @@
   width: 100%;
   flex-direction: row;
   white-space: nowrap;
-  // overflow-x: scroll;
 }
 
 .event-card {
@@ -81,12 +95,13 @@
   );
   min-width: 100px;
   display: inline-block;
-  position: sticky;
+  position: absolute;
   right: 0;
+  height: 100%;
 }
 
-// ::-webkit-scrollbar {
-//   width: 0px;
-//   background: transparent;
-//   /* make scrollbar transparent */
-// }
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+  /* make scrollbar transparent */
+}

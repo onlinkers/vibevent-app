@@ -14,6 +14,7 @@ import { Col, Row } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import EventCard from "components/cards/eventCard";
 import EventCardLD from "components/cards/eventCardLargeDesktop";
+import Sidebar from "components/layouts/sidebar/sidebar";
 
 import "./index.scss";
 
@@ -49,7 +50,11 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const hasErrors = errors.events || events.eventCategories;
 
   const x = useMotionValue(100);
-  const opacity = useTransform(x, [0, (-window.innerWidth / 2) * 1.2], [1, 0]);
+  const opacity = useTransform(
+    x,
+    [0, -window.innerWidth / 2 - 0.1, -window.innerWidth / 2],
+    [1, 1, 0]
+  );
 
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
@@ -78,9 +83,10 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
           ""
         ))} */}
       <div className="Page EventDashboard">
+        <Sidebar />
         <div className="events-scroll">
-          <div className="event-category">
-            <h1>Online Experiences</h1>
+          <div className="events-category">
+            <h1 className="events-category__title">Online Experiences</h1>
             <div className="events-frame">
               <motion.div
                 className="events-draggable"
@@ -102,10 +108,10 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                   );
                 })}
               </motion.div>
-              <motion.div
+              {/* <motion.div
                 className="gradient-fade"
                 style={{ opacity }}
-              ></motion.div>
+              ></motion.div> */}
             </div>
           </div>
         </div>

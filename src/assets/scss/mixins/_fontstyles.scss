@@ -35,3 +35,11 @@
     font-weight: 0.875em;
   }
 }
+
+@mixin event-category-title {
+  @include desktop {
+    font-weight: bold;
+    font-family: $card-desktop;
+    font-size: 2.5em;
+  }
+}
