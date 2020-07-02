@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import QuickToolCard from "./quickToolCard";
 import PreviewCard from "./previewCard";
-import "./index.css";
+import "./index.scss";
 import { Event } from "types/props";
 
 interface Props {
@@ -19,7 +19,7 @@ interface Props {
 export default class SearchTools extends React.Component {
   render() {
     return (
-      <div>
+      <div className="search-tools">
         <QuickToolCard />
         <PreviewCard />
       </div>
