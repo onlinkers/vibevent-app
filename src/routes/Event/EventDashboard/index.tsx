@@ -13,6 +13,7 @@ import ExploreBar from "components/layouts/exporeBar";
 import { Col, Row } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import EventCard from "components/cards/eventCard";
+import SearchTools from "components/searchTools";
 import EventCardLD from "components/cards/eventCardLargeDesktop";
 import Sidebar from "components/layouts/sidebar/sidebar";
 
@@ -114,6 +115,9 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
               ></motion.div> */}
             </div>
           </div>
+        </div>
+        <div className="events-search">
+          <SearchTools />
         </div>
       </div>
     </React.Fragment>
