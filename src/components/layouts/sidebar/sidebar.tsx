@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useCycle } from "framer-motion";
 import useDimensions from "react-use-dimensions";
 
-import "./sidebar.scss";
+import "./index.scss";
 import MenuToggle from "components/svg/MenuToggle";
 
 interface Props {}
@@ -19,7 +19,7 @@ const sidebarVariants = {
     },
   }),
   closed: () => ({
-    width: "5%",
+    width: "78px",
     transition: {
       delay: 0,
       type: "spring",
@@ -31,14 +31,14 @@ const sidebarVariants = {
 
 const navVariants = {
   open: {
-    x: 50,
+    x: 0,
     opacity: 1,
     transition: {
       y: { stiffness: 1000, velocity: -100 },
     },
   },
   closed: {
-    x: 0,
+    x: -50,
     opacity: 0,
     transition: {
       y: { stiffness: 1000 },
@@ -57,10 +57,10 @@ const routes = [
   },
 ];
 
-const Navigation = ({ list, isOpen }) => {
+const Navigation = ({ isOpen }) => {
   return (
     <motion.ul className="navlinks">
-      {list.map((item) => {
+      {routes.map((item) => {
         return (
           <>
             <Link
@@ -72,7 +72,7 @@ const Navigation = ({ list, isOpen }) => {
                 whileTap={{ scale: 0.98 }}
                 variants={navVariants}
                 className="navlink"
-                key={item.name}
+                key={item.label}
               >
                 {item.label}
               </motion.li>
@@ -97,8 +97,9 @@ const Sidebar: React.FunctionComponent<Props> = () => {
         custom={height}
         ref={containerRef}
         variants={sidebarVariants}
+        onHoverEnd={isOpen ? () => toggleOpen() : undefined}
       >
-        <Navigation list={routes} isOpen={isOpen} />
+        <Navigation isOpen={isOpen} />
         <MenuToggle toggle={() => toggleOpen()} />
       </motion.nav>
     </>

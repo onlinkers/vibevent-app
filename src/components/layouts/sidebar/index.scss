@@ -3,10 +3,10 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: 5%;
   background: white;
   z-index: 100;
   overflow: hidden;
+  width: 5%;
 }
 
 .navlinks,
@@ -22,14 +22,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .navlink {
   font-family: $primary-label;
   font-weight: bold;
-  font-size: 2em;
   color: $dark;
   margin: 5% 0;
   cursor: pointer;
   user-select: none;
+  @include tablet-landscape {
+    font-size: 1.5em;
+  }
+  @include desktop {
+    font-size: 2em;
+  }
 }

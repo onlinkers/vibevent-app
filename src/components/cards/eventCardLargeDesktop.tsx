@@ -48,7 +48,6 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
           <button
             className={"save-btn " + (isSaved ? "save-btn--active" : "")}
             onClick={(e) => {
-              console.log(isSaved);
               setIsSaved(!isSaved);
             }}
           >

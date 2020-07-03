@@ -1,7 +1,11 @@
 @mixin card-desktop-title {
+  font-family: $primary-label;
+  font-weight: bold;
+  @include tablet-landscape {
+    font-size: 1em;
+    line-height: 115%;
+  }
   @include desktop {
-    font-family: $primary-label;
-    font-weight: bold;
     font-size: 1.125em;
     line-height: 125%;
   }
@@ -9,30 +13,43 @@
 
 @mixin card-desktop-secondary {
   color: $secondary;
+  font-family: $primary-label;
+  @include tablet-landscape {
+    font-size: 0.75em;
+  }
   @include desktop {
-    font-family: $primary-label;
     font-size: 0.875em;
   }
 }
 
 @mixin card-desktop-month {
+  font-weight: bold;
+  @include tablet-landscape {
+    line-height: 100%;
+    font-size: 0.75em;
+  }
   @include desktop {
-    font-weight: bold;
     font-size: 0.875em;
   }
 }
 
 @mixin card-desktop-date {
+  font-weight: bold;
+  @include tablet-landscape {
+    font-size: 1.25em;
+  }
   @include desktop {
-    font-weight: bold;
     font-size: 1.75em;
   }
 }
 
 @mixin card-save-btn {
+  font-weight: bold;
+  @include tablet-landscape {
+    font-size: 0.875em;
+  }
   @include desktop {
-    font-weight: bold;
-    font-weight: 0.875em;
+    font-size: 1em;
   }
 }
 
