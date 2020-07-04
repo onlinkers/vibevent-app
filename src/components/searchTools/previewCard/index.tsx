@@ -21,7 +21,7 @@ export default class PreviewCard extends React.Component {
         <img className="preview-card-thumbnail" src=""/>
         <p className="preview-card-date">Jun 10</p>
         <p className="preview-card-title">Digital Marketing for Dummies</p>
-        <p className="preview-card-tags">Online Experiences • Marketing •  Technology</p>
+        <p className="preview-card-tags">Online Experiences • Marketing • Technology</p>
       </div>
     );
   }
