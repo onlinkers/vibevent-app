@@ -54,9 +54,9 @@
 }
 
 @mixin event-category-title {
+  font-family: $primary-label;
+  font-weight: bold;
   @include desktop {
-    font-weight: bold;
-    font-family: $primary-label;
     font-size: 2.5em;
   }
 }
