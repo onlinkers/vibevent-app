@@ -11,6 +11,7 @@ import {
 import QuickAccessMenu from "components/searchTools";
 import EventCardLD from "components/cards/largeCard/eventCardLargeDesktop";
 import Sidebar from "components/layouts/sidebar/sidebar";
+import useDimensions from "react-use-dimensions";
 
 import "./index.scss";
 
@@ -30,7 +31,7 @@ interface Props {
 const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const { events, loading, errors, fetchAllEvents } = props;
 
-  const eventsArray = Object.values(events);
+  const eventsArray = Object.values(events).slice(1, 5);
 
   const history = useHistory();
 
@@ -45,8 +46,17 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
 
   const hasErrors = errors.events || events.eventCategories;
 
-  // const x = useMotionValue(100);
-  // const opacity = useTransform(x, [0, -window.innerWidth / 2], [1, 0]);
+  const x = useMotionValue(100);
+  const opacityRight = useTransform(
+    x,
+    [0, (-window.innerWidth / 2) * 1.2 - 20, (-window.innerWidth / 2) * 1.2],
+    [1, 1, 0]
+  );
+  const opacityLeft = useTransform(
+    x,
+    [0, 20, (-window.innerWidth / 2) * 1.2],
+    [0, 1, 1]
+  );
 
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
@@ -87,8 +97,8 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                   left: (-window.innerWidth / 2) * 1.2,
                   right: 0,
                 }}
-                dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
-                // style={{ x }}
+                dragTransition={{ bounceStiffness: 300, bounceDamping: 50 }}
+                style={{ x }}
               >
                 {eventsArray.map((event) => {
                   return (
@@ -100,11 +110,15 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                   );
                 })}
               </motion.div>
-              {/* <motion.div
-                className="gradient-fade"
-                style={{ opacity }}
-              ></motion.div> */}
             </div>
+            <motion.div
+              className="gradient-fade-right"
+              style={{ opacity: opacityRight }}
+            ></motion.div>
+            <motion.div
+              className="gradient-fade-left"
+              style={{ opacity: opacityLeft }}
+            ></motion.div>
           </div>
         </div>
         <div className="quick-access-tab">

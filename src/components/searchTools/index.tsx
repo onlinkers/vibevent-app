@@ -19,6 +19,7 @@ interface Props {
 
 const QuickAccessMenu: React.FunctionComponent<Props> = (props) => {
   const { events, loading, errors, fetchAllEvents } = props;
+  const eventsArray = Object.values(events).slice(1, 5);
 
   return (
     <>
@@ -34,8 +35,8 @@ const QuickAccessMenu: React.FunctionComponent<Props> = (props) => {
             <h3>Previously Viewed</h3>
           </div>
           <div className="card-previews-container">
-            <SmallCard />
-            <SmallCard />
+            <SmallCard event={eventsArray[0]} />
+            <SmallCard event={eventsArray[1]} />
           </div>
         </div>
       </div>

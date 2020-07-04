@@ -106,7 +106,7 @@
   flex-grow: 1;
 }
 
-.gradient-fade {
+.gradient-fade-right {
   background: linear-gradient(
     270deg,
     #f6f6f7 12.4%,
@@ -116,7 +116,22 @@
   display: inline-block;
   position: absolute;
   right: 0;
-  height: 100%;
+  bottom: 2vh;
+  height: 70%;
+}
+.gradient-fade-left {
+  background: linear-gradient(
+    270deg,
+    #f6f6f7 12.4%,
+    rgba(246, 246, 247, 0) 100%
+  );
+  transform: rotate(-180deg);
+  min-width: 100px;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  bottom: 2vh;
+  height: 70%;
 }
 
 ::-webkit-scrollbar {
