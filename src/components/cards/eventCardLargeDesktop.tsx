@@ -24,7 +24,11 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
       <motion.div className="event-card-ld">
         <div className="event-image">
           <img
-            src={event.media?.coverPhoto?.baseSrc}
+            src={
+              event.media?.coverPhoto?.baseSrc
+                ? event.media?.coverPhoto?.baseSrc
+                : "assets/media/default-image.png"
+            }
             alt=""
             className="event-image__img"
           />
@@ -36,7 +40,7 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
             <span className="date">01</span>
           </h3>
           <div className="event-title-hosts">
-            <h3 className="event-title">{event.name}</h3>
+            <h3 className="event-title">{event.name.slice(0, 45)}</h3>
             <p className="event-host">
               {event.hosts ? event.hosts[0] : "UBC SISA"}
             </p>
@@ -44,7 +48,6 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
           <button
             className={"save-btn " + (isSaved ? "save-btn--active" : "")}
             onClick={(e) => {
-              console.log(isSaved);
               setIsSaved(!isSaved);
             }}
           >
