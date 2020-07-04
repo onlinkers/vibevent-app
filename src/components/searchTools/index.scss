@@ -1,23 +1,23 @@
 .search-tools {
-    font-family: $primary-label;
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    top: 8em;
-    right: 4em;
+  font-family: $primary-label;
+  display: flex;
+  flex-wrap: wrap;
+  // position: absolute;
+  // top: 20%;
+  // right: 5%;
 }
 
-.search-quick-container {
-    display: flex;
-    flex-wrap: wrap;
-    right: 5%;
-    width: 100%;
+.quick-access-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .search-preview-container {
-    margin-top: 10%;
-    display: flex;
-    flex-wrap: wrap;
-    right: 5%;
-    width: 100%;
+  margin-top: 10%;
+  display: flex;
+  flex-wrap: wrap;
+  right: 5%;
+  width: 100%;
 }

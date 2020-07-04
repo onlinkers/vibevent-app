@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Event } from "types/props";
 import { stringifyTags } from "utils/index";
 import { motion } from "framer-motion";
+import moment from "moment";
+
 import "./index.scss";
 
 interface Props {
@@ -18,6 +20,8 @@ interface Props {
 const EventCardLD: React.FunctionComponent<Props> = (props) => {
   const { event } = props;
   const [isSaved, setIsSaved] = useState(false);
+  const month = moment(event.startDate).format("MMM").toUpperCase();
+  const date = moment(event.startDate).format("DD");
 
   return (
     <React.Fragment>
@@ -35,9 +39,9 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
         </div>
         <div className="event-description">
           <h3 className="event-date">
-            <span className="month">JUN</span>
+            <span className="month">{month}</span>
             <br />
-            <span className="date">01</span>
+            <span className="date">{date}</span>
           </h3>
           <div className="event-title-hosts">
             <h3 className="event-title">{event.name.slice(0, 45)}</h3>

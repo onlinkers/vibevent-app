@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -9,10 +8,6 @@ import {
   useTransform,
 } from "framer-motion";
 
-import ExploreBar from "components/layouts/exporeBar";
-import { Col, Row } from "antd";
-import { ReloadOutlined } from "@ant-design/icons";
-import EventCard from "components/cards/eventCard";
 import SearchTools from "components/searchTools";
 import EventCardLD from "components/cards/eventCardLargeDesktop";
 import Sidebar from "components/layouts/sidebar/sidebar";
@@ -50,12 +45,8 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
 
   const hasErrors = errors.events || events.eventCategories;
 
-  const x = useMotionValue(100);
-  const opacity = useTransform(
-    x,
-    [0, -window.innerWidth / 2 - 0.1, -window.innerWidth / 2],
-    [1, 1, 0]
-  );
+  // const x = useMotionValue(100);
+  // const opacity = useTransform(x, [0, -window.innerWidth / 2], [1, 0]);
 
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
@@ -97,7 +88,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                   right: 0,
                 }}
                 dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
-                style={{ x }}
+                // style={{ x }}
               >
                 {eventsArray.map((event) => {
                   return (
@@ -117,7 +108,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
           </div>
         </div>
         <div className="events-search">
-          <SearchTools />
+          <SearchTools events={events} />
         </div>
       </div>
     </React.Fragment>

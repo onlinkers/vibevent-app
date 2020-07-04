@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+
 import QuickToolCard from "./quickToolCard";
 import PreviewCard from "./previewCard";
-import "./index.scss";
 import { Event } from "types/props";
+import { EventsPayload } from "types/store";
+import "./index.scss";
 
 interface Props {
-    event: Event;
-    favorited?: boolean;
-    variant?: "detailed" | "brief";
-    loading?: boolean;
-    width?: string;
-    size?: string;
-    refetch?: Function;
-    [key: string]: any;
+  events: EventsPayload;
+  loading?: boolean;
+  errors?: {
+    events?: string;
+    eventCategories?: string;
+  };
+  fetchAllEvents?: Function;
 }
 
-export default class SearchTools extends React.Component {
-  render() {
-    return (
+const SearchTools: React.FunctionComponent<Props> = (props) => {
+  const { events, loading, errors, fetchAllEvents } = props;
+
+  return (
+    <>
       <div className="search-tools">
-        <div className="search-quick-container">
+        <div className="quick-access-container">
           <QuickToolCard />
           <QuickToolCard />
           <QuickToolCard />
@@ -33,7 +36,8 @@ export default class SearchTools extends React.Component {
           <PreviewCard />
         </div>
       </div>
-    );
-  }
-}
+    </>
+  );
+};
 
+export default SearchTools;
