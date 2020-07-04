@@ -18,7 +18,10 @@ export default class PreviewCard extends React.Component {
   render() {
     return (
       <div className="preview-card">
-        <h3 className= "preview-card-title">Digital Marketing for Dummies</h3>
+        <img className="preview-card-thumbnail" src=""/>
+        <p className="preview-card-date">Jun 10</p>
+        <p className="preview-card-title">Digital Marketing for Dummies</p>
+        <p className="preview-card-tags">Online Experiences • Marketing •  Technology</p>
       </div>
     );
   }

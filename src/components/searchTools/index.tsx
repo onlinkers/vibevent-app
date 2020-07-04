@@ -28,6 +28,9 @@ export default class SearchTools extends React.Component {
         </div>
         <div className="search-preview-container">
           <PreviewCard />
+          <PreviewCard />
+          <PreviewCard />
+          <PreviewCard />
         </div>
       </div>
     );
