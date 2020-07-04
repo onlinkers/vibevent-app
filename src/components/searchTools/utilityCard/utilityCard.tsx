@@ -12,7 +12,7 @@ interface Props {
   // [key: string]: any;
 }
 
-const QuickToolCard: React.FunctionComponent<Props> = () => {
+const UtilityCard: React.FunctionComponent<Props> = () => {
   return (
     <>
       <div className="quick-access-card">
@@ -25,4 +25,4 @@ const QuickToolCard: React.FunctionComponent<Props> = () => {
   );
 };
 
-export default QuickToolCard;
+export default UtilityCard;

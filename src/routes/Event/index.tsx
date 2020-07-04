@@ -5,7 +5,7 @@ import EventDashboard from "./EventDashboard";
 import EventDetails from "./EventDetails";
 import EventCreate from "./EventCreate";
 import EventEdit from "./EventEdit";
-import DesktopEventCardLarge from "../../components/cards/eventCardLargeDesktop";
+import DesktopEventCardLarge from "../../components/cards/largeCard/eventCardLargeDesktop";
 
 const Events = () => (
   <Switch>

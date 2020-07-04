@@ -5,7 +5,7 @@
   height: 10vh;
   border-radius: 10px;
   background: #ffffff;
-  margin: 0 0 5% 5%;
+  margin: 0 0 2.5% 2.5%;
 }
 
 .quick-access-card:hover {
@@ -17,8 +17,13 @@
   bottom: 2%;
   left: 7%;
   font-weight: bold;
-  font-size: 1.25em;
   line-height: 125%;
+  @include tablet-landscape {
+    font-size: 1.125em;
+  }
+  @include desktop {
+    font-size: 1.25em;
+  }
 }
 
 .qa-card__icon {

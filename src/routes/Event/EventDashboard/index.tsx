@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 
 import SearchTools from "components/searchTools";
-import EventCardLD from "components/cards/eventCardLargeDesktop";
+import EventCardLD from "components/cards/largeCard/eventCardLargeDesktop";
 import Sidebar from "components/layouts/sidebar/sidebar";
 
 import "./index.scss";
@@ -107,7 +107,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             </div>
           </div>
         </div>
-        <div className="events-search">
+        <div className="quick-access-tab">
           <SearchTools events={events} />
         </div>
       </div>

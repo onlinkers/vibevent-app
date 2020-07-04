@@ -59,20 +59,30 @@
 
     .events-category {
       h1 {
-        @include event-category-title;
+        font-family: $primary-label;
+        font-weight: bold;
         user-select: none;
+        @include desktop {
+          font-size: 2.5em;
+        }
       }
-      h1:first-child {
-        margin-top: 10%;
-      }
+    }
+
+    .events-category:first-child {
+      margin-top: 10%;
     }
   }
 
-  .events-search {
-    width: 30%;
+  .quick-access-tab {
     position: absolute;
     top: 10%;
     right: 2.5%;
+    @include tablet-landscape {
+      width: 40%;
+    }
+    @include desktop {
+      width: 30%;
+    }
   }
 }
 

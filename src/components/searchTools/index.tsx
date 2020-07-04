@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import QuickToolCard from "./quickToolCard";
-import PreviewCard from "./previewCard";
+import QuickToolCard from "components/searchTools/utilityCard/utilityCard";
+import PreviewCard from "../cards/smallCard/smallCard";
 import { Event } from "types/props";
 import { EventsPayload } from "types/store";
 import "./index.scss";
@@ -29,11 +29,14 @@ const SearchTools: React.FunctionComponent<Props> = (props) => {
           <QuickToolCard />
           <QuickToolCard />
         </div>
-        <div className="search-preview-container">
-          <PreviewCard />
-          <PreviewCard />
-          <PreviewCard />
-          <PreviewCard />
+        <div className="card-previews-section">
+          <div className="card-previews-header">
+            <h3>Previous Events</h3>
+          </div>
+          <div className="card-previews-container">
+            <PreviewCard />
+            <PreviewCard />
+          </div>
         </div>
       </div>
     </>

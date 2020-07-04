@@ -14,10 +14,35 @@
   width: 100%;
 }
 
-.search-preview-container {
-  margin-top: 10%;
-  display: flex;
-  flex-wrap: wrap;
-  right: 5%;
+.card-previews-section {
   width: 100%;
+  @include tablet-landscape {
+    margin-top: 3%;
+  }
+  @include desktop {
+    margin-top: 3%;
+  }
+
+  .card-previews-header {
+    margin: 0 0 1% 3%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    h3 {
+      display: inline-block;
+      margin: 0;
+      @include desktop {
+        font-family: $primary-label;
+        font-weight: 700;
+        font-size: 1.375em;
+      }
+    }
+  }
+
+  .card-previews-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
 }
