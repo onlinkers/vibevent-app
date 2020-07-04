@@ -1,0 +1,28 @@
+.preview-card {
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 225px;
+    height: 86px;
+    border-radius: 10px;
+    background: #ffffff;
+    margin-bottom: 15px;
+    margin-right: 1em;
+}
+
+.preview-card-title {
+    position: absolute;
+    width: 144px;
+    height: 28px;
+    left: 69px;
+    top: 23px;
+
+    position: absolute;
+    bottom: 0;
+    margin-left: 1em;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: flex-end;
+}

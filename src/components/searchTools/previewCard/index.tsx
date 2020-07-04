@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./index.css";
+import "./index.scss";
 import { Event } from "types/props";
 
 interface Props {
@@ -17,8 +17,8 @@ interface Props {
 export default class PreviewCard extends React.Component {
   render() {
     return (
-      <div>
-        <p>preview card</p>
+      <div className="preview-card">
+        <h3 className= "preview-card-title">Digital Marketing for Dummies</h3>
       </div>
     );
   }
