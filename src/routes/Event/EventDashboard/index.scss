@@ -46,6 +46,7 @@
 
 .EventDashboard {
   overflow-y: scroll;
+  overflow-x: hidden;
   background: url(../../../assets/media/dashboard-backdrop.jpg);
   background-color: #f6f6f7;
   background-position: right bottom;
