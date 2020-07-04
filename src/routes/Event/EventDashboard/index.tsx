@@ -8,7 +8,7 @@ import {
   useTransform,
 } from "framer-motion";
 
-import SearchTools from "components/searchTools";
+import QuickAccessMenu from "components/searchTools";
 import EventCardLD from "components/cards/largeCard/eventCardLargeDesktop";
 import Sidebar from "components/layouts/sidebar/sidebar";
 
@@ -108,7 +108,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
           </div>
         </div>
         <div className="quick-access-tab">
-          <SearchTools events={events} />
+          <QuickAccessMenu events={events} />
         </div>
       </div>
     </React.Fragment>

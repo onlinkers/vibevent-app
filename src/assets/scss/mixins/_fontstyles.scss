@@ -64,9 +64,10 @@
 
 @mixin small-card-title {
   font-family: $primary-label;
+  color: $dark;
   margin: 0;
   line-height: 125%;
-  font-weight: 800;
+  font-weight: 700;
   @include tablet-landscape {
     font-size: 0.875em;
   }
