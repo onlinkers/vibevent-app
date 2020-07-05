@@ -24,6 +24,7 @@
   }
 
   .card-previews-header {
+    user-select: none;
     margin: 0 0 1% 3%;
     display: flex;
     flex-direction: row;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
+import { motion } from "framer-motion";
 
 import "./index.scss";
 import { Event } from "types/props";
@@ -21,8 +22,16 @@ const SmallCard: React.FunctionComponent<Props> = (props) => {
   const month = moment(event?.startDate).format("MMM DD");
   return (
     <>
-      <div className="small-card">
-        <img className="small-card-thumbnail" src={""} />
+      <motion.div
+        className="small-card"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 1 }}
+        transition={{ duration: 0.001 }}
+      >
+        <img
+          className="small-card-coverphoto"
+          src={event?.media?.coverPhoto?.baseSrc}
+        />
         <div className="small-card-description">
           <p className="description-date">{month}</p>
           <p className="description-title">
@@ -30,7 +39,7 @@ const SmallCard: React.FunctionComponent<Props> = (props) => {
           </p>
           <p className="description-host">UBC SISA</p>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

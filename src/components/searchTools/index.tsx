@@ -25,18 +25,18 @@ const QuickAccessMenu: React.FunctionComponent<Props> = (props) => {
     <>
       <div className="quick-access">
         <div className="quick-access-container">
-          <QuickToolCard />
-          <QuickToolCard />
-          <QuickToolCard />
-          <QuickToolCard />
+          {[0, 1, 2, 3].map((item) => {
+            return <QuickToolCard key={item} />;
+          })}
         </div>
         <div className="card-previews-section">
           <div className="card-previews-header">
             <h3>Previously Viewed</h3>
           </div>
           <div className="card-previews-container">
-            <SmallCard event={eventsArray[0]} />
-            <SmallCard event={eventsArray[1]} />
+            {eventsArray.slice(0, 2).map((item) => {
+              return <SmallCard event={item} key={item._id} />;
+            })}
           </div>
         </div>
       </div>

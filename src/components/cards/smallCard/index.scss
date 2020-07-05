@@ -12,14 +12,17 @@
   justify-content: space-between;
   padding: 2%;
 
-  .small-card-thumbnail {
+  .small-card-coverphoto {
+    user-select: none;
     width: 25%;
     height: 100%;
-    background: black;
+    object-fit: cover;
+    // background: black;
     border-radius: 10px;
   }
 
   .small-card-description {
+    user-select: none;
     width: 70%;
     margin-left: 2%;
     height: 100%;

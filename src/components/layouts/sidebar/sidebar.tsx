@@ -6,7 +6,6 @@ import useDimensions from "react-use-dimensions";
 import MenuToggle from "components/svg/menu-toggle/MenuToggle";
 import VibeventLogo from "components/svg/vibevent-logo/VibeventLogo";
 import "./index.scss";
-import vibeventIcon from "../../../assets/icons/vibevent-icon.svg";
 
 interface Props {}
 
@@ -81,22 +80,20 @@ const Navigation = ({ isOpen }) => {
       <motion.ul className="navlinks">
         {routes.map((item) => {
           return (
-            <>
-              <Link
-                to={item.route}
-                style={!isOpen ? { pointerEvents: "none" } : {}}
+            <Link
+              to={item.route}
+              style={!isOpen ? { pointerEvents: "none" } : {}}
+              key={item.label}
+            >
+              <motion.li
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.98 }}
+                variants={navVariants}
+                className="navlink"
               >
-                <motion.li
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.98 }}
-                  variants={navVariants}
-                  className="navlink"
-                  key={item.label}
-                >
-                  {item.label}
-                </motion.li>
-              </Link>
-            </>
+                {item.label}
+              </motion.li>
+            </Link>
           );
         })}
       </motion.ul>

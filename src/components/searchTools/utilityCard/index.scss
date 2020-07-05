@@ -8,11 +8,8 @@
   margin: 0 0 2.5% 2.5%;
 }
 
-.quick-access-card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
 .qa-card__title {
+  user-select: none;
   position: absolute;
   bottom: 2%;
   left: 7%;
@@ -27,6 +24,7 @@
 }
 
 .qa-card__icon {
+  user-select: none;
   position: absolute;
   right: 0;
   margin-right: 1em;
