@@ -53,12 +53,12 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const x = useMotionValue(0);
   const opacityRight = useTransform(
     x,
-    [0, (-window.innerWidth / 2) * 1.2 - 20, (-window.innerWidth / 2) * 1.2],
+    [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
     [1, 1, 0]
   );
   const opacityLeft = useTransform(
     x,
-    [0, 20, (-window.innerWidth / 2) * 1.2],
+    [0, 20, (-window.innerWidth / 2) * 1.25],
     [0, 1, 1]
   );
 
@@ -96,7 +96,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                     className="events-draggable"
                     drag="x"
                     dragConstraints={{
-                      left: (-window.innerWidth / 2) * 1.2,
+                      left: (-window.innerWidth / 2) * 1.25,
                       right: 0,
                     }}
                     dragTransition={{ bounceStiffness: 300, bounceDamping: 50 }}
@@ -114,11 +114,11 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                   </motion.div>
                 </div>
                 <motion.div
-                  className="gradient-fade-right"
+                  className="gradient-fade gradient-fade-right"
                   style={{ opacity: opacityRight }}
                 ></motion.div>
                 <motion.div
-                  className="gradient-fade-left"
+                  className="gradient-fade gradient-fade-left"
                   style={{ opacity: opacityLeft }}
                 ></motion.div>
               </div>
