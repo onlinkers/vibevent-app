@@ -4,11 +4,11 @@
   font-family: $primary-label;
   font-weight: bold;
   @include tablet-landscape {
-    font-size: 1em;
+    font-size: .825em;
     line-height: 100%;
   }
   @include desktop {
-    font-size: 1.125em;
+    font-size: 1em;
     line-height: 125%;
   }
 }

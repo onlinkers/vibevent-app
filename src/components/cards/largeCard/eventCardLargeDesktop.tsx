@@ -44,7 +44,9 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
             <span className="date">{date}</span>
           </h3>
           <div className="event-title-hosts">
-            <h3 className="event-title">{event.name.slice(0, 45)}</h3>
+            <p className="event-title">
+              {event?.name.slice(0, 37) + (event?.name.length > 37 ? "..." : "")}  
+            </p>
             <p className="event-host">
               {event.hosts ? event.hosts[0] : "UBC SISA"}
             </p>
