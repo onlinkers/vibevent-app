@@ -10,7 +10,10 @@ export interface Event {
   venue: Venue;
   price?: number;
   description?: string;
-  rating?: number;
+  rating?: {
+    sum: number;
+    count: number;
+  };
   categories: string[];
   links?: {
     ticket?: string;
@@ -24,4 +27,8 @@ export interface Event {
     userTags: string[];
     hostTags: string[];
   };
+  rooms?: [{
+    roomId: number;
+    name?: string;
+  }]
 }

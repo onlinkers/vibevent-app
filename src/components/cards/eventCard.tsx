@@ -93,7 +93,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
               <React.Fragment>
                 <div><ClockCircleFilled />&nbsp;{event.startDate}</div>
                 <div><PushpinFilled />&nbsp;{event.venue.name}</div>
-                <div><StarFilled />&nbsp;{event.rating}</div>
+                <div><StarFilled />&nbsp;{event.rating?.count && event.rating.sum/event.rating.count}</div>
                 <br />
                 <div><InfoCircleFilled />&nbsp;{event.description}</div>
               </React.Fragment>
