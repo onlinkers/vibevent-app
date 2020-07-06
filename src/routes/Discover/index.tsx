@@ -12,6 +12,8 @@ interface DispatchProps {
   eventData: EventDataState;
 }
 
+// TODO: Adapt to events that don't have location specified (online/virtual)
+
 const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
 
   const {

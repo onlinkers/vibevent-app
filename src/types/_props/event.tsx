@@ -1,9 +1,10 @@
 import { Venue } from "./venue";
 import { Image } from "./image";
+import { User } from "./user";
 
 export interface Event {
   _id: string;
-  hosts: string[];
+  hosts: string[] | User[];
   name: string;
   startDate: Date;
   endDate: Date;

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import moment from "moment";
 
 import "./index.scss";
+import { User } from "types/props";
 
 interface Props {
   event: Event;
@@ -21,6 +22,10 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
   const [isSaved, setIsSaved] = useState(false);
   const month = moment(event.startDate).format("MMM").toUpperCase();
   const date = moment(event.startDate).format("DD");
+
+  const hosts = event.hosts && event.hosts.length ? (event.hosts as User[]).map((host) => {
+    return `${host.firstName} ${host.lastName}`;
+  }) : [];
 
   return (
     <React.Fragment>
@@ -48,7 +53,7 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
                 (event?.name.length > 37 ? "..." : "")}
             </p>
             <p className="event-host">
-              {event.hosts ? event.hosts[0] : "UBC SISA"}
+              {hosts.join(", ")}
             </p>
           </div>
           <button
