@@ -1,7 +1,7 @@
 import React from "react";
 
 import QuickToolCard from "components/searchTools/utilityCard/utilityCard";
-import SmallCard from "../cards/smallCard/smallCard";
+import SmallEventCard from "../cards/smallCard/eventCard";
 import { EventsPayload } from "types/store";
 import "./index.scss";
 
@@ -33,7 +33,7 @@ const QuickAccessMenu: React.FunctionComponent<Props> = (props) => {
           </div>
           <div className="card-previews-container">
             {eventsArray.slice(0, 2).map((item) => {
-              return <SmallCard event={item} key={item._id} />;
+              return <SmallEventCard event={item} key={item._id} />;
             })}
           </div>
         </div>

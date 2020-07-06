@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 
 import QuickAccessMenu from "components/searchTools";
-import EventCardLD from "components/cards/largeCard/eventCardLargeDesktop";
+import EventCard from "components/cards/largeCard/eventCard";
 import Sidebar from "components/layouts/sidebar/sidebar";
 
 import "./index.scss";
@@ -89,11 +89,11 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                   >
                     {eventsArray.map((event) => {
                       return (
-                        <EventCardLD
+                        <EventCard
                           event={event}
                           key={event._id}
                           className="event-card"
-                        ></EventCardLD>
+                        ></EventCard>
                       );
                     })}
                   </motion.div>

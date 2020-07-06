@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Button, Typography, Collapse, Empty } from "antd";
-import EventCard from "components/cards/largeCard/eventCard";
+import SmallEventCard from "components/cards/smallCard/eventCard";
 
 import { User } from "types/props";
 
@@ -166,13 +166,9 @@ const ProfileDetails = (props: Props) => {
           <Collapse.Panel header="Events You've Created:" key="created">
             {eventsCreated &&
               eventsCreated.map((event) => (
-                <EventCard
+                <SmallEventCard
                   key={event._id}
-                  variant="brief"
                   event={event}
-                  width="10em"
-                  size="small"
-                  bordered
                 />
               ))}
             {(!eventsCreated || !eventsCreated.length) && (
@@ -191,13 +187,9 @@ const ProfileDetails = (props: Props) => {
           >
             {eventsInvolved &&
               eventsInvolved.map((event) => (
-                <EventCard
+                <SmallEventCard
                   key={event._id}
-                  variant="brief"
                   event={event}
-                  width="10em"
-                  size="small"
-                  bordered
                 />
               ))}
             {(!eventsInvolved || !eventsInvolved.length) && (
