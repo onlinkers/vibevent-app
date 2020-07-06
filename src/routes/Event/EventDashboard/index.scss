@@ -1,0 +1,138 @@
+// .EventDashboard {
+//   overflow-y: scroll;
+//   background-color: #f6f6f7;
+// }
+
+// .EventDashboard>.dashboard-row {
+//   width: 100%;
+//   margin: 0 !important;
+// }
+
+// .EventDashboard>.dashboard-row {
+//   width: 100%;
+//   margin: 0 !important;
+// }
+
+// /* TODO: Extra responsiveness */
+// @media (max-width: 1200px) {
+//   .EventDashboard>.dashboard-row>.dashboard-col {
+//     min-width: 20%;
+//   }
+// }
+
+// @media (max-width: 1000px) {
+//   .EventDashboard>.dashboard-row>.dashboard-col {
+//     min-width: 25%;
+//   }
+// }
+
+// @media (max-width: 800px) {
+//   .EventDashboard>.dashboard-row {
+//     width: calc(100% - 2em);
+//     margin-left: 1em !important;
+//     margin-right: 1em !important;
+//   }
+
+//   .EventDashboard>.dashboard-row>.dashboard-col {
+//     min-width: 33%;
+//   }
+// }
+
+// @media (max-width: 500px) {
+//   .EventDashboard>.dashboard-row>.dashboard-col {
+//     min-width: 50%;
+//   }
+// }
+
+.EventDashboard {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: url(../../../assets/media/dashboard-backdrop.jpg);
+  background-color: #f6f6f7;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+
+  .events-scroll {
+    width: 40%;
+    position: absolute;
+    left: 10%;
+
+    .events-category {
+      h1 {
+        font-family: $primary-label;
+        font-weight: bold;
+        user-select: none;
+        @include desktop {
+          font-size: 2.5em;
+        }
+      }
+    }
+
+    .events-category:first-child {
+      margin-top: 10%;
+    }
+  }
+
+  .quick-access-tab {
+    position: absolute;
+    top: 10%;
+    right: 2.5%;
+    @include tablet-landscape {
+      width: 40%;
+    }
+    @include desktop {
+      width: 30%;
+    }
+  }
+}
+
+.events-frame {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow: auto;
+  white-space: nowrap;
+  position: relative;
+}
+
+.events-draggable {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  white-space: nowrap;
+}
+
+.event-card {
+  flex-grow: 1;
+}
+
+.gradient-fade {
+  background: linear-gradient(
+    270deg,
+    #f6f6f7 12.4%,
+    rgba(246, 246, 247, 0) 100%
+  );
+  display: inline-block;
+  position: absolute;
+  bottom: 2vh;
+  height: 70%;
+  @include tablet-landscape {
+    min-width: 75px;
+  }
+  @include desktop {
+    min-width: 100px;
+  }
+}
+.gradient-fade-right {
+  right: 0;
+}
+.gradient-fade-left {
+  transform: rotate(-180deg);
+  left: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+  /* make scrollbar transparent */
+}

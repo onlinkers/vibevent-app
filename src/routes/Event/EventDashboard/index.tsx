@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
-import ExploreBar from "components/layouts/exporeBar";
-import { Col, Row } from "antd";
-import { ReloadOutlined } from "@ant-design/icons";
-import EventCard from "components/cards/eventCard";
+import QuickAccessMenu from "components/searchTools";
+import EventCardLD from "components/cards/largeCard/eventCardLargeDesktop";
+import Sidebar from "components/layouts/sidebar/sidebar";
 
-import "./index.css";
+import "./index.scss";
 
 import { EventsPayload } from "types/store";
 import { fetchAllEvents } from "store/actions/eventActions";
+import { ReloadOutlined } from "@ant-design/icons";
+import EventCard from "components/cards/largeCard/eventCard";
+import { Row, Col } from "antd";
 
 interface Props {
   events: EventsPayload;
@@ -18,21 +21,15 @@ interface Props {
   errors: {
     events?: string;
     eventCategories?: string;
-  }
+  };
   fetchAllEvents: Function;
 }
 
 const EventDashboard: React.FunctionComponent<Props> = (props) => {
-  
-  const {
-    events,
-    loading,
-    errors,
-    fetchAllEvents
-  } = props;
+  const { events, loading, errors, fetchAllEvents } = props;
 
-  const eventsArray = Object.values(events);
-  
+  const eventsArray = Object.values(events).slice(1, 5);
+
   const history = useHistory();
 
   const refreshPage = () => {
@@ -45,15 +42,27 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   }, []); // eslint-disable-line
 
   const hasErrors = errors.events || events.eventCategories;
+  // const hasErrors = true;
+
+  const x = useMotionValue(0);
+  const opacityRight = useTransform(
+    x,
+    [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
+    [1, 1, 0]
+  );
+  const opacityLeft = useTransform(
+    x,
+    [0, 20, (-window.innerWidth / 2) * 1.25],
+    [0, 1, 1]
+  );
 
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
     <React.Fragment>
-      <ExploreBar />
       {loading && (
-        <div className="Page Page--explore EventDashboard">
+        <div className="Page EventDashboard">
           <Row gutter={[16, 16]} className="dashboard-row">
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => ( 
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
               <Col key={num} span={4} className="dashboard-col">
                 <EventCard variant="detailed" loading={true} />
               </Col>
@@ -61,27 +70,58 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
           </Row>
         </div>
       )}
-      {!loading && (hasErrors ? (
-        <div className="Page Error">
-          <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
-          <div className="text--unselectable">{errors.events}</div>
-          <div className="text--unselectable">{errors.eventCategories}</div>
-        </div>
-      ) : (
-        <div className="Page Page--explore EventDashboard">
-          <Row gutter={[16, 16]} className="dashboard-row">
-            {eventsArray.map((event) => ( 
-              <Col key={event._id} span={4} className="dashboard-col">
-                <EventCard
-                  variant="detailed"
-                  event={event}
-                  refetch={fetchAllEvents}
-                />
-              </Col>
-            ))}
-          </Row>
-        </div>
-      ))}
+      {!loading &&
+        (hasErrors ? (
+          <div className="Page Error">
+            <div onClick={refreshPage} className="button--clickable">
+              <ReloadOutlined />
+            </div>
+            <div className="text--unselectable">{errors.events}</div>
+            <div className="text--unselectable">{errors.eventCategories}</div>
+          </div>
+        ) : (
+          <div className="Page EventDashboard">
+            <Sidebar />
+            <div className="events-scroll">
+              <div className="events-category">
+                <h1 className="events-category__title">Online Experiences</h1>
+                <div className="events-frame">
+                  <motion.div
+                    className="events-draggable"
+                    drag="x"
+                    dragConstraints={{
+                      left: (-window.innerWidth / 2) * 1.25,
+                      right: 0,
+                    }}
+                    dragTransition={{ bounceStiffness: 300, bounceDamping: 50 }}
+                    style={{ x }}
+                  >
+                    {eventsArray.map((event) => {
+                      return (
+                        <EventCardLD
+                          event={event}
+                          key={event._id}
+                          className="event-card"
+                        ></EventCardLD>
+                      );
+                    })}
+                  </motion.div>
+                </div>
+                <motion.div
+                  className="gradient-fade gradient-fade-right"
+                  style={{ opacity: opacityRight }}
+                ></motion.div>
+                <motion.div
+                  className="gradient-fade gradient-fade-left"
+                  style={{ opacity: opacityLeft }}
+                ></motion.div>
+              </div>
+            </div>
+            <div className="quick-access-tab">
+              <QuickAccessMenu events={events} />
+            </div>
+          </div>
+        ))}
     </React.Fragment>
   );
 };
@@ -90,7 +130,7 @@ const mapStateToProps = ({ eventData }) => {
   return {
     events: eventData.events,
     loading: eventData.loading,
-    errors: eventData.errors
+    errors: eventData.errors,
   };
 };
 

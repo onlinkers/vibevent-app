@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Button, Typography, Collapse, Empty } from "antd";
-import EventCard from "components/cards/eventCard";
+import EventCard from "components/cards/largeCard/eventCard";
 
 import { User } from "types/props";
 
@@ -9,10 +9,10 @@ import "./index.css";
 import DefaultAvatar from "assets/media/default-avatar.png";
 
 interface Props {
-    user: User;
-    onSave: Function;
-    redirectEvents: Function;
-    logOut: Function;
+  user: User;
+  onSave: Function;
+  redirectEvents: Function;
+  logOut: Function;
 }
 
 // TODO: Import color from styles
@@ -20,20 +20,10 @@ const saveColor = { background: "green", color: "white" };
 const errorColor = { background: "red", color: "white" };
 
 const ProfileDetails = (props: Props) => {
-
-  const {
-    user,
-    onSave,
-    redirectEvents,
-    logOut
-  } = props;
+  const { user, onSave, redirectEvents, logOut } = props;
 
   // editable states
-  const {
-    profilePhoto,
-    eventsCreated,
-    eventsInvolved
-  } = user;
+  const { profilePhoto, eventsCreated, eventsInvolved } = user;
 
   const imageSrc = profilePhoto?.baseSrc || DefaultAvatar;
 
@@ -60,11 +50,10 @@ const ProfileDetails = (props: Props) => {
         lastName,
         profilePhoto,
         eventsInvolved: eventsInvolvedIds,
-        eventsCreated: eventsCreatedIds
-      }
+        eventsCreated: eventsCreatedIds,
+      },
     });
     setEditable(false);
-
   };
 
   const cancel = () => {
@@ -79,43 +68,54 @@ const ProfileDetails = (props: Props) => {
     <div className="Profile row">
       {/* TODO: Profile picture uploading */}
       <div className="col-2 user-profile">
-        <img
-          className="user-profile__image"
-          src={imageSrc}
-          alt="profile"
-        />
-        <Typography.Title className="user-profile__name">{firstName} {lastName}</Typography.Title>
+        <img className="user-profile__image" src={imageSrc} alt="profile" />
+        <Typography.Title className="user-profile__name">
+          {firstName} {lastName}
+        </Typography.Title>
         <Button
           className="button--clickable"
           type="primary"
           onClick={() => setEditable(!editable)}
           disabled={editable}
-        >Edit Profile</Button>
-        <Button className="button--clickable" onClick={() => logOut()}>Log Out</Button>
+        >
+          Edit Profile
+        </Button>
+        <Button className="button--clickable" onClick={() => logOut()}>
+          Log Out
+        </Button>
       </div>
       <div className="col-2 user-data">
         <h3>
           <span className="label">First Name:</span>
           <Typography.Text
             className={editable ? "editable--active" : "editable"}
-            editable={editable ? { editing: true, onChange: setFirstName } : false}
-          >{firstName}
+            editable={
+              editable ? { editing: true, onChange: setFirstName } : false
+            }
+          >
+            {firstName}
           </Typography.Text>
         </h3>
         <h3>
           <span className="label">Last Name:</span>
           <Typography.Text
             className={editable ? "editable--active" : "editable"}
-            editable={editable ? { editing: true, onChange: setLastName } : false}
-          >{lastName}
+            editable={
+              editable ? { editing: true, onChange: setLastName } : false
+            }
+          >
+            {lastName}
           </Typography.Text>
         </h3>
         <h3>
           <span className="label">Username:</span>
           <Typography.Text
             className={editable ? "editable--active" : "editable"}
-            editable={editable ? { editing: true, onChange: setUsername } : false}
-          >{username}
+            editable={
+              editable ? { editing: true, onChange: setUsername } : false
+            }
+          >
+            {username}
           </Typography.Text>
         </h3>
         <h3>
@@ -123,7 +123,8 @@ const ProfileDetails = (props: Props) => {
           <Typography.Text
             className={editable ? "editable--active" : "editable"}
             editable={editable ? { editing: true, onChange: setEmail } : false}
-          >{email}
+          >
+            {email}
           </Typography.Text>
         </h3>
         {editable && (
@@ -133,38 +134,65 @@ const ProfileDetails = (props: Props) => {
               type="primary"
               style={saveColor}
               onClick={save}
-            >Save</Button>
+            >
+              Save
+            </Button>
             <Button
               className="button--clickable"
               type="primary"
               style={errorColor}
               onClick={cancel}
-            >Cancel</Button>
+            >
+              Cancel
+            </Button>
           </div>
         )}
         <br />
         <Collapse defaultActiveKey={[]} className="events-panel">
-          <Collapse.Panel header="Events You&apos;ve Created:" key="created">
-            {eventsCreated && eventsCreated.map((event) =>
-              <EventCard key={event._id} variant="brief" event={event} width="10em" size="small" bordered />
+          <Collapse.Panel header="Events You've Created:" key="created">
+            {eventsCreated &&
+              eventsCreated.map((event) => (
+                <EventCard
+                  key={event._id}
+                  variant="brief"
+                  event={event}
+                  width="10em"
+                  size="small"
+                  bordered
+                />
+              ))}
+            {(!eventsCreated || !eventsCreated.length) && (
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}>
+                <Button type="primary" onClick={() => redirectEvents()}>
+                  Find Events!
+                </Button>
+              </Empty>
             )}
-            {(!eventsCreated || !eventsCreated.length) &&
-                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}>
-                      <Button type="primary" onClick={() => redirectEvents()}>Find Events!</Button>
-                    </Empty>
-            }
           </Collapse.Panel>
         </Collapse>
         <Collapse defaultActiveKey={[]} className="events-panel">
-          <Collapse.Panel header="Events You&apos;ve Been Involved With:" key="created">
-            {eventsInvolved && eventsInvolved.map((event) =>
-              <EventCard key={event._id} variant="brief" event={event} width="10em" size="small" bordered />
+          <Collapse.Panel
+            header="Events You've Been Involved With:"
+            key="created"
+          >
+            {eventsInvolved &&
+              eventsInvolved.map((event) => (
+                <EventCard
+                  key={event._id}
+                  variant="brief"
+                  event={event}
+                  width="10em"
+                  size="small"
+                  bordered
+                />
+              ))}
+            {(!eventsInvolved || !eventsInvolved.length) && (
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}>
+                <Button type="primary" onClick={() => redirectEvents()}>
+                  Find Events!
+                </Button>
+              </Empty>
             )}
-            {(!eventsInvolved || !eventsInvolved.length) &&
-                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}>
-                      <Button type="primary" onClick={() => redirectEvents()}>Find Events!</Button>
-                    </Empty>
-            }
           </Collapse.Panel>
         </Collapse>
       </div>

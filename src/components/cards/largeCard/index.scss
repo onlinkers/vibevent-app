@@ -1,0 +1,105 @@
+.event-card-ld {
+  display: flex;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  margin: 0.5em;
+  white-space: normal;
+  overflow: hidden;
+  font-family: $primary-label;
+  min-width: 60%;
+  min-height: 30vh;
+  max-width: 60%;
+  max-height: 30vh;
+
+  .event-image {
+    height: 70%;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+
+    .event-image__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+  }
+
+  .event-description {
+    position: absolute;
+    bottom: 0;
+    background: white;
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 2% 5%;
+
+    .event-date {
+      text-align: center;
+      width: 15%;
+      margin: 0;
+      @include tablet-landscape {
+        line-height: 125%;
+      }
+      @include desktop {
+        line-height: 150%;
+      }
+
+      .month {
+        @include card-desktop-month;
+      }
+
+      .date {
+        @include card-desktop-date;
+      }
+    }
+
+    .event-title-hosts {
+      width: 60%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      @include tablet-landscape {
+        padding: 0 3% 0 5%;
+      }
+      @include desktop {
+        padding: 0 3%;
+      }
+
+      .event-title {
+        @include card-desktop-title;
+        margin: 0;
+      }
+
+      .event-host {
+        @include card-desktop-secondary;
+        margin: 0;
+      }
+    }
+
+    .save-btn {
+      width: 25%;
+      height: 50%;
+      background-color: white;
+      border: 2px solid #ff1d58;
+      color: #ff1d58;
+      outline: none;
+      @include card-save-btn;
+      @include tablet-landscape {
+        border-radius: 5px;
+      }
+      @include desktop {
+        border-radius: 10px;
+      }
+    }
+
+    .save-btn--active {
+      background-color: #ff1d58;
+      color: white;
+    }
+  }
+}
