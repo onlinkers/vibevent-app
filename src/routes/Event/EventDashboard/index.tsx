@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 // import { motion, useMotionValue, useTransform } from "framer-motion";
 
-import QuickAccessMenu from "components/searchTools";
+import QuickAccessMenu from "components/quickAccess";
 import EventCardLD from "components/cards/largeCard/eventCardLargeDesktop";
 import Sidebar from "components/layouts/sidebar/sidebar";
 

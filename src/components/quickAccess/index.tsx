@@ -1,6 +1,6 @@
 import React from "react";
 
-import QuickToolCard from "components/searchTools/utilityCard/utilityCard";
+import QuickToolCard from "components/quickAccess/utilityCard/utilityCard";
 import SmallCard from "../cards/smallCard/smallCard";
 import { EventsPayload } from "types/store";
 import "./index.scss";
@@ -26,11 +26,12 @@ const QuickAccessMenu: React.FunctionComponent<Props> = (props) => {
         <div className="vibevent-logo-container">
           <VibeventNameLogo />
         </div>
-        <div className="quick-access-container">
+        {/* FUTURE FEATURE */}
+        {/* <div className="quick-access-container">
           {[0, 1, 2, 3].map((item) => {
             return <QuickToolCard key={item} />;
           })}
-        </div>
+        </div> */}
         <div className="card-previews-section">
           <div className="card-previews-header">
             <h3>Previously Viewed</h3>
