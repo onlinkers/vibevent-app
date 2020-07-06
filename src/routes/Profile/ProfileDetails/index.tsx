@@ -33,6 +33,7 @@ const ProfileDetails = (props: Props) => {
   const [email, setEmail] = useState(user.email);
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
+  const [description, setDescription] = useState(user.description);
 
   const { _id: userId } = user;
 
@@ -48,6 +49,7 @@ const ProfileDetails = (props: Props) => {
         email,
         firstName,
         lastName,
+        description,
         profilePhoto,
         eventsInvolved: eventsInvolvedIds,
         eventsCreated: eventsCreatedIds,
@@ -61,6 +63,7 @@ const ProfileDetails = (props: Props) => {
     setEmail(user.email);
     setFirstName(user.firstName);
     setLastName(user.lastName);
+    setDescription(user.description);
     setEditable(false);
   };
 
@@ -125,6 +128,17 @@ const ProfileDetails = (props: Props) => {
             editable={editable ? { editing: true, onChange: setEmail } : false}
           >
             {email}
+          </Typography.Text>
+        </h3>
+        <h3>
+          <span className="label">Description:</span>
+          <Typography.Text
+            className={editable ? "editable--active" : "editable"}
+            editable={
+              editable ? { editing: true, onChange: setDescription } : false
+            }
+          >
+            {description}
           </Typography.Text>
         </h3>
         {editable && (
