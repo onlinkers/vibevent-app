@@ -23,7 +23,7 @@
     }
 
     .events-category:first-child {
-      margin-top: 10%;
+      margin-top: 5vh;
     }
   }
 }
@@ -81,6 +81,10 @@
 .gradient-fade-left {
   transform: rotate(-180deg);
   left: 0;
+}
+
+.page-label {
+  @include page-label;
 }
 
 ::-webkit-scrollbar {

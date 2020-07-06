@@ -4,6 +4,7 @@ import QuickToolCard from "components/searchTools/utilityCard/utilityCard";
 import SmallCard from "../cards/smallCard/smallCard";
 import { EventsPayload } from "types/store";
 import "./index.scss";
+import VibeventNameLogo from "components/svg/vibevent-name-logo/VibeventNameLogo";
 
 interface Props {
   events: EventsPayload;
@@ -22,6 +23,9 @@ const QuickAccessMenu: React.FunctionComponent<Props> = (props) => {
   return (
     <>
       <div className="quick-access">
+        <div className="vibevent-logo-container">
+          <VibeventNameLogo />
+        </div>
         <div className="quick-access-container">
           {[0, 1, 2, 3].map((item) => {
             return <QuickToolCard key={item} />;

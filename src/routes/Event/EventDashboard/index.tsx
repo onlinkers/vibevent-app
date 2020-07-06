@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+// import { motion, useMotionValue, useTransform } from "framer-motion";
 
 import QuickAccessMenu from "components/searchTools";
 import EventCardLD from "components/cards/largeCard/eventCardLargeDesktop";
@@ -44,17 +44,17 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const hasErrors = errors.events || events.eventCategories;
   // const hasErrors = true;
 
-  const x = useMotionValue(0);
-  const opacityRight = useTransform(
-    x,
-    [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
-    [1, 1, 0]
-  );
-  const opacityLeft = useTransform(
-    x,
-    [0, 20, (-window.innerWidth / 2) * 1.25],
-    [0, 1, 1]
-  );
+  // const x = useMotionValue(0);
+  // const opacityRight = useTransform(
+  //   x,
+  //   [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
+  //   [1, 1, 0]
+  // );
+  // const opacityLeft = useTransform(
+  //   x,
+  //   [0, 20, (-window.innerWidth / 2) * 1.25],
+  //   [0, 1, 1]
+  // );
 
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
@@ -130,6 +130,11 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
               </div>
             </div>
             <QuickAccessMenu events={events} />
+            <h1 className="page-label">
+              Activity
+              <br />
+              Dashboard
+            </h1>
           </div>
         ))}
     </React.Fragment>

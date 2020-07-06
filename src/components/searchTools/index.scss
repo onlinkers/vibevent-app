@@ -3,13 +3,22 @@
   display: flex;
   flex-wrap: wrap;
   position: fixed;
-  top: 10%;
+  top: 5%;
   right: 2.5%;
   @include tablet-landscape {
     width: 40%;
   }
   @include desktop {
     width: 30%;
+  }
+
+  /* TEMP CHANGE */
+  .vibevent-logo-container {
+    position: relative;
+    width: 100%;
+    right: 0;
+    height: 5vh;
+    margin-bottom: 3vh;
   }
 }
 
@@ -38,9 +47,12 @@
     h3 {
       display: inline-block;
       margin: 0;
+      font-family: $primary-label;
+      font-weight: 700;
+      @include tablet-landscape {
+        font-size: 1.25em;
+      }
       @include desktop {
-        font-family: $primary-label;
-        font-weight: 700;
         font-size: 1.375em;
       }
     }
