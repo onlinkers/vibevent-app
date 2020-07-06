@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+// import { motion, useMotionValue, useTransform } from "framer-motion";
 
 import QuickAccessMenu from "components/searchTools";
 import EventCard from "components/cards/largeCard/eventCard";
@@ -43,24 +43,26 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const hasErrors = errors.events || events.eventCategories;
   // const hasErrors = true;
 
-  const x = useMotionValue(0);
-  const opacityRight = useTransform(
-    x,
-    [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
-    [1, 1, 0]
-  );
-  const opacityLeft = useTransform(
-    x,
-    [0, 20, (-window.innerWidth / 2) * 1.25],
-    [0, 1, 1]
-  );
+  // const x = useMotionValue(0);
+  // const opacityRight = useTransform(
+  //   x,
+  //   [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
+  //   [1, 1, 0]
+  // );
+  // const opacityLeft = useTransform(
+  //   x,
+  //   [0, 20, (-window.innerWidth / 2) * 1.25],
+  //   [0, 1, 1]
+  // );
 
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
     <div className="Page EventDashboard">
       <Sidebar />
       {loading && (
-        <div className="Page Error"><Spin /></div>
+        <div className="Page Error">
+          <Spin />
+        </div>
       )}
       {!loading &&
         (hasErrors ? (
@@ -76,7 +78,19 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="events-scroll">
               <div className="events-category">
                 <h1 className="events-category__title">Online Experiences</h1>
-                <div className="events-frame">
+                <div className="events-frame--no-scroll">
+                  {eventsArray.map((event) => {
+                    return (
+                      <EventCard
+                        event={event}
+                        key={event._id}
+                        className="event-card"
+                      ></EventCard>
+                    );
+                  })}
+                </div>
+                {/* FUTURE FEATURE: do not delete */}
+                {/* <div className="events-frame">
                   <motion.div
                     className="events-draggable"
                     drag="x"
@@ -105,15 +119,17 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                 <motion.div
                   className="gradient-fade gradient-fade-left"
                   style={{ opacity: opacityLeft }}
-                ></motion.div>
+                ></motion.div> */}
               </div>
             </div>
-            <div className="quick-access-tab">
-              <QuickAccessMenu events={events} />
-            </div>
+            <QuickAccessMenu events={events} />
+            <h1 className="page-label">
+              Activity
+              <br />
+              Dashboard
+            </h1>
           </React.Fragment>
-        ))
-      }
+        ))}
     </div>
   );
 };

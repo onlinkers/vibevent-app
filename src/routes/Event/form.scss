@@ -1,0 +1,13 @@
+.EventForm {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+
+    .ant-form {
+        height: 100%;
+        width: 80%;
+        overflow-y: scroll;
+    }
+}

@@ -1,0 +1,109 @@
+.Profile {
+    flex-direction: column;
+    overflow-y: scroll;
+
+    .user-data, .user-profile {
+        width: 100%;
+        padding: 10%;
+        flex: unset;
+    }
+
+    .user-data {
+        h3 {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            margin-bottom: 1em;
+
+            .label {
+                margin-bottom: 0.5em;
+            }
+
+            .label, .editable, .editable--active {
+                flex: unset;
+                left: 0;
+            }
+        }
+    }
+
+
+    @include tablet-landscape {
+        height: 100%;
+        padding-left: 10%;
+    
+        .user-profile {
+            text-align: center;
+            width: 40%;
+            flex: 40%;
+            padding: 3rem;
+            padding-right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+    
+            .user-profile__image {
+                height: auto;
+                width: 30%;
+                margin: 5%;
+            }
+            .user-profile__name {
+                font-size: 2em;
+            }
+        }
+    
+        .user-data {
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            flex: 60%;
+            padding: 3rem;
+            overflow-y: scroll;
+    
+            h3 {
+                font-size: 1.3em;
+                margin-top: 1em;
+                margin-bottom: 1em;
+                display: flex;
+    
+                .label {
+                    float: left;
+                    min-width: 10em;
+                    flex: 30%;
+                }
+                .editable, .editable--active {
+                    border: 1 black;
+                    flex: 70%;
+                }
+            }
+    
+            .edit-buttons {
+                margin: 0 auto;
+    
+                .ant-btn {
+                    width: fit-content;
+                    padding-left: 2em;
+                    padding-right: 2em;
+                    margin-left: 0.5em;
+                    margin-right: 0.5em;
+                }
+            }
+    
+            .events-panel {
+                margin-bottom: 1em;
+    
+                .ant-collapse-item > .ant-collapse-content > .ant-collapse-content-box {
+                    display: flex;
+                    flex-direction: row;
+                    padding: 0;
+                    overflow-x: scroll;
+                    flex-shrink: 0;
+                }
+    
+                .ant-collapse-item > .ant-collapse-content > .ant-collapse-content-box > .ant-empty {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}

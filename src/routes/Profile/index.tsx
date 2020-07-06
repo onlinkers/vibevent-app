@@ -3,10 +3,12 @@ import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { Button, message } from "antd";
+import { Button, message, Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
+import Sidebar from "components/layouts/sidebar/sidebar";
 import ProfileDetails from "./ProfileDetails";
 
+import "./index.scss";
 import { User } from "types/props";
 
 import { AppContext } from "context/AppContext";
@@ -69,9 +71,10 @@ const Profile: React.FunctionComponent<Props> = (props) => {
     if(userId) fetchUserData(userId);
   }, []); // eslint-disable-line
 
-  return loading ? null : (
-    <React.Fragment>
-      {loading && <div className="Page Loader">Loading...</div>}
+  return (
+    <div className="Page">
+      <Sidebar />
+      {loading && <div className="Page Loader"><Spin/></div>}
       {!loading && (error ? (
         <div className="Page Error">
           <div onClick={refreshPage}><ReloadOutlined /></div>
@@ -79,16 +82,14 @@ const Profile: React.FunctionComponent<Props> = (props) => {
           <Button className="button--clickable" onClick={logOut}>Log Out</Button>
         </div>
       ) : (
-        <div className="Page Page--explore">
-          <ProfileDetails
-            user={user}
-            onSave={handleSave}
-            redirectEvents={redirectEvents}
-            logOut={logOut}
-          />
-        </div>
+        <ProfileDetails
+          user={user}
+          onSave={handleSave}
+          redirectEvents={redirectEvents}
+          logOut={logOut}
+        />
       ))}
-    </React.Fragment>
+    </div>
   );
 };
 

@@ -17,10 +17,10 @@ import awsconfig from "./aws-config.js";
 
 /* STYLESHEETS */
 import "./index.scss";
-import "./styles/antd-overwrites.css";
-import "./styles/components.css";
-import "./styles/layout.css";
-import "./styles/typography.css";
+import "./styles/antd-overwrites.scss";
+import "./styles/components.scss";
+import "./styles/layout.scss";
+import "./styles/typography.scss";
 import "antd/dist/antd.css";
 
 // configure amplify

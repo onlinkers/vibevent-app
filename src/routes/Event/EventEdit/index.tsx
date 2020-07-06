@@ -10,7 +10,7 @@ import {
 import { ReloadOutlined } from "@ant-design/icons";
 import EventForm from "components/forms/EventForm";
 
-import "../index.css";
+import "../form.scss";
 import { EventsPayload, EventCategoriesPayload } from "types/store";
 import eventService from "services/eventService";
 

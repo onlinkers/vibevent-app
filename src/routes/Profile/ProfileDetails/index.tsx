@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 
 import { Button, Typography, Collapse, Empty } from "antd";
-import SmallEventCard from "components/cards/smallCard/eventCard";
+import TinyEventCard from "components/cards/tinyCard/eventCard";
 
 import { User } from "types/props";
-
-import "./index.css";
 import DefaultAvatar from "assets/media/default-avatar.png";
 
 interface Props {
@@ -163,10 +161,14 @@ const ProfileDetails = (props: Props) => {
         )}
         <br />
         <Collapse defaultActiveKey={[]} className="events-panel">
-          <Collapse.Panel header="Events You've Created:" key="created">
+          <Collapse.Panel
+            header="Events You've Created:"
+            key="created"
+            forceRender
+          >
             {eventsCreated &&
               eventsCreated.map((event) => (
-                <SmallEventCard
+                <TinyEventCard
                   key={event._id}
                   event={event}
                 />
@@ -183,11 +185,12 @@ const ProfileDetails = (props: Props) => {
         <Collapse defaultActiveKey={[]} className="events-panel">
           <Collapse.Panel
             header="Events You've Been Involved With:"
-            key="created"
+            key="involved"
+            forceRender
           >
             {eventsInvolved &&
               eventsInvolved.map((event) => (
-                <SmallEventCard
+                <TinyEventCard
                   key={event._id}
                   event={event}
                 />
