@@ -11,9 +11,8 @@ import "./index.scss";
 
 import { EventsPayload } from "types/store";
 import { fetchAllEvents } from "store/actions/eventActions";
+import { Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import EventCard from "components/cards/largeCard/eventCard";
-import { Row, Col } from "antd";
 
 interface Props {
   events: EventsPayload;
@@ -58,30 +57,24 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
 
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
-    <React.Fragment>
+    <div className="Page EventDashboard">
+      <Sidebar />
       {loading && (
-        <div className="Page EventDashboard">
-          <Row gutter={[16, 16]} className="dashboard-row">
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-              <Col key={num} span={4} className="dashboard-col">
-                <EventCard variant="detailed" loading={true} />
-              </Col>
-            ))}
-          </Row>
+        <div className="Page Error">
+          <Spin />
         </div>
       )}
       {!loading &&
         (hasErrors ? (
-          <div className="Page Error">
+          <React.Fragment>
             <div onClick={refreshPage} className="button--clickable">
               <ReloadOutlined />
             </div>
             <div className="text--unselectable">{errors.events}</div>
             <div className="text--unselectable">{errors.eventCategories}</div>
-          </div>
+          </React.Fragment>
         ) : (
-          <div className="Page EventDashboard">
-            <Sidebar />
+          <React.Fragment>
             <div className="events-scroll">
               <div className="events-category">
                 <h1 className="events-category__title">Online Experiences</h1>
@@ -135,9 +128,9 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
               <br />
               Dashboard
             </h1>
-          </div>
+          </React.Fragment>
         ))}
-    </React.Fragment>
+    </div>
   );
 };
 

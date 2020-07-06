@@ -6,11 +6,12 @@ import { Auth } from "aws-amplify";
 // Import all the parent routes
 import Home from "./Home";
 import Events from "./Event";
-import Discover from "./Discover";
+// import Discover from "./Discover";
 import Profile from "./Profile";
 import Authentication from "./Authentication";
 import NotFound from "./NotFound";
 import Forbidden from "./Forbidden";
+import Construction from "./Construction";
 
 import { message } from "antd";
 
@@ -109,7 +110,7 @@ const Routes: React.FunctionComponent<Props> = (props) => {
         <AuthRoute
           exact
           path="/"
-          component={<Redirect to="/discover" />}
+          component={<Redirect to="/event/dashboard" />}
           altComponent={<Home />}
         />
         <AuthRoute path="/profile" component={<Profile />} />
@@ -119,7 +120,7 @@ const Routes: React.FunctionComponent<Props> = (props) => {
 
         {/* PUBLIC ROUTES */}
         <Route path="/event" component={Events} />
-        <Route path="/discover" component={Discover} />
+        <Route path="/discover" component={Construction} /> {/* TO CHANGE */}
         <Route path="/forbidden" component={Forbidden} />
         <Route path="/empty" render={() => <div></div>} />
         <Route path="*" component={NotFound} />

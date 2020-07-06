@@ -77,7 +77,7 @@ const Profile: React.FunctionComponent<Props> = (props) => {
       {!loading && (error ? (
         <div className="Page Error">
           <div onClick={refreshPage}><ReloadOutlined /></div>
-          <div className="text--unselectable">{error}</div>
+          <div className="t--unselectable">{error}</div>
           <Button className="button--clickable" onClick={logOut}>Log Out</Button>
         </div>
       ) : (

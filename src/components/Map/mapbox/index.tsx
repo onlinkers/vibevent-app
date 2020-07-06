@@ -86,6 +86,10 @@ const Mapbox = React.memo<MapboxProps>(
       const matchingFeatures: EventFeature[] = [];
       formattedEvents.features.forEach((event) => {
 
+        // if not an event with venue coordinates, skip
+        const coordinates = event.geometry && event.geometry.coordinates;
+        if(!coordinates) return;
+
         // Search through both the event name and title
         const placeName = `${event.text} @ ${event.properties.title}`;
         if(placeName.toLowerCase().search(query.toLowerCase()) !== -1) {
@@ -93,11 +97,12 @@ const Mapbox = React.memo<MapboxProps>(
             ...event,
             "place_name": placeName,
             "place_name_exclude_text": event.properties.title,
-            "center": event.geometry.coordinates,
+            "center": coordinates,
             "place_type": ["custom_event"]
           };
-          matchingFeatures.push(feature);
+          matchingFeatures.push((feature as EventFeature));
         }
+
       });
       return matchingFeatures;
     };
@@ -112,6 +117,9 @@ const Mapbox = React.memo<MapboxProps>(
 
       // load the event markers
       events.forEach((event) => {
+
+        if(!event.venue.location || !event.venue.location.coordinates) return;
+
         // load the react JSX as a DOM element
         const markerNode = document.createElement("div");
         markerNode.className="custom-mapbox-event-marker";
