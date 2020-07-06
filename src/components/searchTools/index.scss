@@ -1,0 +1,49 @@
+.quick-access {
+  font-family: $primary-label;
+  display: flex;
+  flex-wrap: wrap;
+  // position: absolute;
+  // top: 20%;
+  // right: 5%;
+}
+
+.quick-access-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.card-previews-section {
+  width: 100%;
+  @include tablet-landscape {
+    margin-top: 3%;
+  }
+  @include desktop {
+    margin-top: 3%;
+  }
+
+  .card-previews-header {
+    user-select: none;
+    margin: 0 0 1% 3%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    h3 {
+      display: inline-block;
+      margin: 0;
+      @include desktop {
+        font-family: $primary-label;
+        font-weight: 700;
+        font-size: 1.375em;
+      }
+    }
+  }
+
+  .card-previews-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}

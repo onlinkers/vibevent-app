@@ -14,7 +14,7 @@ import {
   InfoCircleFilled,
 } from "@ant-design/icons";
 
-import "./index.css";
+import "./index.scss";
 
 import { Event } from "types/props";
 import DefaultImage from "assets/media/default-image.png";
@@ -32,7 +32,6 @@ interface Props {
 }
 
 const EventCard: React.FunctionComponent<Props> = (props) => {
-
   const {
     event,
     favorited = false,
@@ -47,7 +46,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
   const history = useHistory();
 
   const redirectToEvent = (eventId: string) => {
-    history.push(`/event/${eventId}`); 
+    history.push(`/event/${eventId}`);
   };
 
   const editEvent = (eventId) => {
@@ -56,26 +55,29 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
 
   const deleteEvent = async (eventId) => {
     await eventService.deleteEvent({ id: eventId });
-    refetch && await refetch();
+    refetch && (await refetch());
   };
 
   const imageSource = event?.media?.coverPhoto?.baseSrc || DefaultImage;
   let className = "event-card";
-  if(size) className = `event-card-${size}`;
+  if (size) className = `event-card-${size}`;
 
-  if(event && variant === "detailed") {
+  if (event && variant === "detailed") {
     return (
       <Card
         hoverable
         className={className}
         style={{ width, minWidth: width }}
-        cover={imageSource && <img src={imageSource} alt="event-cover"/>}
+        cover={imageSource && <img src={imageSource} alt="event-cover" />}
         {...rest}
         title={event.name}
-        extra={favorited ? <HeartFilled/> : <HeartOutlined/>}
+        extra={favorited ? <HeartFilled /> : <HeartOutlined />}
         actions={[
-          <ExpandOutlined key="open" onClick={() => redirectToEvent(event._id)}/>,
-          <EditOutlined key="edit" onClick={() => editEvent(event._id)}/>,
+          <ExpandOutlined
+            key="open"
+            onClick={() => redirectToEvent(event._id)}
+          />,
+          <EditOutlined key="edit" onClick={() => editEvent(event._id)} />,
           <Popconfirm
             key="delete"
             title="Are you sure delete this event?"
@@ -83,8 +85,8 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
             okText="Yes"
             cancelText="No"
           >
-            <DeleteOutlined key="setting"/>
-          </Popconfirm>
+            <DeleteOutlined key="setting" />
+          </Popconfirm>,
         ]}
       >
         <Skeleton loading={loading} active>
@@ -94,22 +96,36 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
                 <div><ClockCircleFilled />&nbsp;{event.startDate}</div>
                 <div><PushpinFilled />&nbsp;{event.venue.name}</div>
                 <div><StarFilled />&nbsp;{event.rating?.count && event.rating.sum/event.rating.count}</div>
+                <div>
+                  <ClockCircleFilled />
+                  &nbsp;{event.startDate}
+                </div>
+                <div>
+                  <PushpinFilled />
+                  &nbsp;{event.venue.name}
+                </div>
+                <div>
+                  <StarFilled />
+                  &nbsp;{event.rating}
+                </div>
                 <br />
-                <div><InfoCircleFilled />&nbsp;{event.description}</div>
+                <div>
+                  <InfoCircleFilled />
+                  &nbsp;{event.description}
+                </div>
               </React.Fragment>
             }
           />
         </Skeleton>
       </Card>
     );
-  }
-  else if(event && variant === "brief") {
+  } else if (event && variant === "brief") {
     return (
       <Card
         hoverable
         className={className}
         style={{ width, minWidth: width }}
-        cover={imageSource && <img src={imageSource} alt="event-cover"/>}
+        cover={imageSource && <img src={imageSource} alt="event-cover" />}
         {...rest}
       >
         <Skeleton loading={loading} active>
@@ -120,23 +136,21 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
         </Skeleton>
       </Card>
     );
-  }
-  else { // Allow adding more options here
+  } else {
+    // Allow adding more options here
     return (
       <Card
         className={className}
         style={{ width, minWidth: width }}
-        cover={imageSource && <img src={imageSource} alt="event-cover"/>}
+        cover={imageSource && <img src={imageSource} alt="event-cover" />}
         {...rest}
       >
         <Skeleton loading={true} title paragraph={false} active>
-          <Card.Meta
-            title="template"
-          ></Card.Meta>
+          <Card.Meta title="template"></Card.Meta>
         </Skeleton>
       </Card>
     );
-  };
+  }
 };
 
 export default EventCard;

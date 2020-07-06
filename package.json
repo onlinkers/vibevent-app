@@ -11,6 +11,7 @@
     "antd": "^4.2.5",
     "aws-amplify": "^3.0.13",
     "axios": "^0.19.2",
+    "framer-motion": "^1.11.1",
     "mapbox-gl": "^1.10.0",
     "moment": "^2.26.0",
     "node-sass": "^4.14.1",
@@ -21,6 +22,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-use-dimensions": "^1.2.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "typescript": "^3.7.5"
