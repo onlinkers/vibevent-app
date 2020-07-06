@@ -1,20 +1,23 @@
 .vibevent-logo-container {
   position: absolute;
-  top: 3%;
+  top: 5%;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   background: white;
   z-index: 100;
   overflow: hidden;
-  width: 5%;
+  min-width: 10%;
+  @include tablet-landscape {
+    min-width: 78px;
+  }
 }
 
 .navlinks,

@@ -1,0 +1,70 @@
+.quick-access {
+  font-family: $primary-label;
+  flex-wrap: wrap;
+  position: fixed;
+  top: 5%;
+  right: 2.5%;
+  display: none;
+
+  @include tablet-landscape {
+    display: flex;
+    width: 40%;
+  }
+  @include desktop {
+    display: flex;
+    width: 30%;
+  }
+
+  /* TEMP CHANGE */
+  .vibevent-logo-container {
+    position: relative;
+    width: 100%;
+    right: 0;
+    height: 5vh;
+    margin-bottom: 3vh;
+  }
+}
+
+.quick-access-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.card-previews-section {
+  width: 100%;
+  @include tablet-landscape {
+    margin-top: 3%;
+  }
+  @include desktop {
+    margin-top: 3%;
+  }
+
+  .card-previews-header {
+    user-select: none;
+    margin: 0 0 1% 3%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    h3 {
+      display: inline-block;
+      margin: 0;
+      font-family: $primary-label;
+      font-weight: 700;
+      @include tablet-landscape {
+        font-size: 1.25em;
+      }
+      @include desktop {
+        font-size: 1.375em;
+      }
+    }
+  }
+
+  .card-previews-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}

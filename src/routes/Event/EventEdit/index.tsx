@@ -11,7 +11,7 @@ import { ReloadOutlined } from "@ant-design/icons";
 import ExploreBar from "components/layouts/exporeBar";
 import EventForm from "components/forms/EventForm";
 
-import "../index.css";
+import "../form.scss";
 import { EventsPayload, EventCategoriesPayload } from "types/store";
 import eventService from "services/eventService";
 

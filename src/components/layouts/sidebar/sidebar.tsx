@@ -5,13 +5,16 @@ import useDimensions from "react-use-dimensions";
 
 import MenuToggle from "components/svg/menu-toggle/MenuToggle";
 import VibeventLogo from "components/svg/vibevent-logo/VibeventLogo";
+// import VibeventNameLogo from "components/svg/vibevent-name-logo/VibeventNameLogo";
 import "./index.scss";
 
 interface Props {}
 
+const wide = window.innerWidth >= 600;
+
 const sidebarVariants = {
-  open: (height = 1000) => ({
-    width: "18%",
+  open: () => ({
+    width: wide ? "20%" : "100%",
     transition: {
       type: "spring",
       stiffness: 300,
@@ -20,7 +23,7 @@ const sidebarVariants = {
     },
   }),
   closed: () => ({
-    width: "78px",
+    width: "0",
     transition: {
       delay: 0,
       type: "spring",
@@ -75,6 +78,7 @@ const Navigation = ({ isOpen }) => {
         className="vibevent-logo-container"
         initial={false}
       >
+        {/* <VibeventNameLogo /> */}
         <VibeventLogo toggle={() => toggleTheme()} theme={theme} />
       </motion.div>
       <motion.ul className="navlinks">
