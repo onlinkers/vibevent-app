@@ -93,9 +93,6 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
           <Card.Meta
             description={
               <React.Fragment>
-                <div><ClockCircleFilled />&nbsp;{event.startDate}</div>
-                <div><PushpinFilled />&nbsp;{event.venue.name}</div>
-                <div><StarFilled />&nbsp;{event.rating?.count && event.rating.sum/event.rating.count}</div>
                 <div>
                   <ClockCircleFilled />
                   &nbsp;{event.startDate}
@@ -106,7 +103,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
                 </div>
                 <div>
                   <StarFilled />
-                  &nbsp;{event.rating}
+                  &nbsp;{event.rating?.count && (event.rating.sum/event.rating.count).toFixed(1)}
                 </div>
                 <br />
                 <div>
