@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import { motion } from "framer-motion";
 
 import "./index.scss";

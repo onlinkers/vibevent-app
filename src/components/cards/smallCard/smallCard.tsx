@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import moment from "moment";
 import { motion } from "framer-motion";
 
@@ -31,6 +30,7 @@ const SmallCard: React.FunctionComponent<Props> = (props) => {
         <img
           className="small-card-coverphoto"
           src={event?.media?.coverPhoto?.baseSrc}
+          alt="eventCoverPhoto"
         />
         <div className="small-card-description">
           <p className="description-date">{month}</p>

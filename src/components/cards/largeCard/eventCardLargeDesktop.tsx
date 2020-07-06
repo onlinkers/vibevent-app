@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Event } from "types/props";
-import { stringifyTags } from "utils/index";
 import { motion } from "framer-motion";
 import moment from "moment";
 
@@ -45,7 +44,8 @@ const EventCardLD: React.FunctionComponent<Props> = (props) => {
           </h3>
           <div className="event-title-hosts">
             <p className="event-title">
-              {event?.name.slice(0, 37) + (event?.name.length > 37 ? "..." : "")}  
+              {event?.name.slice(0, 37) +
+                (event?.name.length > 37 ? "..." : "")}
             </p>
             <p className="event-host">
               {event.hosts ? event.hosts[0] : "UBC SISA"}

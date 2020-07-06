@@ -2,8 +2,6 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import "./index.scss";
 
-const Rect = (props) => <motion.rect {...props} />;
-
 const VibeventLogo = ({ toggle, theme }) => (
   <motion.svg
     width="109"

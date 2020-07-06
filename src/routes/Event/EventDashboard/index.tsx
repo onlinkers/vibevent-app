@@ -1,17 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  motion,
-  useElementScroll,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 import QuickAccessMenu from "components/searchTools";
 import EventCardLD from "components/cards/largeCard/eventCardLargeDesktop";
 import Sidebar from "components/layouts/sidebar/sidebar";
-import useDimensions from "react-use-dimensions";
 
 import "./index.scss";
 

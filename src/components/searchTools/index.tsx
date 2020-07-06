@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 
 import QuickToolCard from "components/searchTools/utilityCard/utilityCard";
 import SmallCard from "../cards/smallCard/smallCard";
-import { Event } from "types/props";
 import { EventsPayload } from "types/store";
 import "./index.scss";
 
@@ -18,7 +16,7 @@ interface Props {
 }
 
 const QuickAccessMenu: React.FunctionComponent<Props> = (props) => {
-  const { events, loading, errors, fetchAllEvents } = props;
+  const { events } = props;
   const eventsArray = Object.values(events).slice(1, 5);
 
   return (
