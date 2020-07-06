@@ -1,14 +1,17 @@
 .quick-access {
   font-family: $primary-label;
-  display: flex;
   flex-wrap: wrap;
   position: fixed;
   top: 5%;
   right: 2.5%;
+  display: none;
+
   @include tablet-landscape {
+    display: flex;
     width: 40%;
   }
   @include desktop {
+    display: flex;
     width: 30%;
   }
 

@@ -3,31 +3,16 @@
   height: 100%;
   width: 100%;
   position: relative;
+  background: #f6f6f7;
 }
 
 /* Should extend "Page" */
 .Page--center {
-  height: 100%;
-  width: 100%;
+  @extend .Page;
   align-items: center;
   display: flex;
   justify-content: center;
   text-align: center;
-  position: relative;
-}
-
-.Page--explore {
-  max-height: calc(100vh - 5em);
-  margin-top: 5em;
-}
-
-/* TODO: Mobile View */
-@media (max-width: 800px) {
-  .Page--explore {
-    margin-top: 0;
-    max-height: calc(100vh - 4em);
-    margin-bottom: 4em;
-  }
 }
 
 .Loader {

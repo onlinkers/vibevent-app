@@ -7,9 +7,14 @@
   background-repeat: no-repeat;
 
   .events-scroll {
-    width: 50%;
+    width: 85%;
     position: absolute;
-    left: 10%;
+    left: 15%;
+
+    @include tablet-landscape {
+      width: 50%;
+      left: 10%;
+    }
 
     .events-category {
       h1 {

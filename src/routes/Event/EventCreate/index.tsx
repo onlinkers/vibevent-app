@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import {
   message,
 } from "antd";
-import ExploreBar from "components/layouts/exporeBar";
+import Sidebar from "components/layouts/sidebar/sidebar";
 import EventForm from "components/forms/EventForm";
 
-import "../index.css";
+import "../form.scss";
 import { EventCategoriesPayload } from "types/store";
 import eventService from "services/eventService";
 
@@ -65,20 +65,20 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
   };
 
   return (
-    <React.Fragment>
-      <ExploreBar />
+    <div className="Page--center EventForm">
+      <Sidebar />
       {loading && <div className="Page Loader">Loading...</div>}
       {!loading && (
-        <div className="Page--center Page--explore EventForm">
+        <React.Fragment>
           <h1>Create Your Event!</h1>
           <EventForm
             mode="CREATE"
             onSubmit={handleSubmit}
             eventCategories={eventCategories}
           />
-        </div>
+        </React.Fragment>
       )}
-    </React.Fragment>
+    </div>
   );
 };
 
