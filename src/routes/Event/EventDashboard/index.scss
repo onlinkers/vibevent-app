@@ -9,11 +9,10 @@
   .events-scroll {
     width: 85%;
     position: absolute;
-    left: 15%;
+    left: 5%;
 
     @include tablet-landscape {
       width: 50%;
-      left: 10%;
     }
 
     .events-category {
