@@ -1,6 +1,6 @@
 import React from "react";
 
-import QuickToolCard from "components/quickAccess/utilityCard/utilityCard";
+// import UtilityCard from "components/quickAccess/utilityCard/utilityCard";
 import SmallCard from "../cards/smallCard/smallCard";
 import { EventsPayload } from "types/store";
 import "./index.scss";
@@ -29,7 +29,7 @@ const QuickAccessMenu: React.FunctionComponent<Props> = (props) => {
         {/* FUTURE FEATURE */}
         {/* <div className="quick-access-container">
           {[0, 1, 2, 3].map((item) => {
-            return <QuickToolCard key={item} />;
+            return <UtilityCard key={item} />;
           })}
         </div> */}
         <div className="card-previews-section">
