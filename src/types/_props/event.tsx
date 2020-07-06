@@ -1,16 +1,20 @@
 import { Venue } from "./venue";
 import { Image } from "./image";
+import { User } from "./user";
 
 export interface Event {
   _id: string;
-  hosts: string[];
+  hosts: string[] | User[];
   name: string;
   startDate: Date;
   endDate: Date;
   venue: Venue;
   price?: number;
   description?: string;
-  rating?: number;
+  rating?: {
+    sum: number;
+    count: number;
+  };
   categories: string[];
   links?: {
     ticket?: string;
@@ -24,4 +28,8 @@ export interface Event {
     userTags: string[];
     hostTags: string[];
   };
+  rooms?: [{
+    roomId: number;
+    name?: string;
+  }]
 }

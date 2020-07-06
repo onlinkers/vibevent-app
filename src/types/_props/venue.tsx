@@ -1,6 +1,6 @@
 export interface Venue {
     name: string
-    location: {
+    location?: {
         coordinates: number[]
         type: "Point" | null
     }

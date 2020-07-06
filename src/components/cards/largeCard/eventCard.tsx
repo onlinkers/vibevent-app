@@ -103,7 +103,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
                 </div>
                 <div>
                   <StarFilled />
-                  &nbsp;{event.rating}
+                  &nbsp;{event.rating?.count && (event.rating.sum/event.rating.count).toFixed(1)}
                 </div>
                 <br />
                 <div>
