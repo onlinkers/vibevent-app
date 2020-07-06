@@ -41,8 +41,8 @@ const Map = React.memo<Props>(({ loaded, events, selectedCategories, error }) =>
 	
   return (
     <React.Fragment>
-      {!loaded && <div className="Page Loader">Loading...</div>}
-      {loaded && error && <div className="Page Error">
+      {!loaded && <div className="Page--full Loader">Loading...</div>}
+      {loaded && error && <div className="Page--full Error">
         <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
         <div className="t--unselectable">{error}</div>
       </div>}

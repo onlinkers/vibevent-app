@@ -74,9 +74,9 @@ const Profile: React.FunctionComponent<Props> = (props) => {
   return (
     <div className="Page">
       <Sidebar />
-      {loading && <div className="Page Loader"><Spin/></div>}
+      {loading && <div className="Page--full Loader"><Spin/></div>}
       {!loading && (error ? (
-        <div className="Page Error">
+        <div className="Page--full Error">
           <div onClick={refreshPage}><ReloadOutlined /></div>
           <div className="t--unselectable">{error}</div>
           <Button className="button--clickable" onClick={logOut}>Log Out</Button>
