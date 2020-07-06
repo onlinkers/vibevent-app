@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import { MapContext, MapProvider } from "context/MapContext";
 import Map from "components/Map";
-import ExploreBar from "components/layouts/exporeBar";
 import CategoryFilter from "components/Map/filters/categoryFilter";
 
 import { EventDataState } from "types/store";
@@ -30,7 +29,6 @@ const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
       <MapContext.Consumer>
         {({ loaded, selectedCategories, setSelectedCategories }) => (
           <div className="Discover Page">
-            <ExploreBar />
             {!errors.eventCategories ? <CategoryFilter
               loaded={loaded && !eventsLoading}
               eventCategoryDefinitions={eventCategories}

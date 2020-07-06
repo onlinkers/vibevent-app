@@ -8,7 +8,6 @@ import {
   Button,
 } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import ExploreBar from "components/layouts/exporeBar";
 import EventForm from "components/forms/EventForm";
 
 import "../index.css";
@@ -111,7 +110,6 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
 
   return (
     <React.Fragment>
-      <ExploreBar />
       {!loaded && <div className="Page Loader">Loading...</div>}
       {loaded && (hasErrors ? (
         <div className="Page Error">

@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 import { Button, message } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import ExploreBar from "components/layouts/exporeBar";
 import ProfileDetails from "./ProfileDetails";
 
 import { User } from "types/props";
@@ -72,7 +71,6 @@ const Profile: React.FunctionComponent<Props> = (props) => {
 
   return loading ? null : (
     <React.Fragment>
-      <ExploreBar />
       {loading && <div className="Page Loader">Loading...</div>}
       {!loading && (error ? (
         <div className="Page Error">

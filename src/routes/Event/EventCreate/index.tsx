@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import {
   message,
 } from "antd";
-import ExploreBar from "components/layouts/exporeBar";
 import EventForm from "components/forms/EventForm";
 
 import "../index.css";
@@ -66,7 +65,6 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   return (
     <React.Fragment>
-      <ExploreBar />
       {loading && <div className="Page Loader">Loading...</div>}
       {!loading && (
         <div className="Page--center Page--explore EventForm">
