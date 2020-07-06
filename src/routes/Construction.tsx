@@ -1,13 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Empty } from "antd";
 
-const NotFound = () => {
+const Construction = () => {
   const history = useHistory();
   return (
     <div className="Page--center" style={{ flexDirection: "column" }}>
-      <h1>404: Not Found</h1>
-      <p>Sorry, the page you are looking for cannot be found</p>
+      <Empty description={false}>
+        Page is Under Construction!!
+      </Empty>
       <br />
       <Button type="primary" onClick={() => history.push("/")}>Home</Button>
       <Button type="default" onClick={() => history.goBack()}>Go Back</Button>
@@ -15,4 +16,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default Construction;
