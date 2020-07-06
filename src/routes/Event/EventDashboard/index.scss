@@ -1,49 +1,3 @@
-// .EventDashboard {
-//   overflow-y: scroll;
-//   background-color: #f6f6f7;
-// }
-
-// .EventDashboard>.dashboard-row {
-//   width: 100%;
-//   margin: 0 !important;
-// }
-
-// .EventDashboard>.dashboard-row {
-//   width: 100%;
-//   margin: 0 !important;
-// }
-
-// /* TODO: Extra responsiveness */
-// @media (max-width: 1200px) {
-//   .EventDashboard>.dashboard-row>.dashboard-col {
-//     min-width: 20%;
-//   }
-// }
-
-// @media (max-width: 1000px) {
-//   .EventDashboard>.dashboard-row>.dashboard-col {
-//     min-width: 25%;
-//   }
-// }
-
-// @media (max-width: 800px) {
-//   .EventDashboard>.dashboard-row {
-//     width: calc(100% - 2em);
-//     margin-left: 1em !important;
-//     margin-right: 1em !important;
-//   }
-
-//   .EventDashboard>.dashboard-row>.dashboard-col {
-//     min-width: 33%;
-//   }
-// }
-
-// @media (max-width: 500px) {
-//   .EventDashboard>.dashboard-row>.dashboard-col {
-//     min-width: 50%;
-//   }
-// }
-
 .EventDashboard {
   overflow-y: scroll;
   overflow-x: hidden;
@@ -53,7 +7,7 @@
   background-repeat: no-repeat;
 
   .events-scroll {
-    width: 40%;
+    width: 50%;
     position: absolute;
     left: 10%;
 
@@ -72,18 +26,6 @@
       margin-top: 10%;
     }
   }
-
-  .quick-access-tab {
-    position: absolute;
-    top: 10%;
-    right: 2.5%;
-    @include tablet-landscape {
-      width: 40%;
-    }
-    @include desktop {
-      width: 30%;
-    }
-  }
 }
 
 .events-frame {
@@ -93,13 +35,23 @@
   overflow: auto;
   white-space: nowrap;
   position: relative;
+
+  .events-draggable {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    white-space: nowrap;
+  }
 }
 
-.events-draggable {
+/* TEMP FEATURE */
+.events-frame--no-scroll {
   display: flex;
-  width: 100%;
   flex-direction: row;
-  white-space: nowrap;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+  flex-wrap: wrap;
 }
 
 .event-card {

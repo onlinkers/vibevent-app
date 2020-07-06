@@ -2,9 +2,15 @@
   font-family: $primary-label;
   display: flex;
   flex-wrap: wrap;
-  // position: absolute;
-  // top: 20%;
-  // right: 5%;
+  position: fixed;
+  top: 10%;
+  right: 2.5%;
+  @include tablet-landscape {
+    width: 40%;
+  }
+  @include desktop {
+    width: 30%;
+  }
 }
 
 .quick-access-container {

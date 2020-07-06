@@ -7,10 +7,18 @@
   white-space: normal;
   overflow: hidden;
   font-family: $primary-label;
-  min-width: 60%;
+
+  /* TEMP CHANGE: do not delete */
+  // min-width: 60%;
+  // min-height: 30vh;
+  // max-width: 60%;
+  // max-height: 30vh;
+  /* TEMP CHANGES FOLLOW */
+  min-width: 45%;
   min-height: 30vh;
-  max-width: 60%;
+  max-width: 45%;
   max-height: 30vh;
+  /* ------- */
 
   .event-image {
     height: 70%;

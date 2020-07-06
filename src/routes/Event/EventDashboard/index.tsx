@@ -85,7 +85,19 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="events-scroll">
               <div className="events-category">
                 <h1 className="events-category__title">Online Experiences</h1>
-                <div className="events-frame">
+                <div className="events-frame--no-scroll">
+                  {eventsArray.map((event) => {
+                    return (
+                      <EventCardLD
+                        event={event}
+                        key={event._id}
+                        className="event-card"
+                      ></EventCardLD>
+                    );
+                  })}
+                </div>
+                {/* FUTURE FEATURE: do not delete */}
+                {/* <div className="events-frame">
                   <motion.div
                     className="events-draggable"
                     drag="x"
@@ -114,12 +126,10 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                 <motion.div
                   className="gradient-fade gradient-fade-left"
                   style={{ opacity: opacityLeft }}
-                ></motion.div>
+                ></motion.div> */}
               </div>
             </div>
-            <div className="quick-access-tab">
-              <QuickAccessMenu events={events} />
-            </div>
+            <QuickAccessMenu events={events} />
           </div>
         ))}
     </React.Fragment>
