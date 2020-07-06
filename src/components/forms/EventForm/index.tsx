@@ -142,7 +142,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
           }
         ]}
       >
-        <div />
+        <Input />
       </Form.Item>
 
       <Form.Item

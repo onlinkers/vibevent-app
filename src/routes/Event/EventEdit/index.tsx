@@ -136,7 +136,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
                 categories: thisEvent.categories,
                 ticketLink: thisEvent.links?.ticket,
                 venue: thisEvent.venue.name,
-                venueCoordinates: thisEvent.venue.location,
+                venueCoordinates: thisEvent.venue.location, // TODO
                 coverPhoto: thisEvent.media?.coverPhoto?.baseSrc,
                 tags: thisEvent.tags?.hostTags
               }}
