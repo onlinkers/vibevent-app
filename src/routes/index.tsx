@@ -12,6 +12,7 @@ import Authentication from "./Authentication";
 import NotFound from "./NotFound";
 import Forbidden from "./Forbidden";
 import Construction from "./Construction";
+import Landing from "./Landing";
 
 import { message } from "antd";
 
@@ -114,15 +115,14 @@ const Routes: React.FunctionComponent<Props> = (props) => {
           altComponent={<Home />}
         />
         <AuthRoute path="/profile" component={<Profile />} />
-
         {/* AUTHENTICATION */}
         <AuthRoute path="/auth" altComponent={<Authentication />} redirect />
-
         {/* PUBLIC ROUTES */}
         <Route path="/event" component={Events} />
         <Route path="/discover" component={Construction} /> {/* TO CHANGE */}
         <Route path="/forbidden" component={Forbidden} />
         <Route path="/empty" render={() => <div></div>} />
+        <Route path="/landing" component={Landing} />
         <Route path="*" component={NotFound} />
       </Switch>
     </BrowserRouter>

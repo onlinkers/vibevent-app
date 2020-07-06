@@ -1,0 +1,48 @@
+.Landing {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.backdrop {
+  width: 150vh;
+  position: relative;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+
+.landing-content {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+}
+
+.landing-logo {
+  position: relative;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  // z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .vibevent-landing-logo {
+  }
+  .vibevent-landing-name {
+    margin-top: 2%;
+  }
+}
+
+.landing-description {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
