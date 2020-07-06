@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import React from "react";
+// import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 import {
   Form,
@@ -20,16 +20,16 @@ interface Props {
     initialValues?: any;
 }
 
-const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
+// const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const EventForm: React.FunctionComponent<Props> = (props) => {
 
   const { onSubmit, eventCategories, initialValues } = props;
-  const initialVenueCoordinates = (initialValues && initialValues.venueCoordinates) || null;
+  // const initialVenueCoordinates = (initialValues && initialValues.venueCoordinates) || null;
 
   const [form] = Form.useForm();
-  const [loaded, setLoaded] = useState(false);
-  const [venueCoordinates, setVenueCoordinates] = useState<number[] | null>(initialVenueCoordinates);
+  // const [loaded, setLoaded] = useState(false);
+  // const [venueCoordinates, setVenueCoordinates] = useState<number[] | null>(initialVenueCoordinates);
 
   const submitFormatter = (formValues) => {
     const { venue, startDate, endDate, ...rest } = formValues;
@@ -38,7 +38,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       // venue needs its own object (including the coordinates)
       venue: {
         name: venue,
-        location: venueCoordinates
+        // location: venueCoordinates
       },
       // Dates need to be in ISO form
       startDate: startDate.toISOString(),
@@ -48,28 +48,28 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       
   };
 
-  useEffect(() => {
-    if(!loaded) {
-      // Initialize the geocoder in the form
-      const geocoder = new MapboxGeocoder({
-        accessToken: MAPBOX_TOKEN,
-        types: "country,region,place,postcode,locality,neighborhood"
-      });
+  // useEffect(() => {
+  //   if(!loaded) {
+  //     // Initialize the geocoder in the form
+  //     const geocoder = new MapboxGeocoder({
+  //       accessToken: MAPBOX_TOKEN,
+  //       types: "country,region,place,postcode,locality,neighborhood"
+  //     });
 
-      const element = document.querySelectorAll("#venue");
-      if(element.length) {
-        geocoder.addTo("#venue");
-        setLoaded(true);
-      }
+  //     const element = document.querySelectorAll("#venue");
+  //     if(element.length) {
+  //       geocoder.addTo("#venue");
+  //       setLoaded(true);
+  //     }
 
-      // Update state and the form values when geocoder is used
-      geocoder.on("result", ({ result }) => {
-        const { place_name: placeName, geometry } = result;
-        setVenueCoordinates(geometry);
-        form.setFieldsValue({ venue: placeName });
-      });
-    }
-  }, []); // eslint-disable-line
+  //     // Update state and the form values when geocoder is used
+  //     geocoder.on("result", ({ result }) => {
+  //       const { place_name: placeName, geometry } = result;
+  //       setVenueCoordinates(geometry);
+  //       form.setFieldsValue({ venue: placeName });
+  //     });
+  //   }
+  // }, []); // eslint-disable-line
 
   return (
     <Form
