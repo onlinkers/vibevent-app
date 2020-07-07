@@ -4,7 +4,7 @@ import { User } from "./user";
 
 export interface Event {
   _id: string;
-  hosts: string[] | User[];
+  hosts: User[] | string[];
   name: string;
   startDate: Date;
   endDate: Date;

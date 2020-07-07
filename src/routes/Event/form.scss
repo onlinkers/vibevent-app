@@ -1,8 +1,12 @@
 .EventForm {
     display: flex;
     flex-direction: column;
-}
-.EventForm > .ant-form {
-    width: 80%;
-    margin-left: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+
+    .ant-form {
+        height: 100%;
+        width: 80%;
+        overflow-y: scroll;
+    }
 }

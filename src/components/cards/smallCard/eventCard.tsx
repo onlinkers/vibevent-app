@@ -16,7 +16,7 @@ interface Props {
   // [key: string]: any;
 }
 
-const SmallCard: React.FunctionComponent<Props> = (props) => {
+const EventCard: React.FunctionComponent<Props> = (props) => {
   const { event } = props;
   const month = moment(event?.startDate).format("MMM DD");
   return (
@@ -44,4 +44,4 @@ const SmallCard: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-export default SmallCard;
+export default EventCard;

@@ -46,7 +46,7 @@ const SignupForm: React.FunctionComponent<Props> = () => {
   };
 
   return (
-    <div className="Page--center">
+    <div className="Page--full--center">
       <Form
         title="Sign Up"
         description="Enter your login details below to get started!"

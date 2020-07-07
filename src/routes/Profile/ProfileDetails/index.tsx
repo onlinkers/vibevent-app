@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 
 import { Button, Typography, Collapse, Empty } from "antd";
-import EventCard from "components/cards/largeCard/eventCard";
+import TinyEventCard from "components/cards/tinyCard/eventCard";
 
 import { User } from "types/props";
-
-import "./index.css";
 import DefaultAvatar from "assets/media/default-avatar.png";
 
 interface Props {
@@ -33,6 +31,7 @@ const ProfileDetails = (props: Props) => {
   const [email, setEmail] = useState(user.email);
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
+  const [description, setDescription] = useState(user.description);
 
   const { _id: userId } = user;
 
@@ -48,6 +47,7 @@ const ProfileDetails = (props: Props) => {
         email,
         firstName,
         lastName,
+        description,
         profilePhoto,
         eventsInvolved: eventsInvolvedIds,
         eventsCreated: eventsCreatedIds,
@@ -61,6 +61,7 @@ const ProfileDetails = (props: Props) => {
     setEmail(user.email);
     setFirstName(user.firstName);
     setLastName(user.lastName);
+    setDescription(user.description);
     setEditable(false);
   };
 
@@ -127,6 +128,17 @@ const ProfileDetails = (props: Props) => {
             {email}
           </Typography.Text>
         </h3>
+        <h3>
+          <span className="label">Description:</span>
+          <Typography.Text
+            className={editable ? "editable--active" : "editable"}
+            editable={
+              editable ? { editing: true, onChange: setDescription } : false
+            }
+          >
+            {description}
+          </Typography.Text>
+        </h3>
         {editable && (
           <div className="edit-buttons">
             <Button
@@ -149,16 +161,16 @@ const ProfileDetails = (props: Props) => {
         )}
         <br />
         <Collapse defaultActiveKey={[]} className="events-panel">
-          <Collapse.Panel header="Events You've Created:" key="created">
+          <Collapse.Panel
+            header="Events You've Created:"
+            key="created"
+            forceRender
+          >
             {eventsCreated &&
               eventsCreated.map((event) => (
-                <EventCard
+                <TinyEventCard
                   key={event._id}
-                  variant="brief"
                   event={event}
-                  width="10em"
-                  size="small"
-                  bordered
                 />
               ))}
             {(!eventsCreated || !eventsCreated.length) && (
@@ -173,17 +185,14 @@ const ProfileDetails = (props: Props) => {
         <Collapse defaultActiveKey={[]} className="events-panel">
           <Collapse.Panel
             header="Events You've Been Involved With:"
-            key="created"
+            key="involved"
+            forceRender
           >
             {eventsInvolved &&
               eventsInvolved.map((event) => (
-                <EventCard
+                <TinyEventCard
                   key={event._id}
-                  variant="brief"
                   event={event}
-                  width="10em"
-                  size="small"
-                  bordered
                 />
               ))}
             {(!eventsInvolved || !eventsInvolved.length) && (
