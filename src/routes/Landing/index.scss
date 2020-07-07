@@ -1,0 +1,203 @@
+.Landing {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.backdrop {
+  width: 150vh;
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+
+.landing-content {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+}
+
+.landing-logo-section {
+  position: relative;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .landing-logo {
+    position: absolute;
+    overflow: hidden;
+    z-index: 0;
+    margin: 0;
+
+    .vibevent-landing-name {
+      margin-top: 2%;
+    }
+  }
+}
+
+.landing-description-section {
+  border-top: 2px solid $dark;
+  background: $light;
+  position: relative;
+  height: 200vh;
+  width: 95%;
+  left: 2.5%;
+  font-family: $primary-label;
+  z-index: 1;
+
+  h1 {
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    position: sticky;
+    top: 40%;
+    font-family: $primary-serif;
+    font-size: 10em;
+    color: $gray4;
+    opacity: 50%;
+  }
+
+  .our-story {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    border: 1px solid $dark;
+    padding: 5%;
+    background: white;
+
+    .our-story__img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    p {
+      font-family: $secondary-label;
+      font-size: 1.5em;
+      font-weight: 600;
+      color: $dark;
+      line-height: 125%;
+      margin: 0;
+    }
+  }
+
+  .offer-box {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    padding: 0 2%;
+    // border-bottom: 1px solid $dark;
+
+    .offer-box__img {
+      width: 100%;
+      height: 30vh;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    h3 {
+      font-family: $primary-serif;
+      font-size: 2.5em;
+      font-weight: 800;
+      margin: 0;
+      color: $gray6;
+    }
+    p {
+      font-size: 1.125em;
+      color: $dark;
+      margin-bottom: 10%;
+    }
+  }
+
+  .event-discovery {
+    left: 35%;
+  }
+
+  .event-consulting {
+    right: 0;
+  }
+}
+
+.landing-footer {
+  border-top: 2px solid $dark;
+  // background: $light;
+  position: relative;
+  height: 100vh;
+  width: 95%;
+  left: 2.5%;
+  font-family: $primary-label;
+  z-index: 1;
+
+  .coming-soon {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 40%;
+    width: 100%;
+    font-family: $primary-serif;
+    h1 {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      font-size: 8em;
+      margin: 0;
+      line-height: 100%;
+    }
+    h3 {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      font-size: 2em;
+      margin: 0;
+      font-weight: 600;
+      font-style: italic;
+    }
+    h5 {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      font-size: 1em;
+      font-weight: 600;
+      color: $gray4;
+    }
+  }
+  .dashboard-button {
+    margin-top: 5%;
+    background: black;
+    border: none;
+    width: 15%;
+    height: 6vh;
+    border-radius: 50px;
+    opacity: 0.7;
+
+    .dashboard-button__link {
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include tablet-landscape {
+        font-size: 1.125em;
+      }
+      @include desktop {
+        font-size: 1.5em;
+      }
+    }
+  }
+}

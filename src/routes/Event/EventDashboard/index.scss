@@ -84,6 +84,7 @@
 
 .page-label {
   @include page-label;
+  font-weight: 800;
 }
 
 ::-webkit-scrollbar {
