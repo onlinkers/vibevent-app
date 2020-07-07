@@ -43,13 +43,6 @@ const Landing = () => {
         <div className="landing-description-section">
           <h1>OUR STORY</h1>
           <motion.div className="our-story">
-            {/* <motion.img
-              src={
-                "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-              }
-              alt=""
-              className="our-story__img"
-            /> */}
             <motion.p>
               At Vibevent, we believe in creating unique moments that leave a
               lasting impression. What differentiates us from our competitors is
