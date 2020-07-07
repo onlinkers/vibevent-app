@@ -8,7 +8,6 @@ import {
   Button,
 } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import ExploreBar from "components/layouts/exporeBar";
 import EventForm from "components/forms/EventForm";
 
 import "../form.scss";
@@ -111,10 +110,9 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
 
   return (
     <React.Fragment>
-      <ExploreBar />
-      {!loaded && <div className="Page Loader">Loading...</div>}
+      {!loaded && <div className="Page--full Loader">Loading...</div>}
       {loaded && (hasErrors ? (
-        <div className="Page Error">
+        <div className="Page--fulll Error">
           <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
           <div className="t--unselectable">{errors[0]}</div>
           <div className="t--unselectable">{errors[1]}</div>
@@ -143,7 +141,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
             />
           </div>
         ) : (
-          <div className="Page Error">
+          <div className="Page--full Error">
             <div className="t--unselectable">Data on the event you are trying to edit does not exist!</div>
             <Button type="primary" className="button--clickable" onClick={() => history.push("/event/create")}>Create a new event.</Button>
             <Button className="button--clickable" onClick={() => history.goBack()}>Go back.</Button>

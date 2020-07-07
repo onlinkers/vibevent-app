@@ -67,7 +67,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
   return (
     <div className="Page--center EventForm">
       <Sidebar />
-      {loading && <div className="Page Loader">Loading...</div>}
+      {loading && <div className="Page--full Loader">Loading...</div>}
       {!loading && (
         <React.Fragment>
           <h1>Create Your Event!</h1>

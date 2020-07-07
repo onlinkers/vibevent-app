@@ -56,7 +56,7 @@ const ConfirmSignUp: React.FunctionComponent = () => {
   };
 
   return (
-    <div className="Page--center">
+    <div className="Page--full--center">
       <Form
         ref={formRef}
         name="basic"

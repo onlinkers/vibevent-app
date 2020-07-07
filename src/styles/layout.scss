@@ -3,10 +3,30 @@
   height: 100%;
   width: 100%;
   position: relative;
-  // background: #f6f6f7;
+  background-color: $gray1;
+
+  left: 10%;
+  width: 90%;
+  @include tablet-landscape {
+    left: 78px;
+    width: calc(100% - 78px);
+  }
 }
 
-/* Should extend "Page" */
+.Page--full {
+  @extend .Page;
+  left: unset;
+  width: 100%;
+}
+
+.Page--full--center {
+  @extend .Page--full;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
 .Page--center {
   @extend .Page;
   align-items: center;

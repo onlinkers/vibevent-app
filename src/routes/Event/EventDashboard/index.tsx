@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 // import { motion, useMotionValue, useTransform } from "framer-motion";
 
-import QuickAccessMenu from "components/quickAccess";
-import EventCardLD from "components/cards/largeCard/eventCardLargeDesktop";
+import QuickAccessMenu from "components/searchTools";
+import EventCard from "components/cards/largeCard/eventCard";
 import Sidebar from "components/layouts/sidebar/sidebar";
 
 import "./index.scss";
@@ -36,6 +36,10 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     history.goBack();
   };
 
+  const redirectToEvent = (eventId) => {
+    history.push(`/event/${eventId}`);
+  };
+
   useEffect(() => {
     fetchAllEvents();
   }, []); // eslint-disable-line
@@ -60,7 +64,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     <div className="Page EventDashboard">
       <Sidebar />
       {loading && (
-        <div className="Page Error">
+        <div className="Page--full Loader">
           <Spin />
         </div>
       )}
@@ -81,11 +85,12 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                 <div className="events-frame--no-scroll">
                   {eventsArray.map((event) => {
                     return (
-                      <EventCardLD
+                      <EventCard
                         event={event}
                         key={event._id}
                         className="event-card"
-                      ></EventCardLD>
+                        onClick={() => { redirectToEvent(event._id); }}
+                      ></EventCard>
                     );
                   })}
                 </div>
@@ -103,11 +108,11 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                   >
                     {eventsArray.map((event) => {
                       return (
-                        <EventCardLD
+                        <EventCard
                           event={event}
                           key={event._id}
                           className="event-card"
-                        ></EventCardLD>
+                        ></EventCard>
                       );
                     })}
                   </motion.div>

@@ -104,7 +104,7 @@
   font-family: $primary-label;
   margin: 0;
   font-weight: bold;
-  color: #ff1d58;
+  color: $red1;
   @include tablet-landscape {
     font-size: 0.625em;
   }

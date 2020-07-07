@@ -1,153 +1,71 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-
-import { Card, Skeleton, Popconfirm } from "antd";
-import {
-  ExpandOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  HeartOutlined,
-  HeartFilled,
-  PushpinFilled,
-  ClockCircleFilled,
-  StarFilled,
-  InfoCircleFilled,
-} from "@ant-design/icons";
+import React, { useState } from "react";
+import { Event } from "types/props";
+import { motion } from "framer-motion";
+import moment from "moment";
 
 import "./index.scss";
-
-import { Event } from "types/props";
-import DefaultImage from "assets/media/default-image.png";
-import eventService from "services/eventService";
+import { User } from "types/props";
 
 interface Props {
-  event?: Event;
+  event: Event;
   favorited?: boolean;
-  variant?: "detailed" | "brief";
   loading?: boolean;
-  width?: string;
-  size?: string;
-  refetch?: Function;
+  onClick?: Function;
   [key: string]: any;
 }
 
 const EventCard: React.FunctionComponent<Props> = (props) => {
-  const {
-    event,
-    favorited = false,
-    variant,
-    loading = false,
-    width = "auto",
-    size,
-    refetch,
-    ...rest
-  } = props;
+  const { event, onClick = () => {} } = props;
+  const [isSaved, setIsSaved] = useState(false);
+  const month = moment(event.startDate).format("MMM").toUpperCase();
+  const date = moment(event.startDate).format("DD");
 
-  const history = useHistory();
+  const hosts = event.hosts && event.hosts.length ? (event.hosts as User[]).map((host) => {
+    return `${host.firstName} ${host.lastName || ""}`;
+  }) : [];
 
-  const redirectToEvent = (eventId: string) => {
-    history.push(`/event/${eventId}`);
-  };
-
-  const editEvent = (eventId) => {
-    history.push(`/event/${eventId}/edit`);
-  };
-
-  const deleteEvent = async (eventId) => {
-    await eventService.deleteEvent({ id: eventId });
-    refetch && (await refetch());
-  };
-
-  const imageSource = event?.media?.coverPhoto?.baseSrc || DefaultImage;
-  let className = "event-card";
-  if (size) className = `event-card-${size}`;
-
-  if (event && variant === "detailed") {
-    return (
-      <Card
-        hoverable
-        className={className}
-        style={{ width, minWidth: width }}
-        cover={imageSource && <img src={imageSource} alt="event-cover" />}
-        {...rest}
-        title={event.name}
-        extra={favorited ? <HeartFilled /> : <HeartOutlined />}
-        actions={[
-          <ExpandOutlined
-            key="open"
-            onClick={() => redirectToEvent(event._id)}
-          />,
-          <EditOutlined key="edit" onClick={() => editEvent(event._id)} />,
-          <Popconfirm
-            key="delete"
-            title="Are you sure delete this event?"
-            onConfirm={() => deleteEvent(event._id)}
-            okText="Yes"
-            cancelText="No"
-          >
-            <DeleteOutlined key="setting" />
-          </Popconfirm>,
-        ]}
-      >
-        <Skeleton loading={loading} active>
-          <Card.Meta
-            description={
-              <React.Fragment>
-                <div>
-                  <ClockCircleFilled />
-                  &nbsp;{event.startDate}
-                </div>
-                <div>
-                  <PushpinFilled />
-                  &nbsp;{event.venue.name}
-                </div>
-                <div>
-                  <StarFilled />
-                  &nbsp;{event.rating?.count && (event.rating.sum/event.rating.count).toFixed(1)}
-                </div>
-                <br />
-                <div>
-                  <InfoCircleFilled />
-                  &nbsp;{event.description}
-                </div>
-              </React.Fragment>
+  return (
+    <React.Fragment>
+      <motion.div className="event-card-ld">
+        <div className="event-image">
+          <img
+            src={
+              event.media?.coverPhoto?.baseSrc
+                ? event.media?.coverPhoto?.baseSrc
+                : "assets/media/default-image.png"
             }
+            alt=""
+            className="event-image__img"
           />
-        </Skeleton>
-      </Card>
-    );
-  } else if (event && variant === "brief") {
-    return (
-      <Card
-        hoverable
-        className={className}
-        style={{ width, minWidth: width }}
-        cover={imageSource && <img src={imageSource} alt="event-cover" />}
-        {...rest}
-      >
-        <Skeleton loading={loading} active>
-          <Card.Meta
-            title={event?.name}
-            description={event?.description}
-          ></Card.Meta>
-        </Skeleton>
-      </Card>
-    );
-  } else {
-    // Allow adding more options here
-    return (
-      <Card
-        className={className}
-        style={{ width, minWidth: width }}
-        cover={imageSource && <img src={imageSource} alt="event-cover" />}
-        {...rest}
-      >
-        <Skeleton loading={true} title paragraph={false} active>
-          <Card.Meta title="template"></Card.Meta>
-        </Skeleton>
-      </Card>
-    );
-  }
+        </div>
+        <div className="event-description">
+          <h3 className="event-date">
+            <span className="month">{month}</span>
+            <br />
+            <span className="date">{date}</span>
+          </h3>
+          <div className="event-title-hosts">
+            <p className="event-title" onClick={() => onClick()}>
+              {event?.name.slice(0, 37) +
+                (event?.name.length > 37 ? "..." : "")}
+            </p>
+            <p className="event-host">
+              {hosts.join(", ").slice(0, 20) +
+                (hosts.join(", ").length > 20 ? "..." : "")}
+            </p>
+          </div>
+          <button
+            className={"save-btn " + (isSaved ? "save-btn--active" : "")}
+            onClick={(e) => {
+              setIsSaved(!isSaved);
+            }}
+          >
+            {isSaved ? "Saved" : "Save"}
+          </button>
+        </div>
+      </motion.div>
+    </React.Fragment>
+  );
 };
 
 export default EventCard;
