@@ -7,17 +7,11 @@ import { Event } from "types/props";
 
 interface Props {
   event: Event;
-  // favorited?: boolean;
-  // variant?: "detailed" | "brief";
-  // loading?: boolean;
-  // width?: string;
-  // size?: string;
-  // refetch?: Function;
-  // [key: string]: any;
+  onClick?: Function;
 }
 
 const EventCard: React.FunctionComponent<Props> = (props) => {
-  const { event } = props;
+  const { event, onClick = () => {} } = props;
   const month = moment(event?.startDate).format("MMM DD");
   return (
     <>
@@ -26,6 +20,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 1 }}
         transition={{ duration: 0.001 }}
+        onClick={() => onClick()}
       >
         <img
           className="small-card-coverphoto"
