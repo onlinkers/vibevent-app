@@ -7,7 +7,7 @@ import QuickAccessMenu from "components/searchTools";
 import Sidebar from "components/layouts/sidebar/sidebar";
 import NotFound from "routes/NotFound";
 
-import { Empty, Card, Avatar, Tag, Spin } from "antd";
+import { Empty, Card, Avatar, Tag, Spin, Button } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import "./index.scss";
 import DefaultImage from "assets/media/default-image.png";
@@ -56,7 +56,7 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
         <img src={photo.baseSrc} alt={`host-${index}`} loading="lazy"/>
       </div>;
     });
-    photos.push(hostPhotos.length === 2 ? <div className="event__images-2-row">{hostPhotos}</div> : hostPhotos);
+    photos.push(hostPhotos.length === 2 ? <div key="host-col" className="event__images-2-row">{hostPhotos}</div> : hostPhotos);
     
     // get 2 user photos
     const userPhotos = ((event.media.userPhotos?.length && event.media.userPhotos.splice(0,2)) || []).map((photo, index) => {
@@ -64,7 +64,7 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
         <img src={photo.baseSrc} alt={`user-${index}`} loading="lazy"/>
       </div>;
     });
-    photos.push(userPhotos.length === 2 ? <div className="event__images-2-row">{userPhotos}</div> : userPhotos);
+    photos.push(userPhotos.length === 2 ? <div key="user-col" className="event__images-2-row">{userPhotos}</div> : userPhotos);
 
     return photos;
     
@@ -145,8 +145,12 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
             </div>
 
 
-            <div className="event__categories">
-              {generateCategories()}
+            <div className="event__actions">
+              <div className="event__categories">
+                {generateCategories()}
+              </div>
+              {event.links?.register &&
+                <Button className="event__actions-register" href={event.links.register}>Register</Button>}
             </div>
 
             <h1>{event.name}</h1>

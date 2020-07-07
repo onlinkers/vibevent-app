@@ -18,6 +18,7 @@ export interface Event {
   categories: string[];
   links?: {
     ticket?: string;
+    register?: string;
   };
   media?: {
     coverPhoto?: Image;
