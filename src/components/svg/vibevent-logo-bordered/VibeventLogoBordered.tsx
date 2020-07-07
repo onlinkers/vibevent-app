@@ -4,7 +4,8 @@ import "./index.scss";
 
 const VibeventLogoBordered = () => {
   const blackBox = useAnimation();
-  const blackStroke = useAnimation();
+  const blackStroke1 = useAnimation();
+  const blackStroke2 = useAnimation();
   return (
     <motion.svg
       width="220"
@@ -21,7 +22,22 @@ const VibeventLogoBordered = () => {
         fillOpacity="0"
         stroke="black"
         strokeWidth="0.5"
-        animate={blackStroke}
+        animate={blackStroke1}
+        initial={{ rotate: 0 }}
+        transition={{
+          loop: Infinity,
+          ease: "linear",
+          duration: 2,
+        }}
+      />
+      <motion.path
+        d="M38.3205 109.033L110 37.3535L181.679 109.033L110 180.712L38.3205 109.033Z"
+        fill="white"
+        fillOpacity="0"
+        stroke="black"
+        strokeWidth="0.5"
+        animate={blackStroke2}
+        initial={{ rotate: 0, opacity: 0 }}
         transition={{
           loop: Infinity,
           ease: "linear",
@@ -32,15 +48,27 @@ const VibeventLogoBordered = () => {
         d="M110 56L163.033 109.033L110 162.066L56.967 109.033L110 56Z"
         fill="black"
         animate={blackBox}
+        initial={{ fillOpacity: 0.8 }}
         onHoverStart={() => {
           blackBox.start({
             scale: 1.35,
+            fillOpacity: 1,
+          });
+          blackStroke2.start({
+            rotate: 360,
+            opacity: 1,
           });
         }}
         onHoverEnd={() => {
           blackBox.start({
             scale: 1.0,
+            fillOpacity: 0.8,
           });
+          blackStroke2.set({
+            rotate: 0,
+            opacity: 0,
+          });
+          blackStroke2.stop();
         }}
         transition={{ ease: "backInOut" }}
       />

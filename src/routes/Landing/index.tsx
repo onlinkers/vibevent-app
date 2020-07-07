@@ -11,15 +11,27 @@ const Landing = () => {
     <div className="Landing">
       <img src={Backdrop} className="backdrop" alt="" />
       <div className="landing-content">
-        <div className="landing-logo">
-          <VibeventLogoBordered />
-          <img
-            src={VibeventNameLogo}
-            className="vibevent-landing-name"
-            alt=""
-          />
+        <div className="landing-logo-section">
+          <div className="landing-logo">
+            <VibeventLogoBordered />
+            <img
+              src={VibeventNameLogo}
+              className="vibevent-landing-name"
+              alt=""
+            />
+          </div>
         </div>
-        <div className="landing-description"></div>
+        <div className="landing-description-section">
+          <h1>OUR STORY</h1>
+          <p className="our-story">
+            At Vibevent, we believe in creating unique moments that leave a
+            lasting impression. What differentiates us from our competitors is
+            that we really listen to our clients, creating distinctive events
+            tailored to their specific needs and desires. Our innovative mix of
+            solutions ensures that every detail is covered. Get in touch to
+            learn how we can make your dream event a reality.
+          </p>
+        </div>
       </div>
     </div>
   );

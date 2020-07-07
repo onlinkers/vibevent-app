@@ -8,7 +8,7 @@
 
 .backdrop {
   width: 150vh;
-  position: relative;
+  position: fixed;
   top: 0%;
   left: 50%;
   transform: translateX(-50%);
@@ -23,26 +23,53 @@
   width: 100vw;
 }
 
-.landing-logo {
+.landing-logo-section {
   position: relative;
   top: 0;
   height: 100vh;
   width: 100%;
-  // z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  .vibevent-landing-logo {
-  }
-  .vibevent-landing-name {
-    margin-top: 2%;
+  .landing-logo {
+    position: absolute;
+    overflow: hidden;
+    z-index: 0;
+    margin: 0;
+
+    .vibevent-landing-name {
+      margin-top: 2%;
+    }
   }
 }
 
-.landing-description {
+.landing-description-section {
+  border-top: 2px solid $dark;
+  background: $light;
   position: relative;
-  height: 100vh;
-  width: 100%;
+  height: 200vh;
+  width: 95%;
+  left: 2.5%;
+  font-family: $primary-label;
+  z-index: 1;
+
+  h1 {
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    position: sticky;
+    top: 40%;
+    font-family: $primary-serif;
+    font-size: 10em;
+    color: $gray5;
+    opacity: 50%;
+  }
+
+  .our-story {
+    font-family: $secondary-label;
+    font-size: 2em;
+    font-weight: 600;
+  }
 }
