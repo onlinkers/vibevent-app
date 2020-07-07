@@ -145,6 +145,9 @@
 
   .coming-soon {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     top: 40%;
     width: 100%;
     font-family: $primary-serif;
@@ -172,6 +175,29 @@
       font-size: 1em;
       font-weight: 600;
       color: $gray4;
+    }
+  }
+  .dashboard-button {
+    margin-top: 5%;
+    background: black;
+    border: none;
+    width: 15%;
+    height: 6vh;
+    border-radius: 50px;
+    opacity: 0.7;
+
+    .dashboard-button__link {
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include tablet-landscape {
+        font-size: 1.125em;
+      }
+      @include desktop {
+        font-size: 1.5em;
+      }
     }
   }
 }

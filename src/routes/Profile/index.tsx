@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { Button, message } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import ExploreBar from "components/layouts/exporeBar";
+import Sidebar from "components/layouts/sidebar/sidebar";
 import ProfileDetails from "./ProfileDetails";
 
 import { User } from "types/props";
@@ -71,8 +71,8 @@ const Profile: React.FunctionComponent<Props> = (props) => {
   }, []); // eslint-disable-line
 
   return loading ? null : (
-    <React.Fragment>
-      <ExploreBar />
+    <div className="Page">
+      <Sidebar />
       {loading && <div className="Page Loader">Loading...</div>}
       {!loading && (error ? (
         <div className="Page Error">
@@ -81,16 +81,16 @@ const Profile: React.FunctionComponent<Props> = (props) => {
           <Button className="button--clickable" onClick={logOut}>Log Out</Button>
         </div>
       ) : (
-        <div className="Page Page--explore">
+        <React.Fragment>
           <ProfileDetails
             user={user}
             onSave={handleSave}
             redirectEvents={redirectEvents}
             logOut={logOut}
           />
-        </div>
+        </React.Fragment>
       ))}
-    </React.Fragment>
+    </div>
   );
 };
 

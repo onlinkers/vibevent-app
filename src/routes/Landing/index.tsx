@@ -5,25 +5,26 @@ import "./index.scss";
 import Backdrop from "assets/media/landing-page-backdrop.jpg";
 import VibeventNameLogo from "assets/icons/vibevent-name-logo.svg";
 import VibeventLogoBordered from "components/svg/vibevent-logo-bordered/VibeventLogoBordered";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
-  const [isOpen, toggleOpen] = useCycle(false, true);
-  const textVariants = {
-    open: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        y: { stiffness: 1000, velocity: -100 },
-      },
-    },
-    closed: {
-      y: -50,
-      opacity: 0,
-      transition: {
-        y: { stiffness: 1000 },
-      },
-    },
-  };
+  // const [isOpen, toggleOpen] = useCycle(false, true);
+  // const textVariants = {
+  //   open: {
+  //     y: 0,
+  //     opacity: 1,
+  //     transition: {
+  //       y: { stiffness: 1000, velocity: -100 },
+  //     },
+  //   },
+  //   closed: {
+  //     y: -50,
+  //     opacity: 0,
+  //     transition: {
+  //       y: { stiffness: 1000 },
+  //     },
+  //   },
+  // };
 
   return (
     <div className="Landing">
@@ -114,6 +115,11 @@ const Landing = () => {
             <h1>COMING SOON</h1>
             <h3>with new features!</h3>
             {/* <h5>We're still in the testing phase!</h5> */}
+            <button className="dashboard-button">
+              <Link to="/event/dashboard" className="dashboard-button__link">
+                View Dashboard
+              </Link>
+            </button>
           </div>
         </div>
       </div>

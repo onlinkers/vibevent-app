@@ -10,9 +10,11 @@ import "./index.scss";
 
 interface Props {}
 
+const wide = window.innerWidth >= 600;
+
 const sidebarVariants = {
-  open: (height = 1000) => ({
-    width: "18%",
+  open: () => ({
+    width: wide ? "20%" : "100%",
     transition: {
       type: "spring",
       stiffness: 300,
@@ -21,7 +23,7 @@ const sidebarVariants = {
     },
   }),
   closed: () => ({
-    width: "78px",
+    width: "0",
     transition: {
       delay: 0,
       type: "spring",
