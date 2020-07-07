@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Auth } from "aws-amplify";
 
 // Import all the parent routes
-import Home from "./Home";
+// import Home from "./Home";
 import Events from "./Event";
 // import Discover from "./Discover";
 import Profile from "./Profile";
@@ -112,7 +112,7 @@ const Routes: React.FunctionComponent<Props> = (props) => {
           exact
           path="/"
           component={<Redirect to="/event/dashboard" />}
-          altComponent={<Home />}
+          altComponent={<Landing />}
         />
         <AuthRoute path="/profile" component={<Profile />} />
         {/* AUTHENTICATION */}
@@ -122,7 +122,7 @@ const Routes: React.FunctionComponent<Props> = (props) => {
         <Route path="/discover" component={Construction} /> {/* TO CHANGE */}
         <Route path="/forbidden" component={Forbidden} />
         <Route path="/empty" render={() => <div></div>} />
-        <Route path="/landing" component={Landing} />
+        {/* <Route path="/landing" component={Landing} /> */}
         <Route path="*" component={NotFound} />
       </Switch>
     </BrowserRouter>
