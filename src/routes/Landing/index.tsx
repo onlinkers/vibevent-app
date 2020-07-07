@@ -115,11 +115,15 @@ const Landing = () => {
             <h1>COMING SOON</h1>
             <h3>with new features!</h3>
             {/* <h5>We're still in the testing phase!</h5> */}
-            <button className="dashboard-button">
+            <motion.button
+              className="dashboard-button"
+              whileHover={{ scale: 1.01, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
               <Link to="/event/dashboard" className="dashboard-button__link">
                 View Dashboard
               </Link>
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
