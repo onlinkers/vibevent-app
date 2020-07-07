@@ -61,7 +61,7 @@ const LoginForm: React.FunctionComponent<Props> = (props) => {
   };
 
   return (
-    <div className="Page--center">
+    <div className="Page--full--center">
       <Form
         title="Log In"
         description="Log into your account!"

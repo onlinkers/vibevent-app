@@ -36,6 +36,10 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     history.goBack();
   };
 
+  const redirectToEvent = (eventId) => {
+    history.push(`/event/${eventId}`);
+  };
+
   useEffect(() => {
     fetchAllEvents();
   }, []); // eslint-disable-line
@@ -60,7 +64,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     <div className="Page EventDashboard">
       <Sidebar />
       {loading && (
-        <div className="Page Error">
+        <div className="Page--full Loader">
           <Spin />
         </div>
       )}
@@ -85,6 +89,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                         event={event}
                         key={event._id}
                         className="event-card"
+                        onClick={() => { redirectToEvent(event._id); }}
                       ></EventCard>
                     );
                   })}

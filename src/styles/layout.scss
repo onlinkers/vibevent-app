@@ -3,7 +3,7 @@
   height: 100%;
   width: 100%;
   position: relative;
-  background: #f6f6f7;
+  background-color: $gray1;
 
   left: 10%;
   width: 90%;
@@ -16,6 +16,15 @@
 .Page--full {
   @extend .Page;
   left: unset;
+  width: 100%;
+}
+
+.Page--full--center {
+  @extend .Page--full;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 .Page--center {

@@ -9,22 +9,19 @@ import { User } from "types/props";
 interface Props {
   event: Event;
   favorited?: boolean;
-  variant?: "detailed" | "brief";
   loading?: boolean;
-  width?: string;
-  size?: string;
-  refetch?: Function;
+  onClick?: Function;
   [key: string]: any;
 }
 
 const EventCard: React.FunctionComponent<Props> = (props) => {
-  const { event } = props;
+  const { event, onClick = () => {} } = props;
   const [isSaved, setIsSaved] = useState(false);
   const month = moment(event.startDate).format("MMM").toUpperCase();
   const date = moment(event.startDate).format("DD");
 
   const hosts = event.hosts && event.hosts.length ? (event.hosts as User[]).map((host) => {
-    return `${host.firstName} ${host.lastName}`;
+    return `${host.firstName} ${host.lastName || ""}`;
   }) : [];
 
   return (
@@ -48,12 +45,13 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
             <span className="date">{date}</span>
           </h3>
           <div className="event-title-hosts">
-            <p className="event-title">
+            <p className="event-title" onClick={() => onClick()}>
               {event?.name.slice(0, 37) +
                 (event?.name.length > 37 ? "..." : "")}
             </p>
             <p className="event-host">
-              {hosts.join(", ")}
+              {hosts.join(", ").slice(0, 20) +
+                (hosts.join(", ").length > 20 ? "..." : "")}
             </p>
           </div>
           <button

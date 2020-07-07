@@ -7,7 +7,7 @@ import Sidebar from "components/layouts/sidebar/sidebar";
 const Construction = () => {
   const history = useHistory();
   return (
-    <div className="Page--center" style={{ flexDirection: "column" }}>
+    <div className="Page--full--center" style={{ flexDirection: "column" }}>
       <Sidebar />
       <Empty description={false}>
         Page is Under Construction!!

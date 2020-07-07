@@ -1,10 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
 
 // import UtilityCard from "components/searchTools/utilityCard/utilityCard";
 import SmallEventCard from "components/cards/smallCard/eventCard";
+import VibeventNameLogo from "components/svg/vibevent-name-logo/VibeventNameLogo";
+
 import { EventsPayload } from "types/store";
 import "./index.scss";
-import VibeventNameLogo from "components/svg/vibevent-name-logo/VibeventNameLogo";
 
 interface Props {
   events: EventsPayload;
@@ -13,11 +15,10 @@ interface Props {
     events?: string;
     eventCategories?: string;
   };
-  fetchAllEvents?: Function;
 }
 
 const SearchTools: React.FunctionComponent<Props> = (props) => {
-  const { events } = props;
+  const { events = {} } = props;
   const eventsArray = Object.values(events).slice(1, 5);
 
   return (
@@ -45,4 +46,12 @@ const SearchTools: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-export default SearchTools;
+const mapStateToProps = ({ eventData }) => {
+  return {
+    events: eventData.events,
+    loading: eventData.loading,
+    errors: eventData.errors,
+  };
+};
+
+export default connect(mapStateToProps, {})(SearchTools);

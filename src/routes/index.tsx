@@ -7,6 +7,7 @@ import { Auth } from "aws-amplify";
 import Home from "./Home";
 import Events from "./Event";
 // import Discover from "./Discover";
+import Rooms from "./Rooms";
 import Profile from "./Profile";
 import Authentication from "./Authentication";
 import NotFound from "./NotFound";
@@ -120,6 +121,7 @@ const Routes: React.FunctionComponent<Props> = (props) => {
 
         {/* PUBLIC ROUTES */}
         <Route path="/event" component={Events} />
+        <Route path="/room/:roomId" component={Rooms} />
         <Route path="/discover" component={Construction} /> {/* TO CHANGE */}
         <Route path="/forbidden" component={Forbidden} />
         <Route path="/empty" render={() => <div></div>} />
