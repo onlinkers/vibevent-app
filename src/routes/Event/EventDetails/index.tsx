@@ -34,7 +34,6 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
   const history = useHistory();
 
   const { eventId } = useParams();
-  console.log({ eventCategories }, loading);
   const event = events[eventId];
 
   const redirectToRoom = (roomId) => {
