@@ -40,7 +40,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
       <motion.div
         className="event-card-ld"
         whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.001 }}
+        transition={{ duration: 0.1 }}
         onClick={link}
       >
         <div className="event-image">
