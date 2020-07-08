@@ -53,7 +53,7 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
     </div>);
 
     // get 2 host photos
-    const hostPhotos = ((event.media.hostPhotos?.length && event.media.hostPhotos.splice(0,2)) || []).map((photo, index) => {
+    const hostPhotos = ((event.media.hostPhotos?.length && event.media.hostPhotos.slice(0,2)) || []).map((photo, index) => {
       return <div key={`host-${index}`} className="event__images-image">
         <img src={photo.baseSrc} alt={`host-${index}`} loading="lazy"/>
       </div>;
@@ -61,7 +61,7 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
     photos.push(hostPhotos.length === 2 ? <div key="host-col" className="event__images-2-row">{hostPhotos}</div> : hostPhotos);
     
     // get 2 user photos
-    const userPhotos = ((event.media.userPhotos?.length && event.media.userPhotos.splice(0,2)) || []).map((photo, index) => {
+    const userPhotos = ((event.media.userPhotos?.length && event.media.userPhotos.slice(0,2)) || []).map((photo, index) => {
       return <div key={`user-${index}`} className="event__images-image">
         <img src={photo.baseSrc} alt={`user-${index}`} loading="lazy"/>
       </div>;
