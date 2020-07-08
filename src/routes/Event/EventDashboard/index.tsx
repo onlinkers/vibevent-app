@@ -27,7 +27,7 @@ interface Props {
 const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const { events, loading, errors, fetchAllEvents } = props;
 
-  const eventsArray = Object.values(events).slice(1, 5);
+  const eventsArray = Object.values(events).slice(0, 5);
 
   const history = useHistory();
 

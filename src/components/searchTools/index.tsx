@@ -23,7 +23,7 @@ const SearchTools: React.FunctionComponent<Props> = (props) => {
   const { events = {} } = props;
   const history = useHistory();
 
-  const eventsArray = Object.values(events).slice(1, 5);
+  const eventsArray = Object.values(events).slice(0, 5);
 
   return (
     <div className="quick-access">
