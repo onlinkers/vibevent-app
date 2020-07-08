@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
+import ReactMarkdown from "markdown-to-jsx";
 
 import QuickAccessMenu from "components/searchTools";
 import Sidebar from "components/layouts/sidebar/sidebar";
@@ -14,6 +15,7 @@ import DefaultImage from "assets/media/default-image.png";
 
 import { EventsPayload, EventCategoriesPayload } from "types/store";
 import { User } from "types/props";
+import { parse } from "utils";
 
 interface Props {
   events: EventsPayload;
@@ -163,7 +165,7 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
             </div>
 
             <h2>About the event</h2>
-            <p>{event.description}</p>
+            <p><ReactMarkdown>{parse(event.description || "")}</ReactMarkdown></p>
 
             <h2>Rooms:</h2>
             <div className="event__rooms">
