@@ -11,12 +11,15 @@ interface Props {
   favorited?: boolean;
   loading?: boolean;
   onClick?: Function;
+  onButtonClick?: Function;
   [key: string]: any;
 }
 
 const EventCard: React.FunctionComponent<Props> = (props) => {
+
   const { event, onClick = () => {} } = props;
   const [isSaved, setIsSaved] = useState(false);
+
   const month = moment(event.startDate).format("MMM").toUpperCase();
   const date = moment(event.startDate).format("DD");
 
@@ -24,9 +27,22 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
     return `${host.firstName} ${host.lastName || ""}`;
   }) : [];
 
+  const link = (e) => {
+    
+    // dont launch event if the button was clicked
+    if((e.target as any).className.includes("btn")) return;
+    onClick();
+
+  };
+
   return (
     <React.Fragment>
-      <motion.div className="event-card-ld">
+      <motion.div
+        className="event-card-ld"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.001 }}
+        onClick={link}
+      >
         <div className="event-image">
           <img
             src={
@@ -45,7 +61,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
             <span className="date">{date}</span>
           </h3>
           <div className="event-title-hosts">
-            <p className="event-title" onClick={() => onClick()}>
+            <p className="event-title">
               {event?.name.slice(0, 37) +
                 (event?.name.length > 37 ? "..." : "")}
             </p>
@@ -54,8 +70,9 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
                 (hosts.join(", ").length > 20 ? "..." : "")}
             </p>
           </div>
+
           <button
-            className={"save-btn " + (isSaved ? "save-btn--active" : "")}
+            className={isSaved ? "save-btn--active" : "save-btn"}
             onClick={(e) => {
               setIsSaved(!isSaved);
             }}

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { motion, useCycle } from "framer-motion";
 import useDimensions from "react-use-dimensions";
+
+import { AppContext } from "context/AppContext";
 
 import MenuToggle from "components/svg/menu-toggle/MenuToggle";
 import VibeventLogo from "components/svg/vibevent-logo/VibeventLogo";
@@ -55,10 +57,14 @@ const routes = [
     label: "Dashboard",
     route: "/event/dashboard",
   },
-  {
-    label: "Discover",
-    route: "/discover",
-  },
+  // {
+  //   label: "Discover",
+  //   route: "/discover",
+  // },
+];
+
+const authenticatedRoutes = [
+
   {
     label: "Create",
     route: "/event/create",
@@ -70,7 +76,16 @@ const routes = [
 ];
 
 const Navigation = ({ isOpen }) => {
+
+
+  const { session } = useContext(AppContext);
+  const { isAuthenticated } = session;
+
+  let links = [...routes];
+  if(isAuthenticated) links = [...routes, ...authenticatedRoutes];
+
   const [theme, toggleTheme] = useCycle(false, true);
+
   return (
     <>
       <motion.div
@@ -82,7 +97,7 @@ const Navigation = ({ isOpen }) => {
         <VibeventLogo toggle={() => toggleTheme()} theme={theme} />
       </motion.div>
       <motion.ul className="navlinks">
-        {routes.map((item) => {
+        {links.map((item) => {
           return (
             <Link
               to={item.route}

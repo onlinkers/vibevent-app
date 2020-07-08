@@ -1,4 +1,4 @@
-import React, { useContext, FunctionComponent } from "react";
+import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 
 import NotFound from "./NotFound";
