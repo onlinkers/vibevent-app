@@ -18,11 +18,11 @@ import "./index.scss";
 import { EventCategoriesPayload } from "types/store";
 
 interface Props {
-    mode: "CREATE" | "EDIT";
-    onSubmit: Function;
-    eventCategories: EventCategoriesPayload;
-    initialValues?: any;
-    onChange?: (fieldsChanged: any, allFields?:any) => void;
+  mode: "CREATE" | "EDIT";
+  onSubmit: Function;
+  eventCategories: EventCategoriesPayload;
+  initialValues?: any;
+  onChange?: (fieldsChanged: any, allFields?:any) => void;
 }
 
 // const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
@@ -38,31 +38,17 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
   // const [venueCoordinates, setVenueCoordinates] = useState<number[] | null>(initialVenueCoordinates);
 
   const submitFormatter = async (formValues) => {
+    try {
 
-    setIsSubmitting(true);
+      setIsSubmitting(true);
+      await onSubmit(formValues);
 
-    const { venue, date, link, ...rest } = formValues;
+    }
+    finally {
 
-    // links need to be re-organized
-    const links = {};
-    link.forEach((l) => {
-      links[l.type] = l.url;
-    });
+      setIsSubmitting(false);
 
-    await onSubmit({
-      // venue needs its own object (including the coordinates)
-      venue: {
-        name: venue,
-      },
-      // Dates need to be in ISO form
-      startDate: date[0].toISOString(),
-      endDate: date[1].toISOString(),
-      links,
-      ...rest
-    });
-
-    setIsSubmitting(false);
-      
+    }
   };
 
   // useEffect(() => {
@@ -135,7 +121,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       </Form.Item>
 
       <Form.Item
-        name="venue"
+        name="venueName"
         label="Event Venue"
         rules={[
           {

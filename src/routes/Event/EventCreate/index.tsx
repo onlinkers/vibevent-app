@@ -53,43 +53,39 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
   });
 
   const handleSubmit = async (formValues) => {
-    
-    const {
-      coverPhoto: coverPhotoUrl,
-      ticketLink: ticketLinkUrl,
-      ...values
-    } = formValues;
+
+    const { venueName, date, link, ...rest } = formValues;
+
+    // links need to be re-organized
+    const links = {};
+    link.forEach((l) => { links[l.type] = l.url; });
 
     const payload = {
-      ...values,
+      ...rest,
       // We need to set the user that creates the event as "host"
       hosts: [user._id],
-      // Venue object must contain the coordiantes as well
+      // venue needs its own object (including the coordinates)
+      venue: {
+        name: venueName,
+      },
+      // Dates need to be in ISO form
+      startDate: date[0].toISOString(),
+      endDate: date[1].toISOString(),
+      links
     };
 
     // TODO: Proper Image Uploading
-    if(coverPhotoUrl) payload.coverPhoto = {
-      baseSrc: coverPhotoUrl,
-      size: {
-        width: 100,
-        height: 100
-      }
-    };
-
-    // optional ticket link
-    if(ticketLinkUrl) payload.links = {
-      ticket: ticketLinkUrl
-    };
 
     await eventService.createEvent(payload);
 
     message.success("Event created!");
     history.goBack();
+
   };
 
   const handleFormChange = (changedValues) => {
 
-    // TODO: Find a way/or not to render link changes in the form
+    // TODO: Find a way/or dont even bother render-ing link changes in the form
     if(changedValues.link) return;
 
     const newFormFields = {

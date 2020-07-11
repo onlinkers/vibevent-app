@@ -11,7 +11,7 @@ const Events = () => (
   <Switch>
     <Route path="/event/dashboard" component={EventDashboard} />
     <AuthRoute path="/event/create" component={<EventCreate />} />
-    <Route path="/event/:eventId/edit" component={EventEdit} />
+    <AuthRoute path="/event/:eventId/edit" component={<EventEdit />} />
     <Route path="/event/:eventId" component={EventDetails} />
   </Switch>
 );
