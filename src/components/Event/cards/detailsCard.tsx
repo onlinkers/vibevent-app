@@ -66,9 +66,9 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     
     const hosts: any[] = [];
     
-    (event.hosts as User[]).forEach((host) => {
+    (event.hosts as User[]).forEach((host, index) => {
       hosts.push(<Card.Meta
-        key={host._id}
+        key={host._id || "host" + index}
         avatar={ <Avatar src={host.profilePhoto?.baseSrc || DefaultImage} />}
         title={`${host.firstName} ${host.lastName || ""}`}
         description={host.description || ""}
