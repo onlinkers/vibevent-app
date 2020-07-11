@@ -5,18 +5,20 @@ import { connect } from "react-redux";
 import {
   message,
 } from "antd";
-import Sidebar from "components/layouts/Sidebar";
 import EventForm from "components/Event/form";
+import EventDetailsCard from "components/Event/cards/detailsCard";
+import Sidebar from "components/layouts/Sidebar";
 
 import "../form.scss";
 import { EventCategoriesPayload } from "types/store";
+import { User } from "types/props";
 import eventService from "services/eventService";
 
 interface Props {
   eventCategories: EventCategoriesPayload;
   loading: boolean;
   errors: string
-  userId: string;
+  user: User;
 }
 
 const EventCreate: React.FunctionComponent<Props> = (props) => {
@@ -26,7 +28,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
   const {
     eventCategories,
     loading,
-    userId
+    user
   } = props;
 
   const handleSubmit = async (formValues) => {
@@ -40,7 +42,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
     const payload = {
       ...values,
       // We need to set the user that creates the event as "host"
-      hosts: [userId],
+      hosts: [user._id],
       // Venue object must contain the coordiantes as well
     };
 
@@ -65,18 +67,50 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
   };
 
   return (
-    <div className="Page--center EventForm">
+    <div className="Page EventForm">
       <Sidebar />
       {loading && <div className="Page--full Loader">Loading...</div>}
       {!loading && (
-        <React.Fragment>
-          <h1>Create Your Event!</h1>
-          <EventForm
-            mode="CREATE"
-            onSubmit={handleSubmit}
+        <>
+          <div className="event-create-form">
+            <h1>Create Your Event!</h1>
+            <EventForm
+              mode="CREATE"
+              onSubmit={handleSubmit}
+              eventCategories={eventCategories}
+            />
+          </div>
+          <EventDetailsCard
+            event={{
+              _id: "new-event",
+              hosts: [user],
+              name: "random-event",
+              startDate: new Date(),
+              endDate: new Date(),
+              venue: {
+                name: "Place"
+              },
+              description: "hello",
+              categories: [],
+              links: {
+                register: "yey"
+              },
+              media: {
+                coverPhoto: { baseSrc: "https://picsum.photos/id/237/200/300" },
+                hostPhotos: [
+                  { baseSrc: "https://picsum.photos/id/237/200/300" },
+                  { baseSrc: "https://picsum.photos/id/237/200/300" }
+                ]
+              },
+              tags: {
+                hostTags: ["dog", "new", "template"],
+                userTags: []
+              }
+            }}
             eventCategories={eventCategories}
+            redirects={false}
           />
-        </React.Fragment>
+        </>
       )}
     </div>
   );
@@ -87,7 +121,7 @@ const mapStateToProps = ({ eventData, userData }) => {
     eventCategories: eventData.eventCategories,
     loading: eventData.loading,
     errors: eventData.errors.eventCategories,
-    userId: userData.user._id
+    user: userData.user
   };
 };
 

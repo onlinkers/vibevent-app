@@ -1,3 +1,12 @@
+.field-add {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .anticon {
+        margin-left: 1em;
+    }
+}
 
 .category-select-option > .ant-select-item-option-content,
 .category-select > .ant-select-selector > .ant-select-selection-item > .ant-select-selection-item-content {
