@@ -13,4 +13,6 @@ export * from "./_utils/filterEventMarkersToDelete";
 
 export * from "./_utils/parse";
 
+export * from "./_utils/reactToEventFormChanges";
+
 export * from "./_utils/stringifyTags";

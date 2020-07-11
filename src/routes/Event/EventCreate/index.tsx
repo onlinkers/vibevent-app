@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -11,7 +11,7 @@ import EventDetailsCard from "components/Event/cards/detailsCard";
 
 import "../form.scss";
 import { EventCategoriesPayload } from "types/store";
-import { User } from "types/props";
+import { User, Event } from "types/props";
 import eventService from "services/eventService";
 
 interface Props {
@@ -23,13 +23,34 @@ interface Props {
 
 const EventCreate: React.FunctionComponent<Props> = (props) => {
 
-  const history = useHistory();
-
   const {
     eventCategories,
     loading,
     user
   } = props;
+
+  const history = useHistory();
+  const [previewValues, setPreviewValues] = useState<Event>({
+    _id: "new-event",
+    hosts: [user],
+    name: "",
+    startDate: new Date(),
+    endDate: new Date(),
+    venue: {
+      name: ""
+    },
+    description: "",
+    categories: [],
+    links: {},
+    media: {
+      coverPhoto: { baseSrc: "" },
+      hostPhotos: []
+    },
+    tags: {
+      hostTags: [],
+      userTags: []
+    }
+  });
 
   const handleSubmit = async (formValues) => {
     
@@ -66,6 +87,29 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
     history.goBack();
   };
 
+  const handleFormChange = (changedValues) => {
+
+    // TODO: Find a way/or not to render link changes in the form
+    if(changedValues.link) return;
+
+    const newFormFields = {
+      ...previewValues,
+      // name, price, description, categories
+      ...changedValues,
+      startDate: (changedValues.date && changedValues.date[0]) || previewValues.startDate,
+      endDate: (changedValues.date && changedValues.date[1]) || previewValues.startDate,
+      venue: {
+        name: changedValues.venue || previewValues.venue.name
+      },
+      tags: {
+        hostTags: changedValues.tags || previewValues.tags?.hostTags
+      }
+    };
+
+    setPreviewValues(newFormFields);
+    
+  };
+
   return (
     <div className="Page EventForm">
       <Navbar />
@@ -76,37 +120,13 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
             <h1>Create Your Event!</h1>
             <EventForm
               mode="CREATE"
+              onChange={handleFormChange}
               onSubmit={handleSubmit}
               eventCategories={eventCategories}
             />
           </div>
           <EventDetailsCard
-            event={{
-              _id: "new-event",
-              hosts: [user],
-              name: "random-event",
-              startDate: new Date(),
-              endDate: new Date(),
-              venue: {
-                name: "Place"
-              },
-              description: "hello",
-              categories: [],
-              links: {
-                register: "yey"
-              },
-              media: {
-                coverPhoto: { baseSrc: "https://picsum.photos/id/237/200/300" },
-                hostPhotos: [
-                  { baseSrc: "https://picsum.photos/id/237/200/300" },
-                  { baseSrc: "https://picsum.photos/id/237/200/300" }
-                ]
-              },
-              tags: {
-                hostTags: ["dog", "new", "template"],
-                userTags: []
-              }
-            }}
+            event={previewValues}
             eventCategories={eventCategories}
             redirects={false}
           />
