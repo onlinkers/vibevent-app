@@ -22,13 +22,14 @@ interface Props {
     onSubmit: Function;
     eventCategories: EventCategoriesPayload;
     initialValues?: any;
+    onChange?: (fieldsChanged: any, allFields?:any) => void;
 }
 
 // const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const EventForm: React.FunctionComponent<Props> = (props) => {
 
-  const { onSubmit, eventCategories, initialValues } = props;
+  const { onSubmit, eventCategories, initialValues, onChange = () => {} } = props;
   // const initialVenueCoordinates = (initialValues && initialValues.venueCoordinates) || null;
 
   const [form] = Form.useForm();
@@ -95,6 +96,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       layout="horizontal"
       size={"small"}
       initialValues={initialValues}
+      onValuesChange={onChange}
       onFinish={submitFormatter}
     >
 
