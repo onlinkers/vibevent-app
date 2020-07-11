@@ -38,7 +38,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
   return (
     <React.Fragment>
       <motion.div
-        className="event-card-ld"
+        className="event-card-large"
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.1 }}
         onClick={link}

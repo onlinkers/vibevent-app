@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Empty } from "antd";
 
-import Sidebar from "components/layouts/sidebar/sidebar";
+import Sidebar from "components/layouts/Sidebar";
 
 const Construction = () => {
   const history = useHistory();

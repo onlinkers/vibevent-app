@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import {
   message,
 } from "antd";
-import Sidebar from "components/layouts/sidebar/sidebar";
-import EventForm from "components/forms/EventForm";
+import Sidebar from "components/layouts/Sidebar";
+import EventForm from "components/Event/form";
 
 import "../form.scss";
 import { EventCategoriesPayload } from "types/store";

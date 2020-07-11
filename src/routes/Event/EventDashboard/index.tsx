@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 // import { motion, useMotionValue, useTransform } from "framer-motion";
 
-import QuickAccessMenu from "components/searchTools";
-import EventCard from "components/cards/largeCard/eventCard";
-import Sidebar from "components/layouts/sidebar/sidebar";
+import QuickAccessMenu from "components/Event/searchTools";
+import EventCard from "components/Event/cards/largeCard";
+import Sidebar from "components/layouts/Sidebar";
 
 import "./index.scss";
 

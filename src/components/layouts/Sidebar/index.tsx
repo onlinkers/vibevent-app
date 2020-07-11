@@ -5,9 +5,9 @@ import useDimensions from "react-use-dimensions";
 
 import { AppContext } from "context/AppContext";
 
-import MenuToggle from "components/svg/menu-toggle/MenuToggle";
-import VibeventLogo from "components/svg/vibevent-logo/VibeventLogo";
-// import VibeventNameLogo from "components/svg/vibevent-name-logo/VibeventNameLogo";
+import MenuToggle from "components/shared/svg/menu-toggle";
+import VibeventLogo from "components/shared/svg/vibevent-logo";
+// import VibeventNameLogo from "components/shared/svg/vibevent-name-logo";
 import "./index.scss";
 
 interface Props {}

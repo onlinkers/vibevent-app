@@ -1,4 +1,4 @@
-.event-card-ld {
+.event-card-large {
   display: flex;
   position: relative;
   z-index: 0;
@@ -112,5 +112,102 @@
       background-color: $red1;
       color: white;
     }
+  }
+}
+
+.event-card-small {
+  position: relative;
+  transition: 0.3s;
+  width: 45%;
+  height: 10vh;
+  border-radius: 10px;
+  background: #ffffff;
+  margin: 0 0 2.5% 2.5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2%;
+  cursor: pointer;
+
+  .event-card-small-coverphoto {
+    user-select: none;
+    width: 25%;
+    height: 100%;
+    object-fit: cover;
+    // background: black;
+    border-radius: 10px;
+  }
+
+  .event-card-small-description {
+    user-select: none;
+    width: 70%;
+    margin-left: 2%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .description-date {
+      @include small-card-date;
+    }
+
+    .description-title {
+      @include small-card-title;
+    }
+
+    .description-host {
+      @include small-card-host;
+    }
+  }
+}
+
+.event-card-tiny {
+    height: 15em;
+    overflow: hidden;
+    width: 20%;
+    min-width: 10em;
+
+    .ant-card-cover {
+        height: 7em;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+}
+
+.utility-card {
+  position: relative;
+  transition: 0.3s;
+  width: 45%;
+  height: 10vh;
+  border-radius: 10px;
+  background: #ffffff;
+  margin: 0 0 2.5% 2.5%;
+
+  .qa-card__title {
+    user-select: none;
+    position: absolute;
+    bottom: 2%;
+    left: 7%;
+    font-weight: bold;
+    line-height: 125%;
+    @include tablet-landscape {
+      font-size: 1.125em;
+    }
+    @include desktop {
+      font-size: 1.25em;
+    }
+  }
+  
+  .qa-card__icon {
+    user-select: none;
+    position: absolute;
+    right: 0;
+    margin-right: 1em;
+    margin-top: 4%;
   }
 }

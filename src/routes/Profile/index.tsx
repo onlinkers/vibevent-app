@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { Button, message, Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import Sidebar from "components/layouts/sidebar/sidebar";
+import Sidebar from "components/layouts/Sidebar";
 import ProfileDetails from "./ProfileDetails";
 
 import "./index.scss";

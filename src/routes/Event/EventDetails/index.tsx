@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import moment from "moment";
 import ReactMarkdown from "markdown-to-jsx";
 
-import QuickAccessMenu from "components/searchTools";
-import Sidebar from "components/layouts/sidebar/sidebar";
+import QuickAccessMenu from "components/Event/searchTools";
+import Sidebar from "components/layouts/Sidebar";
 import NotFound from "routes/NotFound";
 
 import { Empty, Card, Avatar, Tag, Spin, Button } from "antd";

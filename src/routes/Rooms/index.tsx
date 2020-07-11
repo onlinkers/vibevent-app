@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import Sidebar from "components/layouts/sidebar/sidebar";
+import Sidebar from "components/layouts/Sidebar";
 import NotFound from "routes/NotFound";
 
 import { Spin } from "antd";

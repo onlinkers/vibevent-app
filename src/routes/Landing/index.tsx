@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import "./index.scss";
 import Backdrop from "assets/media/landing-page-backdrop.jpg";
 import VibeventNameLogo from "assets/icons/vibevent-name-logo.svg";
-import VibeventLogoBordered from "components/svg/vibevent-logo-bordered/VibeventLogoBordered";
+import VibeventLogoBordered from "components/shared/svg/vibevent-logo-bordered";
 import { Link } from "react-router-dom";
 
 const Landing = () => {

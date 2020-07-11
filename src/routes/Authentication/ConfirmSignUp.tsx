@@ -5,7 +5,7 @@ import queryString from "query-string";
 
 import { Form, Button } from "antd";
 import { FormInstance } from "antd/lib/form";
-import TextInput from "components/forms/inputs/textInput";
+import TextInput from "components/shared/forms/inputs/textInput";
 
 const ConfirmSignUp: React.FunctionComponent = () => {
 

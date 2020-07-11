@@ -24,7 +24,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
   return (
     <Card
       hoverable
-      className="event-card"
+      className="event-card-tiny"
       cover={imageSource && <img src={imageSource} alt="event-cover" />}
       {...rest}
     >

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Button, Typography, Collapse, Empty } from "antd";
-import TinyEventCard from "components/cards/tinyCard/eventCard";
+import TinyEventCard from "components/Event/cards/tinyCard";
 
 import { User } from "types/props";
 import DefaultAvatar from "assets/media/default-avatar.png";
