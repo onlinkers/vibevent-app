@@ -117,15 +117,17 @@ const Routes: React.FunctionComponent<Props> = (props) => {
           altComponent={<Landing />}
         />
         <AuthRoute path="/profile" component={<Profile />} />
+
         {/* AUTHENTICATION */}
         <AuthRoute path="/auth" altComponent={<Authentication />} redirect />
+
         {/* PUBLIC ROUTES */}
         <Route path="/event" component={Events} />
         <Route path="/room/:roomId" component={Rooms} />
         <Route path="/discover" component={Construction} /> {/* TO CHANGE */}
         <Route path="/forbidden" component={Forbidden} />
         <Route path="/empty" render={() => <div></div>} />
-        {/* <Route path="/landing" component={Landing} /> */}
+        {/* <Route path="/home" component={Home} /> */} {/* FOR TESTING */}
         <Route path="*" component={NotFound} />
       </Switch>
     </BrowserRouter>
