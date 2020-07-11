@@ -93,7 +93,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
       // name, price, description, categories
       ...changedValues,
       startDate: (changedValues.date && changedValues.date[0]) || previewValues.startDate,
-      endDate: (changedValues.date && changedValues.date[1]) || previewValues.startDate,
+      endDate: (changedValues.date && changedValues.date[1]) || previewValues.endDate,
       venue: {
         name: changedValues.venue || previewValues.venue.name
       },

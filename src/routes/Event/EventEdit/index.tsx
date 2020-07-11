@@ -14,10 +14,11 @@ import Sidebar from "components/layouts/Sidebar";
 
 import "../form.scss";
 import { EventsPayload, EventCategoriesPayload } from "types/store";
-import { Event } from "types/props";
+import { Event, User } from "types/props";
 import eventService from "services/eventService";
 
 interface Props {
+  user: User;
   events: EventsPayload;
   eventCategories: EventCategoriesPayload;
   loading: boolean;
@@ -33,6 +34,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
   const history = useHistory();
 
   const {
+    user,
     events,
     eventCategories,
     loading,
@@ -86,6 +88,29 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
 
   };
 
+  const handleFormChange = (changedValues) => {
+
+    // TODO: Find a way/or dont even bother render-ing link changes in the form
+    if(changedValues.link) return;
+
+    const newFormFields = {
+      ...thisEvent,
+      // name, price, description, categories
+      ...changedValues,
+      startDate: (changedValues.date && changedValues.date[0]) || thisEvent?.startDate,
+      endDate: (changedValues.date && changedValues.date[1]) || thisEvent?.endDate,
+      venue: {
+        name: changedValues.venue || thisEvent?.venue.name
+      },
+      tags: {
+        hostTags: changedValues.tags || thisEvent?.tags?.hostTags
+      }
+    };
+
+    setThisEvent(newFormFields);
+    
+  };
+
   useEffect(() => {
     if(eventId) {
 
@@ -98,7 +123,10 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
       
       const reduxEvent = events[eventId];
       if(reduxEvent) { // if the event is found in redux
-        setThisEvent(reduxEvent);
+        setThisEvent({
+          ...reduxEvent,
+          hosts: typeof reduxEvent.hosts[0] === "string" ? [user] : reduxEvent.hosts
+        });
         setEventLoaded(true);
       }
       else { // if the event is not found in redux
@@ -131,6 +159,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
               <h1>Edit your event!</h1>
               <EventForm
                 mode="EDIT"
+                onChange={handleFormChange}
                 onSubmit={handleSubmit}
                 eventCategories={eventCategories}
                 initialValues={{
@@ -163,8 +192,9 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-const mapStateToProps = ({ eventData }) => {
+const mapStateToProps = ({ eventData, userData }) => {
   return {
+    user: userData.user,
     events: eventData.events,
     eventCategories: eventData.eventCategories,
     loading: eventData.loading,
