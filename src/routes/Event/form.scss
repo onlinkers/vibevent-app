@@ -1,12 +1,48 @@
+@import "./index.scss";
+
 .EventForm {
     display: flex;
     flex-direction: column;
     padding-top: 5%;
     padding-bottom: 5%;
+    overflow-y: scroll;
 
-    .ant-form {
-        height: 100%;
+    .event-create-form {
+        padding-top: 85vh;
         width: 80%;
+
+        h1 {
+            text-align: center;
+        }
+
+        @include tablet-landscape {
+            padding-top: 0;
+            padding-left: 35%;
+            margin-left: 5%;
+
+            h1 {
+                text-align: left;
+            }
+        }
+    }
+
+    .event-details-card {
+        @extend .event-content;
+        margin-top: 0;
+        margin-bottom: 0;
+        height: calc(80% * 1.25);
+        transform: scale(0.8);
+        transform-origin: top;
+        font-size: 0.8em;
         overflow-y: scroll;
+
+        // Overwrite to not take all space
+        @include tablet-landscape {
+            width: 30%;
+        }
+        .event__rooms {
+            transform: scale(0.8);
+            transform-origin: top;
+        }
     }
 }
