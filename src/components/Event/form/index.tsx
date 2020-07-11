@@ -13,6 +13,7 @@ import {
 
 import DynamicInput from "components/shared/form/inputs/dynamicInput";
 import DynamicSelect from "components/shared/form/inputs/dynamicSelect";
+import MarkdownEditor from "components/shared/form/inputs/markdownEditor";
 
 import "./index.scss";
 import { EventCategoriesPayload } from "types/store";
@@ -144,7 +145,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
         name="description"
         label="Description"
       >
-        <Input />
+        <MarkdownEditor />
       </Form.Item>
 
       <Divider orientation="left">Add Links</Divider>

@@ -10,7 +10,7 @@ import {
 import { ReloadOutlined } from "@ant-design/icons";
 import EventForm from "components/Event/form";
 import EventDetailsCard from "components/Event/cards/detailsCard";
-import Sidebar from "components/layouts/Sidebar";
+import Navbar from "components/layouts/navbar";
 
 import "../form.scss";
 import { EventsPayload, EventCategoriesPayload } from "types/store";
@@ -144,7 +144,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className="Page EventForm">
-      <Sidebar />
+      <Navbar />
       {!loaded && <div className="Page--full Loader">Loading...</div>}
       {loaded && (hasErrors ? (
         <div className="Page--full Error">

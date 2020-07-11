@@ -10,16 +10,28 @@
     .event-create-form, .event-edit-form {
         padding-top: 85vh;
         width: 80%;
+        margin: 0 auto;
 
         h1 {
             text-align: center;
+        }
+            
+        .ant-form-item {
+            margin: 0 auto;
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        .ant-btn {
+            min-width: 100%;
         }
 
         @include tablet-landscape {
             padding-top: 0;
             padding-left: 35%;
+            margin: 0;
             margin-left: 5%;
-
+            
             h1 {
                 text-align: left;
             }
@@ -38,6 +50,8 @@
 
         // Overwrite to not take all space
         @include tablet-landscape {
+            position: fixed;
+            left: 7.5%;
             width: 30%;
         }
         .event__rooms {
