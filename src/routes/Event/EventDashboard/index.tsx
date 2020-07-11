@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 // import { motion, useMotionValue, useTransform } from "framer-motion";
@@ -13,6 +13,7 @@ import { EventsPayload } from "types/store";
 import { fetchAllEvents } from "store/actions/eventActions";
 import { Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
+import { SizeContext } from "context/SizeContext";
 
 interface Props {
   events: EventsPayload;
@@ -26,6 +27,8 @@ interface Props {
 
 const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const { events, loading, errors, fetchAllEvents } = props;
+  const { breakpoint } = useContext(SizeContext);
+  console.log(breakpoint);
 
   const eventsArray = Object.values(events).slice(0, 5);
 
@@ -89,7 +92,9 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                         event={event}
                         key={event._id}
                         className="event-card"
-                        onClick={() => { redirectToEvent(event._id); }}
+                        onClick={() => {
+                          redirectToEvent(event._id);
+                        }}
                       ></EventCard>
                     );
                   })}

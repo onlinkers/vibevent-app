@@ -7,6 +7,7 @@ import { Auth } from "aws-amplify";
 // import Home from "./Home";
 import Events from "./Event";
 // import Discover from "./Discover";
+import { SizeProvider } from "context/SizeContext";
 import Rooms from "./Rooms";
 import Profile from "./Profile";
 import Authentication from "./Authentication";
@@ -106,28 +107,30 @@ const Routes: React.FunctionComponent<Props> = (props) => {
   }, []); // eslint-disable-line
 
   return isAuthenticating ? null : (
-    <BrowserRouter>
-      <Switch>
-        {/* DOUBLE ROUTES */}
-        <AuthRoute
-          exact
-          path="/"
-          component={<Redirect to="/event/dashboard" />}
-          altComponent={<Landing />}
-        />
-        <AuthRoute path="/profile" component={<Profile />} />
-        {/* AUTHENTICATION */}
-        <AuthRoute path="/auth" altComponent={<Authentication />} redirect />
-        {/* PUBLIC ROUTES */}
-        <Route path="/event" component={Events} />
-        <Route path="/room/:roomId" component={Rooms} />
-        <Route path="/discover" component={Construction} /> {/* TO CHANGE */}
-        <Route path="/forbidden" component={Forbidden} />
-        <Route path="/empty" render={() => <div></div>} />
-        {/* <Route path="/landing" component={Landing} /> */}
-        <Route path="*" component={NotFound} />
-      </Switch>
-    </BrowserRouter>
+    <SizeProvider>
+      <BrowserRouter>
+        <Switch>
+          {/* DOUBLE ROUTES */}
+          <AuthRoute
+            exact
+            path="/"
+            component={<Redirect to="/event/dashboard" />}
+            altComponent={<Landing />}
+          />
+          <AuthRoute path="/profile" component={<Profile />} />
+          {/* AUTHENTICATION */}
+          <AuthRoute path="/auth" altComponent={<Authentication />} redirect />
+          {/* PUBLIC ROUTES */}
+          <Route path="/event" component={Events} />
+          <Route path="/room/:roomId" component={Rooms} />
+          <Route path="/discover" component={Construction} /> {/* TO CHANGE */}
+          <Route path="/forbidden" component={Forbidden} />
+          <Route path="/empty" render={() => <div></div>} />
+          {/* <Route path="/landing" component={Landing} /> */}
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </BrowserRouter>
+    </SizeProvider>
   );
 };
 
