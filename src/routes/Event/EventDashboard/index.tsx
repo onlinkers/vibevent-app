@@ -28,7 +28,6 @@ interface Props {
 const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const { events, loading, errors, fetchAllEvents } = props;
   const { breakpoint } = useContext(SizeContext);
-  console.log(breakpoint);
 
   const eventsArray = Object.values(events).slice(0, 5);
 
@@ -80,6 +79,8 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="text--unselectable">{errors.events}</div>
             <div className="text--unselectable">{errors.eventCategories}</div>
           </React.Fragment>
+        ) : breakpoint === "mobile" ? (
+          ""
         ) : (
           <React.Fragment>
             <div className="events-scroll">

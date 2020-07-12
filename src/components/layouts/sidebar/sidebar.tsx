@@ -64,7 +64,6 @@ const routes = [
 ];
 
 const authenticatedRoutes = [
-
   {
     label: "Create",
     route: "/event/create",
@@ -76,13 +75,11 @@ const authenticatedRoutes = [
 ];
 
 const Navigation = ({ isOpen }) => {
-
-
   const { session } = useContext(AppContext);
   const { isAuthenticated } = session;
 
   let links = [...routes];
-  if(isAuthenticated) links = [...routes, ...authenticatedRoutes];
+  if (isAuthenticated) links = [...routes, ...authenticatedRoutes];
 
   const [theme, toggleTheme] = useCycle(false, true);
 

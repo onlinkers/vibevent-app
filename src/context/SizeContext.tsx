@@ -15,21 +15,7 @@ const SizeContext = createContext<ContextProps>({
 });
 
 const SizeProvider: React.FunctionComponent<ProviderProps> = ({ children }) => {
-  const [breakpoint, setBreakpoint] = useState("mobile");
-  // const value = {
-  //   breakpoint,
-  //   setBreakpoint,
-  //   windowWidth,
-  //   setWindowWidth,
-  // };
-
-  useEffect(() => {
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => {
-      console.log("windowWidth:", window.innerWidth, "breakpoint?", breakpoint);
-    };
-  }, [breakpoint]);
+  const [breakpoint, setBreakpoint] = useState("");
 
   const updateSize = () => {
     if (window.innerWidth < 600) {
@@ -44,6 +30,15 @@ const SizeProvider: React.FunctionComponent<ProviderProps> = ({ children }) => {
       setBreakpoint("desktop-big");
     }
   };
+
+  window.addEventListener("resize", updateSize);
+
+  useEffect(() => {
+    updateSize();
+    return () => {
+      console.log("windowWidth:", window.innerWidth, "breakpoint?", breakpoint);
+    };
+  }, [breakpoint]);
 
   return (
     <SizeContext.Provider value={{ breakpoint, setBreakpoint }}>

@@ -5,11 +5,11 @@
   position: relative;
   background-color: $gray1;
 
-  left: 10%;
-  width: 90%;
-  @include tablet-landscape {
+  @include tablet-portrait {
     left: 78px;
     width: calc(100% - 78px);
+  }
+  @include tablet-landscape {
   }
 }
 
