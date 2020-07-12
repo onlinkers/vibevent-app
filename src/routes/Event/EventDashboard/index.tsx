@@ -45,7 +45,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   } = props;
   const { breakpoint } = useContext(ThemeContext);
 
-  const eventsArray = Object.values(events).slice(0, 5);
+  const eventsArray = Object.values(events);
 
   const history = useHistory();
 
