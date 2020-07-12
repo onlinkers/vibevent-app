@@ -12,14 +12,31 @@
   .events-scroll {
     @extend .event-content;
 
+    h1 {
+      font-family: $primary-label;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .page-label-mobile {
+      margin-left: 25%;
+      margin-top: 5%;
+      font-size: 1.8em;
+    }
+
     .events-category {
       h1 {
-        font-family: $primary-label;
-        font-weight: bold;
-        user-select: none;
-        @include desktop {
+        font-size: 1.5em;
+        @include tablet-landscape {
           font-size: 2.5em;
         }
+      }
+    }
+
+    .events-category-mobile {
+      margin-left: 10%;
+      h1 {
+        font-size: 1.3em;
       }
     }
 
@@ -29,7 +46,7 @@
   }
 }
 
-.events-frame {
+.events-frame-mobile {
   display: flex;
   flex-direction: row;
   width: 100%;

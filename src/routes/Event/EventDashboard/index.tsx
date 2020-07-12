@@ -1,10 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-// import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 import QuickAccessMenu from "components/searchTools";
-import EventCard from "components/cards/largeCard/eventCard";
+import LargeEventCard from "components/cards/largeCard/eventCard";
+import SmallEventCard from "components/cards/smallCard/eventCard";
 import Sidebar from "components/layouts/sidebar/sidebar";
 
 import "./index.scss";
@@ -49,17 +50,17 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const hasErrors = errors.events || events.eventCategories;
   // const hasErrors = true;
 
-  // const x = useMotionValue(0);
-  // const opacityRight = useTransform(
-  //   x,
-  //   [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
-  //   [1, 1, 0]
-  // );
-  // const opacityLeft = useTransform(
-  //   x,
-  //   [0, 20, (-window.innerWidth / 2) * 1.25],
-  //   [0, 1, 1]
-  // );
+  const x = useMotionValue(0);
+  const opacityRight = useTransform(
+    x,
+    [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
+    [1, 1, 0]
+  );
+  const opacityLeft = useTransform(
+    x,
+    [0, 20, (-window.innerWidth / 2) * 1.25],
+    [0, 1, 1]
+  );
 
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
@@ -80,7 +81,41 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="text--unselectable">{errors.eventCategories}</div>
           </React.Fragment>
         ) : breakpoint === "mobile" ? (
-          ""
+          <div className="events-scroll">
+            <h1 className="page-label-mobile">Activity Dashboard</h1>
+            <div className="events-category-mobile">
+              <h1 className="events-category-title-mobile">Online Experiences</h1>
+              <div className="events-frame-mobile">
+                <motion.div
+                  className="events-draggable"
+                  drag="x"
+                  dragConstraints={{
+                    left: (-window.innerWidth / 2) * 1.25,
+                    right: 0,
+                  }}
+                  dragTransition={{ bounceStiffness: 300, bounceDamping: 50 }}
+                  style={{ x }}
+                >
+                  {eventsArray.map((event) => {
+                    return (
+                      <SmallEventCard
+                        event={event}
+                        key={event._id}
+                      ></SmallEventCard>
+                    );
+                  })}
+                </motion.div>
+              </div>
+              <motion.div
+                className="gradient-fade gradient-fade-right"
+                style={{ opacity: opacityRight }}
+              ></motion.div>
+              <motion.div
+                className="gradient-fade gradient-fade-left"
+                style={{ opacity: opacityLeft }}
+              ></motion.div>
+            </div>
+          </div>
         ) : (
           <React.Fragment>
             <div className="events-scroll">
@@ -89,14 +124,14 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                 <div className="events-frame--no-scroll">
                   {eventsArray.map((event) => {
                     return (
-                      <EventCard
+                      <LargeEventCard
                         event={event}
                         key={event._id}
                         className="event-card"
                         onClick={() => {
                           redirectToEvent(event._id);
                         }}
-                      ></EventCard>
+                      ></LargeEventCard>
                     );
                   })}
                 </div>
