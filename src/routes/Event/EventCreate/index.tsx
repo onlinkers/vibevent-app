@@ -54,7 +54,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   const handleSubmit = async (formValues) => {
 
-    const { venueName, date, link, ...rest } = formValues;
+    const { venueName, date, link, room, ...rest } = formValues;
 
     // links need to be re-organized
     const links = {};
@@ -71,7 +71,8 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
       // Dates need to be in ISO form
       startDate: date[0].toISOString(),
       endDate: date[1].toISOString(),
-      links
+      links,
+      rooms: room
     };
 
     // TODO: Proper Image Uploading
@@ -85,20 +86,34 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   const handleFormChange = (changedValues) => {
 
-    // TODO: Find a way/or dont even bother render-ing link changes in the form
+    // TODO: Find a way/or dont even bother render-ing link/room changes in the form
     if(changedValues.link) return;
+    else if(changedValues.room) return;
+
+    const {
+      date = null,
+      venueName = previewValues.venue.name,
+      tags: hostTags = previewValues.tags?.hostTags,
+
+      // name, price, description, categories
+      ...rest
+    } = changedValues;
+
+    const startDate = (date && date[0]) || previewValues.startDate;
+    const endDate = (date && date[1]) || previewValues.endDate;
 
     const newFormFields = {
+      // hosts, rating, media
       ...previewValues,
-      // name, price, description, categories
-      ...changedValues,
-      startDate: (changedValues.date && changedValues.date[0]) || previewValues.startDate,
-      endDate: (changedValues.date && changedValues.date[1]) || previewValues.endDate,
+      ...rest,
+      startDate,
+      endDate,
       venue: {
-        name: changedValues.venue || previewValues.venue.name
+        name: venueName
       },
       tags: {
-        hostTags: changedValues.tags || previewValues.tags?.hostTags
+        ...previewValues.tags,
+        hostTags,
       }
     };
 
