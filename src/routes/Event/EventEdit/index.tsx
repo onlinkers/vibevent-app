@@ -14,11 +14,10 @@ import Sidebar from "components/layouts/Sidebar";
 
 import "../form.scss";
 import { EventsPayload, EventCategoriesPayload } from "types/store";
-import { Event, User } from "types/props";
+import { Event } from "types/props";
 import eventService from "services/eventService";
 
 interface Props {
-  user: User;
   events: EventsPayload;
   eventCategories: EventCategoriesPayload;
   loading: boolean;
@@ -34,7 +33,6 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
   const history = useHistory();
 
   const {
-    user,
     events,
     eventCategories,
     loading,
@@ -76,6 +74,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
     };
 
     delete payload._id;
+    delete payload.hosts;
     delete payload.createdAt;
     delete payload.updatedAt;
 
@@ -123,10 +122,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
       
       const reduxEvent = events[eventId];
       if(reduxEvent) { // if the event is found in redux
-        setThisEvent({
-          ...reduxEvent,
-          hosts: typeof reduxEvent.hosts[0] === "string" ? [user] : reduxEvent.hosts
-        });
+        setThisEvent(reduxEvent);
         setEventLoaded(true);
       }
       else { // if the event is not found in redux
@@ -192,9 +188,8 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-const mapStateToProps = ({ eventData, userData }) => {
+const mapStateToProps = ({ eventData }) => {
   return {
-    user: userData.user,
     events: eventData.events,
     eventCategories: eventData.eventCategories,
     loading: eventData.loading,
