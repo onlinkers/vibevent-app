@@ -49,7 +49,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
 
   const handleSubmit = async (formValues) => {
 
-    const { venueName, date, link, tags, ...rest } = formValues;
+    const { venueName, date, link, tags, room, ...rest } = formValues;
 
     // links need to be re-organized
     const links = {};
@@ -67,6 +67,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
       startDate: date[0].toISOString(),
       endDate: date[1].toISOString(),
       links,
+      rooms: room,
       tags: {
         ...thisEvent?.tags,
         hostTags: tags
@@ -89,20 +90,34 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
 
   const handleFormChange = (changedValues) => {
 
-    // TODO: Find a way/or dont even bother render-ing link changes in the form
+    // TODO: Find a way/or dont even bother render-ing link/room changes in the form
     if(changedValues.link) return;
+    else if (changedValues.room) return;
+
+    const {
+      date = null,
+      venueName = thisEvent?.venue.name,
+      tags: hostTags = thisEvent?.tags?.hostTags,
+
+      // name, price, description, categories
+      ...rest
+    } = changedValues;
+
+    const startDate = (date && date[0]) || thisEvent?.startDate;
+    const endDate = (date && date[1]) || thisEvent?.endDate;
 
     const newFormFields = {
+      // hosts, rating, media
       ...thisEvent,
-      // name, price, description, categories
-      ...changedValues,
-      startDate: (changedValues.date && changedValues.date[0]) || thisEvent?.startDate,
-      endDate: (changedValues.date && changedValues.date[1]) || thisEvent?.endDate,
+      ...rest,
+      startDate,
+      endDate,
       venue: {
-        name: changedValues.venue || thisEvent?.venue.name
+        name: venueName
       },
       tags: {
-        hostTags: changedValues.tags || thisEvent?.tags?.hostTags
+        ...thisEvent?.tags,
+        hostTags,
       }
     };
 
@@ -165,6 +180,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
                   description: thisEvent.description,
                   categories: thisEvent.categories,
                   link: thisEvent.links && Object.entries(thisEvent.links).map(([type, url]) => ({ type, url })),
+                  room: thisEvent.rooms,
                   venueName: thisEvent.venue.name,
                   // venueCoordinates: thisEvent.venue.location, // TODO
                   tags: thisEvent.tags?.hostTags

@@ -179,7 +179,32 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
               }
             ]
           },
-          render: <Input/>
+          render: <Input placeholder="Enter url"/>
+        }
+      ]}/>
+
+      <Divider orientation="left">Add Rooms</Divider>
+      
+      <DynamicInput type="room" inputs={[
+        {
+          name: "roomId",
+          props: {
+            style: { width: "50%" },
+            rules: [
+              {
+                required: true,
+                message: "Enter a room id!",
+              }
+            ]
+          },
+          render: <Input placeholder="Enter room ID"/>
+        },
+        {
+          name: "name",
+          props: {
+            style: { width: "50%" }
+          },
+          render: <Input placeholder="Room name"/>
         }
       ]}/>
 
