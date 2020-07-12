@@ -150,7 +150,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
       </div>
 
       <h2>About the event</h2>
-      <p><ReactMarkdown>{parse(event.description || "")}</ReactMarkdown></p>
+      <div><ReactMarkdown>{parse(event.description || "")}</ReactMarkdown></div>
 
       <h2>Rooms:</h2>
       <div className="event__rooms">
