@@ -18,7 +18,6 @@ interface Props {
 const EventCard: React.FunctionComponent<Props> = (props) => {
 
   const { saved = null, event, onClick = () => {}, onSaveClick = () => {} } = props;
-  console.log(event.name, { saved });
 
   const month = moment(event.startDate).format("MMM").toUpperCase();
   const date = moment(event.startDate).format("DD");
