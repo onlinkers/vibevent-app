@@ -6,6 +6,7 @@ import moment from "moment";
 import {
   message,
   Button,
+  Popconfirm
 } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import EventForm from "components/Event/form";
@@ -85,6 +86,15 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
 
     message.success("Event edited!");
     history.goBack();
+
+  };
+
+  const deleteEvent = async (eventId) => {
+    
+    await eventService.deleteEvent({ id: eventId });
+
+    message.success("Event deleted!");
+    history.push("/event/dashboard");
 
   };
 
@@ -186,6 +196,15 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
                   tags: thisEvent.tags?.hostTags
                 }}
               />
+              <br />
+              <Popconfirm
+                title="Are you sure delete this event? You cannot undo this action."
+                onConfirm={() => deleteEvent(thisEvent._id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button danger>Delete Event</Button>
+              </Popconfirm>
             </div>
             <EventDetailsCard
               event={thisEvent}

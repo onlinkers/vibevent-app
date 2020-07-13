@@ -30,7 +30,7 @@ interface Props {
 
 const EventForm: React.FunctionComponent<Props> = (props) => {
 
-  const { onSubmit, eventCategories, initialValues, onChange = () => {} } = props;
+  const { mode, onSubmit, eventCategories, initialValues, onChange = () => {} } = props;
   // const initialVenueCoordinates = (initialValues && initialValues.venueCoordinates) || null;
 
   const [form] = Form.useForm();
@@ -236,7 +236,9 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
           <Upload />
         </Form.Item> */}
 
-      <Button type="primary" htmlType="submit" disabled={isSubmitting}>Submit</Button>
+      <Button type="primary" htmlType="submit" disabled={isSubmitting}>
+        {mode === "CREATE" ? "Create Event" : "Edit Event"}
+      </Button>
     </Form>
   );
 };
