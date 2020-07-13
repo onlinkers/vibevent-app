@@ -11,4 +11,5 @@ export interface User {
     profilePhoto?: Image;
     eventsInvolved?: Event[];
     eventsCreated?: Event[];
+    eventsSaved?: Event[];
 }

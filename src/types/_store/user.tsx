@@ -21,6 +21,9 @@ export interface UserCreatePayload {
   username: string;
   email: string;
   profilePhoto?: Image;
+  eventsCreated?: Event[];
+  eventsInvolved?: Event[];
+  eventsSaved?: Event[];
 }
 
 // STORE STATE

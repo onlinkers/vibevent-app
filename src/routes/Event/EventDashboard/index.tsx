@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 // import { motion, useMotionValue, useTransform } from "framer-motion";
 
+import { Spin } from "antd";
+import { ReloadOutlined } from "@ant-design/icons";
 import QuickAccessMenu from "components/searchTools";
 import EventCard from "components/cards/largeCard/eventCard";
 import Sidebar from "components/layouts/sidebar/sidebar";
@@ -10,11 +12,13 @@ import Sidebar from "components/layouts/sidebar/sidebar";
 import "./index.scss";
 
 import { EventsPayload } from "types/store";
+import { User } from "types/props";
 import { fetchAllEvents } from "store/actions/eventActions";
-import { Spin } from "antd";
-import { ReloadOutlined } from "@ant-design/icons";
+import { fetchUserData, saveUserData } from "store/actions/userActions";
+import userService from "services/userService";
 
 interface Props {
+  user: User;
   events: EventsPayload;
   loading: boolean;
   errors: {
@@ -22,10 +26,12 @@ interface Props {
     eventCategories?: string;
   };
   fetchAllEvents: Function;
+  fetchUserData: Function;
+  saveUserData: Function;
 }
 
 const EventDashboard: React.FunctionComponent<Props> = (props) => {
-  const { events, loading, errors, fetchAllEvents } = props;
+  const { events, loading, errors, fetchAllEvents, fetchUserData, saveUserData, user } = props;
 
   const eventsArray = Object.values(events).slice(0, 5);
 
@@ -40,8 +46,28 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     history.push(`/event/${eventId}`);
   };
 
+  const saveEvent = async (eventId, save) => {
+
+    let newSavedEvents = user.eventsSaved || [];
+    let newSavedEventIds = user.eventsSaved
+      ? user.eventsSaved.map((savedEvent) => savedEvent._id)
+      : [];
+    if(save && !newSavedEventIds.includes(eventId)) {
+      newSavedEventIds.push(eventId);
+      newSavedEvents.push(events[eventId]);
+    }
+    else {
+      newSavedEventIds = newSavedEventIds.filter((id) => id !== eventId);
+      newSavedEvents = newSavedEvents.filter((e) => e._id !== eventId);
+    }
+    
+    await userService.saveEvent({ id: user._id, payload: { eventsSaved: newSavedEventIds } });
+    saveUserData({ ...user, eventsSaved: newSavedEvents });
+  };
+
   useEffect(() => {
     fetchAllEvents();
+    if(user?._id) fetchUserData(user._id);
   }, []); // eslint-disable-line
 
   const hasErrors = errors.events || events.eventCategories;
@@ -88,8 +114,10 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                       <EventCard
                         event={event}
                         key={event._id}
+                        saved={user.eventsSaved && !!user.eventsSaved.find((savedEvent) => String(event._id) === savedEvent._id )}
                         className="event-card"
                         onClick={() => { redirectToEvent(event._id); }}
+                        onSaveClick={saveEvent}
                       ></EventCard>
                     );
                   })}
@@ -139,10 +167,11 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-const mapStateToProps = ({ eventData }) => {
+const mapStateToProps = ({ eventData, userData }) => {
   return {
+    user: userData.user,
     events: eventData.events,
-    loading: eventData.loading,
+    loading: eventData.loading || userData.loading,
     errors: eventData.errors,
   };
 };
@@ -150,6 +179,8 @@ const mapStateToProps = ({ eventData }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllEvents: () => dispatch(fetchAllEvents()),
+    fetchUserData: (userId) => dispatch(fetchUserData(userId)),
+    saveUserData: (userData) => dispatch(saveUserData(userData))
   };
 };
 

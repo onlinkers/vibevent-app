@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Event } from "types/props";
 import { motion } from "framer-motion";
 import moment from "moment";
@@ -8,17 +8,17 @@ import { User } from "types/props";
 
 interface Props {
   event: Event;
-  favorited?: boolean;
+  saved?: boolean;
   loading?: boolean;
   onClick?: Function;
-  onButtonClick?: Function;
+  onSaveClick?: Function;
   [key: string]: any;
 }
 
 const EventCard: React.FunctionComponent<Props> = (props) => {
 
-  const { event, onClick = () => {} } = props;
-  const [isSaved, setIsSaved] = useState(false);
+  const { saved = null, event, onClick = () => {}, onSaveClick = () => {} } = props;
+  console.log(event.name, { saved });
 
   const month = moment(event.startDate).format("MMM").toUpperCase();
   const date = moment(event.startDate).format("DD");
@@ -71,14 +71,14 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
             </p>
           </div>
 
-          <button
-            className={isSaved ? "save-btn--active" : "save-btn"}
-            onClick={(e) => {
-              setIsSaved(!isSaved);
-            }}
-          >
-            {isSaved ? "Saved" : "Save"}
-          </button>
+          {saved !== null && (
+            <button
+              className={saved ? "save-btn--active" : "save-btn"}
+              onClick={() => { onSaveClick(event._id, !saved); }}
+            >
+              {saved ? "Saved" : "Save"}
+            </button>
+          )}
         </div>
       </motion.div>
     </React.Fragment>
