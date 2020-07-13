@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useState } from "react";
 import { Event } from "types/props";
 import { motion } from "framer-motion";
@@ -15,24 +16,24 @@ interface Props {
   [key: string]: any;
 }
 
-const EventCard: React.FunctionComponent<Props> = (props) => {
-
+const LargeEventCard: React.FunctionComponent<Props> = (props) => {
   const { event, onClick = () => {} } = props;
   const [isSaved, setIsSaved] = useState(false);
 
   const month = moment(event.startDate).format("MMM").toUpperCase();
   const date = moment(event.startDate).format("DD");
 
-  const hosts = event.hosts && event.hosts.length ? (event.hosts as User[]).map((host) => {
-    return `${host.firstName} ${host.lastName || ""}`;
-  }) : [];
+  const hosts =
+    event.hosts && event.hosts.length
+      ? (event.hosts as User[]).map((host) => {
+          return `${host.firstName} ${host.lastName || ""}`;
+        })
+      : [];
 
   const link = (e) => {
-    
     // dont launch event if the button was clicked
-    if((e.target as any).className.includes("btn")) return;
+    if ((e.target as any).className.includes("btn")) return;
     onClick();
-
   };
 
   return (
@@ -85,4 +86,4 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-export default EventCard;
+export default LargeEventCard;

@@ -92,6 +92,8 @@
   margin: 0;
   line-height: 125%;
   font-weight: 700;
+  white-space: normal;
+  font-size: 0.875em;
   @include tablet-landscape {
     font-size: 0.875em;
   }
@@ -105,6 +107,7 @@
   margin: 0;
   font-weight: bold;
   color: $red1;
+  font-size: 0.875em;
   @include tablet-landscape {
     font-size: 0.625em;
   }

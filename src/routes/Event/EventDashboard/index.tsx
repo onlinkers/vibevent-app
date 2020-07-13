@@ -1,11 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+// import { motion, useMotionValue, useTransform } from "framer-motion";
 
 import QuickAccessMenu from "components/searchTools";
-import LargeEventCard from "components/cards/largeCard/eventCard";
-import SmallEventCard from "components/cards/smallCard/eventCard";
+import LargeEventCard from "components/cards/largeEventCard/eventCard";
+import SmallEventCard from "components/cards/smallEventCard/eventCard";
 import Sidebar from "components/layouts/sidebar/sidebar";
 
 import "./index.scss";
@@ -50,17 +50,17 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const hasErrors = errors.events || events.eventCategories;
   // const hasErrors = true;
 
-  const x = useMotionValue(0);
-  const opacityRight = useTransform(
-    x,
-    [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
-    [1, 1, 0]
-  );
-  const opacityLeft = useTransform(
-    x,
-    [0, 20, (-window.innerWidth / 2) * 1.25],
-    [0, 1, 1]
-  );
+  // const x = useMotionValue(0);
+  // const opacityRight = useTransform(
+  //   x,
+  //   [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
+  //   [1, 1, 0]
+  // );
+  // const opacityLeft = useTransform(
+  //   x,
+  //   [0, 20, (-window.innerWidth / 2) * 1.25],
+  //   [0, 1, 1]
+  // );
 
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
@@ -85,39 +85,21 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="page-header">
               <h1>Dashboard</h1>
             </div>
-            <div className="events-category-mobile">
-              <h1 className="events-category-title-mobile">
-                Online Experiences
-              </h1>
-              <div className="events-frame-mobile">
-                <motion.div
-                  className="events-draggable"
-                  drag="x"
-                  dragConstraints={{
-                    left: (-window.innerWidth / 2) * 1.25,
-                    right: 0,
-                  }}
-                  dragTransition={{ bounceStiffness: 300, bounceDamping: 50 }}
-                  style={{ x }}
-                >
-                  {eventsArray.map((event) => {
-                    return (
-                      <SmallEventCard
-                        event={event}
-                        key={event._id}
-                      ></SmallEventCard>
-                    );
-                  })}
-                </motion.div>
+            <div className="events-category">
+              <h5>Online Experiences</h5>
+              <div className="events-frame">
+                {eventsArray.map((event) => {
+                  return (
+                    <SmallEventCard
+                      event={event}
+                      key={event._id}
+                      onClick={() => {
+                        redirectToEvent(event._id);
+                      }}
+                    ></SmallEventCard>
+                  );
+                })}
               </div>
-              <motion.div
-                className="gradient-fade gradient-fade-right"
-                style={{ opacity: opacityRight }}
-              ></motion.div>
-              <motion.div
-                className="gradient-fade gradient-fade-left"
-                style={{ opacity: opacityLeft }}
-              ></motion.div>
             </div>
           </div>
         ) : (

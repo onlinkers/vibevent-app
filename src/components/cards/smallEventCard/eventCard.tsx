@@ -10,7 +10,7 @@ interface Props {
   onClick?: Function;
 }
 
-const EventCard: React.FunctionComponent<Props> = (props) => {
+const SmallEventCard: React.FunctionComponent<Props> = (props) => {
   const { event, onClick = () => {} } = props;
   const month = moment(event?.startDate).format("MMM DD");
   return (
@@ -39,4 +39,4 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-export default EventCard;
+export default SmallEventCard;

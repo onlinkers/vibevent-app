@@ -11,31 +11,45 @@
 }
 
 .mobile-view {
+  /* mobile SCSS goes here */
+
   .page-header {
     position: relative;
     height: 10vh;
     width: 100%;
+    font-family: $primary-label;
+
     h1 {
       text-align: center;
       position: absolute;
       width: 100%;
       margin: 0;
       bottom: 20%;
-      font-size: 1.25em;
+      font-size: 1.5em;
+      font-weight: 700;
     }
   }
 
-  .events-category-mobile {
-    margin-left: 10%;
-    h1 {
-      font-size: 1.3em;
+  .events-category {
+    h5 {
+      font-family: $primary-label;
+      margin-left: 5%;
+      font-size: 1.125em;
+      font-weight: 700;
     }
   }
-  .events-frame-mobile {
+
+  .events-category:first-of-type {
+    margin-top: 10%;
+  }
+
+  .events-frame {
+    padding: 0 0 0 3%;
     display: flex;
     flex-direction: row;
     width: 100%;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
     white-space: nowrap;
     position: relative;
 
@@ -46,9 +60,16 @@
       white-space: nowrap;
     }
   }
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    /* make scrollbar transparent */
+  }
 }
 
 .desktop-view {
+  /* desktop SCSS goes here */
+
   .events-scroll {
     @extend .event-content;
 

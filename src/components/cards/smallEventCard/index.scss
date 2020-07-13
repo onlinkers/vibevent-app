@@ -1,17 +1,23 @@
 .small-card {
   position: relative;
   transition: 0.3s;
-  width: 45%;
-  height: 10vh;
   border-radius: 10px;
   background: #ffffff;
-  margin: 0 0 2.5% 2.5%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 2%;
   cursor: pointer;
+  min-width: 65%;
+  margin: 0 1.25% 0 1.25%;
+  height: 12vh;
+  padding: 2%;
+  @include tablet-landscape {
+    margin: 0 0 2.5% 2.5%;
+    padding: 2%;
+    min-width: 45%;
+    height: 10vh;
+  }
 
   .small-card-coverphoto {
     user-select: none;
