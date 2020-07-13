@@ -81,10 +81,14 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="text--unselectable">{errors.eventCategories}</div>
           </React.Fragment>
         ) : breakpoint === "mobile" ? (
-          <div className="events-scroll">
-            <h1 className="page-label-mobile">Activity Dashboard</h1>
+          <div className="mobile-view">
+            <div className="page-header">
+              <h1>Dashboard</h1>
+            </div>
             <div className="events-category-mobile">
-              <h1 className="events-category-title-mobile">Online Experiences</h1>
+              <h1 className="events-category-title-mobile">
+                Online Experiences
+              </h1>
               <div className="events-frame-mobile">
                 <motion.div
                   className="events-draggable"
@@ -117,7 +121,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             </div>
           </div>
         ) : (
-          <React.Fragment>
+          <div className="desktop-view">
             <div className="events-scroll">
               <div className="events-category">
                 <h1 className="events-category__title">Online Experiences</h1>
@@ -174,7 +178,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
               <br />
               Dashboard
             </h1>
-          </React.Fragment>
+          </div>
         ))}
     </div>
   );
