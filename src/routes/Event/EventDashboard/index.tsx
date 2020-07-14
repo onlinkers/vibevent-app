@@ -14,7 +14,7 @@ import { EventsPayload } from "types/store";
 import { fetchAllEvents } from "store/actions/eventActions";
 import { Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import { SizeContext } from "context/SizeContext";
+import { ThemeContext } from "context/SizeContext";
 
 interface Props {
   events: EventsPayload;
@@ -28,7 +28,7 @@ interface Props {
 
 const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const { events, loading, errors, fetchAllEvents } = props;
-  const { breakpoint } = useContext(SizeContext);
+  const { breakpoint } = useContext(ThemeContext);
 
   const eventsArray = Object.values(events).slice(0, 5);
 
@@ -85,20 +85,22 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="page-header">
               <h1>Dashboard</h1>
             </div>
-            <div className="events-category">
-              <h5>Online Experiences</h5>
-              <div className="events-frame">
-                {eventsArray.map((event) => {
-                  return (
-                    <SmallEventCard
-                      event={event}
-                      key={event._id}
-                      onClick={() => {
-                        redirectToEvent(event._id);
-                      }}
-                    ></SmallEventCard>
-                  );
-                })}
+            <div className="page-contents">
+              <div className="events-category">
+                <h5>Online Experiences</h5>
+                <div className="events-frame">
+                  {eventsArray.map((event) => {
+                    return (
+                      <SmallEventCard
+                        event={event}
+                        key={event._id}
+                        onClick={() => {
+                          redirectToEvent(event._id);
+                        }}
+                      ></SmallEventCard>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

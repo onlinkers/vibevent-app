@@ -15,49 +15,53 @@
 
   .page-header {
     position: relative;
-    height: 10vh;
+    height: 7.5vh;
+    @include phone-med-quality {
+      height: 8.5vh;
+    }
     width: 100%;
     font-family: $primary-label;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     h1 {
       text-align: center;
       position: absolute;
       width: 100%;
       margin: 0;
-      bottom: 20%;
+      top: 1.75vh;
       font-size: 1.5em;
       font-weight: 700;
     }
   }
 
-  .events-category {
-    h5 {
-      font-family: $primary-label;
-      margin-left: 5%;
-      font-size: 1.125em;
-      font-weight: 700;
-    }
-  }
-
-  .events-category:first-of-type {
-    margin-top: 10%;
-  }
-
-  .events-frame {
-    padding: 0 0 0 3%;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
+  .page-contents {
     position: relative;
+    width: 100%;
+    height: calc(100vh - 30px);
+    .events-category {
+      h5 {
+        font-family: $primary-label;
+        margin-left: 5%;
+        font-size: 1.125em;
+        font-weight: 700;
+      }
+    }
 
-    .events-draggable {
+    // .events-category:first-of-type {
+    //   margin-top: 10%;
+    // }
+
+    .events-frame {
+      padding: 0 0 0 3%;
       display: flex;
-      width: 100%;
       flex-direction: row;
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
       white-space: nowrap;
+      position: relative;
     }
   }
   ::-webkit-scrollbar {
@@ -141,5 +145,3 @@
     /* make scrollbar transparent */
   }
 }
-
-/* TEMP FEATURE */

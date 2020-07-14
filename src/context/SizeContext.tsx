@@ -7,15 +7,20 @@ interface ProviderProps {
 interface ContextProps {
   breakpoint: string;
   setBreakpoint: Function;
+  theme: string;
 }
 
-const SizeContext = createContext<ContextProps>({
+const ThemeContext = createContext<ContextProps>({
   breakpoint: "mobile",
   setBreakpoint: () => {},
+  theme: "light",
 });
 
-const SizeProvider: React.FunctionComponent<ProviderProps> = ({ children }) => {
+const ThemeProvider: React.FunctionComponent<ProviderProps> = ({
+  children,
+}) => {
   const [breakpoint, setBreakpoint] = useState("");
+  const [theme] = useState("light");
 
   const updateSize = () => {
     if (window.innerWidth < 600) {
@@ -36,15 +41,15 @@ const SizeProvider: React.FunctionComponent<ProviderProps> = ({ children }) => {
   useEffect(() => {
     updateSize();
     return () => {
-      console.log("windowWidth:", window.innerWidth, "breakpoint?", breakpoint);
+      // console.log("windowWidth:", window.innerWidth, "breakpoint?", breakpoint);
     };
   }, [breakpoint]);
 
   return (
-    <SizeContext.Provider value={{ breakpoint, setBreakpoint }}>
+    <ThemeContext.Provider value={{ breakpoint, setBreakpoint, theme }}>
       {children}
-    </SizeContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 
-export { SizeContext, SizeProvider };
+export { ThemeContext, ThemeProvider };
