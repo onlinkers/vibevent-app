@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import EventDetailsCard from "components/Event/cards/detailsCard";
 import QuickAccessMenu from "components/Event/searchTools";
-import Sidebar from "components/layouts/Sidebar";
+import Sidebar from "components/layouts/sidebar";
 import NotFound from "routes/NotFound";
 
 import { Spin } from "antd";

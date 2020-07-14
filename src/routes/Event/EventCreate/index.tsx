@@ -7,7 +7,7 @@ import {
 } from "antd";
 import EventForm from "components/Event/form";
 import EventDetailsCard from "components/Event/cards/detailsCard";
-import Sidebar from "components/layouts/Sidebar";
+import Sidebar from "components/layouts/sidebar";
 
 import "../form.scss";
 import { EventCategoriesPayload } from "types/store";

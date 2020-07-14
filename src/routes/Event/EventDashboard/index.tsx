@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import QuickAccessMenu from "components/Event/searchTools";
 import EventCard from "components/Event/cards/largeCard";
-import Sidebar from "components/layouts/Sidebar";
+import Sidebar from "components/layouts/sidebar";
 
 import "./index.scss";
 
