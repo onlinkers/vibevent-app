@@ -22,9 +22,13 @@
 
 @mixin card-desktop-title {
   font-family: $primary-label;
-  font-weight: bold;
+  font-weight: 700;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   @include tablet-landscape {
-    font-size: 0.75em;
+    font-size: 0.875em;
     line-height: 100%;
   }
   @include desktop {
@@ -94,6 +98,10 @@
   font-weight: 700;
   white-space: normal;
   font-size: 0.875em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   @include tablet-landscape {
     font-size: 0.875em;
   }

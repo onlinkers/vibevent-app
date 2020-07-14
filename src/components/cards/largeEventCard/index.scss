@@ -15,11 +15,20 @@
   // max-width: 60%;
   // max-height: 30vh;
   /* TEMP CHANGES FOLLOW */
-  min-width: 45%;
-  min-height: 30vh;
-  max-width: 45%;
-  max-height: 30vh;
   user-select: none;
+
+  @include tablet-landscape {
+    min-width: 45%;
+    min-height: 25vh;
+    max-width: 45%;
+    max-height: 25vh;
+  }
+  @include desktop {
+    min-width: 45%;
+    min-height: 30vh;
+    max-width: 45%;
+    max-height: 30vh;
+  }
   /* ------- */
 
   .event-image {
@@ -98,6 +107,8 @@
       border: 2px solid $red1;
       color: $red1;
       outline: none;
+      display: flex;
+      justify-content: center;
       @include card-save-btn;
       @include tablet-landscape {
         border-radius: 5px;

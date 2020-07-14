@@ -30,7 +30,8 @@ const SmallEventCard: React.FunctionComponent<Props> = (props) => {
         <div className="small-card-description">
           <p className="description-date">{month}</p>
           <p className="description-title">
-            {event?.name.slice(0, 35) + (event?.name.length > 35 ? "..." : "")}
+            {/* {event?.name.slice(0, 35) + (event?.name.length > 35 ? "..." : "")} */}
+            {event?.name}
           </p>
           <p className="description-host">UBC SISA</p>
         </div>

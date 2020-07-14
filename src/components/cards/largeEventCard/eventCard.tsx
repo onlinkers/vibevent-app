@@ -63,8 +63,9 @@ const LargeEventCard: React.FunctionComponent<Props> = (props) => {
           </h3>
           <div className="event-title-hosts">
             <p className="event-title">
-              {event?.name.slice(0, 37) +
-                (event?.name.length > 37 ? "..." : "")}
+              {/* {event?.name.slice(0, 37) +
+                (event?.name.length > 37 ? "..." : "")} */}
+              {event?.name}
             </p>
             <p className="event-host">
               {hosts.join(", ").slice(0, 20) +

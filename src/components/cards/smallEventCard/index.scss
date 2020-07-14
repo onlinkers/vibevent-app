@@ -43,6 +43,7 @@
     }
 
     .description-title {
+      max-height: 50%;
       @include small-card-title;
     }
 
