@@ -203,7 +203,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
                 okText="Yes"
                 cancelText="No"
               >
-                <Button danger>Delete Event</Button>
+                <Button className="delete-button" danger>Delete Event</Button>
               </Popconfirm>
             </div>
             <EventDetailsCard
