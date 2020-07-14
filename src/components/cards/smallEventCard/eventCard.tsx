@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import moment from "moment";
 import { motion } from "framer-motion";
 
 import "./index.scss";
 import { Event } from "types/props";
+import { ThemeContext } from "context/ThemeContext";
 
 interface Props {
   event: Event;
@@ -11,13 +12,14 @@ interface Props {
 }
 
 const SmallEventCard: React.FunctionComponent<Props> = (props) => {
+  const { breakpoint } = useContext(ThemeContext);
   const { event, onClick = () => {} } = props;
   const month = moment(event?.startDate).format("MMM DD");
   return (
     <>
       <motion.div
         className="small-card"
-        whileHover={{ scale: 1.1 }}
+        whileHover={breakpoint === "desktop" ? { scale: 1.1 } : {}}
         whileTap={{ scale: 1 }}
         transition={{ duration: 0.001 }}
         onClick={() => onClick()}

@@ -14,7 +14,7 @@ import { EventsPayload } from "types/store";
 import { fetchAllEvents } from "store/actions/eventActions";
 import { Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import { ThemeContext } from "context/SizeContext";
+import { ThemeContext } from "context/ThemeContext";
 
 interface Props {
   events: EventsPayload;

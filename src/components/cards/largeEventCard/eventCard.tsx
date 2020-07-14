@@ -1,11 +1,12 @@
 /* eslint-disable indent */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Event } from "types/props";
 import { motion } from "framer-motion";
 import moment from "moment";
 
 import "./index.scss";
 import { User } from "types/props";
+import { ThemeContext } from "context/ThemeContext";
 
 interface Props {
   event: Event;
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const LargeEventCard: React.FunctionComponent<Props> = (props) => {
+  const { breakpoint } = useContext(ThemeContext);
   const { event, onClick = () => {} } = props;
   const [isSaved, setIsSaved] = useState(false);
 
@@ -40,7 +42,7 @@ const LargeEventCard: React.FunctionComponent<Props> = (props) => {
     <React.Fragment>
       <motion.div
         className="event-card-ld"
-        whileHover={{ scale: 1.05 }}
+        whileHover={breakpoint === "desktop" ? { scale: 1.05 } : {}}
         transition={{ duration: 0.1 }}
         onClick={link}
       >
