@@ -59,8 +59,8 @@ A dotenv (`.env`) environmental file needs to be created at `root`
 > You can do this easily by copying and renaming one of the existing files, such as `.env.default`
 
 - `.env.default` will rely on a local development space, and require the API to be running locally alongside the app
-- `.env.stage` will rely on an external instance of the API to be running, which makes use of the stage database
-- (WITH CAUTION) `.env.prod` will also rely on an external instance of the API to be running, which makes use of the production database
+- `.env.stage` will rely on an external instance of the API to be running, which makes use of the API in the stage environment
+- (WITH CAUTION) `.env.prod` will also rely on an external instance of the API to be running in the production environment
 
 ### Components and Utilities
 
@@ -78,25 +78,34 @@ When a service is used, the function will return a promise, which can then be us
 
 ### Styles
 
-Styles are written **inside** `.css` or `.scss` files alongside each component file
+Styles are written **inside** or `.scss` files alongside each component file
 
-Overwrites to libraries or global style variables and constants can be wrriten in `src/assets/scss`, which is pre-pended in the root component
+Overwrites to libraries or global style variables and constants can be written in `src/assets/scss`, which is pre-pended in the root component. We utilize scss mixins and variables, which can be included anywhere in the application (eg: `@include tablet-portrait` for mixins and `color: $gray1` for variables)
+
+Other than scss breakpoints, the same logic is replicated in the `breakpoint` state in `ThemeContext`, which can also be used anywhere throughout the app.
 
 ## Deployment
 
-None yet. Application's `master` branch is currently built on Netlify for live viewing. Build settings can be accessed ONLY through the onlinker-admin netlify account. Netlify teams has a billing plan which we are too cheap to purchase as of now.
-
-Our custom domain is: https://onlinker-domain.live
+### Building
 
 Run `npm run build` to minify and compile the application for production. Build location is in the `build` folder
 
+### Stage and Production Deployment
+
+The application's `master` branch is currently built on Netlify for live viewing/testing. Build settings can be accessed ONLY through the onlinker-admin netlify account. Netlify teams has a billing plan which we are too cheap to purchase as of now.
+
+Our application in stage environment can be accessed on: https://vibevent-stage.netlify.app
+
+To deploy the application to our `production` environment, a Github release can be done on the GUI, which automatically updates the `prod` branch with the most recent updates on `master`. This process should be automatically conducted by Github Actions.
+
 ## Contributing
+
 Contributions are only accepted from members of the [team](https://github.com/orgs/onlinkers/people). Instructions to start contributing are as follows:
 
 1. Clone the remote repository into a local environment
 2. Setup the repository (instructions [here](#getting-started))
 3. Make the appropriate edits and additions
-4. Submit pull requests with a detailed commit message of what additions were made
+4. Submit pull requests using one of the templates, and with a detailed commit message of what additions were made
 --> Pull requests will be accepted after being reviewed and after the appropriate tests are conducted
 
 ### Built With

@@ -13,6 +13,7 @@ import { fetchAllEventData } from "store/actions/eventActions";
 
 /* UTILITIES */
 import { AppProvider } from "context/AppContext";
+import { ThemeProvider } from "context/ThemeContext";
 import awsconfig from "./aws-config.js";
 
 /* STYLESHEETS */
@@ -49,9 +50,11 @@ ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
     <AppProvider>
-      <div className="App">
-        <Routes />
-      </div>
+      <ThemeProvider>
+        <div className="App">
+          <Routes />
+        </div>
+      </ThemeProvider>
     </AppProvider>
   </Provider>,
   // </React.StrictMode>
