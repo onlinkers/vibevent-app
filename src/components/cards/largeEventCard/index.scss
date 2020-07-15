@@ -17,6 +17,10 @@
   /* TEMP CHANGES FOLLOW */
   user-select: none;
 
+  min-width: 45%;
+  max-width: 45%;
+  min-height: 25vh;
+  max-height: 25vh;
   @include tablet-landscape {
     min-width: 45%;
     min-height: 25vh;
@@ -82,8 +86,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding: 0 3% 0 5%;
       @include tablet-landscape {
-        padding: 0 3% 0 5%;
       }
       @include desktop {
         padding: 0 3%;

@@ -8,6 +8,10 @@
   right: 2.5%;
   text-align: right;
   user-select: none;
+  @include tablet-portrait {
+    line-height: 115%;
+    font-size: 3em;
+  }
   @include tablet-landscape {
     line-height: 115%;
     font-size: 4.5em;
@@ -27,6 +31,10 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  @include tablet-portrait {
+    font-size: 1em;
+    line-height: 1em;
+  }
   @include tablet-landscape {
     font-size: 0.875em;
     line-height: 100%;
@@ -96,7 +104,6 @@
   margin: 0;
   line-height: 1em;
   font-weight: 700;
-  // min-height: 50%;
   white-space: normal;
   font-size: 0.875em;
   display: -webkit-box;
