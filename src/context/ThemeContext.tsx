@@ -40,9 +40,6 @@ const ThemeProvider: React.FunctionComponent<ProviderProps> = ({
 
   useEffect(() => {
     updateSize();
-    return () => {
-      // console.log("windowWidth:", window.innerWidth, "breakpoint?", breakpoint);
-    };
   }, [breakpoint]);
 
   return (
