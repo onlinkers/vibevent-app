@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Event } from "types/props";
 import { motion } from "framer-motion";
 import moment from "moment";
@@ -10,17 +10,21 @@ import { ThemeContext } from "context/ThemeContext";
 
 interface Props {
   event: Event;
-  favorited?: boolean;
+  saved?: boolean;
   loading?: boolean;
   onClick?: Function;
-  onButtonClick?: Function;
+  onSaveClick?: Function;
   [key: string]: any;
 }
 
 const LargeEventCard: React.FunctionComponent<Props> = (props) => {
+  const {
+    saved = null,
+    event,
+    onClick = () => {},
+    onSaveClick = () => {},
+  } = props;
   const { breakpoint } = useContext(ThemeContext);
-  const { event, onClick = () => {} } = props;
-  const [isSaved, setIsSaved] = useState(false);
 
   const month = moment(event.startDate).format("MMM").toUpperCase();
   const date = moment(event.startDate).format("DD");
@@ -72,14 +76,16 @@ const LargeEventCard: React.FunctionComponent<Props> = (props) => {
             </p>
           </div>
 
-          <button
-            className={isSaved ? "save-btn--active" : "save-btn"}
-            onClick={(e) => {
-              setIsSaved(!isSaved);
-            }}
-          >
-            {isSaved ? "Saved" : "Save"}
-          </button>
+          {saved !== null && (
+            <button
+              className={saved ? "save-btn--active" : "save-btn"}
+              onClick={() => {
+                onSaveClick(event._id, !saved);
+              }}
+            >
+              {saved ? "Saved" : "Save"}
+            </button>
+          )}
         </div>
       </motion.div>
     </React.Fragment>

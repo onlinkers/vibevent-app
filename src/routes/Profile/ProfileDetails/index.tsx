@@ -21,7 +21,7 @@ const ProfileDetails = (props: Props) => {
   const { user, onSave, redirectEvents, logOut } = props;
 
   // editable states
-  const { profilePhoto, eventsCreated, eventsInvolved } = user;
+  const { profilePhoto, eventsCreated, eventsInvolved, eventsSaved } = user;
 
   const imageSrc = profilePhoto?.baseSrc || DefaultAvatar;
 
@@ -39,6 +39,7 @@ const ProfileDetails = (props: Props) => {
     // need to turn into an array of strings first
     const eventsInvolvedIds = eventsInvolved?.map((event) => event._id);
     const eventsCreatedIds = eventsCreated?.map((event) => event._id);
+    const eventsSavedIds = eventsSaved?.map((event) => event._id);
 
     await onSave({
       id: userId,
@@ -51,6 +52,7 @@ const ProfileDetails = (props: Props) => {
         profilePhoto,
         eventsInvolved: eventsInvolvedIds,
         eventsCreated: eventsCreatedIds,
+        eventsSaved: eventsSavedIds,
       },
     });
     setEditable(false);
@@ -196,6 +198,28 @@ const ProfileDetails = (props: Props) => {
                 />
               ))}
             {(!eventsInvolved || !eventsInvolved.length) && (
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}>
+                <Button type="primary" onClick={() => redirectEvents()}>
+                  Find Events!
+                </Button>
+              </Empty>
+            )}
+          </Collapse.Panel>
+        </Collapse>
+        <Collapse defaultActiveKey={[]} className="events-panel">
+          <Collapse.Panel
+            header="Events You've Saved:"
+            key="saved"
+            forceRender
+          >
+            {eventsSaved &&
+              eventsSaved.map((event) => (
+                <TinyEventCard
+                  key={event._id}
+                  event={event}
+                />
+              ))}
+            {(!eventsSaved || !eventsSaved.length) && (
               <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}>
                 <Button type="primary" onClick={() => redirectEvents()}>
                   Find Events!
