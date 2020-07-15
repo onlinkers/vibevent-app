@@ -51,4 +51,13 @@ export default {
       throw err;
     }
   },
+  saveEvent: async ({ id, payload }) => {
+    try {
+      const results = await api.patch(`/user/${id}/events_saved`, payload);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
+  },
 };
