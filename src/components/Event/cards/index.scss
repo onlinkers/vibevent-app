@@ -15,17 +15,26 @@
   // max-width: 60%;
   // max-height: 30vh;
   /* TEMP CHANGES FOLLOW */
-  min-width: 45%;
-  min-height: 30vh;
-  max-width: 45%;
-  max-height: 30vh;
   user-select: none;
+
+  min-width: 45%;
+  max-width: 45%;
+  height: 30vh;
+  min-height: 10em;
+  max-height: 20em;
+  @include tablet-landscape {
+    min-height: 8em;
+  }
+  @include desktop {
+    min-height: 6em;
+  }
   /* ------- */
 
   .event-image {
     height: 70%;
     position: absolute;
     top: 0;
+    width: 100%;
     overflow: hidden;
 
     .event-image__img {
@@ -41,7 +50,8 @@
     bottom: 0;
     background: white;
     width: 100%;
-    height: 30%;
+    height: fit-content;
+    min-height: 30%;
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -69,12 +79,12 @@
 
     .event-title-hosts {
       width: 60%;
-      height: 100%;
+      height: fit-content;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding: 0 3% 0 5%;
       @include tablet-landscape {
-        padding: 0 3% 0 5%;
       }
       @include desktop {
         padding: 0 3%;
@@ -93,11 +103,14 @@
 
     .save-btn {
       width: 25%;
-      height: 50%;
+      height: fit-content;
       background-color: white;
       border: 2px solid $red1;
       color: $red1;
       outline: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       @include card-save-btn;
       @include tablet-landscape {
         border-radius: 5px;
@@ -133,9 +146,8 @@
   .event-card-small-coverphoto {
     user-select: none;
     width: 25%;
-    height: 100%;
+    height: 5em;
     object-fit: cover;
-    // background: black;
     border-radius: 10px;
   }
 
@@ -209,5 +221,58 @@
     right: 0;
     margin-right: 1em;
     margin-top: 4%;
+  }
+}
+
+.event-card-small {
+  position: relative;
+  transition: 0.3s;
+  border-radius: 10px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  min-width: 65%;
+  margin: 0 1.25% 0 1.25%;
+  height: fit-content;
+  padding: 2%;
+  @include tablet-landscape {
+    margin: 0 0 2.5% 2.5%;
+    padding: 2%;
+    width: 45%;
+    min-width: unset;
+    height: fit-content;
+  }
+
+  .small-card-coverphoto {
+    user-select: none;
+    width: 25%;
+    height: 4em;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .small-card-description {
+    user-select: none;
+    width: 70%;
+    margin-left: 2%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .description-date {
+      @include small-card-date;
+    }
+
+    .description-title {
+      @include small-card-title;
+    }
+
+    .description-host {
+      @include small-card-host;
+    }
   }
 }

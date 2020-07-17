@@ -1,20 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 // import { motion, useMotionValue, useTransform } from "framer-motion";
 
+import { Spin } from "antd";
+import { ReloadOutlined } from "@ant-design/icons";
 import QuickAccessMenu from "components/Event/searchTools";
-import EventCard from "components/Event/cards/largeCard";
+import LargeEventCard from "components/Event/cards/largeCard";
+import SmallEventCard from "components/Event/cards/smallCard";
 import Sidebar from "components/layouts/sidebar";
 
 import "./index.scss";
+import { ThemeContext } from "context/ThemeContext";
 
 import { EventsPayload } from "types/store";
+import { User } from "types/props";
 import { fetchAllEvents } from "store/actions/eventActions";
-import { Spin } from "antd";
-import { ReloadOutlined } from "@ant-design/icons";
+import { fetchUserData, saveUserData } from "store/actions/userActions";
+import userService from "services/userService";
 
 interface Props {
+  user: User;
   events: EventsPayload;
   loading: boolean;
   errors: {
@@ -22,10 +28,21 @@ interface Props {
     eventCategories?: string;
   };
   fetchAllEvents: Function;
+  fetchUserData: Function;
+  saveUserData: Function;
 }
 
 const EventDashboard: React.FunctionComponent<Props> = (props) => {
-  const { events, loading, errors, fetchAllEvents } = props;
+  const {
+    events,
+    loading,
+    errors,
+    fetchAllEvents,
+    fetchUserData,
+    saveUserData,
+    user,
+  } = props;
+  const { breakpoint } = useContext(ThemeContext);
 
   const eventsArray = Object.values(events);
 
@@ -40,8 +57,29 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     history.push(`/event/${eventId}`);
   };
 
+  const saveEvent = async (eventId, save) => {
+    let newSavedEvents = user.eventsSaved || [];
+    let newSavedEventIds = user.eventsSaved
+      ? user.eventsSaved.map((savedEvent) => savedEvent._id)
+      : [];
+    if (save && !newSavedEventIds.includes(eventId)) {
+      newSavedEventIds.push(eventId);
+      newSavedEvents.push(events[eventId]);
+    } else {
+      newSavedEventIds = newSavedEventIds.filter((id) => id !== eventId);
+      newSavedEvents = newSavedEvents.filter((e) => e._id !== eventId);
+    }
+
+    await userService.saveEvent({
+      id: user._id,
+      payload: { eventsSaved: newSavedEventIds },
+    });
+    saveUserData({ ...user, eventsSaved: newSavedEvents });
+  };
+
   useEffect(() => {
     fetchAllEvents();
+    if (user?._id) fetchUserData(user._id);
   }, []); // eslint-disable-line
 
   const hasErrors = errors.events || events.eventCategories;
@@ -77,20 +115,53 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="text--unselectable">{errors.events}</div>
             <div className="text--unselectable">{errors.eventCategories}</div>
           </React.Fragment>
+        ) : breakpoint === "mobile" ? (
+          <div className="mobile-view">
+            <div className="page-header">
+              <h1>Dashboard</h1>
+            </div>
+            <div className="page-contents">
+              <div className="events-category">
+                <h5>Online Experiences</h5>
+                <div className="events-frame">
+                  {eventsArray.map((event) => {
+                    return (
+                      <SmallEventCard
+                        event={event}
+                        key={event._id}
+                        onClick={() => {
+                          redirectToEvent(event._id);
+                        }}
+                      ></SmallEventCard>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
         ) : (
-          <React.Fragment>
+          <div className="desktop-view">
             <div className="events-scroll">
               <div className="events-category">
                 <h1 className="events-category__title">Online Experiences</h1>
                 <div className="events-frame--no-scroll">
                   {eventsArray.map((event) => {
                     return (
-                      <EventCard
+                      <LargeEventCard
                         event={event}
                         key={event._id}
+                        saved={
+                          user.eventsSaved &&
+                          !!user.eventsSaved.find(
+                            (savedEvent) => String(event._id) === savedEvent._id
+                          )
+                        }
                         className="event-card"
-                        onClick={() => { redirectToEvent(event._id); }}
-                      ></EventCard>
+                        onClick={() => {
+                          redirectToEvent(event._id);
+                        }}
+                        onSaveClick={saveEvent}
+                      ></LargeEventCard>
                     );
                   })}
                 </div>
@@ -133,16 +204,17 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
               <br />
               Dashboard
             </h1>
-          </React.Fragment>
+          </div>
         ))}
     </div>
   );
 };
 
-const mapStateToProps = ({ eventData }) => {
+const mapStateToProps = ({ eventData, userData }) => {
   return {
+    user: userData.user,
     events: eventData.events,
-    loading: eventData.loading,
+    loading: eventData.loading || userData.loading,
     errors: eventData.errors,
   };
 };
@@ -150,6 +222,8 @@ const mapStateToProps = ({ eventData }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllEvents: () => dispatch(fetchAllEvents()),
+    fetchUserData: (userId) => dispatch(fetchUserData(userId)),
+    saveUserData: (userData) => dispatch(saveUserData(userData)),
   };
 };
 

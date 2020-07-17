@@ -1,45 +1,52 @@
-import React, { useState } from "react";
+/* eslint-disable indent */
+import React, { useContext } from "react";
 import { Event } from "types/props";
 import { motion } from "framer-motion";
 import moment from "moment";
 
 import "./index.scss";
 import { User } from "types/props";
+import { ThemeContext } from "context/ThemeContext";
 
 interface Props {
   event: Event;
-  favorited?: boolean;
+  saved?: boolean;
   loading?: boolean;
   onClick?: Function;
-  onButtonClick?: Function;
+  onSaveClick?: Function;
   [key: string]: any;
 }
 
-const EventCard: React.FunctionComponent<Props> = (props) => {
-
-  const { event, onClick = () => {} } = props;
-  const [isSaved, setIsSaved] = useState(false);
+const LargeEventCard: React.FunctionComponent<Props> = (props) => {
+  const {
+    saved = null,
+    event,
+    onClick = () => {},
+    onSaveClick = () => {},
+  } = props;
+  const { breakpoint } = useContext(ThemeContext);
 
   const month = moment(event.startDate).format("MMM").toUpperCase();
   const date = moment(event.startDate).format("DD");
 
-  const hosts = event.hosts && event.hosts.length ? (event.hosts as User[]).map((host) => {
-    return `${host.firstName} ${host.lastName || ""}`;
-  }) : [];
+  const hosts =
+    event.hosts && event.hosts.length
+      ? (event.hosts as User[]).map((host) => {
+          return `${host.firstName} ${host.lastName || ""}`;
+        })
+      : [];
 
   const link = (e) => {
-    
     // dont launch event if the button was clicked
-    if((e.target as any).className.includes("btn")) return;
+    if ((e.target as any).className.includes("btn")) return;
     onClick();
-
   };
 
   return (
     <React.Fragment>
       <motion.div
         className="event-card-large"
-        whileHover={{ scale: 1.05 }}
+        whileHover={breakpoint === "desktop" ? { scale: 1.05 } : {}}
         transition={{ duration: 0.1 }}
         onClick={link}
       >
@@ -62,27 +69,27 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
           </h3>
           <div className="event-title-hosts">
             <p className="event-title">
-              {event?.name.slice(0, 37) +
-                (event?.name.length > 37 ? "..." : "")}
+              {event?.name}
             </p>
             <p className="event-host">
-              {hosts.join(", ").slice(0, 20) +
-                (hosts.join(", ").length > 20 ? "..." : "")}
+              {hosts.join(", ")}
             </p>
           </div>
 
-          <button
-            className={isSaved ? "save-btn--active" : "save-btn"}
-            onClick={(e) => {
-              setIsSaved(!isSaved);
-            }}
-          >
-            {isSaved ? "Saved" : "Save"}
-          </button>
+          {saved !== null && (
+            <button
+              className={saved ? "save-btn--active" : "save-btn"}
+              onClick={() => {
+                onSaveClick(event._id, !saved);
+              }}
+            >
+              {saved ? "Saved" : "Save"}
+            </button>
+          )}
         </div>
       </motion.div>
     </React.Fragment>
   );
 };
 
-export default EventCard;
+export default LargeEventCard;

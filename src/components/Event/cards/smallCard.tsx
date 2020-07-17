@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import moment from "moment";
 import { motion } from "framer-motion";
 
 import "./index.scss";
 import { Event } from "types/props";
+import { ThemeContext } from "context/ThemeContext";
 
 interface Props {
   event: Event;
   onClick?: Function;
 }
 
-const EventCard: React.FunctionComponent<Props> = (props) => {
+const SmallEventCard: React.FunctionComponent<Props> = (props) => {
+  const { breakpoint } = useContext(ThemeContext);
   const { event, onClick = () => {} } = props;
   const month = moment(event?.startDate).format("MMM DD");
   return (
     <>
       <motion.div
         className="event-card-small"
-        whileHover={{ scale: 1.1 }}
+        whileHover={breakpoint === "desktop" ? { scale: 1.1 } : {}}
         whileTap={{ scale: 1 }}
         transition={{ duration: 0.001 }}
         onClick={() => onClick()}
@@ -30,7 +32,7 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
         <div className="event-card-small-description">
           <p className="description-date">{month}</p>
           <p className="description-title">
-            {event?.name.slice(0, 35) + (event?.name.length > 35 ? "..." : "")}
+            {event?.name}
           </p>
           <p className="description-host">UBC SISA</p>
         </div>
@@ -39,4 +41,4 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-export default EventCard;
+export default SmallEventCard;

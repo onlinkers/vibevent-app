@@ -7,6 +7,7 @@ import { Auth } from "aws-amplify";
 // import Home from "./Home";
 import Events from "./Event";
 // import Discover from "./Discover";
+
 import Rooms from "./Rooms";
 import Profile from "./Profile";
 import Authentication from "./Authentication";

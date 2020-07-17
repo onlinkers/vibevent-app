@@ -19,7 +19,6 @@ interface Props {
 }
 
 const SearchTools: React.FunctionComponent<Props> = (props) => {
-  
   const { events = {} } = props;
   const history = useHistory();
 
@@ -42,11 +41,15 @@ const SearchTools: React.FunctionComponent<Props> = (props) => {
         </div>
         <div className="card-previews-container">
           {eventsArray.slice(0, 2).map((event) => {
-            return <SmallEventCard
-              event={event}
-              key={event._id}
-              onClick={() => { history.push(`/event/${event._id}`)}}
-            />;
+            return (
+              <SmallEventCard
+                event={event}
+                key={event._id}
+                onClick={() => {
+                  history.push(`/event/${event._id}`);
+                }}
+              />
+            );
           })}
         </div>
       </div>
