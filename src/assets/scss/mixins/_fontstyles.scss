@@ -145,3 +145,53 @@
     font-size: 0.75em;
   }
 }
+
+/* MEDIUM CARD */
+
+@mixin medium-card-title {
+  font-family: $primary-label;
+  color: $dark;
+  margin: 0;
+  line-height: 1em;
+  font-weight: 700;
+  white-space: normal;
+  font-size: 0.875em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  @include tablet-landscape {
+    font-size: 0.875em;
+  }
+  @include desktop {
+    font-size: 0.875em;
+  }
+}
+
+@mixin medium-card-date {
+  font-family: $primary-label;
+  margin: 0;
+  font-weight: bold;
+  color: $red1;
+  font-size: 0.875em;
+  @include tablet-landscape {
+    font-size: 0.625em;
+  }
+  @include desktop {
+    font-size: 0.625em;
+  }
+}
+
+@mixin medium-card-host {
+  font-family: $primary-label;
+  margin: 0;
+  font-weight: 500;
+  color: #a5a7bd;
+  @include tablet-landscape {
+    font-size: 0.525em;
+  }
+  @include desktop {
+    font-size: 0.65em;
+  }
+}
