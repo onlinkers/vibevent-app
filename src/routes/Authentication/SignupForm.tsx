@@ -38,7 +38,8 @@ const SignupForm: React.FunctionComponent<Props> = () => {
         family_name: lastName || "",
         email,
         preferred_username: username || "",
-        "custom:mongoid": userId
+        "custom:mongoid": userId,
+        "custom:role": "USER"
       }
     });
 

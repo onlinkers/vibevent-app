@@ -34,6 +34,7 @@ const LoginForm: React.FunctionComponent<Props> = (props) => {
     else {
       saveUserData({
         _id: user.attributes["custom:mongoid"],
+        role: user.attributes["custom:role"],
         username: user.attributes.preferred_username,
         email: user.attributes.email,
         firstName: user.attributes.given_name,
