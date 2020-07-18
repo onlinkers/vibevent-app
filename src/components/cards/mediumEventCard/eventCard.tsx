@@ -6,6 +6,9 @@ import "./index.scss";
 import { Event } from "types/props";
 import { ThemeContext } from "context/ThemeContext";
 
+import shareIcon from "../../../assets/icons/share.svg";
+import bookmarkIcon from "../../../assets/icons/bookmark.svg";
+
 interface Props {
   event: Event;
   onClick?: Function;
@@ -30,12 +33,23 @@ const MediumEventCard: React.FunctionComponent<Props> = (props) => {
           alt="eventCoverPhoto"
         />
         <div className="medium-card-description">
-          <p className="description-date">{month}</p>
-          <p className="description-title">
-            {event?.name}
-          </p>
-          <p className="description-host">UBC SISA</p>
+          <div className="description-text">
+            <p className="description-date">{month}</p>
+            <p className="description-title">
+              {event?.name}
+            </p>
+            <p className="description-host">UBC SISA</p>
+          </div>
+          <div className="description-options">
+            <a className="share-button">
+              <img src={shareIcon}/>
+            </a>
+            <a className="bookmark-button">
+              <img src={bookmarkIcon}/>
+            </a>
+          </div>
         </div>
+
       </motion.div>
     </>
   );
