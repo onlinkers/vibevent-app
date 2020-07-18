@@ -1,0 +1,54 @@
+.medium-card {
+    position: relative;
+    transition: 0.3s;
+    border-radius: 5px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    min-width: 55%;
+    margin: 0 1.25% 0 1.25%;
+    height: fit-content;
+    padding: 2%;
+    @include tablet-landscape {
+      margin: 0 0 2.5% 2.5%;
+      padding: 2%;
+      width: 45%;
+      min-width: unset;
+      height: fit-content;
+    }
+  
+    .medium-card-coverphoto {
+      user-select: none;
+      width: 100%;
+      height: 8em;
+      object-fit: cover;
+      // background: black;
+      border-radius: 5px;
+    }
+  
+    .medium-card-description {
+      user-select: none;
+      width: 100%;
+      margin: 4% 0 0 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  
+      .description-date {
+        @include small-card-date;
+      }
+  
+      .description-title {
+        @include small-card-title;
+      }
+  
+      .description-host {
+        @include small-card-host;
+      }
+    }
+  }
+  

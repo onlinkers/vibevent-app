@@ -7,6 +7,7 @@ import { Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import QuickAccessMenu from "components/searchTools";
 import LargeEventCard from "components/cards/largeEventCard/eventCard";
+import MediumEventCard from "components/cards/mediumEventCard/eventCard";
 import SmallEventCard from "components/cards/smallEventCard/eventCard";
 import Sidebar from "components/layouts/sidebar/sidebar";
 
@@ -121,6 +122,22 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
               <h1>Dashboard</h1>
             </div>
             <div className="page-contents">
+              <div className="events-category">
+                <h5>Suggested For You</h5>
+                <div className="events-frame">
+                  {eventsArray.map((event) => {
+                    return (
+                      <MediumEventCard
+                        event={event}
+                        key={event._id}
+                        onClick={() => {
+                          redirectToEvent(event._id);
+                        }}
+                      ></MediumEventCard>
+                    );
+                  })}
+                </div>
+              </div>
               <div className="events-category">
                 <h5>Online Experiences</h5>
                 <div className="events-frame">
