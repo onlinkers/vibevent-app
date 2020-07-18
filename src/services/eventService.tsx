@@ -41,15 +41,6 @@ export default {
       throw err;
     }
   },
-  updateEvent: async ({ id, payload }) => {
-    try {
-      const results = await api.patch(`/event/${id}`, payload);
-      return results;
-    } catch(err) {
-      apiErrorHandler(err);
-      throw err;
-    }
-  },
   deleteEvent: async ({ id }) => {
     try {
       const results = await api.delete(`/event/${id}`);

@@ -33,15 +33,6 @@ export default {
       throw err;
     }
   },
-  updateUser: async ({ id, payload }) => {
-    try {
-      const results = await api.patch(`/user/${id}`, payload);
-      return results;
-    } catch(err) {
-      apiErrorHandler(err);
-      throw err;
-    }
-  },
   deleteUser: async ({ id }) => {
     try {
       const results = await api.delete(`/user/${id}`);
