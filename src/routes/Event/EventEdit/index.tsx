@@ -3,10 +3,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
 
-import {
-  message,
-  Button,
-} from "antd";
+import popup from "popup";
+import { Button } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import EventForm from "components/forms/EventForm";
 
@@ -75,7 +73,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
     
     await eventService.setEvent({ id: eventId, payload });
 
-    message.success("Event edited!");
+    popup.success("Event changes saved!");
     history.goBack();
   };
 

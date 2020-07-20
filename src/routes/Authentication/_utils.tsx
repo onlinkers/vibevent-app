@@ -1,4 +1,4 @@
-import { message } from "antd";
+import popup from "popup";
 
 export const saveSessionToLocalStorage = (session) => {
       
@@ -21,7 +21,7 @@ export const checkCognitoUser = (user) => {
     }
   }
   catch(err) {
-    message.error(err.message);
+    popup.error("User authentication problem! Please contact our customer service team to resolve!", err.message);
     throw err;
   }
 };

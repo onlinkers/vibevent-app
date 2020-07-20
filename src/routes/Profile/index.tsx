@@ -3,7 +3,8 @@ import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { Button, message, Spin } from "antd";
+import popup from "popup";
+import { Button, Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import Sidebar from "components/layouts/sidebar/sidebar";
 import ProfileDetails from "./ProfileDetails";
@@ -37,7 +38,7 @@ const Profile: React.FunctionComponent<Props> = (props) => {
 
   const handleSave = async (payload) => {
     await userService.setUser(payload);
-    message.success("User saved!");
+    popup.success("User changes saved!");
   };
     
   const refreshPage = () => {

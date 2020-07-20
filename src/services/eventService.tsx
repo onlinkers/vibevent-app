@@ -1,5 +1,5 @@
 import api from "../api";
-import { apiErrorHandler } from "./_errorHandlers";
+import { apiErrorHandler } from "../popup";
 
 export default {
   getAllEvents: async () => {

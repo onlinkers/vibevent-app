@@ -2,9 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
-import {
-  message,
-} from "antd";
+import popup from "popup";
 import Sidebar from "components/layouts/sidebar/sidebar";
 import EventForm from "components/forms/EventForm";
 
@@ -60,7 +58,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
     await eventService.createEvent(payload);
 
-    message.success("Event created!");
+    popup.success("Event created!");
     history.goBack();
   };
 
