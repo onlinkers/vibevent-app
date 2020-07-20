@@ -9,10 +9,11 @@
   justify-content: space-between;
   cursor: pointer;
   min-width: 65%;
-  min-height: 10%;
+  height: 12vh;
   margin: 0 1.25% 0 1.25%;
   padding: 2%;
   @include tablet-landscape {
+    height: 10vh;
     margin: 0 0 2.5% 2.5%;
     padding: 2%;
     width: 45%;

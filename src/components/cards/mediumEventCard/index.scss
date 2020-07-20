@@ -10,7 +10,7 @@
   cursor: pointer;
   min-width: 75%;
   margin: 0 1.25% 0 1.25%;
-  min-height: 10%;
+  min-height: 15vh;
   padding: 2%;
   @include tablet-landscape {
     margin: 0 0 2.5% 2.5%;
@@ -59,29 +59,24 @@
       flex-direction: row;
       justify-content: flex-end;
       width: 40%;
+      align-items: center;
 
-      .share-button {
+      button {
+        outline: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 4%;
         padding: 0.3em 0.6em;
         height: 2.5em;
-        margin: 14% 5%;
-        background: rgba(255, 29, 88, 0.15);
         border-radius: 3px;
-
+        border: 0px;
         > img {
           width: 1.3em;
         }
       }
-
-      .bookmark-button {
-        padding: 0.3em 0.6em;
-        height: 2.5em;
-        margin: 14% 5%;
+      .share-button {
         background: rgba(255, 29, 88, 0.15);
-        border-radius: 3px;
-
-        > img {
-          width: 1.3em;
-        }
       }
     }
   }

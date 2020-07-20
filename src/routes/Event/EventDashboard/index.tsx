@@ -133,6 +133,13 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                         onClick={() => {
                           redirectToEvent(event._id);
                         }}
+                        saved={
+                          user.eventsSaved &&
+                          !!user.eventsSaved.find(
+                            (savedEvent) => String(event._id) === savedEvent._id
+                          )
+                        }
+                        onSaveClick={saveEvent}
                       ></MediumEventCard>
                     );
                   })}
