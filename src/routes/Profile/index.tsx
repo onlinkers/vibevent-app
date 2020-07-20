@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
@@ -13,11 +13,10 @@ import { User } from "types/props";
 
 import { AppContext } from "context/AppContext";
 import userService from "services/userService";
-import { clearUserData, fetchUserData } from "store/actions/userActions";
+import { clearUserData } from "store/actions/userActions";
 
 interface Props {
     clearUserData: Function;
-    fetchUserData: Function;
     loading: boolean,
     error: string,
     user: User;
@@ -27,13 +26,10 @@ const Profile: React.FunctionComponent<Props> = (props) => {
 
   const {
     clearUserData,
-    fetchUserData,
     loading,
     error,
     user
   } = props;
-
-  const userId = user?._id;
 
   const history = useHistory();
   const { session } = useContext(AppContext);
@@ -67,10 +63,6 @@ const Profile: React.FunctionComponent<Props> = (props) => {
     history.push("/");
   };
 
-  useEffect(() => {
-    if(userId) fetchUserData(userId);
-  }, []); // eslint-disable-line
-
   return (
     <div className="Page">
       <Sidebar />
@@ -103,8 +95,7 @@ const mapStateToProps = ({ userData }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    clearUserData: () => dispatch(clearUserData()),
-    fetchUserData: (userId) => dispatch(fetchUserData(userId))
+    clearUserData: () => dispatch(clearUserData())
   };
 };
 

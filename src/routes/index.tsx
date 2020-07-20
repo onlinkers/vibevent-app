@@ -16,19 +16,18 @@ import Forbidden from "./Forbidden";
 import Construction from "./Construction";
 import Landing from "./Landing";
 
-import { message } from "antd";
-
 import AuthRoute from "./AuthRoute";
 import { AppContext } from "context/AppContext";
-import { saveUserData, saveCognitoUser } from "store/actions/userActions";
+import { saveCognitoUser, fetchUserData } from "store/actions/userActions";
+import { saveSessionToLocalStorage, checkCognitoUser } from "./Authentication/_utils";
 
 interface Props {
-  saveUserData: Function;
   saveCognitoUser: Function;
+  fetchUserData: Function;
 }
 
 const Routes: React.FunctionComponent<Props> = (props) => {
-  const { saveUserData, saveCognitoUser } = props;
+  const { saveCognitoUser, fetchUserData } = props;
 
   const { session } = useContext(AppContext);
   const {
@@ -51,12 +50,6 @@ const Routes: React.FunctionComponent<Props> = (props) => {
     };
 
     try {
-      // save session data to local storage (for API calls)
-      const saveToLocalStorage = (session) => {
-        if (session.accessToken) localStorage.setItem("cognitoAccessToken", session.accessToken.jwtToken);
-        if (session.idToken) localStorage.setItem("cognitoIdToken", session.idToken.jwtToken);
-        if (session.refreshToken) localStorage.setItem("cognitoRefreshToken", session.refreshToken.token);
-      };
 
       // load the current session from Cognito and
       const loadSession = async () => {
@@ -66,20 +59,13 @@ const Routes: React.FunctionComponent<Props> = (props) => {
 
       const loadUser = async () => {
         const user = await Auth.currentAuthenticatedUser();
-        if (!user.attributes) {
-          message.error(
-            "There is a problem with the current Cognito user! It does not contain your id."
-          );
-        } else {
-          saveUserData({
-            _id: user.attributes["custom:mongoid"],
-            role: user.attributes["custom:role"],
-            username: user.attributes.preferred_username,
-            email: user.attributes.email,
-            firstName: user.attributes.given_name,
-            lastName: user.attributes.family_name,
-          });
-        }
+
+        // check the contents of the cognito user
+        checkCognitoUser(user);
+
+        // fetch user data from database and save into redux
+        const userId = user.attributes["custom:mongoid"];
+        fetchUserData(userId);
         saveCognitoUser(user);
       };
 
@@ -87,7 +73,7 @@ const Routes: React.FunctionComponent<Props> = (props) => {
       if (!isAuthenticated) {
         // Run
         loadSession()
-          .then(saveToLocalStorage)
+          .then(saveSessionToLocalStorage)
           .then(loadUser)
           .then(handleHasSession)
           .catch(handleNoSession);
@@ -126,8 +112,8 @@ const Routes: React.FunctionComponent<Props> = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveUserData: (payload) => dispatch(saveUserData(payload)),
     saveCognitoUser: (payload) => dispatch(saveCognitoUser(payload)),
+    fetchUserData: (userId) => dispatch(fetchUserData(userId))
   };
 };
 

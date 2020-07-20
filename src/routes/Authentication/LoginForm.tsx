@@ -3,15 +3,15 @@ import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
-import { message } from "antd";
 import Form, { TextInput } from "components/forms";
 
 import { AppContext } from "context/AppContext";
-import { saveUserData, saveCognitoUser } from "store/actions/userActions";
+import { saveCognitoUser, fetchUserData } from "store/actions/userActions";
+import { saveSessionToLocalStorage, checkCognitoUser } from "./_utils";
 
 interface Props {
-  saveUserData: Function;
   saveCognitoUser: Function;
+  fetchUserData: Function;
 }
 
 const LoginForm: React.FunctionComponent<Props> = (props) => {
@@ -19,36 +19,33 @@ const LoginForm: React.FunctionComponent<Props> = (props) => {
   const history = useHistory();
   const { session } = useContext(AppContext);
   const { setIsAuthenticated } = session;
-  const { saveUserData, saveCognitoUser } = props;
+  const { saveCognitoUser, fetchUserData } = props;
 
   const logIn = async (formValues) => {
-    const { email, password } = formValues;
-    if(!email || !password) return null;
+    try {
 
-    const user = await Auth.signIn(email, password);
-    const session = user.signInUserSession;
+      const { email, password } = formValues;
+      if(!email || !password) return null;
+  
+      const user = await Auth.signIn(email, password);
+      const session = user.signInUserSession;
+  
+      // check the contents of the cognito user
+      checkCognitoUser(user);
 
-    if(!user.attributes) {
-      message.error("There is a problem with the current Cognito user! It does not contain your id.");
+      // fetch user data from database and save into redux
+      const userId = user.attributes["custom:mongoid"];
+      fetchUserData(userId);
+      saveCognitoUser(user);
+
+      saveSessionToLocalStorage(session);
+
+    } catch(err) {
+
+      Auth.signOut();
+      throw err;
+
     }
-    else {
-      saveUserData({
-        _id: user.attributes["custom:mongoid"],
-        role: user.attributes["custom:role"],
-        username: user.attributes.preferred_username,
-        email: user.attributes.email,
-        firstName: user.attributes.given_name,
-        lastName: user.attributes.family_name
-      });
-    }
-    saveCognitoUser(user);
-
-    // Save the session tokens to localstorage
-    // TODO: Use cookies instead
-    // https://stackoverflow.com/questions/48983708/where-to-store-access-token-in-react-js
-    localStorage.setItem("cognitoAccessToken", session.accessToken.jwtToken);
-    localStorage.setItem("cognitoIdToken", session.idToken.jwtToken);
-    localStorage.setItem("cognitoRefreshToken", session.refreshToken.token);
 
   };
 
@@ -109,8 +106,8 @@ const LoginForm: React.FunctionComponent<Props> = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveUserData: (payload) => dispatch(saveUserData(payload)),
-    saveCognitoUser: (payload) => dispatch(saveCognitoUser(payload))
+    saveCognitoUser: (payload) => dispatch(saveCognitoUser(payload)),
+    fetchUserData: (userId) => dispatch(fetchUserData(userId))
   };
 };
 

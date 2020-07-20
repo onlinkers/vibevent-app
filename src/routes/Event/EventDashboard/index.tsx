@@ -77,6 +77,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     saveUserData({ ...user, eventsSaved: newSavedEvents });
   };
 
+  // Dashboard needs refreshing when opened
   useEffect(() => {
     fetchAllEvents();
     if (user?._id) fetchUserData(user._id);
