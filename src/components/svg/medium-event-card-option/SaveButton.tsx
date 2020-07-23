@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./index.scss";
 
 interface Props {
@@ -7,15 +7,14 @@ interface Props {
   onSaveClick?: Function;
 }
 
-const SaveButton = () => {
-  const [saved, setSaved] = useState(false);
+const SaveButton = (props) => {
+  const { event, saved = null, onSaveClick = () => {} } = props;
 
   return (
     <button
       className={saved ? "bookmark-button--saved" : "bookmark-button"}
       onClick={() => {
-        // onSaveClick(event._id, !saved);
-        setSaved(!saved);
+        onSaveClick(event._id, !saved);
       }}
     >
       <svg
