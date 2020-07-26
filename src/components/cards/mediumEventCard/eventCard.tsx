@@ -5,7 +5,7 @@ import "./index.scss";
 import { Event } from "types/props";
 import SaveButton from "components/svg/medium-event-card-option/SaveButton";
 
-// import shareIcon from "../../../assets/icons/share.svg";
+import shareIcon from "../../../assets/icons/share.svg";
 // import bookmarkIcon from "../../../assets/icons/bookmark.svg";
 
 interface Props {
@@ -39,9 +39,9 @@ const MediumEventCard: React.FunctionComponent<Props> = (props) => {
             <p className="description-host">UBC SISA</p>
           </div>
           <div className="description-options">
-            {/* <button className="share-button">
+            <button className="share-button">
               <img src={shareIcon} alt="share-icon" />
-            </button> */}
+            </button>
             {/* <button className="bookmark-button" onClick={() => onSaveClick()}>
               <img src={bookmarkIcon} />
             </button> */}

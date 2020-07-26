@@ -10,6 +10,7 @@ import LargeEventCard from "components/cards/largeEventCard/eventCard";
 import MediumEventCard from "components/cards/mediumEventCard/eventCard";
 import SmallEventCard from "components/cards/smallEventCard/eventCard";
 import Sidebar from "components/layouts/sidebar/sidebar";
+import Navbar from "components/layouts/navbar/navbar";
 
 import "./index.scss";
 
@@ -101,7 +102,6 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
     <div className="Page EventDashboard">
-      <Sidebar />
       {loading && (
         <div className="Page--full Loader">
           <Spin />
@@ -118,6 +118,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
           </React.Fragment>
         ) : breakpoint === "mobile" ? (
           <div className="mobile-view">
+            <Navbar/>
             <div className="page-header">
               <h1>Dashboard</h1>
             </div>
@@ -165,6 +166,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
           </div>
         ) : (
           <div className="desktop-view">
+            <Sidebar />
             <div className="events-scroll">
               <div className="events-category">
                 <h1 className="events-category__title">Online Experiences</h1>
