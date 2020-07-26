@@ -112,6 +112,9 @@
       justify-content: center;
       align-items: center;
       @include card-save-btn;
+      @include tablet-portrait {
+        border-radius: 5px;
+      }
       @include tablet-landscape {
         border-radius: 5px;
       }
