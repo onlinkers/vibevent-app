@@ -1,9 +1,18 @@
 .navbar-container {
     position: fixed;
+    display: flex;
+    align-items: center;
+
     width: 100%;
     height: 5em;
     left: 0;
     bottom: 0;
 
     background: #FFFFFF;
+
+    .navbar-links {
+        display: flex;
+        margin: auto;
+        align-items: center;
+    }
 }

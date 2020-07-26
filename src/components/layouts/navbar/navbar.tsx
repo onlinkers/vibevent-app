@@ -41,9 +41,11 @@ const Navbar: React.FunctionComponent<Props> = () => {
 
   return (
     <div className="navbar-container">
-      <HomeIcon
-        toggle={true}
-      />
+      <div className="navbar-links">
+        <HomeIcon
+          toggle={true}
+        />
+      </div>
     </div>
   );
 }
