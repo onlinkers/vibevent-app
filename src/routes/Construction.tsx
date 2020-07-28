@@ -2,13 +2,13 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Empty } from "antd";
 
-import Sidebar from "components/layouts/sidebar/sidebar";
+import Navbar from "components/layouts/navbar";
 
 const Construction = () => {
   const history = useHistory();
   return (
     <div className="Page--full--center" style={{ flexDirection: "column" }}>
-      <Sidebar />
+      <Navbar />
       <Empty description={false}>
         Page is Under Construction!!
       </Empty>
