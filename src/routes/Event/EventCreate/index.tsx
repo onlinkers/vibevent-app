@@ -6,7 +6,7 @@ import {
   message,
 } from "antd";
 import Navbar from "components/layouts/navbar";
-import EventForm from "components/forms/EventForm";
+import EventForm from "components/Event/form";
 
 import "../form.scss";
 import { EventCategoriesPayload } from "types/store";

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
-import Form, { TextInput } from "components/forms";
+import Form, { TextInput } from "components/shared/form";
 
 import userService from "services/userService";
 

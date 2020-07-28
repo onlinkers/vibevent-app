@@ -8,7 +8,7 @@ import {
   Button,
 } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import EventForm from "components/forms/EventForm";
+import EventForm from "components/Event/form";
 
 import "../form.scss";
 import { EventsPayload, EventCategoriesPayload } from "types/store";
