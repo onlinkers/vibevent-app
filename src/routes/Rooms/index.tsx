@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import Sidebar from "components/layouts/sidebar/sidebar";
+import Navbar from "components/layouts/navbar";
 import NotFound from "routes/NotFound";
 
 import { Spin } from "antd";
@@ -65,7 +65,7 @@ const Room: React.FunctionComponent<Props> = () => {
 
   return (
     <div className="Page EventDetails">
-      <Sidebar />
+      <Navbar />
       {!loaded && (
         <div className="Page--full Loader">
           <Spin />

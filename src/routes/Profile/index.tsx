@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { Button, message, Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import Sidebar from "components/layouts/sidebar/sidebar";
+import Navbar from "components/layouts/navbar";
 import ProfileDetails from "./ProfileDetails";
 
 import "./index.scss";
@@ -73,7 +73,7 @@ const Profile: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className="Page">
-      <Sidebar />
+      <Navbar />
       {loading && <div className="Page--full Loader"><Spin/></div>}
       {!loading && (error ? (
         <div className="Page--full Error">

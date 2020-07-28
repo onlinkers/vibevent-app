@@ -7,8 +7,9 @@ import { Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import QuickAccessMenu from "components/searchTools";
 import LargeEventCard from "components/cards/largeEventCard/eventCard";
+import MediumEventCard from "components/cards/mediumEventCard/eventCard";
 import SmallEventCard from "components/cards/smallEventCard/eventCard";
-import Sidebar from "components/layouts/sidebar/sidebar";
+import Navbar from "components/layouts/navbar";
 
 import "./index.scss";
 
@@ -100,7 +101,6 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
     <div className="Page EventDashboard">
-      <Sidebar />
       {loading && (
         <div className="Page--full Loader">
           <Spin />
@@ -115,96 +115,120 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
             <div className="text--unselectable">{errors.events}</div>
             <div className="text--unselectable">{errors.eventCategories}</div>
           </React.Fragment>
-        ) : breakpoint === "mobile" ? (
-          <div className="mobile-view">
-            <div className="page-header">
-              <h1>Dashboard</h1>
-            </div>
-            <div className="page-contents">
-              <div className="events-category">
-                <h5>Online Experiences</h5>
-                <div className="events-frame">
-                  {eventsArray.map((event) => {
-                    return (
-                      <SmallEventCard
-                        event={event}
-                        key={event._id}
-                        onClick={() => {
-                          redirectToEvent(event._id);
-                        }}
-                      ></SmallEventCard>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
         ) : (
-          <div className="desktop-view">
-            <div className="events-scroll">
-              <div className="events-category">
-                <h1 className="events-category__title">Online Experiences</h1>
-                <div className="events-frame--no-scroll">
-                  {eventsArray.map((event) => {
-                    return (
-                      <LargeEventCard
-                        event={event}
-                        key={event._id}
-                        saved={
-                          user.eventsSaved &&
+          <>
+            <Navbar/>
+            {breakpoint === "mobile" ? (
+              <div className="mobile-view">
+                <div className="page-header">
+                  <h1>Dashboard</h1>
+                </div>
+                <div className="page-contents">
+                  <div className="events-category">
+                    <h5>Suggested For You</h5>
+                    <div className="events-frame">
+                      {eventsArray.map((event) => {
+                        return (
+                          <MediumEventCard
+                            event={event}
+                            key={event._id}
+                            onClick={() => {
+                              redirectToEvent(event._id);
+                            }}
+                            saved={
+                              user.eventsSaved &&
                           !!user.eventsSaved.find(
                             (savedEvent) => String(event._id) === savedEvent._id
                           )
-                        }
-                        className="event-card"
-                        onClick={() => {
-                          redirectToEvent(event._id);
-                        }}
-                        onSaveClick={saveEvent}
-                      ></LargeEventCard>
-                    );
-                  })}
+                            }
+                            onSaveClick={saveEvent}
+                          ></MediumEventCard>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="events-category">
+                    <h5>Online Experiences</h5>
+                    <div className="events-frame">
+                      {eventsArray.map((event) => {
+                        return (
+                          <SmallEventCard
+                            event={event}
+                            key={event._id}
+                            onClick={() => {
+                              redirectToEvent(event._id);
+                            }}
+                          ></SmallEventCard>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
-                {/* FUTURE FEATURE: do not delete */}
-                {/* <div className="events-frame">
-                  <motion.div
-                    className="events-draggable"
-                    drag="x"
-                    dragConstraints={{
-                      left: (-window.innerWidth / 2) * 1.25,
-                      right: 0,
-                    }}
-                    dragTransition={{ bounceStiffness: 300, bounceDamping: 50 }}
-                    style={{ x }}
-                  >
-                    {eventsArray.map((event) => {
-                      return (
-                        <EventCard
-                          event={event}
-                          key={event._id}
-                          className="event-card"
-                        ></EventCard>
-                      );
-                    })}
-                  </motion.div>
-                </div>
-                <motion.div
-                  className="gradient-fade gradient-fade-right"
-                  style={{ opacity: opacityRight }}
-                ></motion.div>
-                <motion.div
-                  className="gradient-fade gradient-fade-left"
-                  style={{ opacity: opacityLeft }}
-                ></motion.div> */}
               </div>
-            </div>
-            <QuickAccessMenu events={events} />
-            <h1 className="page-label">
-              Activity
-              <br />
-              Dashboard
-            </h1>
-          </div>
+            ) : (
+              <div className="desktop-view">
+                <div className="events-scroll">
+                  <div className="events-category">
+                    <h1 className="events-category__title">Online Experiences</h1>
+                    <div className="events-frame--no-scroll">
+                      {eventsArray.map((event) => {
+                        return (
+                          <LargeEventCard
+                            event={event}
+                            key={event._id}
+                            saved={
+                              user.eventsSaved &&
+                          !!user.eventsSaved.find(
+                            (savedEvent) => String(event._id) === savedEvent._id
+                          )
+                            }
+                            className="event-card"
+                            onClick={() => {
+                              redirectToEvent(event._id);
+                            }}
+                            onSaveClick={saveEvent}
+                          ></LargeEventCard>
+                        );
+                      })}
+                    </div>
+                    {/* FUTURE FEATURE: do not delete */}
+                    {/* <div className="events-frame">
+                      <motion.div
+                        className="events-draggable"
+                        drag="x"
+                        dragConstraints={{
+                          left: (-window.innerWidth / 2) * 1.25,
+                          right: 0,
+                        }}
+                        dragTransition={{ bounceStiffness: 300, bounceDamping: 50 }}
+                        style={{ x }}
+                      >
+                        {eventsArray.map((event) => {
+                          return (
+                            <EventCard
+                              event={event}
+                              key={event._id}
+                              className="event-card"
+                            ></EventCard>
+                          );
+                        })}
+                      </motion.div>
+                    </div>
+                    <motion.div
+                      className="gradient-fade gradient-fade-right"
+                      style={{ opacity: opacityRight }}
+                    ></motion.div>
+                    <motion.div
+                      className="gradient-fade gradient-fade-left"
+                      style={{ opacity: opacityLeft }}
+                    ></motion.div> */}
+                  </div>
+                </div>
+                <QuickAccessMenu events={events} />
+                <h1 className="page-label">Activity<br />Dashboard</h1>
+              </div>
+            )}
+          </>
         ))}
     </div>
   );
