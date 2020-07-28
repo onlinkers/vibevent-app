@@ -5,7 +5,7 @@ import moment from "moment";
 import ReactMarkdown from "markdown-to-jsx";
 
 import QuickAccessMenu from "components/searchTools";
-import Sidebar from "components/layouts/sidebar/sidebar";
+import Navbar from "components/layouts/navbar";
 import NotFound from "routes/NotFound";
 
 import { Empty, Card, Avatar, Tag, Spin, Button } from "antd";
@@ -126,7 +126,7 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className="Page EventDetails">
-      <Sidebar />
+      <Navbar />
       {loading && (
         <div className="Page--full Loader">
           <Spin />

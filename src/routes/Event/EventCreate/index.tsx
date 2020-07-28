@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import {
   message,
 } from "antd";
-import Sidebar from "components/layouts/sidebar/sidebar";
+import Navbar from "components/layouts/navbar";
 import EventForm from "components/forms/EventForm";
 
 import "../form.scss";
@@ -66,7 +66,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className="Page--center EventForm">
-      <Sidebar />
+      <Navbar />
       {loading && <div className="Page--full Loader">Loading...</div>}
       {!loading && (
         <React.Fragment>

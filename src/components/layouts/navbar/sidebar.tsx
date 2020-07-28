@@ -1,45 +1,18 @@
-import React, { useMemo, useContext } from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, useCycle } from "framer-motion";
 import useDimensions from "react-use-dimensions";
-
-import { AppContext } from "context/AppContext";
-import { ThemeContext } from "context/ThemeContext";
 
 import MenuToggle from "components/svg/menu-toggle/MenuToggle";
 import VibeventLogo from "components/svg/vibevent-logo/VibeventLogo";
 import "./index.scss";
 
-interface Props {}
+interface Props {
+  breakpoint: String;
+  routes: any[];
+}
 
-const routes = [
-  {
-    label: "Dashboard",
-    route: "/event/dashboard",
-  },
-  // {
-  //   label: "Discover",
-  //   route: "/discover",
-  // },
-];
-
-const authenticatedRoutes = [
-  {
-    label: "Create",
-    route: "/event/create",
-  },
-  {
-    label: "My Activity",
-    route: "/profile",
-  },
-];
-
-const Navigation = ({ isOpen }) => {
-  const { session } = useContext(AppContext);
-  const { isAuthenticated } = session;
-
-  let links = [...routes];
-  if (isAuthenticated) links = [...routes, ...authenticatedRoutes];
+const Navigation = ({ isOpen, routes }) => {
 
   const [theme, toggleTheme] = useCycle(false, true);
 
@@ -70,12 +43,12 @@ const Navigation = ({ isOpen }) => {
         <VibeventLogo toggle={() => toggleTheme()} theme={theme} />
       </motion.div>
       <motion.ul className="navlinks">
-        {links.map((item) => {
+        {routes.map((route) => {
           return (
             <Link
-              to={item.route}
+              to={route.url}
               style={!isOpen ? { pointerEvents: "none" } : {}}
-              key={item.label}
+              key={route.label}
             >
               <motion.li
                 whileHover={{ scale: 1.1 }}
@@ -83,7 +56,7 @@ const Navigation = ({ isOpen }) => {
                 variants={navVariants}
                 className="navlink"
               >
-                {item.label}
+                {route.label}
               </motion.li>
             </Link>
           );
@@ -93,10 +66,9 @@ const Navigation = ({ isOpen }) => {
   );
 };
 
-const Sidebar: React.FunctionComponent<Props> = () => {
+const Sidebar: React.FunctionComponent<Props> = ({ breakpoint, routes }) => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [containerRef, { height }] = useDimensions();
-  const { breakpoint } = useContext(ThemeContext);
 
   const sidebarOpenWidth = useMemo(() => breakpoint === "tablet-portrait" ? "40%" : "20%", [breakpoint]);
 
@@ -132,7 +104,7 @@ const Sidebar: React.FunctionComponent<Props> = () => {
         variants={sidebarVariants}
         onHoverEnd={isOpen ? () => toggleOpen() : undefined}
       >
-        <Navigation isOpen={isOpen} />
+        <Navigation isOpen={isOpen} routes={routes}/>
         <MenuToggle toggle={() => toggleOpen()} />
       </motion.nav>
     </>

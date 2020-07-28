@@ -9,8 +9,7 @@ import QuickAccessMenu from "components/searchTools";
 import LargeEventCard from "components/cards/largeEventCard/eventCard";
 import MediumEventCard from "components/cards/mediumEventCard/eventCard";
 import SmallEventCard from "components/cards/smallEventCard/eventCard";
-import Sidebar from "components/layouts/sidebar/sidebar";
-import Navbar from "components/layouts/navbar/navbar";
+import Navbar from "components/layouts/navbar";
 
 import "./index.scss";
 
@@ -166,7 +165,7 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
           </div>
         ) : (
           <div className="desktop-view">
-            <Sidebar />
+            <Navbar />
             <div className="events-scroll">
               <div className="events-category">
                 <h1 className="events-category__title">Online Experiences</h1>
