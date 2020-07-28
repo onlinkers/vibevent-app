@@ -6,9 +6,9 @@ import { connect } from "react-redux";
 import { Spin } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import QuickAccessMenu from "components/searchTools";
-import LargeEventCard from "components/cards/largeEventCard/eventCard";
-import MediumEventCard from "components/cards/mediumEventCard/eventCard";
-import SmallEventCard from "components/cards/smallEventCard/eventCard";
+import LargeEventCard from "components/Event/cards/largeCard";
+import MediumEventCard from "components/Event/cards/mediumCard";
+import SmallEventCard from "components/Event/cards/smallCard";
 import Navbar from "components/layouts/navbar";
 
 import "./index.scss";
