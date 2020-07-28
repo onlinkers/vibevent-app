@@ -1,0 +1,19 @@
+// -------
+// EVENT-CARD-TINY
+// -------
+.event-card-tiny {
+  height: 15em;
+  overflow: hidden;
+  width: 20%;
+  min-width: 10em;
+
+  .ant-card-cover {
+      height: 7em;
+
+      img {
+          height: 100%;
+          object-fit: cover;
+      }
+  }
+
+}

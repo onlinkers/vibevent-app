@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-// import UtilityCard from "components/searchTools/utilityCard/utilityCard";
-import SmallEventCard from "components/cards/smallEventCard/eventCard";
+// import UtilityCard from "components/Event/cards/utilityCard";
+import SmallEventCard from "components/Event/cards/smallCard";
 import VibeventNameLogo from "components/svg/vibevent-name-logo/VibeventNameLogo";
 
 import { EventsPayload } from "types/store";

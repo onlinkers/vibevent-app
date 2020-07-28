@@ -1,0 +1,136 @@
+// -------
+// EVENT-CARD-LARGE
+// -------
+.event-card-large {
+    display: flex;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    margin: 0.5em;
+    white-space: normal;
+    overflow: hidden;
+    font-family: $primary-label;
+    cursor: pointer;
+    
+    /* TEMP CHANGE: do not delete */
+    // min-width: 60%;
+    // min-height: 30vh;
+    // max-width: 60%;
+    // max-height: 30vh;
+    /* TEMP CHANGES FOLLOW */
+    user-select: none;
+    
+    min-width: 45%;
+    max-width: 45%;
+    height: 30vh;
+    min-height: 10em;
+    max-height: 20em;
+    @include tablet-landscape {
+      min-height: 8em;
+    }
+    @include desktop {
+      min-height: 6em;
+    }
+    /* ------- */
+    
+    .event-coverphoto {
+      height: 70%;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+      
+      .event-coverphoto__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+      }
+    }
+    
+    .event-description {
+      position: absolute;
+      bottom: 0;
+      background: white;
+      width: 100%;
+      height: fit-content;
+      min-height: 30%;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      padding: 2% 5%;
+      
+      .description-date {
+        text-align: center;
+        width: 15%;
+        margin: 0;
+        @include tablet-landscape {
+          line-height: 125%;
+        }
+        @include desktop {
+          line-height: 150%;
+        }
+        
+        .description-date__month {
+          @include card-desktop-month;
+        }
+        
+        .description-date__date {
+          @include card-desktop-date;
+        }
+      }
+      
+      .description-title-hosts {
+        width: 60%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 3% 0 5%;
+        @include tablet-landscape {
+        }
+        @include desktop {
+          padding: 0 3%;
+        }
+        
+        .description-title {
+          @include card-desktop-title;
+          margin: 0;
+        }
+        
+        .description-host {
+          @include card-desktop-secondary;
+          margin: 0;
+        }
+      }
+      
+      .save-btn {
+        width: 25%;
+        height: fit-content;
+        background-color: white;
+        border: 2px solid $red1;
+        color: $red1;
+        outline: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include card-save-btn;
+        @include tablet-portrait {
+          border-radius: 5px;
+        }
+        @include tablet-landscape {
+          border-radius: 5px;
+        }
+        @include desktop {
+          border-radius: 10px;
+        }
+      }
+      
+      .save-btn--active {
+        @extend .save-btn;
+        background-color: $red1;
+        color: white;
+      }
+    }
+  }
+  

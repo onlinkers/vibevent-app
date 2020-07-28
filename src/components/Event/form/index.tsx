@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 import {
@@ -8,44 +8,48 @@ import {
   Select,
   DatePicker,
   InputNumber,
+  Divider,
 } from "antd";
 
-import "./index.css";
+import DynamicInput from "components/shared/form/inputs/dynamicInput";
+import DynamicSelect from "components/shared/form/inputs/dynamicSelect";
+import MarkdownEditor from "components/shared/form/inputs/markdownEditor";
+
+import "./index.scss";
 import { EventCategoriesPayload } from "types/store";
 
 interface Props {
-    mode: "CREATE" | "EDIT";
-    onSubmit: Function;
-    eventCategories: EventCategoriesPayload;
-    initialValues?: any;
+  mode: "CREATE" | "EDIT";
+  onSubmit: Function;
+  eventCategories: EventCategoriesPayload;
+  initialValues?: any;
+  onChange?: (fieldsChanged: any, allFields?:any) => void;
 }
 
 // const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const EventForm: React.FunctionComponent<Props> = (props) => {
 
-  const { onSubmit, eventCategories, initialValues } = props;
+  const { mode, onSubmit, eventCategories, initialValues, onChange = () => {} } = props;
   // const initialVenueCoordinates = (initialValues && initialValues.venueCoordinates) || null;
 
   const [form] = Form.useForm();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   // const [loaded, setLoaded] = useState(false);
   // const [venueCoordinates, setVenueCoordinates] = useState<number[] | null>(initialVenueCoordinates);
 
-  const submitFormatter = (formValues) => {
-    const { venue, startDate, endDate, ...rest } = formValues;
+  const submitFormatter = async (formValues) => {
+    try {
 
-    onSubmit({
-      // venue needs its own object (including the coordinates)
-      venue: {
-        name: venue,
-        // location: venueCoordinates
-      },
-      // Dates need to be in ISO form
-      startDate: startDate.toISOString(),
-      endDate: endDate.toISOString(),
-      ...rest
-    });
-      
+      setIsSubmitting(true);
+      await onSubmit(formValues);
+
+    }
+    finally {
+
+      setIsSubmitting(false);
+
+    }
   };
 
   // useEffect(() => {
@@ -74,13 +78,15 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
   return (
     <Form
       form={form}
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 14 }}
+      labelCol={{ span: 6 }}
+      labelAlign="left"
       layout="horizontal"
       size={"small"}
       initialValues={initialValues}
+      onValuesChange={onChange}
       onFinish={submitFormatter}
     >
+    
       <Form.Item
         name="name"
         label="Event Name"
@@ -95,8 +101,8 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       </Form.Item>
 
       <Form.Item
-        name="startDate"
-        label="Start Date"
+        name="date"
+        label="Date"
         rules={[
           {
             required: true,
@@ -104,36 +110,17 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
           },
           {
             validator: (rule, value) => {
-              if(value >= Date.now()) return Promise.resolve();
+              if(value[0] >= Date.now()) return Promise.resolve();
               return Promise.reject("Cannot set the event to start in the past!");
             }
           }
         ]}
       >
-        <DatePicker showTime/>
+        <DatePicker.RangePicker showTime/>
       </Form.Item>
 
       <Form.Item
-        name="endDate"
-        label="End Date"
-        rules={[
-          {
-            required: true,
-            message: "Enter an end date!",
-          },
-          ({ getFieldValue }) => ({
-            validator: (rule, value) => {
-              if (!value || getFieldValue("startDate") <= value) return Promise.resolve();
-              return Promise.reject("Event cannot end before it starts!");
-            },
-          }),
-        ]}
-      >
-        <DatePicker showTime/>
-      </Form.Item>
-
-      <Form.Item
-        name="venue"
+        name="venueName"
         label="Event Venue"
         rules={[
           {
@@ -156,8 +143,70 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
         name="description"
         label="Description"
       >
-        <Input />
+        <MarkdownEditor />
       </Form.Item>
+
+      <Divider orientation="left">Add Links</Divider>
+      
+      <DynamicInput type="link" inputs={[
+        {
+          name: "type",
+          props: {
+            style: { width: "30%" },
+            rules: [
+              {
+                required: true,
+                message: "Enter a link type!",
+              }
+            ]
+          },
+          render: <DynamicSelect dropdownPlaceholder="Link type" initialOptions={["register", "ticket"]} dynamic={false}/>
+        },
+        {
+          name: "url",
+          props: {
+            style: { width: "70%" },
+            rules: [
+              {
+                required: true,
+                message: "Enter a url!",
+              },
+              {
+                type: "url",
+                message: "This field must be a valid url."
+              }
+            ]
+          },
+          render: <Input placeholder="Enter url"/>
+        }
+      ]}/>
+
+      <Divider orientation="left">Add Rooms</Divider>
+      
+      <DynamicInput type="room" inputs={[
+        {
+          name: "roomId",
+          props: {
+            style: { width: "50%" },
+            rules: [
+              {
+                required: true,
+                message: "Enter a room id!",
+              }
+            ]
+          },
+          render: <Input placeholder="Enter room ID"/>
+        },
+        {
+          name: "name",
+          props: {
+            style: { width: "50%" }
+          },
+          render: <Input placeholder="Room name"/>
+        }
+      ]}/>
+
+      <Divider />
 
       <Form.Item name="categories" label="Categories">
         <Select mode="multiple" className="category-select">
@@ -171,18 +220,6 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
         </Select>
       </Form.Item>
 
-      <Form.Item name="ticketLink" label="Ticket Link">
-        <Input />
-      </Form.Item>
-
-      <Form.Item name="coverPhoto" label="Cover Photo">
-        <Input />
-      </Form.Item>
-
-      {/* <Form.Item name="media" label="Upload Other Media">
-          <Input />
-        </Form.Item> */}
-
       {/* TODO: Common tags in the dropdown */}
       <Form.Item
         name="tags"
@@ -191,7 +228,15 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
         <Select mode="tags"/>
       </Form.Item>
 
-      <Button type="primary" htmlType="submit">Submit</Button>
+      {/* <Divider orientation="left">Media</Divider> */}
+
+      {/* <Form.Item name="media" label="Upload Media">
+          <Upload />
+        </Form.Item> */}
+
+      <Button type="primary" htmlType="submit" disabled={isSubmitting}>
+        {mode === "CREATE" ? "Create Event" : "Edit Event"}
+      </Button>
     </Form>
   );
 };

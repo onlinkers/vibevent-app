@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
 import { message } from "antd";
-import Form, { TextInput } from "components/forms";
+import Form, { TextInput } from "components/shared/form";
 
 import { AppContext } from "context/AppContext";
 import { saveUserData, saveCognitoUser } from "store/actions/userActions";
