@@ -11,6 +11,7 @@
         padding-top: 85vh;
         width: 80%;
         margin: 0 auto;
+        margin-bottom: 6em;
 
         h1 {
             text-align: center;
@@ -42,9 +43,14 @@
         }
     }
 
+    .mobile-title {
+        text-align: center;
+        width: 100%;
+    }
+
     .event-details-card {
         @extend .event-content;
-        margin-top: 0;
+        margin-top: 6em; // top space for mobile title
         margin-bottom: 0;
         height: calc(80% * 1.25);
         transform: scale(0.8);
@@ -52,8 +58,13 @@
         font-size: 0.8em;
         overflow-y: scroll;
 
+        // remove top space
+        @include tablet-portrait {
+            margin-top: 0;
+        }
         // Overwrite to not take all space
         @include tablet-landscape {
+            margin-top: 0;
             position: fixed;
             left: 7.5%;
             width: 30%;

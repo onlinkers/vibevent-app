@@ -78,7 +78,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
   return (
     <Form
       form={form}
-      labelCol={{ span: 4 }}
+      labelCol={{ span: 6 }}
       labelAlign="left"
       layout="horizontal"
       size={"small"}
@@ -86,8 +86,6 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       onValuesChange={onChange}
       onFinish={submitFormatter}
     >
-
-      <Divider />
     
       <Form.Item
         name="name"

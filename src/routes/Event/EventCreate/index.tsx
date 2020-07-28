@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
 import {
+  Divider,
   message,
 } from "antd";
 import Navbar from "components/layouts/navbar";
 import EventForm from "components/Event/form";
 import EventDetailsCard from "components/Event/cards/detailsCard";
+
+import { ThemeContext } from "context/ThemeContext";
 
 import "../form.scss";
 import { EventCategoriesPayload } from "types/store";
@@ -30,6 +33,8 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
   } = props;
 
   const history = useHistory();
+  const { breakpoint } = useContext(ThemeContext);
+
   const [previewValues, setPreviewValues] = useState<Event>({
     _id: "new-event",
     hosts: [user],
@@ -127,8 +132,9 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
       {loading && <div className="Page--full Loader">Loading...</div>}
       {!loading && (
         <>
+          {breakpoint === "mobile" && <div className="mobile-title"><h1>Create Your Event!</h1></div>}
           <div className="event-create-form">
-            <h1>Create Your Event!</h1>
+            {breakpoint !== "mobile" && <><h1>Create Your Event!</h1><Divider/></>}
             <EventForm
               mode="CREATE"
               onChange={handleFormChange}

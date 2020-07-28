@@ -4,6 +4,8 @@ import { Event } from "types/props";
 import { motion } from "framer-motion";
 import moment from "moment";
 
+import DefaultImage from "assets/media/default-image.png";
+
 import "./index.scss";
 import { User } from "types/props";
 
@@ -44,11 +46,7 @@ const EventLargeCard: React.FunctionComponent<Props> = (props) => {
     >
       <div className="event-coverphoto">
         <img
-          src={
-            event.media?.coverPhoto?.baseSrc
-              ? event.media?.coverPhoto?.baseSrc
-              : "assets/media/default-image.png"
-          }
+          src={event.media?.coverPhoto?.baseSrc || DefaultImage}
           alt=""
           className="event-coverphoto__img"
         />

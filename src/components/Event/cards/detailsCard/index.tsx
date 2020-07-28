@@ -10,7 +10,7 @@ import { User, Event } from "types/props";
 import { EventCategoriesPayload } from "types/store";
 import { parse } from "utils";
 
-import "./detailsCard.scss";
+import "./index.scss";
 
 interface Props {
     event: Event;
