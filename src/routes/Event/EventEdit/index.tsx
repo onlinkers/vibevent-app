@@ -26,6 +26,7 @@ interface Props {
     events?: string
     eventCategories?: string,
   };
+  userId: string;
 }
 
 const EventEdit: React.FunctionComponent<Props> = (props) => {
@@ -37,7 +38,8 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
     events,
     eventCategories,
     loading,
-    errors
+    errors,
+    userId,
   } = props;
 
   const [eventLoaded, setEventLoaded] = useState(false);
@@ -146,6 +148,9 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
       };
       
       const reduxEvent = events[eventId];
+
+      if(!reduxEvent || !reduxEvent.hosts.map(host => host._id).includes(userId)) history.push("/forbidden?redirected=true");
+
       if(reduxEvent) { // if the event is found in redux
         setThisEvent(reduxEvent);
         setEventLoaded(true);
@@ -223,8 +228,9 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-const mapStateToProps = ({ eventData }) => {
+const mapStateToProps = ({ eventData, userData }) => {
   return {
+    userId: userData.user._id,
     events: eventData.events,
     eventCategories: eventData.eventCategories,
     loading: eventData.loading,

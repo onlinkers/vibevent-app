@@ -16,11 +16,13 @@ interface Props {
   events: EventsPayload;
   eventCategories: EventCategoriesPayload;
   loading?: boolean;
+  userId: string;
 }
 
 const EventDetails: React.FunctionComponent<Props> = (props) => {
 
   const {
+    userId,
     events,
     eventCategories,
     loading,
@@ -50,6 +52,7 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
             eventCategories={eventCategories}
             redirectToRoom={roomHandler}
             redirectBack={() => { history.push("/event/dashboard"); }}
+            allowEdit={event.hosts.map((host) => host._id).includes(userId)}
           />
           <QuickAccessMenu events={events} />
         </>
@@ -60,8 +63,9 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
 };
 
 
-const mapStateToProps = ({ eventData }) => {
+const mapStateToProps = ({ eventData, userData }) => {
   return {
+    userId: userData.user._id,
     events: eventData.events,
     eventCategories: eventData.eventCategories,
     loading: eventData.loading,
