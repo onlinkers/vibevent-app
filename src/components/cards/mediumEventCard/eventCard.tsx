@@ -3,10 +3,9 @@ import moment from "moment";
 
 import "./index.scss";
 import { Event } from "types/props";
-import SaveButton from "components/svg/medium-event-card-option/SaveButton";
+import SaveButton from "components/buttons/saveButton";
 
-import shareIcon from "../../../assets/icons/share.svg";
-// import bookmarkIcon from "../../../assets/icons/bookmark.svg";
+// import shareIcon from "../../../assets/icons/share.svg";
 
 interface Props {
   event: Event;
@@ -22,7 +21,13 @@ const MediumEventCard: React.FunctionComponent<Props> = (props) => {
     onClick = () => {},
     onSaveClick = () => {},
   } = props;
+
   const month = moment(event?.startDate).format("MMM DD");
+  
+  const handleSaveClick = () => {
+    onSaveClick(event._id, !saved);
+  };
+
   return (
     <>
       <div className="medium-card">
@@ -39,13 +44,12 @@ const MediumEventCard: React.FunctionComponent<Props> = (props) => {
             <p className="description-host">UBC SISA</p>
           </div>
           <div className="description-options">
-            <button className="share-button">
+
+            {/* TODO: Share functionality */}
+            {/* <button className="share-button">
               <img src={shareIcon} alt="share-icon" />
-            </button>
-            {/* <button className="bookmark-button" onClick={() => onSaveClick()}>
-              <img src={bookmarkIcon} />
             </button> */}
-            <SaveButton saved={saved} onSaveClick={onSaveClick} />
+            {saved !== null && <SaveButton saved={saved} onClick={handleSaveClick} />}
           </div>
         </div>
       </div>

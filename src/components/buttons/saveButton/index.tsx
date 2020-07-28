@@ -2,20 +2,17 @@ import React from "react";
 import "./index.scss";
 
 interface Props {
-  event: Event;
   saved?: boolean;
-  onSaveClick?: Function;
+  onClick?: Function;
 }
 
 const SaveButton = (props) => {
-  const { event, saved = null, onSaveClick = () => {} } = props;
+  const { saved = false, onClick = () => {} } = props;
 
   return (
     <button
       className={saved ? "bookmark-button--saved" : "bookmark-button"}
-      onClick={() => {
-        onSaveClick(event._id, !saved);
-      }}
+      onClick={onClick}
     >
       <svg
         width="18"
