@@ -12,20 +12,18 @@ interface Props {
   [key: string]: any;
 }
 
-const EventCard: React.FunctionComponent<Props> = (props) => {
+const EventTinyCard: React.FunctionComponent<Props> = (props) => {
   const {
     event,
     loading = false,
     ...rest
   } = props;
 
-  const imageSource = event?.media?.coverPhoto?.baseSrc || DefaultImage;
-
   return (
     <Card
       hoverable
-      className="event-card"
-      cover={imageSource && <img src={imageSource} alt="event-cover" />}
+      className="event-card-tiny"
+      cover={<img src={event?.media?.coverPhoto?.baseSrc || DefaultImage} alt="event-coverimage" />}
       {...rest}
     >
       <Skeleton loading={loading} active>
@@ -38,4 +36,4 @@ const EventCard: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-export default EventCard;
+export default EventTinyCard;

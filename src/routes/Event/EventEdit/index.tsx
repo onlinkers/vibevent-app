@@ -4,12 +4,18 @@ import { connect } from "react-redux";
 import moment from "moment";
 
 import popup from "popup";
-import { Button } from "antd";
+import {
+  Button,
+  Popconfirm
+} from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
-import EventForm from "components/forms/EventForm";
+import EventForm from "components/Event/form";
+import EventDetailsCard from "components/Event/cards/detailsCard";
+import Navbar from "components/layouts/navbar";
 
 import "../form.scss";
 import { EventsPayload, EventCategoriesPayload } from "types/store";
+import { Event } from "types/props";
 import eventService from "services/eventService";
 
 interface Props {
@@ -35,7 +41,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
   } = props;
 
   const [eventLoaded, setEventLoaded] = useState(false);
-  const [thisEvent, setThisEvent] = useState<any | null>(null);
+  const [thisEvent, setThisEvent] = useState<Event | null>(null);
 
   const refreshPage = () => {
     history.push("/empty");
@@ -44,37 +50,89 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
 
   const handleSubmit = async (formValues) => {
 
-    // TODO: A lot more fields (also for the form itself)
-    const {
-      coverPhoto: coverPhotoUrl,
-      ticketLink: ticketLinkUrl,
-      ...values
-    } = formValues;
+    const { venueName, date, link, tags, room, ...rest } = formValues;
+
+    // links need to be re-organized
+    const links = {};
+    link.forEach((l) => { links[l.type] = l.url; });
 
     const payload = {
-      ...values,
-      media: {},
-      hosts: thisEvent.hosts
+      ...thisEvent,
+      ...rest,
+      // venue needs its own object (including the coordinates)
+      venue: {
+        ...thisEvent?.venue,
+        name: venueName
+      },
+      // Dates need to be in ISO form
+      startDate: date[0].toISOString(),
+      endDate: date[1].toISOString(),
+      links,
+      rooms: room,
+      tags: {
+        ...thisEvent?.tags,
+        hostTags: tags
+      },
     };
+
+    delete payload._id;
+    delete payload.hosts;
+    delete payload.createdAt;
+    delete payload.updatedAt;
 
     // TODO: Proper Image Uploading
-    if(coverPhotoUrl) payload.media.coverPhoto = {
-      baseSrc: coverPhotoUrl,
-      size: {
-        width: 100,
-        height: 100
-      }
-    };
-
-    // optional ticket link
-    if(ticketLinkUrl) payload.links = {
-      ticket: ticketLinkUrl
-    };
     
     await eventService.setEvent({ id: eventId, payload });
 
     popup.success("Event changes saved!");
     history.goBack();
+
+  };
+
+  const deleteEvent = async (eventId) => {
+    
+    await eventService.deleteEvent({ id: eventId });
+
+    popup.success("Event deleted!");
+    history.push("/event/dashboard");
+
+  };
+
+  const handleFormChange = (changedValues) => {
+
+    // TODO: Find a way/or dont even bother render-ing link/room changes in the form
+    if(changedValues.link) return;
+    else if (changedValues.room) return;
+
+    const {
+      date = null,
+      venueName = thisEvent?.venue.name,
+      tags: hostTags = thisEvent?.tags?.hostTags,
+
+      // name, price, description, categories
+      ...rest
+    } = changedValues;
+
+    const startDate = (date && date[0]) || thisEvent?.startDate;
+    const endDate = (date && date[1]) || thisEvent?.endDate;
+
+    const newFormFields = {
+      // hosts, rating, media
+      ...thisEvent,
+      ...rest,
+      startDate,
+      endDate,
+      venue: {
+        name: venueName
+      },
+      tags: {
+        ...thisEvent?.tags,
+        hostTags,
+      }
+    };
+
+    setThisEvent(newFormFields);
+    
   };
 
   useEffect(() => {
@@ -82,7 +140,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
 
       const searchEventInDB = async () => {
         const { data } = await eventService.getEventsByIds({ ids: [eventId] });
-        const eventData = data ? Object.values(data)[0] : null;
+        const eventData = data ? (Object.values(data)[0] as Event) : null;
         if(!eventData) throw new Error("Data on the event you are trying to edit does not exist!");
         return eventData;
       };
@@ -99,45 +157,61 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
           .finally(() => setEventLoaded(true));
       }
 
-    }
-    
+    }    
   }, []); // eslint-disable-line
 
   const hasErrors = errors.events || events.eventCategories;
   const loaded = eventLoaded && !loading;
 
   return (
-    <React.Fragment>
+    <div className="Page EventForm">
+      <Navbar />
       {!loaded && <div className="Page--full Loader">Loading...</div>}
       {loaded && (hasErrors ? (
-        <div className="Page--fulll Error">
+        <div className="Page--full Error">
           <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
           <div className="t--unselectable">{errors[0]}</div>
           <div className="t--unselectable">{errors[1]}</div>
         </div>
       ) : (
         thisEvent ? (
-          <div className="Page--center Page--explore EventForm">
-            <h1>Edit your event!</h1>
-            <EventForm
-              mode="EDIT"
-              onSubmit={handleSubmit}
+          <>
+            <div className="event-edit-form">
+              <h1>Edit your event!</h1>
+              <EventForm
+                mode="EDIT"
+                onChange={handleFormChange}
+                onSubmit={handleSubmit}
+                eventCategories={eventCategories}
+                initialValues={{
+                  name: thisEvent.name,
+                  date: [moment(thisEvent.startDate), moment(thisEvent.endDate)],
+                  price: thisEvent.price,
+                  description: thisEvent.description,
+                  categories: thisEvent.categories,
+                  link: thisEvent.links && Object.entries(thisEvent.links).map(([type, url]) => ({ type, url })),
+                  room: thisEvent.rooms,
+                  venueName: thisEvent.venue.name,
+                  // venueCoordinates: thisEvent.venue.location, // TODO
+                  tags: thisEvent.tags?.hostTags
+                }}
+              />
+              <br />
+              <Popconfirm
+                title="Are you sure delete this event? You cannot undo this action."
+                onConfirm={() => deleteEvent(thisEvent._id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button className="delete-button" danger>Delete Event</Button>
+              </Popconfirm>
+            </div>
+            <EventDetailsCard
+              event={thisEvent}
               eventCategories={eventCategories}
-              initialValues={{
-                name: thisEvent.name,
-                startDate: moment(thisEvent.startDate),
-                endDate: moment(thisEvent.endDate),
-                price: thisEvent.price,
-                description: thisEvent.description,
-                categories: thisEvent.categories,
-                ticketLink: thisEvent.links?.ticket,
-                venue: thisEvent.venue.name,
-                venueCoordinates: thisEvent.venue.location, // TODO
-                coverPhoto: thisEvent.media?.coverPhoto?.baseSrc,
-                tags: thisEvent.tags?.hostTags
-              }}
+              redirects={false}
             />
-          </div>
+          </>
         ) : (
           <div className="Page--full Error">
             <div className="t--unselectable">Data on the event you are trying to edit does not exist!</div>
@@ -145,7 +219,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
             <Button className="button--clickable" onClick={() => history.goBack()}>Go back.</Button>
           </div>
         )))}
-    </React.Fragment>
+    </div>
   );
 };
 

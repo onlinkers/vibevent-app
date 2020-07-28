@@ -1,12 +1,77 @@
+@import "./index.scss";
+
 .EventForm {
     display: flex;
     flex-direction: column;
     padding-top: 5%;
     padding-bottom: 5%;
+    overflow-y: scroll;
 
-    .ant-form {
-        height: 100%;
+    .event-create-form, .event-edit-form {
+        padding-top: 85vh;
         width: 80%;
+        margin: 0 auto;
+        margin-bottom: 6em;
+
+        h1 {
+            text-align: center;
+        }
+            
+        .ant-form-item {
+            margin: 0 auto;
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        .ant-btn {
+            min-width: 100%;
+        }
+
+        .delete-button {
+            margin-bottom: 3em;
+        }
+
+        @include tablet-landscape {
+            padding-top: 0;
+            padding-left: 35%;
+            margin: 0;
+            margin-left: 5%;
+            
+            h1 {
+                text-align: left;
+            }
+        }
+    }
+
+    .mobile-title {
+        text-align: center;
+        width: 100%;
+    }
+
+    .event-details-card {
+        @extend .event-content;
+        margin-top: 6em; // top space for mobile title
+        margin-bottom: 0;
+        height: calc(80% * 1.25);
+        transform: scale(0.8);
+        transform-origin: top;
+        font-size: 0.8em;
         overflow-y: scroll;
+
+        // remove top space
+        @include tablet-portrait {
+            margin-top: 0;
+        }
+        // Overwrite to not take all space
+        @include tablet-landscape {
+            margin-top: 0;
+            position: fixed;
+            left: 7.5%;
+            width: 30%;
+        }
+        .event__rooms {
+            transform: scale(0.8);
+            transform-origin: top;
+        }
     }
 }

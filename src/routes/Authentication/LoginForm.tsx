@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
-import Form, { TextInput } from "components/forms";
+import Form, { TextInput } from "components/shared/form";
 
 import { AppContext } from "context/AppContext";
 import { saveCognitoUser, fetchUserData } from "store/actions/userActions";

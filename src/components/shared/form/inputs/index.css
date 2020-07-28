@@ -63,3 +63,19 @@
         padding-left: 2em;
     }
 }
+
+
+.dynamic-input {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 1em;
+}
+.dynamic-input > .anticon {
+    margin-left: 0.5em;
+    line-height: 2em;
+}
+.dynamic-input > .ant-form-item {
+    margin: 0;
+    width: 100%;
+}
