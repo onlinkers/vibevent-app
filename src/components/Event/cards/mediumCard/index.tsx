@@ -3,7 +3,7 @@ import moment from "moment";
 
 import "./index.scss";
 import { Event, User } from "types/props";
-import SaveButton from "components/buttons/saveButton";
+import SaveButton from "components/shared/buttons/saveButton";
 
 // import shareIcon from "../../../assets/icons/share.svg";
 

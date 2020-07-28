@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import ReactMarkdown from "markdown-to-jsx";
 
-import QuickAccessMenu from "components/searchTools";
+import QuickAccessMenu from "components/Event/searchTools";
 import Navbar from "components/layouts/navbar";
 import NotFound from "routes/NotFound";
 
