@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import popup from "popup";
 import { Divider } from "antd";
-import Navbar from "components/layouts/navbar";
 import EventForm from "components/Event/form";
 import EventDetailsCard from "components/Event/cards/detailsCard";
 
@@ -13,21 +12,22 @@ import { ThemeContext } from "context/ThemeContext";
 import "../form.scss";
 import { EventCategoriesPayload } from "types/store";
 import { User, Event } from "types/props";
+
 import eventService from "services/eventService";
+import { fetchAllEvents } from "store/actions/eventActions";
 
 interface Props {
   eventCategories: EventCategoriesPayload;
-  loading: boolean;
-  errors: string
   user: User;
+  fetchAllEvents: Function;
 }
 
 const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   const {
     eventCategories,
-    loading,
-    user
+    user,
+    fetchAllEvents
   } = props;
 
   const history = useHistory();
@@ -61,7 +61,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
     // links need to be re-organized
     const links = {};
-    link.forEach((l) => { links[l.type] = l.url; });
+    if(link && link.length) link.forEach((l) => { links[l.type] = l.url; });
 
     const payload = {
       ...rest,
@@ -81,6 +81,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
     // TODO: Proper Image Uploading
 
     await eventService.createEvent(payload);
+    fetchAllEvents();
 
     popup.success("Event created!");
     history.goBack();
@@ -126,27 +127,21 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className="Page EventForm">
-      <Navbar />
-      {loading && <div className="Page--full Loader">Loading...</div>}
-      {!loading && (
-        <>
-          {breakpoint === "mobile" && <div className="mobile-title"><h1>Create Your Event!</h1></div>}
-          <div className="event-create-form">
-            {breakpoint !== "mobile" && <><h1>Create Your Event!</h1><Divider/></>}
-            <EventForm
-              mode="CREATE"
-              onChange={handleFormChange}
-              onSubmit={handleSubmit}
-              eventCategories={eventCategories}
-            />
-          </div>
-          <EventDetailsCard
-            event={previewValues}
-            eventCategories={eventCategories}
-            redirects={false}
-          />
-        </>
-      )}
+      {breakpoint === "mobile" && <div className="mobile-title"><h1>Create Your Event!</h1></div>}
+      <div className="event-create-form">
+        {breakpoint !== "mobile" && <><h1>Create Your Event!</h1><Divider/></>}
+        <EventForm
+          mode="CREATE"
+          onChange={handleFormChange}
+          onSubmit={handleSubmit}
+          eventCategories={eventCategories}
+        />
+      </div>
+      <EventDetailsCard
+        event={previewValues}
+        eventCategories={eventCategories}
+        redirects={false}
+      />
     </div>
   );
 };
@@ -154,10 +149,14 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 const mapStateToProps = ({ eventData, userData }) => {
   return {
     eventCategories: eventData.eventCategories,
-    loading: eventData.loading,
-    errors: eventData.errors.eventCategories,
     user: userData.user
   };
 };
 
-export default connect(mapStateToProps, null)(EventCreate);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllEvents: () => dispatch(fetchAllEvents())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventCreate);

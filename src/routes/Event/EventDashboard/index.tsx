@@ -1,45 +1,30 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 // import { motion, useMotionValue, useTransform } from "framer-motion";
 
-import { Spin } from "antd";
-import { ReloadOutlined } from "@ant-design/icons";
 import QuickAccessMenu from "components/Event/searchTools";
 import LargeEventCard from "components/Event/cards/largeCard";
 import MediumEventCard from "components/Event/cards/mediumCard";
 import SmallEventCard from "components/Event/cards/smallCard";
-import Navbar from "components/layouts/navbar";
 
 import "./index.scss";
 
 import { EventsPayload } from "types/store";
 import { User } from "types/props";
-import { fetchAllEvents } from "store/actions/eventActions";
 import { ThemeContext } from "context/ThemeContext";
-import { fetchUserData, saveUserData } from "store/actions/userActions";
+import { saveUserData } from "store/actions/userActions";
 import userService from "services/userService";
 
 interface Props {
   user: User;
   events: EventsPayload;
-  loading: boolean;
-  errors: {
-    events?: string;
-    eventCategories?: string;
-  };
-  fetchAllEvents: Function;
-  fetchUserData: Function;
   saveUserData: Function;
 }
 
 const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const {
     events,
-    loading,
-    errors,
-    fetchAllEvents,
-    fetchUserData,
     saveUserData,
     user,
   } = props;
@@ -48,11 +33,6 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   const eventsArray = Object.values(events);
 
   const history = useHistory();
-
-  const refreshPage = () => {
-    history.push("/empty");
-    history.goBack();
-  };
 
   const redirectToEvent = (eventId) => {
     history.push(`/event/${eventId}`);
@@ -78,15 +58,6 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     saveUserData({ ...user, eventsSaved: newSavedEvents });
   };
 
-  // Dashboard needs refreshing when opened
-  useEffect(() => {
-    fetchAllEvents();
-    if (user?._id) fetchUserData(user._id);
-  }, []); // eslint-disable-line
-
-  const hasErrors = errors.events || events.eventCategories;
-  // const hasErrors = true;
-
   // const x = useMotionValue(0);
   // const opacityRight = useTransform(
   //   x,
@@ -102,98 +73,81 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
     <div className="Page EventDashboard">
-      {loading && (
-        <div className="Page--full Loader">
-          <Spin />
-        </div>
-      )}
-      {!loading &&
-        (hasErrors ? (
-          <React.Fragment>
-            <div onClick={refreshPage} className="button--clickable">
-              <ReloadOutlined />
-            </div>
-            <div className="text--unselectable">{errors.events}</div>
-            <div className="text--unselectable">{errors.eventCategories}</div>
-          </React.Fragment>
-        ) : (
-          <>
-            <Navbar/>
-            {breakpoint === "mobile" ? (
-              <div className="mobile-view">
-                <div className="page-header">
-                  <h1>Dashboard</h1>
-                </div>
-                <div className="page-contents">
-                  <div className="events-category">
-                    <h5>Suggested For You</h5>
-                    <div className="events-frame">
-                      {eventsArray.map((event) => {
-                        return (
-                          <MediumEventCard
-                            event={event}
-                            key={event._id}
-                            onClick={() => {
-                              redirectToEvent(event._id);
-                            }}
-                            saved={
-                              user.eventsSaved &&
+      {breakpoint === "mobile" ? (
+        <div className="mobile-view">
+          <div className="page-header">
+            <h1>Dashboard</h1>
+          </div>
+          <div className="page-contents">
+            <div className="events-category">
+              <h5>Suggested For You</h5>
+              <div className="events-frame">
+                {eventsArray.map((event) => {
+                  return (
+                    <MediumEventCard
+                      event={event}
+                      key={event._id}
+                      onClick={() => {
+                        redirectToEvent(event._id);
+                      }}
+                      saved={
+                        user.eventsSaved &&
                           !!user.eventsSaved.find(
                             (savedEvent) => String(event._id) === savedEvent._id
                           )
-                            }
-                            onSaveClick={saveEvent}
-                          ></MediumEventCard>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  <div className="events-category">
-                    <h5>Online Experiences</h5>
-                    <div className="events-frame">
-                      {eventsArray.map((event) => {
-                        return (
-                          <SmallEventCard
-                            event={event}
-                            key={event._id}
-                            onClick={() => {
-                              redirectToEvent(event._id);
-                            }}
-                          ></SmallEventCard>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
+                      }
+                      onSaveClick={saveEvent}
+                    ></MediumEventCard>
+                  );
+                })}
               </div>
-            ) : (
-              <div className="desktop-view">
-                <div className="events-scroll">
-                  <div className="events-category">
-                    <h1 className="events-category__title">Online Experiences</h1>
-                    <div className="events-frame--no-scroll">
-                      {eventsArray.map((event) => {
-                        return (
-                          <LargeEventCard
-                            event={event}
-                            key={event._id}
-                            saved={
-                              user.eventsSaved &&
+            </div>
+            <div className="events-category">
+              <h5>Online Experiences</h5>
+              <div className="events-frame">
+                {eventsArray.map((event) => {
+                  return (
+                    <SmallEventCard
+                      event={event}
+                      key={event._id}
+                      onClick={() => {
+                        redirectToEvent(event._id);
+                      }}
+                    ></SmallEventCard>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="desktop-view">
+          <div className="events-scroll">
+            <div className="events-category">
+              <h1 className="events-category__title">Online Experiences</h1>
+              <div className="events-frame--no-scroll">
+                {eventsArray.map((event) => {
+                  return (
+                    <LargeEventCard
+                      event={event}
+                      key={event._id}
+                      saved={
+                        user.eventsSaved &&
                           !!user.eventsSaved.find(
                             (savedEvent) => String(event._id) === savedEvent._id
                           )
-                            }
-                            className="event-card"
-                            onClick={() => {
-                              redirectToEvent(event._id);
-                            }}
-                            onSaveClick={saveEvent}
-                          ></LargeEventCard>
-                        );
-                      })}
-                    </div>
-                    {/* FUTURE FEATURE: do not delete */}
-                    {/* <div className="events-frame">
+                      }
+                      className="event-card"
+                      onClick={() => {
+                        redirectToEvent(event._id);
+                      }}
+                      onSaveClick={saveEvent}
+                    ></LargeEventCard>
+                  );
+                })}
+              </div>
+              {/* FUTURE FEATURE: do not delete */}
+              {/* <div className="events-frame">
                       <motion.div
                         className="events-draggable"
                         drag="x"
@@ -223,14 +177,12 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
                       className="gradient-fade gradient-fade-left"
                       style={{ opacity: opacityLeft }}
                     ></motion.div> */}
-                  </div>
-                </div>
-                <QuickAccessMenu events={events} />
-                <h1 className="page-label">Activity<br />Dashboard</h1>
-              </div>
-            )}
-          </>
-        ))}
+            </div>
+          </div>
+          <QuickAccessMenu events={events} />
+          <h1 className="page-label">Activity<br />Dashboard</h1>
+        </div>
+      )}
     </div>
   );
 };
@@ -238,16 +190,12 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
 const mapStateToProps = ({ eventData, userData }) => {
   return {
     user: userData.user,
-    events: eventData.events,
-    loading: eventData.loading || userData.loading,
-    errors: eventData.errors,
+    events: eventData.events
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAllEvents: () => dispatch(fetchAllEvents()),
-    fetchUserData: (userId) => dispatch(fetchUserData(userId)),
     saveUserData: (userData) => dispatch(saveUserData(userData)),
   };
 };

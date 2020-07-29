@@ -52,6 +52,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
     }
   };
 
+  // TODO: Geocoding
   // useEffect(() => {
   //   if(!loaded) {
   //     // Initialize the geocoder in the form
