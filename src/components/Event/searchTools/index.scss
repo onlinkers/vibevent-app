@@ -8,10 +8,6 @@
 
   @include tablet-landscape {
     display: flex;
-    width: 40%;
-  }
-  @include desktop {
-    display: flex;
     width: 30%;
   }
 

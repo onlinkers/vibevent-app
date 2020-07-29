@@ -1,10 +1,14 @@
 .event-details-card {
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 3%;
+    margin-bottom: 6em;
     padding: 2em;
 
     border-radius: 5%;
     background: white;
+
+    @include tablet-portrait {
+        margin-bottom: 3%;
+    }
 
     .back-button {
         color: $red1;
@@ -90,8 +94,10 @@
         .event__categories {
             display: flex;
             flex-direction: row;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             z-index: 1;
+            overflow: hidden;
+            line-height: 1.5em;
 
             .ant-tag {
                 user-select: none;
@@ -99,6 +105,7 @@
                 color: $red1;
                 background: rgba($red1, 0.1);
                 padding: 0.5em 1em 0.5em 1em;
+                margin-bottom: 0.5em;
                 border-radius: 0.5em;
                 border: none;
             }
