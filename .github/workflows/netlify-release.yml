@@ -22,4 +22,4 @@ jobs:
       run: |
         echo "Releasing $RELEASE_VERSION to netlify production"
         npm version $RELEASE_VERSION
-        git push origin master && git push origin master:prod
+        git push origin master && git push origin master:prod --force

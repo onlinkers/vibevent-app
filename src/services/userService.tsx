@@ -1,5 +1,5 @@
 import api from "../api";
-import { apiErrorHandler } from "./_errorHandlers";
+import { apiErrorHandler } from "../popup";
 
 export default {
   getUsersByIds: async ({ ids, withEvents = true }) => {
@@ -27,15 +27,6 @@ export default {
   setUser: async ({ id, payload }) => {
     try {
       const results = await api.put(`/user/${id}`, payload);
-      return results;
-    } catch(err) {
-      apiErrorHandler(err);
-      throw err;
-    }
-  },
-  updateUser: async ({ id, payload }) => {
-    try {
-      const results = await api.patch(`/user/${id}`, payload);
       return results;
     } catch(err) {
       apiErrorHandler(err);

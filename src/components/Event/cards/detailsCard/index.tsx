@@ -1,8 +1,9 @@
 import React from "react";
 import moment from "moment";
 import ReactMarkdown from "markdown-to-jsx";
+import { Link } from "react-router-dom";
 
-import { Empty, Card, Avatar, Tag, Button } from "antd";
+import { Empty, Card, Avatar, Tag, Button, Divider } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import DefaultImage from "assets/media/default-image.png";
 
@@ -18,6 +19,7 @@ interface Props {
     redirectToRoom?: (any:any) => void;
     redirectBack?: (any:any) => void;
     redirects?: boolean;
+    allowEdit?: boolean;
 }
 
 const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
@@ -28,6 +30,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     redirectToRoom = () => {},
     redirectBack = () => {},
     redirects = true,
+    allowEdit = false,
   } = props;
 
   const generatePhotos = () => {
@@ -126,7 +129,6 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         {generatePhotos()}
       </div>
 
-
       <div className="event__actions">
         <div className="event__categories">
           {generateCategories()}
@@ -144,18 +146,28 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         <br />
       </div>
 
+      <Divider />
+
       <div className="event__hosts">
         <h2>Your hosts:</h2>
         {generateHosts()}
       </div>
 
+      <Divider />
+
       <h2>About the event</h2>
       <div><ReactMarkdown>{parse(event.description || "")}</ReactMarkdown></div>
+
+      <Divider />
 
       <h2>Rooms:</h2>
       <div className="event__rooms">
         {generateRooms()}
       </div>
+
+      {allowEdit && <Link to={`${event._id}/edit`}>
+        <Button type="primary" danger className="event__edit_button">Edit this event</Button>
+      </Link>}
             
     </div>
   );

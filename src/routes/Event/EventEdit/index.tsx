@@ -1,52 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
 
-import {
-  message,
-  Button,
-  Popconfirm
-} from "antd";
-import { ReloadOutlined } from "@ant-design/icons";
+import popup from "popup";
 import EventForm from "components/Event/form";
 import EventDetailsCard from "components/Event/cards/detailsCard";
-import Navbar from "components/layouts/navbar";
 
 import "../form.scss";
-import { EventsPayload, EventCategoriesPayload } from "types/store";
 import { Event } from "types/props";
+import { EventCategoriesPayload } from "types/store";
+
 import eventService from "services/eventService";
+import { fetchAllEvents } from "store/actions/eventActions";
 
 interface Props {
-  events: EventsPayload;
+  event: Event;
   eventCategories: EventCategoriesPayload;
-  loading: boolean;
-  errors: {
-    events?: string
-    eventCategories?: string,
-  };
+  fetchAllEvents: Function;
 }
 
-const EventEdit: React.FunctionComponent<Props> = (props) => {
+const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fetchAllEvents }) => {
 
   const { eventId } = useParams();
   const history = useHistory();
 
-  const {
-    events,
-    eventCategories,
-    loading,
-    errors
-  } = props;
-
-  const [eventLoaded, setEventLoaded] = useState(false);
-  const [thisEvent, setThisEvent] = useState<Event | null>(null);
-
-  const refreshPage = () => {
-    history.push("/empty");
-    history.goBack();
-  };
+  const [thisEvent, setThisEvent] = useState(event);
 
   const handleSubmit = async (formValues) => {
 
@@ -54,7 +33,7 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
 
     // links need to be re-organized
     const links = {};
-    link.forEach((l) => { links[l.type] = l.url; });
+    if(link && link.length) link.forEach((l) => { links[l.type] = l.url; });
 
     const payload = {
       ...thisEvent,
@@ -83,17 +62,21 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
     // TODO: Proper Image Uploading
     
     await eventService.setEvent({ id: eventId, payload });
+    fetchAllEvents();
 
-    message.success("Event edited!");
+    popup.success("Event changes saved!");
     history.goBack();
 
   };
 
-  const deleteEvent = async (eventId) => {
+  const handleDelete = async () => {
+
+    const eventId = thisEvent._id;
     
     await eventService.deleteEvent({ id: eventId });
+    fetchAllEvents();
 
-    message.success("Event deleted!");
+    popup.success("Event deleted!");
     history.push("/event/dashboard");
 
   };
@@ -135,101 +118,49 @@ const EventEdit: React.FunctionComponent<Props> = (props) => {
     
   };
 
-  useEffect(() => {
-    if(eventId) {
-
-      const searchEventInDB = async () => {
-        const { data } = await eventService.getEventsByIds({ ids: [eventId] });
-        const eventData = data ? (Object.values(data)[0] as Event) : null;
-        if(!eventData) throw new Error("Data on the event you are trying to edit does not exist!");
-        return eventData;
-      };
-      
-      const reduxEvent = events[eventId];
-      if(reduxEvent) { // if the event is found in redux
-        setThisEvent(reduxEvent);
-        setEventLoaded(true);
-      }
-      else { // if the event is not found in redux
-        searchEventInDB()
-          .then(setThisEvent)
-          .catch(() => setThisEvent(null))
-          .finally(() => setEventLoaded(true));
-      }
-
-    }    
-  }, []); // eslint-disable-line
-
-  const hasErrors = errors.events || events.eventCategories;
-  const loaded = eventLoaded && !loading;
-
   return (
     <div className="Page EventForm">
-      <Navbar />
-      {!loaded && <div className="Page--full Loader">Loading...</div>}
-      {loaded && (hasErrors ? (
-        <div className="Page--full Error">
-          <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
-          <div className="t--unselectable">{errors[0]}</div>
-          <div className="t--unselectable">{errors[1]}</div>
-        </div>
-      ) : (
-        thisEvent ? (
-          <>
-            <div className="event-edit-form">
-              <h1>Edit your event!</h1>
-              <EventForm
-                mode="EDIT"
-                onChange={handleFormChange}
-                onSubmit={handleSubmit}
-                eventCategories={eventCategories}
-                initialValues={{
-                  name: thisEvent.name,
-                  date: [moment(thisEvent.startDate), moment(thisEvent.endDate)],
-                  price: thisEvent.price,
-                  description: thisEvent.description,
-                  categories: thisEvent.categories,
-                  link: thisEvent.links && Object.entries(thisEvent.links).map(([type, url]) => ({ type, url })),
-                  room: thisEvent.rooms,
-                  venueName: thisEvent.venue.name,
-                  // venueCoordinates: thisEvent.venue.location, // TODO
-                  tags: thisEvent.tags?.hostTags
-                }}
-              />
-              <br />
-              <Popconfirm
-                title="Are you sure delete this event? You cannot undo this action."
-                onConfirm={() => deleteEvent(thisEvent._id)}
-                okText="Yes"
-                cancelText="No"
-              >
-                <Button className="delete-button" danger>Delete Event</Button>
-              </Popconfirm>
-            </div>
-            <EventDetailsCard
-              event={thisEvent}
-              eventCategories={eventCategories}
-              redirects={false}
-            />
-          </>
-        ) : (
-          <div className="Page--full Error">
-            <div className="t--unselectable">Data on the event you are trying to edit does not exist!</div>
-            <Button type="primary" className="button--clickable" onClick={() => history.push("/event/create")}>Create a new event.</Button>
-            <Button className="button--clickable" onClick={() => history.goBack()}>Go back.</Button>
-          </div>
-        )))}
+      <div className="event-edit-form">
+        <h1>Edit your event!</h1>
+        <EventForm
+          mode="EDIT"
+          onChange={handleFormChange}
+          onSubmit={handleSubmit}
+          onDelete={handleDelete}
+          eventCategories={eventCategories}
+          initialValues={{
+            name: thisEvent.name,
+            date: [moment(thisEvent.startDate), moment(thisEvent.endDate)],
+            price: thisEvent.price,
+            description: thisEvent.description,
+            categories: thisEvent.categories,
+            link: thisEvent.links && Object.entries(thisEvent.links).map(([type, url]) => ({ type, url })),
+            room: thisEvent.rooms,
+            venueName: thisEvent.venue.name,
+            // venueCoordinates: thisEvent.venue.location, // TODO
+            tags: thisEvent.tags?.hostTags
+          }}
+        />
+      </div>
+      <EventDetailsCard
+        event={thisEvent}
+        eventCategories={eventCategories}
+        redirects={false}
+      />
     </div>
   );
 };
 
 const mapStateToProps = ({ eventData }) => {
   return {
-    events: eventData.events,
-    eventCategories: eventData.eventCategories,
-    loading: eventData.loading,
-    errors: eventData.errors
+    eventCategories: eventData.eventCategories
   };
 };
 
-export default connect(mapStateToProps, null)(EventEdit);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllEvents: () => dispatch(fetchAllEvents())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventEdit);

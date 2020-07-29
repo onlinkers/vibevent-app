@@ -9,6 +9,7 @@ import {
   DatePicker,
   InputNumber,
   Divider,
+  Popconfirm
 } from "antd";
 
 import DynamicInput from "components/shared/form/inputs/dynamicInput";
@@ -24,13 +25,14 @@ interface Props {
   eventCategories: EventCategoriesPayload;
   initialValues?: any;
   onChange?: (fieldsChanged: any, allFields?:any) => void;
+  onDelete?: () => void;
 }
 
 // const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const EventForm: React.FunctionComponent<Props> = (props) => {
 
-  const { mode, onSubmit, eventCategories, initialValues, onChange = () => {} } = props;
+  const { mode, onSubmit, eventCategories, initialValues, onChange = () => {}, onDelete = () => {} } = props;
   // const initialVenueCoordinates = (initialValues && initialValues.venueCoordinates) || null;
 
   const [form] = Form.useForm();
@@ -52,6 +54,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
     }
   };
 
+  // TODO: Geocoding
   // useEffect(() => {
   //   if(!loaded) {
   //     // Initialize the geocoder in the form
@@ -237,6 +240,17 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       <Button type="primary" htmlType="submit" disabled={isSubmitting}>
         {mode === "CREATE" ? "Create Event" : "Edit Event"}
       </Button>
+
+      {mode === "EDIT" &&
+      <Popconfirm
+        title="Are you sure delete this event? You cannot undo this action."
+        onConfirm={onDelete}
+        okText="Yes"
+        cancelText="No"
+      >
+        <Button className="event-delete-button" danger>Delete Event</Button>
+      </Popconfirm>}
+
     </Form>
   );
 };

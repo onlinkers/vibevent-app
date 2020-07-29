@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Form as AntForm, Button as AntButton, message } from "antd";
+import { Form as AntForm, Button as AntButton } from "antd";
 
+import popup from "popup";
 import "./index.css";
 
 interface Props {
@@ -36,7 +37,7 @@ const Form: React.FunctionComponent<Props> = ({ children, ...props }) => {
     // antd needs to be fixed for nested items
     // const firstError = errorFields[0];
     // formInstance.scrollToField(firstError);
-    message.error(`Error validating the following fields: ${errorFields.join(", ")}`);
+    popup.error(`Error validating the following fields: ${errorFields.join(", ")}`);
   };
 
   const submit = async (formValues) => {
@@ -48,7 +49,7 @@ const Form: React.FunctionComponent<Props> = ({ children, ...props }) => {
     }
     catch(err) {
       setIsSubmitting(false);
-      message.error(err.message);
+      popup.error(err.message);
       onFail(err);
     }
   };

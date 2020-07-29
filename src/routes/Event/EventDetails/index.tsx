@@ -1,35 +1,30 @@
 import React from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
 import EventDetailsCard from "components/Event/cards/detailsCard";
-import QuickAccessMenu from "components/Event/searchTools";
 import Navbar from "components/layouts/navbar";
-import NotFound from "routes/NotFound";
 
-import { Spin } from "antd";
 import "./index.scss";
 
-import { EventsPayload, EventCategoriesPayload } from "types/store";
+import { Event } from "types/props";
+import { EventCategoriesPayload } from "types/store";
 
 interface Props {
-  events: EventsPayload;
+  event: Event;
   eventCategories: EventCategoriesPayload;
-  loading?: boolean;
+  userId: string;
 }
 
 const EventDetails: React.FunctionComponent<Props> = (props) => {
 
   const {
-    events,
+    userId,
+    event,
     eventCategories,
-    loading,
   } = props;
 
   const history = useHistory();
-
-  const { eventId } = useParams();
-  const event = events[eventId];
 
   const roomHandler = (roomId) => {
     history.push(`/room/${roomId}`);
@@ -38,33 +33,21 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
   return (
     <div className="Page EventDetails">
       <Navbar />
-      {loading && (
-        <div className="Page--full Loader">
-          <Spin />
-        </div>
-      )}
-      {!loading && event && (
-        <>
-          <EventDetailsCard
-            event={event}
-            eventCategories={eventCategories}
-            redirectToRoom={roomHandler}
-            redirectBack={() => { history.push("/event/dashboard"); }}
-          />
-          <QuickAccessMenu events={events} />
-        </>
-      )}
-      { !loading && !event && <NotFound type="event"/> }
+      <EventDetailsCard
+        event={event}
+        eventCategories={eventCategories}
+        redirectToRoom={roomHandler}
+        redirectBack={() => { history.push("/event/dashboard"); }}
+        allowEdit={event.hosts.map((host) => host._id).includes(userId)}
+      />
     </div>
   );
 };
 
-
-const mapStateToProps = ({ eventData }) => {
+const mapStateToProps = ({ eventData, userData }) => {
   return {
-    events: eventData.events,
     eventCategories: eventData.eventCategories,
-    loading: eventData.loading,
+    userId: userData.user._id
   };
 };
 

@@ -11,6 +11,8 @@ export * from "./_utils/filterEventsByCategoryKeys";
 
 export * from "./_utils/filterEventMarkersToDelete";
 
+export * from "./_utils/getUrlQuery";
+
 export * from "./_utils/parse";
 
 export * from "./_utils/stringifyTags";

@@ -15,6 +15,7 @@ export type UserGetPayload = User;
 
 export interface UserCreatePayload {
   _id?: string;
+  role: string;
   firstName: string;
   lastName?: string;
   description?: string;

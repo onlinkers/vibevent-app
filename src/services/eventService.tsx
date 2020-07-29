@@ -1,5 +1,5 @@
 import api from "../api";
-import { apiErrorHandler } from "./_errorHandlers";
+import { apiErrorHandler } from "../popup";
 
 export default {
   getAllEvents: async () => {
@@ -35,15 +35,6 @@ export default {
   setEvent: async ({ id, payload }) => {
     try {
       const results = await api.put(`/event/${id}`, payload);
-      return results;
-    } catch(err) {
-      apiErrorHandler(err);
-      throw err;
-    }
-  },
-  updateEvent: async ({ id, payload }) => {
-    try {
-      const results = await api.patch(`/event/${id}`, payload);
       return results;
     } catch(err) {
       apiErrorHandler(err);
