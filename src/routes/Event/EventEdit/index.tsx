@@ -4,10 +4,6 @@ import { connect } from "react-redux";
 import moment from "moment";
 
 import popup from "popup";
-import {
-  Button,
-  Popconfirm
-} from "antd";
 import EventForm from "components/Event/form";
 import EventDetailsCard from "components/Event/cards/detailsCard";
 
@@ -73,7 +69,9 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
 
   };
 
-  const deleteEvent = async (eventId) => {
+  const handleDelete = async () => {
+
+    const eventId = thisEvent._id;
     
     await eventService.deleteEvent({ id: eventId });
     fetchAllEvents();
@@ -128,6 +126,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
           mode="EDIT"
           onChange={handleFormChange}
           onSubmit={handleSubmit}
+          onDelete={handleDelete}
           eventCategories={eventCategories}
           initialValues={{
             name: thisEvent.name,
@@ -142,15 +141,6 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
             tags: thisEvent.tags?.hostTags
           }}
         />
-        <br />
-        <Popconfirm
-          title="Are you sure delete this event? You cannot undo this action."
-          onConfirm={() => deleteEvent(thisEvent._id)}
-          okText="Yes"
-          cancelText="No"
-        >
-          <Button className="delete-button" danger>Delete Event</Button>
-        </Popconfirm>
       </div>
       <EventDetailsCard
         event={thisEvent}
