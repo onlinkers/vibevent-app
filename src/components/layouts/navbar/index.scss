@@ -52,6 +52,7 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
+        height: 80%;
     }
     
     .navlink {
@@ -67,6 +68,10 @@
         }
         @include desktop {
             font-size: 1.75em;
+        }
+
+        &.logout {
+            margin-top: auto;
         }
     }
 }

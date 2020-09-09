@@ -6,13 +6,16 @@ import { AppContext } from "context/AppContext";
 import Sidebar from "./sidebar";
 import Bottombar from "./bottombar";
 
-import HomeIcon from "components/svg/home-icon/HomeIcon";
+import BookIcon from "components/svg/book-icon";
+import CreateIcon from "components/svg/create-icon";
+// import HomeIcon from "components/svg/home-icon";
+import SearchIcon from "components/svg/search-icon";
 
 const routes = [
   {
     label: "Dashboard",
     url: "/event/dashboard",
-    mobileIcon: HomeIcon
+    mobileIcon: SearchIcon
   },
   // {
   //   label: "Discover",
@@ -25,12 +28,12 @@ const authenticatedRoutes = [
   {
     label: "Create",
     url: "/event/create",
-    mobileIcon: HomeIcon
+    mobileIcon: CreateIcon
   },
   {
     label: "My Activity",
     url: "/profile",
-    mobileIcon: HomeIcon
+    mobileIcon: BookIcon
   },
 ];
 

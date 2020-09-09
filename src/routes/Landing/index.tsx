@@ -52,10 +52,14 @@ const Landing = () => {
         <div className="hero-text">
           <h1>A virtual space for all your event discovery needs.</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt sed integer gravida in ac faucibus lorem. Eros hendrerit nibh egestas tincidunt. Ullamcorper dolor mauris dui non nunc amet ultrices. In erat sagittis ipsum justo.</p>
-          <Button type="primary" className="explore-btn">
-            <span>Explore - Dashboard</span>
-            <span className="arrows">&gt;&gt;</span>
-          </Button>
+          <Link to="/event/dashboard">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.1 }}
+            >
+              <Button type="primary" className="explore-btn">Explore the Dashboard &gt;&gt;</Button>
+            </motion.div>
+          </Link>
         </div>
       </div>
     </div>

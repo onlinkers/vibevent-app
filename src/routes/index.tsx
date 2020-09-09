@@ -92,6 +92,7 @@ const Routes: React.FunctionComponent<Props> = (props) => {
           exact
           path="/"
           component={<Landing />}
+          altComponent={<Landing />}
         />
         <AuthRoute path="/profile" component={<Construction />} /> {/*  TO CHANGE */}
 
