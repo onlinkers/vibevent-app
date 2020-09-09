@@ -16,6 +16,12 @@
         color: $red1 !important;
         border-color: $red1 !important;
     }
+
+    &.ant-btn-empty {
+        background-color: unset !important;
+        color: white !important;
+        border: none !important;
+    }
 }
 
 .ant-tag {
