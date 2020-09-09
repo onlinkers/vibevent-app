@@ -43,6 +43,24 @@ const LandingHeader = () => {
   );
 };
 
+const StepNum = ({ direction = "ltr", num }) => {
+
+  const { breakpoint } = useContext(ThemeContext);
+
+  return (
+    <div className="step-num" style={{ flexDirection: direction === "ltr" || breakpoint === "mobile" ? "row" : "row-reverse" }}>
+      <svg width="531" height="2" viewBox="0 0 531 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line y1="1" x2="531" y2="1" stroke="#FF1D58" strokeWidth="2"/>
+      </svg>
+      <svg width="100" height="80" viewBox="0 0 126 126" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="63" cy="63" r="62" stroke="#FF1D58" strokeWidth="2"/>
+        <text x="40" y="75" className="step-num__num">{num}</text>
+      </svg>
+    </div>
+  );
+
+};
+
 const Landing = () => {
   return (
     <div className="Landing">
@@ -61,6 +79,57 @@ const Landing = () => {
             </motion.div>
           </Link>
         </div>
+      </div>
+
+      <div className="steps">
+
+        <div className="step-text-container">
+          <div className="step-text-container-flex">
+            <StepNum direction="ltr" num="01"/>
+            <div className="step-text">
+              <h1>Plan your event.</h1>
+              <p>Our team will help you formulate the best strategy according to statistics on student trends and behaviors. Capture the attention of your target group!</p>
+            </div>
+          </div>
+        </div>
+        <div className="s-1"></div>
+
+
+
+        <div className="step-text-container reverse">
+          <div className="step-text-container-flex">
+            <StepNum direction="rtl" num="02"/>
+            <div className="step-text">
+              <h1>Promote your event.</h1>
+              <p>Easily reach up to 1000 students and obtain at least 100 registrants with us. We’ll be using our very own marketing channels to ensure your event gains the traction it needs!</p>
+            </div>
+          </div>
+        </div>
+        <div className="s-2"></div>
+
+
+        <div className="step-text-container full">
+          <div className="step-text-container-flex">
+            <StepNum direction="ltr" num="03"/>
+            <div className="step-text">
+              <h1>Host your event.</h1>
+              <p>Struggling to find the best platform to fulfill your purpose? We offer Zoom, Google Meet, Hopin, and Run The World at a fraction of the cost! Your amazing event doesn’t have to break the bank.</p>
+            </div>
+          </div>
+        </div>
+        <div className="s-3"></div>
+
+        <div className="step-text-container reverse">
+          <div className="step-text-container-flex">
+            <StepNum direction="rtl" num="04"/>
+            <div className="step-text">
+              <h1>Manage your event.</h1>
+              <p>We want you and your attendees to have the best possible time during your event. From preventing technical issue headaches to making sure the event flows well, we want all of you to have a magical experience!</p>
+            </div>
+          </div>
+        </div>
+        <div className="s-4"></div>
+
       </div>
     </div>
   );

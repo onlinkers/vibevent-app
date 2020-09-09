@@ -5,6 +5,9 @@
   overflow-y: scroll;
   overflow-x: hidden;
 
+  $landing-text-size: 1.5em;
+  $landing-text-size-sm: 1.25em;
+
   .hero {
     width: 100%;
     height: 100vh;
@@ -145,15 +148,111 @@
       }
 
       @include tablet-portrait {
-        font-size: 1.25em;
+        font-size: $landing-text-size-sm;
       }
 
       @include tablet-landscape {
         padding: 25% 0 15% 15%;
-        font-size: 1.5em;
+        font-size: $landing-text-size;
       }
     }
 
+  }
+
+  .steps {
+    width: 100%;
+    margin-top: 10%;
+
+    .step-text-container {
+      width: 100%;
+      padding-top: 5em;
+      height: max-content;
+      min-height: 20em;
+      display: table-cell;
+      vertical-align: bottom;
+
+      h1 {
+        color: $red1;
+        font-family: $font-primary;
+        font-weight: bold;
+      }
+
+      p {
+        color: $red1;
+        font-family: $font-secondary;
+      }
+
+      .step-text-container-flex {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .step-text {
+        max-width: 100vw;
+        padding: 0 5em 0 5em;
+      }
+
+      .step-num {
+        display: flex;
+        align-items: center;
+        max-width: 60vw;
+
+        .step-num__num {
+          fill: #FF1D58;
+          font-size: 2em;
+        }
+      }
+
+      @include tablet-portrait {
+        font-size: $landing-text-size-sm;
+        
+        .step-text-container-flex {
+          flex-direction: row;
+        }
+
+        &.reverse {
+          .step-text-container-flex {
+              flex-direction: row-reverse;
+          }
+        }
+
+        &.full {
+          .step-text-container-flex {
+            flex-direction: column;
+          }
+        }
+
+        .step-text {
+          max-width: 60vw;
+          padding: 0 3em 0 3em;
+        }
+
+        .step-num {
+          max-width: 40vw;
+        }
+      }
+
+      @include tablet-landscape {
+        font-size: $landing-text-size;
+      }
+
+    }
+
+    @each $i in 1, 2, 4 {
+      .s-#{$i} {
+        width: 100%;
+        height: calc(100vh - 20em);
+        min-height: calc(650px - 20em);
+        background: url(../../assets/backdrops/landing-#{$i}.png);
+        background-position: bottom left;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+    .s-3 {
+      width: 100%;
+      height: 10em;
+    }
   }
 }
 
