@@ -50,7 +50,7 @@
 }
 
 @mixin card-desktop-secondary {
-  color: $secondary;
+  color: $gray1;
   font-family: $font-primary;
   @include tablet-landscape {
     font-size: 0.75em;
