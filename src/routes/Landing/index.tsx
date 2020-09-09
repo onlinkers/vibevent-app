@@ -3,41 +3,16 @@ import { motion } from "framer-motion";
 
 import "./index.scss";
 import Backdrop from "assets/media/landing-page-backdrop.jpg";
-import VibeventNameLogo from "assets/icons/vibevent-name-logo.svg";
-import VibeventLogoBordered from "components/svg/vibevent-logo-bordered/VibeventLogoBordered";
 import { Link } from "react-router-dom";
 
 const Landing = () => {
-  // const [isOpen, toggleOpen] = useCycle(false, true);
-  // const textVariants = {
-  //   open: {
-  //     y: 0,
-  //     opacity: 1,
-  //     transition: {
-  //       y: { stiffness: 1000, velocity: -100 },
-  //     },
-  //   },
-  //   closed: {
-  //     y: -50,
-  //     opacity: 0,
-  //     transition: {
-  //       y: { stiffness: 1000 },
-  //     },
-  //   },
-  // };
-
   return (
     <div className="Landing">
       <img src={Backdrop} className="backdrop" alt="" />
       <div className="landing-content">
         <div className="landing-logo-section">
           <div className="landing-logo">
-            <VibeventLogoBordered />
-            <img
-              src={VibeventNameLogo}
-              className="vibevent-landing-name"
-              alt=""
-            />
+            
           </div>
         </div>
         <div className="landing-description-section">

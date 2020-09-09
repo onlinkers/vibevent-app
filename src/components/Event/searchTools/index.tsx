@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 
 // import UtilityCard from "components/Event/cards/utilityCard";
 import SmallEventCard from "components/Event/cards/smallCard";
-import VibeventNameLogo from "components/svg/vibevent-name-logo/VibeventNameLogo";
 
 import { EventsPayload } from "types/store";
 import "./index.scss";
@@ -26,9 +25,6 @@ const SearchTools: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className="quick-access">
-      <div className="vibevent-logo-container">
-        <VibeventNameLogo />
-      </div>
       {/* FUTURE FEATURE */}
       {/* <div className="quick-access-container">
           {[0, 1, 2, 3].map((item) => {

@@ -14,8 +14,6 @@ interface Props {
 
 const Navigation = ({ isOpen, routes }) => {
 
-  const [theme, toggleTheme] = useCycle(false, true);
-
   const navVariants = {
     open: {
       x: 0,
@@ -35,13 +33,17 @@ const Navigation = ({ isOpen, routes }) => {
 
   return (
     <>
-      <motion.div
-        variants={navVariants}
-        className="vibevent-logo-container"
-        initial={false}
-      >
-        <VibeventLogo toggle={() => toggleTheme()} theme={theme} />
-      </motion.div>
+      <Link to='/'>
+        <motion.div
+          variants={navVariants}
+          className="vibevent-logo-container"
+          initial={false}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <VibeventLogo/>
+        </motion.div>
+      </Link>
       <motion.ul className="navlinks">
         {routes.map((route) => {
           return (
