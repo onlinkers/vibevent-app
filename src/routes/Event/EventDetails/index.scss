@@ -1,10 +1,15 @@
-@import "../index.scss";
-
 .EventDetails {
     font-family: $font-primary;
     overflow-y: scroll;
 
+    // custom styles for event-details-card (used in-page, not as a component)
     .event-details-card {
-        @extend .event-content;
+        max-width: 90%;
+        margin-left: 5%;
+        left: 5%;
+    
+        @include tablet-landscape {
+          width: 50%;
+        }
     }
 }

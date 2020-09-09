@@ -124,7 +124,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
 
   return (
     <div className="Page EventForm">
-      {breakpoint === "mobile" && <div className="mobile-title"><h1>Create Your Event!</h1></div>}
+      {breakpoint === "mobile" && <div className="mobile-title"><h1>Edit Your Event!</h1></div>}
       <div className="event-edit-form">
         {breakpoint !== "mobile" && <><h1>Edit Your Event!</h1><Divider/></>}
         <EventForm
