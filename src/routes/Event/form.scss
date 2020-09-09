@@ -52,6 +52,7 @@
         @extend .event-content;
         margin-top: 6em; // top space for mobile title
         margin-bottom: 0;
+        margin-left: 0;
         height: calc(80% * 1.25);
         transform: scale(0.8);
         transform-origin: top;

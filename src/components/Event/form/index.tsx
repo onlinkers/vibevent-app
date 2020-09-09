@@ -237,6 +237,8 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
           <Upload />
         </Form.Item> */}
 
+      <Divider/>
+
       <Button type="primary" htmlType="submit" disabled={isSubmitting}>
         {mode === "CREATE" ? "Create Event" : "Edit Event"}
       </Button>
@@ -250,6 +252,8 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       >
         <Button className="event-delete-button" danger>Delete Event</Button>
       </Popconfirm>}
+
+      <Divider/>
 
     </Form>
   );

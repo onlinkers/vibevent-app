@@ -1,7 +1,6 @@
 .event-content {
     width: 90%;
-    position: absolute;
-    left: 5%;
+    margin-left: 5%;
 
     @include tablet-landscape {
       width: 50%;

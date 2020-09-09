@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button, Typography, Collapse, Empty } from "antd";
+import { Button, Typography, Collapse, Empty, Divider } from "antd";
 import TinyEventCard from "components/Event/cards/tinyCard";
 
 import { User } from "types/props";
@@ -12,10 +12,6 @@ interface Props {
   redirectEvents: Function;
   logOut: Function;
 }
-
-// TODO: Import color from styles
-const saveColor = { background: "green", color: "white" };
-const errorColor = { background: "red", color: "white" };
 
 const ProfileDetails = (props: Props) => {
   const { user, onSave, redirectEvents, logOut } = props;
@@ -146,15 +142,13 @@ const ProfileDetails = (props: Props) => {
             <Button
               className="button--clickable"
               type="primary"
-              style={saveColor}
               onClick={save}
             >
               Save
             </Button>
             <Button
               className="button--clickable"
-              type="primary"
-              style={errorColor}
+              type="ghost"
               onClick={cancel}
             >
               Cancel
@@ -228,6 +222,8 @@ const ProfileDetails = (props: Props) => {
             )}
           </Collapse.Panel>
         </Collapse>
+
+        <Divider />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 /* ROUTES */
 @mixin page-label {
-  font-family: $font-primary;
+  font-family: $font-titles;
   font-weight: 800;
   position: fixed;
   bottom: 2vh;
@@ -10,15 +10,19 @@
   user-select: none;
   @include tablet-portrait {
     line-height: 115%;
-    font-size: 3em;
+    font-size: 2.5em;
+    position: absolute;
+    bottom: unset;
   }
   @include tablet-landscape {
     line-height: 115%;
-    font-size: 4.5em;
+    font-size: 4em;
+    position: fixed;
+    bottom: 2vh;
   }
   @include desktop {
     line-height: 115%;
-    font-size: 6em;
+    font-size: 5.5em;
   }
 }
 
@@ -82,17 +86,6 @@
   }
   @include desktop {
     font-size: 1.5em;
-  }
-}
-
-@mixin card-save-btn {
-  font-family: $font-primary;
-  font-weight: bold;
-  @include tablet-landscape {
-    font-size: 0.875em;
-  }
-  @include desktop {
-    font-size: 1em;
   }
 }
 
