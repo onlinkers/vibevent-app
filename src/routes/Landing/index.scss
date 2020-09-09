@@ -5,6 +5,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
 
+  $landing-text-size-lg: 1.75em;
   $landing-text-size: 1.5em;
   $landing-text-size-sm: 1.25em;
 
@@ -123,6 +124,10 @@
         margin: 5em 5em 0 0;
       }
 
+      @include desktop {
+        margin: 10em 5em 0 0;
+      }
+
     }
     
     .hero-text {
@@ -155,6 +160,11 @@
         padding: 25% 0 15% 15%;
         font-size: $landing-text-size;
       }
+
+      @include desktop {
+        padding: 30% 0 15% 15%;
+        font-size: $landing-text-size-lg;
+      }
     }
 
   }
@@ -165,7 +175,6 @@
 
     .step-text-container {
       width: 100%;
-      padding-top: 5em;
       height: max-content;
       min-height: 20em;
       display: table-cell;
@@ -205,6 +214,7 @@
 
       @include tablet-portrait {
         font-size: $landing-text-size-sm;
+        padding-top: 10em;
         
         .step-text-container-flex {
           flex-direction: row;
@@ -234,6 +244,10 @@
 
       @include tablet-landscape {
         font-size: $landing-text-size;
+
+        &.first {
+          padding-top: 0;
+        }
       }
 
     }
@@ -242,16 +256,125 @@
       .s-#{$i} {
         width: 100%;
         height: calc(100vh - 20em);
-        min-height: calc(650px - 20em);
+        min-height: 650px;
         background: url(../../assets/backdrops/landing-#{$i}.png);
         background-position: bottom left;
         background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background-size: cover;
+
+        @include tablet-portrait {
+          background-size: 100% 100%;
+        }
       }
     }
-    .s-3 {
+  }
+  
+  .step-background {
+
+    &.s-1 {
+      .textbox-white {
+        background: white;
+        border-radius: 0.5em;
+        color: $red1;
+        padding: 0.75em;
+        width: fit-content;
+        font-family: $font-primary;
+        font-weight: bold;
+        user-select: none;
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+  
+      .step-background-img {
+        height: 80%;
+        margin-top: 5%;
+        padding-top: 10%;
+        width: 100%;
+        background: url(../../assets/media/splash-0.png);
+        background-position: top 50% center;
+        background-repeat: no-repeat;
+        background-size: cover;
+  
+        @include tablet-landscape {
+          background-size: contain;
+          margin-top: 0;
+        }
+      }
+    }
+
+    &.s-2 {
+      display: flex;
+      flex-direction: row;
+      justify-items: center;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+      flex-grow: 1;
+
+      .event-card-large {
+        min-height: 50%;
+        min-width: 300px;
+        left: -10%;
+
+        @include tablet-landscape {
+          min-height: 60%;
+          min-width: 400px
+        }
+
+        @include desktop {
+          min-height: unset;
+          max-height: unset;
+          max-width: unset;
+          height: 60%;
+          width: 100%;
+          left: 0%;
+        }
+      }
+    }
+
+    &.s-3 {
       width: 100%;
-      height: 10em;
+      margin-top: 5%;
+      height: 30em;
+      margin-bottom: 10%;
+      background: url(../../assets/media/splash-1.png);
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      @include tablet-portrait {
+        transform: translate(50%, -100%);
+        position: absolute;
+      }
+
+      @include tablet-landscape {
+        transform: translate(40%, -100%);
+      }
+
+      @include desktop {
+        height: 40em;
+        transform: translate(40%, -90%);
+      }
+    }
+
+    &.s-4 {
+      .step-background-img {
+        @include tablet-portrait {
+          width: 90%;
+          height: 90%;
+          margin-left: 5%;
+          background: url(../../assets/media/splash-2.png);
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+
+        @include tablet-landscape {
+          background-position: bottom center;
+          margin-top: 5%;
+        }
+
+      }
     }
   }
 }

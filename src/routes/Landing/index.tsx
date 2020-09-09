@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import "./index.scss";
 import { Link } from "react-router-dom";
 import { Dropdown, Button } from "antd";
+import LargeEventCard from "components/Event/cards/largeCard";
 
 import VibeventLogo from "components/svg/vibevent-logo";
 import VibeventNameLogo from "components/svg/vibevent-name-logo";
@@ -11,6 +12,7 @@ import MenuIcon from "assets/icons/menu-icon.svg";
 import Hero3D from "assets/media/hero-3d.png";
 
 import { ThemeContext } from "context/ThemeContext";
+import sampleEvents from "./sample-events.json";
 
 const LandingHeader = () => {
   const { breakpoint } = useContext(ThemeContext);
@@ -83,7 +85,7 @@ const Landing = () => {
 
       <div className="steps">
 
-        <div className="step-text-container">
+        <div className="step-text-container first">
           <div className="step-text-container-flex">
             <StepNum direction="ltr" num="01"/>
             <div className="step-text">
@@ -92,9 +94,11 @@ const Landing = () => {
             </div>
           </div>
         </div>
-        <div className="s-1"></div>
-
-
+        <div className="step-background s-1">
+          <div className="step-background-img">
+            <div className="textbox-white">Capturing Your Target Audience</div>
+          </div>
+        </div>
 
         <div className="step-text-container reverse">
           <div className="step-text-container-flex">
@@ -105,7 +109,9 @@ const Landing = () => {
             </div>
           </div>
         </div>
-        <div className="s-2"></div>
+        <div className="step-background s-2">
+          {sampleEvents.map((event) => <LargeEventCard key={event._id} event={(event as any)}/>)}
+        </div>
 
 
         <div className="step-text-container full">
@@ -117,7 +123,7 @@ const Landing = () => {
             </div>
           </div>
         </div>
-        <div className="s-3"></div>
+        <div className="step-background s-3"></div>
 
         <div className="step-text-container reverse">
           <div className="step-text-container-flex">
@@ -128,9 +134,12 @@ const Landing = () => {
             </div>
           </div>
         </div>
-        <div className="s-4"></div>
+        <div className="step-background s-4">
+          <div className="step-background-img"></div>
+        </div>
 
       </div>
+
     </div>
   );
 };
