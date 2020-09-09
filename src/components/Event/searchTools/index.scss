@@ -8,20 +8,7 @@
 
   @include tablet-landscape {
     display: flex;
-    width: 40%;
-  }
-  @include desktop {
-    display: flex;
     width: 30%;
-  }
-
-  /* TEMP CHANGE */
-  .vibevent-logo-container {
-    position: relative;
-    width: 100%;
-    right: 0;
-    height: 5vh;
-    margin-bottom: 3vh;
   }
 }
 

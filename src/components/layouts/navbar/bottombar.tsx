@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { motion } from "framer-motion";
 import "./index.scss";
@@ -10,6 +10,8 @@ interface Props {
 
 const Navbar: React.FunctionComponent<Props> = ({ routes }) => {
 
+  const location = useLocation();
+
   return (
     <div className="navbar-container">
       <div className="navbar-links">
@@ -17,7 +19,6 @@ const Navbar: React.FunctionComponent<Props> = ({ routes }) => {
           return (
             <Link
               to={route.url}
-              style={{ pointerEvents: "none" }}
               key={route.label}
             >
               <motion.li
@@ -25,7 +26,7 @@ const Navbar: React.FunctionComponent<Props> = ({ routes }) => {
                 whileTap={{ scale: 0.98 }}
                 className="navlink"
               >
-                <route.mobileIcon toggle={true}/>
+                <route.mobileIcon toggle={location.pathname.includes(route.url)}/>
               </motion.li>
             </Link>
           );

@@ -58,18 +58,6 @@ const EventDashboard: React.FunctionComponent<Props> = (props) => {
     saveUserData({ ...user, eventsSaved: newSavedEvents });
   };
 
-  // const x = useMotionValue(0);
-  // const opacityRight = useTransform(
-  //   x,
-  //   [0, (-window.innerWidth / 2) * 1.25 - 20, (-window.innerWidth / 2) * 1.25],
-  //   [1, 1, 0]
-  // );
-  // const opacityLeft = useTransform(
-  //   x,
-  //   [0, 20, (-window.innerWidth / 2) * 1.25],
-  //   [0, 1, 1]
-  // );
-
   // TODO: Lazy loading (don't load all events, you'll die)
   return (
     <div className="Page EventDashboard">

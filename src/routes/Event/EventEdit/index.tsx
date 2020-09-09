@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
 
 import popup from "popup";
+import { Divider } from "antd";
 import EventForm from "components/Event/form";
 import EventDetailsCard from "components/Event/cards/detailsCard";
+
+import { ThemeContext } from "context/ThemeContext";
 
 import "../form.scss";
 import { Event } from "types/props";
@@ -24,6 +27,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
 
   const { eventId } = useParams();
   const history = useHistory();
+  const { breakpoint } = useContext(ThemeContext);
 
   const [thisEvent, setThisEvent] = useState(event);
 
@@ -120,8 +124,9 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
 
   return (
     <div className="Page EventForm">
+      {breakpoint === "mobile" && <div className="mobile-title"><h1>Create Your Event!</h1></div>}
       <div className="event-edit-form">
-        <h1>Edit your event!</h1>
+        {breakpoint !== "mobile" && <><h1>Edit Your Event!</h1><Divider/></>}
         <EventForm
           mode="EDIT"
           onChange={handleFormChange}

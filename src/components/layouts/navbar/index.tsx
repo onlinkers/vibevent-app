@@ -25,12 +25,12 @@ const authenticatedRoutes = [
   {
     label: "Create",
     url: "/event/create",
-    mobileIcon: () => <div></div>
+    mobileIcon: HomeIcon
   },
   {
     label: "My Activity",
     url: "/profile",
-    mobileIcon: () => <div></div>
+    mobileIcon: HomeIcon
   },
 ];
 
