@@ -105,6 +105,44 @@
       margin: $landing__header--vertical-padding-sm $landing__header--horizontal-padding-sm 0 0;
     }
 
+    .hero-3d {
+      max-height: 60%;
+      max-width: 100%;
+
+      @include tablet-portrait {
+        max-width: 80%;
+        margin: 5em 0 0 10%;
+      }
+
+      @include tablet-landscape {
+        max-width: 50%;
+        float: right;
+        margin: 5em 5em 0 0;
+      }
+
+    }
+    
+    .hero-text {
+      height: 50%;
+      width: 40%;
+
+      display: table-cell;
+      padding: 0 15% 0 15%;
+      vertical-align: middle;
+      transform: translateY(-3em);
+
+      h1 {
+        font-family: $font-secondary;
+        line-height: 1em;
+        font-weight: 600;
+      }
+
+      @include tablet-landscape {
+        padding: 25% 0 15% 15%;
+        font-size: 1.5em;
+      }
+    }
+
   }
 }
 
