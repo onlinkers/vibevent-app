@@ -34,7 +34,7 @@ const EventLargeCard: React.FunctionComponent<Props> = (props) => {
 
   const link = (e) => {
     // dont launch event if the button was clicked
-    if ((e.target as any).className.includes("btn")) return;
+    if ((e.target as any).className.includes("btn") || (e.target as any).parentNode.className.includes("btn")) return;
     onClick();
   };
 
