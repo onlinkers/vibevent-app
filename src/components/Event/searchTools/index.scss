@@ -1,5 +1,5 @@
 .quick-access {
-  font-family: $primary-label;
+  font-family: $font-primary;
   flex-wrap: wrap;
   position: fixed;
   top: 5%;
@@ -37,7 +37,7 @@
     h3 {
       display: inline-block;
       margin: 0;
-      font-family: $primary-label;
+      font-family: $font-primary;
       font-weight: 700;
       @include tablet-landscape {
         font-size: 1.25em;

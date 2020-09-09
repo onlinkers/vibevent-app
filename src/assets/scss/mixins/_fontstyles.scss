@@ -1,6 +1,6 @@
 /* ROUTES */
 @mixin page-label {
-  font-family: $primary-label;
+  font-family: $font-primary;
   font-weight: 800;
   position: fixed;
   bottom: 2vh;
@@ -25,7 +25,7 @@
 /* DESKTOP EVENT CARD */
 
 @mixin card-desktop-title {
-  font-family: $primary-label;
+  font-family: $font-primary;
   font-weight: 700;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -51,7 +51,7 @@
 
 @mixin card-desktop-secondary {
   color: $secondary;
-  font-family: $primary-label;
+  font-family: $font-primary;
   @include tablet-landscape {
     font-size: 0.75em;
     line-height: 150%;
@@ -63,7 +63,7 @@
 }
 
 @mixin card-desktop-month {
-  font-family: $primary-label;
+  font-family: $font-primary;
   font-weight: bold;
   @include tablet-landscape {
     line-height: 100%;
@@ -75,7 +75,7 @@
 }
 
 @mixin card-desktop-date {
-  font-family: $primary-label;
+  font-family: $font-primary;
   font-weight: bold;
   @include tablet-landscape {
     font-size: 1.25em;
@@ -86,7 +86,7 @@
 }
 
 @mixin card-save-btn {
-  font-family: $primary-label;
+  font-family: $font-primary;
   font-weight: bold;
   @include tablet-landscape {
     font-size: 0.875em;
@@ -99,7 +99,7 @@
 /* SMALL CARD */
 
 @mixin small-card-title {
-  font-family: $primary-label;
+  font-family: $font-primary;
   color: $dark;
   margin: 0;
   line-height: 1em;
@@ -120,7 +120,7 @@
 }
 
 @mixin small-card-date {
-  font-family: $primary-label;
+  font-family: $font-primary;
   margin: 0;
   font-weight: bold;
   color: $red1;
@@ -134,7 +134,7 @@
 }
 
 @mixin small-card-host {
-  font-family: $primary-label;
+  font-family: $font-primary;
   margin: 0;
   font-weight: 500;
   color: #a5a7bd;
@@ -150,7 +150,7 @@
 /* MEDIUM CARD */
 
 @mixin medium-card-title {
-  font-family: $primary-label;
+  font-family: $font-primary;
   color: $dark;
   margin: 0;
   line-height: 1em;
@@ -171,7 +171,7 @@
 }
 
 @mixin medium-card-date {
-  font-family: $primary-label;
+  font-family: $font-primary;
   margin: 0;
   font-weight: bold;
   color: $red1;
@@ -185,7 +185,7 @@
 }
 
 @mixin medium-card-host {
-  font-family: $primary-label;
+  font-family: $font-primary;
   margin: 0;
   font-weight: 500;
   color: #a5a7bd;

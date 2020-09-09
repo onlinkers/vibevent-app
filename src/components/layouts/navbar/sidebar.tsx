@@ -4,7 +4,7 @@ import { motion, useCycle } from "framer-motion";
 import useDimensions from "react-use-dimensions";
 
 import MenuToggle from "components/svg/menu-toggle/MenuToggle";
-import VibeventLogo from "components/svg/vibevent-logo/VibeventLogo";
+import VibeventLogo from "components/svg/vibevent-logo";
 import "./index.scss";
 
 interface Props {
