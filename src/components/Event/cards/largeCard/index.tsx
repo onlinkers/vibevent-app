@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import moment from "moment";
 
 import DefaultImage from "assets/media/default-image.png";
+import { Button } from "antd";
 
 import "./index.scss";
 import { User } from "types/props";
@@ -33,7 +34,7 @@ const EventLargeCard: React.FunctionComponent<Props> = (props) => {
 
   const link = (e) => {
     // dont launch event if the button was clicked
-    if ((e.target as any).className.includes("btn")) return;
+    if ((e.target as any).className.includes("btn") || (e.target as any).parentNode.className.includes("btn")) return;
     onClick();
   };
 
@@ -67,14 +68,16 @@ const EventLargeCard: React.FunctionComponent<Props> = (props) => {
         </div>
 
         {saved !== null && (
-          <button
-            className={saved ? "save-btn--active" : "save-btn"}
+          <Button
+            type={saved ? "primary" : "default"}
+            danger={!saved}
+            className={"save-btn"}
             onClick={() => {
               onSaveClick(event._id, !saved);
             }}
           >
             {saved ? "Saved" : "Save"}
-          </button>
+          </Button>
         )}
       </div>
     </motion.div>

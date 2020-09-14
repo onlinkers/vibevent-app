@@ -51,7 +51,7 @@ const LoginForm: React.FunctionComponent<Props> = (props) => {
 
   const logInComplete = async () => {
     setIsAuthenticated(true);
-    history.push("/");
+    history.push("/event/dashboard");
   };
 
   const logInFail = () => {

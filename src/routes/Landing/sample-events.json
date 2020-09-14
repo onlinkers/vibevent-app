@@ -1,0 +1,131 @@
+[
+	{
+		"_id": "eeeeeeeeeeeeeeeeeeee0001",
+		"hosts": [{
+            "firstName": "Vibevent",
+            "lastName": "Team",
+            "_id": "ueeeeeeeeeeeeeeeeeee0001",
+            "username": "user01",
+            "email": "user01@vibevent.co",
+            "role": "USER"
+        }],
+		"name": "Tommy's Birthday Extravaganze",
+		"startDate": "2020-05-30T06:00:00.000Z",
+		"endDate": "2020-05-31T09:00:00.000Z",
+		"venue": { "name": "Venue", "location": { "type": "Point", "coordinates": [-123.125, 49.279] } },
+		"price": 0,
+		"description": "I am an event",
+		"rating": { "sum": 0, "count": 0 },
+		"categories": [],
+		"links": {},
+		"media": {
+			"coverPhoto": { "baseSrc": "https://picsum.photos/id/870/500/300?grayscale" }
+		},
+		"tags": { "hostTags": [], "userTags": [] },
+		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
+		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
+	},
+	{
+		"_id": "eeeeeeeeeeeeeeeeeeee0002",
+		"hosts": [{
+            "firstName": "UCB",
+            "_id": "ueeeeeeeeeeeeeeeeeee0002",
+            "username": "user02",
+            "email": "user02@vibevent.co",
+            "role": "USER"
+        }],
+		"name": "The American Dream: Debunked",
+		"startDate": "2019-08-26T06:00:00.000Z",
+		"endDate": "2019-08-27T09:00:00.000Z",
+		"venue": { "name": "Venue", "location": { "type": "Point", "coordinates": [-123.125, 49.279] } },
+		"price": 0,
+		"description": "I am an event",
+		"rating": { "sum": 0, "count": 0 },
+		"categories": [],
+		"links": {},
+		"media": {
+			"coverPhoto": { "baseSrc": "https://i.picsum.photos/id/1048/5616/3744.jpg?hmac=N5TZKe4gtmf4hU8xRs-zbS4diYiO009Jni7n50609zk" }
+		},
+		"tags": { "hostTags": [], "userTags": [] },
+		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
+		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
+	},
+	{
+		"_id": "eeeeeeeeeeeeeeeeeeee0003",
+		"hosts": [{
+            "firstName": "TedX",
+            "lastName": "Vancouver",
+            "_id": "ueeeeeeeeeeeeeeeeeee0003",
+            "username": "user03",
+            "email": "user03@vibevent.co",
+            "role": "USER"
+        }],
+		"name": "How Drones Changed Consumerism",
+		"startDate": "2020-06-22T19:00:00.000Z",
+        "endDate": "2020-06-23T01:00:00.000Z",
+		"venue": { "name": "Venue", "location": { "type": "Point", "coordinates": [-123.125, 49.279] } },
+		"price": 0,
+		"description": "I am an event",
+		"rating": { "sum": 0, "count": 0 },
+		"categories": [],
+		"links": {},
+		"media": {
+			"coverPhoto": { "baseSrc": "https://i.picsum.photos/id/1042/3456/5184.jpg?hmac=5xr8Veg2D_kEQQO6rvGj_Yk8s_N4iq3-eZ9_KclSXNQ" }
+		},
+		"tags": { "hostTags": [], "userTags": [] },
+		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
+		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
+    },
+	{
+		"_id": "eeeeeeeeeeeeeeeeeeee0004",
+		"hosts": [{
+            "firstName": "Van",
+            "lastName": "Hackspace",
+            "_id": "ueeeeeeeeeeeeeeeeeee0004",
+            "username": "user04",
+            "email": "user04@vibevent.co",
+            "role": "USER"
+        }],
+		"name": "How Realistic is Watch Dogs Hacking?",
+		"startDate": "2020-06-22T19:00:00.000Z",
+        "endDate": "2020-06-23T01:00:00.000Z",
+		"venue": { "name": "Venue", "location": { "type": "Point", "coordinates": [-123.125, 49.279] } },
+		"price": 0,
+		"description": "I am an event",
+		"rating": { "sum": 0, "count": 0 },
+		"categories": [],
+		"links": {},
+		"media": {
+			"coverPhoto": { "baseSrc": "https://i.picsum.photos/id/119/3264/2176.jpg?hmac=PYRYBOGQhlUm6wS94EkpN8dTIC7-2GniC3pqOt6CpNU" }
+		},
+		"tags": { "hostTags": [], "userTags": [] },
+		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
+		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
+    },
+	{
+		"_id": "eeeeeeeeeeeeeeeeeeee0005",
+		"hosts": [{
+            "firstName": "UBC",
+            "lastName": "Gaming Studio",
+            "_id": "ueeeeeeeeeeeeeeeeeee0005",
+            "username": "user05",
+            "email": "user05@vibevent.co",
+            "role": "USER"
+        }],
+		"name": "GameDevs BTS: Gris with Nomada Studios",
+		"startDate": "2020-06-22T19:00:00.000Z",
+        "endDate": "2020-06-23T01:00:00.000Z",
+		"venue": { "name": "Venue", "location": { "type": "Point", "coordinates": [-123.125, 49.279] } },
+		"price": 0,
+		"description": "I am an event",
+		"rating": { "sum": 0, "count": 0 },
+		"categories": [],
+		"links": {},
+		"media": {
+			"coverPhoto": { "baseSrc": "https://i.picsum.photos/id/304/6016/4000.jpg?hmac=ULWayz92dKMWLEZviIJkgLRd6J5FClakkDq_3VmXbw0" }
+		},
+		"tags": { "hostTags": [], "userTags": [] },
+		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
+		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
+    }
+]

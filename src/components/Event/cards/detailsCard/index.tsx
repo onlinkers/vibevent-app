@@ -166,7 +166,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
       </div>
 
       {allowEdit && <Link to={`${event._id}/edit`}>
-        <Button type="primary" danger className="event__edit_button">Edit this event</Button>
+        <Button type="primary" className="event__edit_button">Edit this event</Button>
       </Link>}
             
     </div>

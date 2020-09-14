@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { Auth } from "aws-amplify";
 
@@ -7,14 +7,14 @@ import { Auth } from "aws-amplify";
 // import Home from "./Home";
 import Events from "./Event";
 // import Discover from "./Discover";
+// import Profile from "./Profile";
+import Landing from "./Landing";
 
 import Rooms from "./Rooms";
-import Profile from "./Profile";
 import Authentication from "./Authentication";
 import NotFound from "./NotFound";
 import Forbidden from "./Forbidden";
 import Construction from "./Construction";
-import Landing from "./Landing";
 
 import AuthRoute from "./AuthRoute";
 import { AppContext } from "context/AppContext";
@@ -91,10 +91,10 @@ const Routes: React.FunctionComponent<Props> = (props) => {
         <AuthRoute
           exact
           path="/"
-          component={<Redirect to="/event/dashboard" />}
+          component={<Landing />}
           altComponent={<Landing />}
         />
-        <AuthRoute path="/profile" component={<Profile />} />
+        <AuthRoute path="/profile" component={<Construction />} /> {/*  TO CHANGE */}
 
         {/* AUTHENTICATION */}
         <AuthRoute path="/auth" altComponent={<Authentication />} redirect />

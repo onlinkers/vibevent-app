@@ -3,7 +3,7 @@ import { Image } from "./image";
 
 export interface User {
     _id: string;
-    role: User;
+    role: string;
     firstName: string;
     lastName?: string;
     description?: string;

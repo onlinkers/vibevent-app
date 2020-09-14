@@ -9,7 +9,7 @@
     margin: 0.5em;
     white-space: normal;
     overflow: hidden;
-    font-family: $primary-label;
+    font-family: $font-primary;
     cursor: pointer;
     
     /* TEMP CHANGE: do not delete */
@@ -106,30 +106,13 @@
       
       .save-btn {
         width: 25%;
-        height: fit-content;
-        background-color: white;
-        border: 2px solid $red1;
-        color: $red1;
-        outline: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @include card-save-btn;
-        @include tablet-portrait {
-          border-radius: 5px;
-        }
+
         @include tablet-landscape {
-          border-radius: 5px;
+          font-size: 0.875em;
         }
         @include desktop {
-          border-radius: 10px;
+          font-size: 1em;
         }
-      }
-      
-      .save-btn--active {
-        @extend .save-btn;
-        background-color: $red1;
-        color: white;
       }
     }
   }

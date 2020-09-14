@@ -1,18 +1,34 @@
-import React, { useMemo } from "react";
-import { Link } from "react-router-dom";
+import React, { useMemo, useContext } from "react";
+import { Auth } from "aws-amplify";
+import { Link, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+
 import { motion, useCycle } from "framer-motion";
 import useDimensions from "react-use-dimensions";
 
-import MenuToggle from "components/svg/menu-toggle/MenuToggle";
-import VibeventLogo from "components/svg/vibevent-logo/VibeventLogo";
+import { AppContext } from "context/AppContext";
+import { clearUserData } from "store/actions/userActions";
+import popup from "popup";
+
+import MenuToggle from "components/svg/menu-toggle";
+import VibeventLogo from "components/svg/vibevent-logo";
 import "./index.scss";
 
 interface Props {
   breakpoint: String;
   routes: any[];
+  clearUserData: Function;
 }
 
-const Navigation = ({ isOpen, routes }) => {
+const Navigation = (props) => {
+
+  const {
+    isOpen,
+    routes,
+    isAuthenticated,
+    logIn,
+    logOut
+  } = props;
 
   const navVariants = {
     open: {
@@ -63,12 +79,25 @@ const Navigation = ({ isOpen, routes }) => {
             </Link>
           );
         })}
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.98 }}
+          variants={navVariants}
+          className="navlink logout"
+          onClick={isAuthenticated ? logOut : logIn}
+        >
+          {isAuthenticated ? "Log Out" : "Log In"}
+        </motion.div>
       </motion.ul>
     </>
   );
 };
 
 const Sidebar: React.FunctionComponent<Props> = ({ breakpoint, routes }) => {
+  const history = useHistory();
+  const { session } = useContext(AppContext);
+  const { isAuthenticated, setIsAuthenticated } = session;
+
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [containerRef, { height }] = useDimensions();
 
@@ -95,6 +124,25 @@ const Sidebar: React.FunctionComponent<Props> = ({ breakpoint, routes }) => {
     }),
   };
 
+  const logIn = () => {
+    history.push("/auth/login");
+  };
+
+  const logOut = async () => {
+    // clear the tokens in local storage
+    localStorage.clear();
+    // set app context
+    setIsAuthenticated(false);
+    // clear redux from user
+    clearUserData();
+    // finally, sign out
+    await Auth.signOut();
+    // success message
+    popup.success("Successfully logged out!");
+    // refresh the page after
+    history.go(0);
+  };
+
   return (
     <>
       <motion.nav
@@ -106,11 +154,24 @@ const Sidebar: React.FunctionComponent<Props> = ({ breakpoint, routes }) => {
         variants={sidebarVariants}
         onHoverEnd={isOpen ? () => toggleOpen() : undefined}
       >
-        <Navigation isOpen={isOpen} routes={routes}/>
+        <Navigation 
+          isOpen={isOpen}
+          routes={routes}
+          isAuthenticated={isAuthenticated}
+          logIn={logIn}
+          logOut={logOut}
+        />
         <MenuToggle toggle={() => toggleOpen()} />
       </motion.nav>
     </>
   );
 };
 
-export default Sidebar;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clearUserData: () => dispatch(clearUserData())
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Sidebar);
+

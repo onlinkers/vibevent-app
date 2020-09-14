@@ -1,100 +1,145 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
 
 import "./index.scss";
-import Backdrop from "assets/media/landing-page-backdrop.jpg";
 import { Link } from "react-router-dom";
+import { Dropdown, Button } from "antd";
+import LargeEventCard from "components/Event/cards/largeCard";
+
+import VibeventLogo from "components/svg/vibevent-logo";
+import VibeventNameLogo from "components/svg/vibevent-name-logo";
+import MenuIcon from "assets/icons/menu-icon.svg";
+import Hero3D from "assets/media/hero-3d.png";
+
+import { ThemeContext } from "context/ThemeContext";
+import sampleEvents from "./sample-events.json";
+
+const LandingHeader = () => {
+  const { breakpoint } = useContext(ThemeContext);
+
+  const menuOptions = (
+    <>
+      <Link to="/"><Button className="ant-btn-empty">pricing</Button></Link>
+      <Link to="/"><Button className="ant-btn-empty">about us</Button></Link>
+      <Link to="/"><Button className="ant-btn-empty">contact</Button></Link>
+      <Link to="/auth/login"><Button danger>login</Button></Link>
+    </>
+  );
+
+  return (
+    <div className="header">
+      <motion.div className="logo">
+        <VibeventLogo color="white"/>
+        <VibeventNameLogo color="white"/>
+      </motion.div>
+      {breakpoint === "mobile" ? (
+        <Dropdown overlay={menuOptions} placement="bottomCenter" className="navigation--mobile" overlayClassName="navigation--mobile__dropdown">
+          <img src={MenuIcon} alt="menu"/>
+        </Dropdown>
+      ): (
+        <motion.div className="navigation">
+          {menuOptions}
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
+const StepNum = ({ direction = "ltr", num }) => {
+
+  const { breakpoint } = useContext(ThemeContext);
+
+  return (
+    <div className="step-num" style={{ flexDirection: direction === "ltr" || breakpoint === "mobile" ? "row" : "row-reverse" }}>
+      <svg width="531" height="2" viewBox="0 0 531 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line y1="1" x2="531" y2="1" stroke="#FF1D58" strokeWidth="2"/>
+      </svg>
+      <svg width="100" height="80" viewBox="0 0 126 126" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="63" cy="63" r="62" stroke="#FF1D58" strokeWidth="2"/>
+        <text x="40" y="75" className="step-num__num">{num}</text>
+      </svg>
+    </div>
+  );
+
+};
 
 const Landing = () => {
   return (
     <div className="Landing">
-      <img src={Backdrop} className="backdrop" alt="" />
-      <div className="landing-content">
-        <div className="landing-logo-section">
-          <div className="landing-logo">
-            
+      <div className="hero">
+        <LandingHeader />
+        <img src={Hero3D} alt="hero" className="hero-3d"/>
+        <div className="hero-text">
+          <h1>A virtual space for all your event discovery needs.</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt sed integer gravida in ac faucibus lorem. Eros hendrerit nibh egestas tincidunt. Ullamcorper dolor mauris dui non nunc amet ultrices. In erat sagittis ipsum justo.</p>
+          <Link to="/event/dashboard">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.1 }}
+            >
+              <Button type="primary" className="explore-btn">Explore the Dashboard &gt;&gt;</Button>
+            </motion.div>
+          </Link>
+        </div>
+      </div>
+
+      <div className="steps">
+
+        <div className="step-text-container first">
+          <div className="step-text-container-flex">
+            <StepNum direction="ltr" num="01"/>
+            <div className="step-text">
+              <h1>Plan your event.</h1>
+              <p>Our team will help you formulate the best strategy according to statistics on student trends and behaviors. Capture the attention of your target group!</p>
+            </div>
           </div>
         </div>
-        <div className="landing-description-section">
-          <h1>OUR STORY</h1>
-          <motion.div className="our-story">
-            <motion.p>
-              At Vibevent, we believe in creating unique moments that leave a
-              lasting impression. What differentiates us from our competitors is
-              that we really listen to our clients, creating distinctive events
-              tailored to their specific needs and desires. Our innovative mix
-              of solutions ensures that every detail is covered. Get in touch to
-              learn how we can make your dream event a reality.
-            </motion.p>
-          </motion.div>
-          <div className="what-we-offer">
-            <div className="offer-box event-hosting">
-              <img
-                src={
-                  "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1300&q=80"
-                }
-                className="offer-box__img"
-                alt=""
-              />
-              <h3>Event Hosting</h3>
-              <p>
-                Is organizing a platform for hosting events a hassle? We got you
-                there! We aim to provide a virtual event space with multiple
-                breakout rooms for you and your audience.
-              </p>
-            </div>
-            <div className="offer-box event-discovery">
-              <img
-                src={
-                  "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-                }
-                alt=""
-                className="offer-box__img"
-              />
-              <h3>Event Discovery</h3>
-              <p>
-                Searching for events is no longer a tedious effort. We aim to
-                provide you with a platform where you can discover events
-                without wasting time going through individual pages and register
-                for them with ease.
-              </p>
-            </div>
-            <div className="offer-box event-consulting">
-              <img
-                src={
-                  "https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1358&q=80"
-                }
-                alt=""
-                className="offer-box__img"
-              />
-              <h3>Event Consulting</h3>
-              <p>
-                The key to creating a successful event is to have someone there
-                who you can assist you from ideation to execution. Whether
-                you’re starting with a vague idea or fleshed-out concept, we can
-                help bring your vision to life.
-              </p>
-            </div>
+        <div className="step-background s-1">
+          <div className="step-background-img">
+            <div className="textbox-white">Capturing Your Target Audience</div>
           </div>
         </div>
 
-        <div className="landing-footer">
-          <div className="coming-soon">
-            <h1>COMING SOON</h1>
-            <h3>with new features!</h3>
-            {/* <h5>We're still in the testing phase!</h5> */}
-            <motion.button
-              className="dashboard-button"
-              whileHover={{ scale: 1.01, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Link to="/event/dashboard" className="dashboard-button__link">
-                View Dashboard
-              </Link>
-            </motion.button>
+        <div className="step-text-container reverse">
+          <div className="step-text-container-flex">
+            <StepNum direction="rtl" num="02"/>
+            <div className="step-text">
+              <h1>Promote your event.</h1>
+              <p>Easily reach up to 1000 students and obtain at least 100 registrants with us. We’ll be using our very own marketing channels to ensure your event gains the traction it needs!</p>
+            </div>
           </div>
         </div>
+        <div className="step-background s-2">
+          {sampleEvents.map((event) => <LargeEventCard key={event._id} event={(event as any)}/>)}
+        </div>
+
+
+        <div className="step-text-container full">
+          <div className="step-text-container-flex">
+            <StepNum direction="ltr" num="03"/>
+            <div className="step-text">
+              <h1>Host your event.</h1>
+              <p>Struggling to find the best platform to fulfill your purpose? We offer Zoom, Google Meet, Hopin, and Run The World at a fraction of the cost! Your amazing event doesn’t have to break the bank.</p>
+            </div>
+          </div>
+        </div>
+        <div className="step-background s-3"></div>
+
+        <div className="step-text-container reverse">
+          <div className="step-text-container-flex">
+            <StepNum direction="rtl" num="04"/>
+            <div className="step-text">
+              <h1>Manage your event.</h1>
+              <p>We want you and your attendees to have the best possible time during your event. From preventing technical issue headaches to making sure the event flows well, we want all of you to have a magical experience!</p>
+            </div>
+          </div>
+        </div>
+        <div className="step-background s-4">
+          <div className="step-background-img"></div>
+        </div>
+
       </div>
+
     </div>
   );
 };

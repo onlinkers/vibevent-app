@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import moment from "moment";
 import { motion } from "framer-motion";
 
 import "./index.scss";
 import { Event, User } from "types/props";
-import { ThemeContext } from "context/ThemeContext";
 
 interface Props {
   event: Event;
@@ -13,7 +12,6 @@ interface Props {
 
 // Used in quickaccesstool (desktop) and mobile view
 const EventSmallCard: React.FunctionComponent<Props> = (props) => {
-  const { breakpoint } = useContext(ThemeContext);
   const { event, onClick = () => {} } = props;
   const month = moment(event?.startDate).format("MMM DD");
 
@@ -22,7 +20,7 @@ const EventSmallCard: React.FunctionComponent<Props> = (props) => {
   return (
     <motion.div
       className="event-small-card"
-      whileHover={breakpoint === "desktop" ? { scale: 1.1 } : {}}
+      whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 1 }}
       transition={{ duration: 0.001 }}
       onClick={() => onClick()}

@@ -1,15 +1,16 @@
 /* PAGES */
 .Page {
-  height: 100%;
+  height: calc(100% - 5em);
   width: 100%;
   position: relative;
-  background-color: $gray1;
+  background-color: $gray2;
+  margin-bottom: 5em;
 
   @include tablet-portrait {
+    height: 100%;
+    margin-bottom: unset;
     left: 78px;
     width: calc(100% - 78px);
-  }
-  @include tablet-landscape {
   }
 }
 

@@ -4,7 +4,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
   @include tablet-portrait {
-    background: url(../../../assets/media/dashboard-backdrop.jpg);
+    background: url(../../../assets/backdrops/dashboard-main.jpg);
     background-position: right bottom;
     background-repeat: no-repeat;
   }
@@ -20,7 +20,7 @@
       height: 8.5vh;
     }
     width: 100%;
-    font-family: $primary-label;
+    font-family: $font-primary;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,7 +44,7 @@
       margin-bottom: 3%;
 
       h5 {
-        font-family: $primary-label;
+        font-family: $font-primary;
         margin-left: 5%;
         font-size: 1.125em;
         font-weight: 700;
@@ -82,7 +82,7 @@
     @extend .event-content;
 
     h1 {
-      font-family: $primary-label;
+      font-family: $font-primary;
       font-weight: bold;
       user-select: none;
     }
@@ -143,7 +143,6 @@
 
   .page-label {
     @include page-label;
-    font-weight: 800;
   }
 
   ::-webkit-scrollbar {

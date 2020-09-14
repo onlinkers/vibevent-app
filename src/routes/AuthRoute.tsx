@@ -5,6 +5,8 @@ import NotFound from "./NotFound";
 import Forbidden from "./Forbidden";
 
 import { AppContext } from "context/AppContext";
+import popup from "popup";
+
 interface Props {
     component?: JSX.Element;
     altComponent?: JSX.Element;
@@ -17,6 +19,16 @@ const AuthRoute: React.FunctionComponent<Props> = ({ component, altComponent, re
 
   const { session } = useContext(AppContext);
   const { isAuthenticated } = session;
+
+  const alreadyAuthenticated = () => {
+    popup.success("You are logged in!");
+    return <Redirect to='/event/dashboard' />;
+  };
+
+  const notAuthenticated = () => {
+    popup.success("You are not yet logged in!");
+    return <Redirect to='/event/dashboard' />;
+  };
  
   // Do not load authenticated routes if:
   // 1) user is not authenticated
@@ -27,10 +39,10 @@ const AuthRoute: React.FunctionComponent<Props> = ({ component, altComponent, re
       isAuthenticated === true
         ? component
           ? component
-          : redirect ? <Redirect to='/' /> : <NotFound />
+          : redirect ? alreadyAuthenticated() : <NotFound />
         : altComponent
           ? altComponent 
-          : redirect ? <Redirect to='/' /> : <Forbidden />
+          : redirect ? notAuthenticated() : <Forbidden />
     )} />
   );
 };

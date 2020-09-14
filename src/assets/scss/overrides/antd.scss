@@ -1,0 +1,32 @@
+.ant-btn  {
+    font-family: $font-primary !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 0.5em !important;
+
+    &.ant-btn-primary {
+        background-color: $red1 !important;
+        border-color: $red1 !important;
+    }
+
+    &.ant-btn-dangerous {
+        background-color: white !important;
+        color: $red1 !important;
+        border-color: $red1 !important;
+    }
+
+    &.ant-btn-empty {
+        background-color: unset !important;
+        color: white !important;
+        border: none !important;
+    }
+}
+
+.ant-tag {
+    color: $red1 !important;
+    background: rgba($red1, 0.1) !important;
+    font-family: $font-primary !important;
+    font-weight: 600 !important;
+}
