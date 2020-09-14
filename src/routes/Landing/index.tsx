@@ -19,9 +19,9 @@ const LandingHeader = () => {
 
   const menuOptions = (
     <>
-      <Link to="/"><Button className="ant-btn-empty">pricing</Button></Link>
-      <Link to="/"><Button className="ant-btn-empty">about us</Button></Link>
-      <Link to="/"><Button className="ant-btn-empty">contact</Button></Link>
+      {/* <Link to="/"><Button className="ant-btn-empty">pricing</Button></Link> */}
+      {/* <Link to="/"><Button className="ant-btn-empty">about us</Button></Link> */}
+      {/* <Link to="/"><Button className="ant-btn-empty">contact</Button></Link> */}
       <Link to="/auth/login"><Button danger>login</Button></Link>
     </>
   );
@@ -33,7 +33,7 @@ const LandingHeader = () => {
         <VibeventNameLogo color="white"/>
       </motion.div>
       {breakpoint === "mobile" ? (
-        <Dropdown overlay={menuOptions} placement="bottomCenter" className="navigation--mobile" overlayClassName="navigation--mobile__dropdown">
+        <Dropdown overlay={menuOptions} placement="bottomCenter" className="navigation--mobile" overlayClassName="navigation--mobile__dropdown" trigger={["click"]}>
           <img src={MenuIcon} alt="menu"/>
         </Dropdown>
       ): (
