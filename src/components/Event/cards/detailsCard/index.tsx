@@ -140,7 +140,9 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
 
       <h1>{event.name}</h1>
       <div>
-        <div>{moment(event.startDate).format("LLLL")} - {moment(event.endDate).format("LLLL")}</div>
+        <div>{moment(event.startDate).format("LLLL")} - {moment(event.endDate).format("LLLL")}
+          <br />(Pacific Daylight Time, GMT-0700)
+        </div>
         <div>Hosted at <strong>{event.venue.name}</strong></div>
         <div>Event is <strong>{event.price ? event.price : "free"}</strong></div>
         <br />
