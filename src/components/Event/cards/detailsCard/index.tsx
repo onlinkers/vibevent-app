@@ -102,15 +102,32 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     if(!event.rooms || !event.rooms.length) return <Empty description={false}>No Rooms found</Empty>;
     
     event.rooms && event.rooms.forEach((room, index) => {
-      rooms.push(
-        <div 
-          key={room.roomId}
-          onClick={() => redirectToRoom(room.roomId)}>
-          <Card.Meta
-            className="event__room-button"
-            title={room.name || `Room ${index}`}
-          />
-        </div>);
+
+      if(room.roomLink) {
+        rooms.push(
+          <a 
+            key={`room-${index}`}
+            href={room.roomLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Card.Meta
+              className="event__room-button"
+              title={"Join " + room.name || `Main Room ${index}`}
+            />
+          </a>);
+      } else {
+        rooms.push(
+          <div 
+            key={room.roomId}
+            onClick={() => redirectToRoom(room.roomId)}>
+            <Card.Meta
+              className="event__room-button"
+              title={"Join " + room.name || `Main Room ${index}`}
+            />
+          </div>);
+      }
+
     });
     
     return rooms;
