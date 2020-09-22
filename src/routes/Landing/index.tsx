@@ -125,7 +125,7 @@ const Landing = () => {
         </div>
         <div className="step-background s-3"></div>
 
-        <div className="step-text-container reverse">
+        <div className="step-text-container reverse last">
           <div className="step-text-container-flex">
             <StepNum direction="rtl" num="04"/>
             <div className="step-text">
