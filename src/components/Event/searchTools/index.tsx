@@ -33,10 +33,10 @@ const SearchTools: React.FunctionComponent<Props> = (props) => {
         </div> */}
       <div className="card-previews-section">
         <div className="card-previews-header">
-          <h3>Previously Viewed</h3>
+          <h3>Events Around You</h3>
         </div>
         <div className="card-previews-container">
-          {eventsArray.slice(0, 2).map((event) => {
+          {eventsArray.slice(0, 3).map((event) => {
             return (
               <SmallEventCard
                 event={event}

@@ -35,7 +35,7 @@ interface Props2 {
 const EventRoutesWithId: React.FunctionComponent<Props2> = (props) => {
 
   const { userId, events } = props;
-  const { eventId } = useParams();
+  const { eventId } = useParams() as { eventId: string };
   const history = useHistory();
 
   const [eventLoaded, setEventLoaded] = useState(false);
@@ -65,7 +65,7 @@ const EventRoutesWithId: React.FunctionComponent<Props2> = (props) => {
       }
 
     }    
-  }, []); // eslint-disable-line
+  }, [eventId]); // eslint-disable-line
 
   return !eventLoaded ? <Loading /> : (
     event ? (
