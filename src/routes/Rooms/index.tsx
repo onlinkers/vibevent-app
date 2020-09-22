@@ -12,7 +12,7 @@ interface Props {
 
 const Room: React.FunctionComponent<Props> = () => {
 
-  const { roomId } = useParams();
+  const { roomId } = useParams() as { roomId: string };
 
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -20,7 +20,7 @@ const Room: React.FunctionComponent<Props> = () => {
   useEffect(() => {
 
     // eslint-disable-next-line
-    console.log("roomId", { roomId });
+    console.log("roomId: ", roomId);
     if(!roomId) {
       setError(true);
       setLoaded(true);

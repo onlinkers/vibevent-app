@@ -28,7 +28,7 @@ const DynamicInput: React.FunctionComponent<Props> = (props) => {
             <div key={field.fieldKey} className="dynamic-input">
               {
                 inputs.map((input, index) => (
-                  <Form.Item key={"input" + field.name + index} name={[field.key, input.name]} {...input.props} >
+                  <Form.Item key={"input" + field.name + index} name={[field.name, input.name]} {...input.props} >
                     {input.render}
                   </Form.Item>
                 ))

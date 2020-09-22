@@ -103,11 +103,11 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     
     event.rooms && event.rooms.forEach((room, index) => {
 
-      if(room.roomLink) {
+      if(room.type == "zoom") {
         rooms.push(
           <a 
             key={`room-${index}`}
-            href={room.roomLink}
+            href={room.link}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -119,8 +119,8 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
       } else {
         rooms.push(
           <div 
-            key={room.roomId}
-            onClick={() => redirectToRoom(room.roomId)}>
+            key={room.link}
+            onClick={() => redirectToRoom(room.link)}>
             <Card.Meta
               className="event__room-button"
               title={"Join " + room.name || `Main Room ${index}`}

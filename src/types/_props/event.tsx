@@ -30,8 +30,8 @@ export interface Event {
     hostTags: string[];
   };
   rooms?: [{
-    roomId?: number;
-    roomLink?: string;
+    type: string;
+    link: string;
     name?: string;
   }]
 }

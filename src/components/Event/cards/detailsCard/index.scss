@@ -104,6 +104,7 @@
                 padding: 1em;
                 border-radius: 0.5em;
                 border: none;
+                margin-bottom: 0.5em;
             }
         }
     }
@@ -139,6 +140,7 @@
 
         .event__room-button {
             padding: 1em;
+            margin-bottom: 1em;
             background: white;
             border-radius: 1em;
             border: $gray1 1px solid;
