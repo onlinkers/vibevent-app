@@ -71,7 +71,8 @@ const Landing = () => {
         <img src={Hero3D} alt="hero" className="hero-3d"/>
         <div className="hero-text">
           <h1>A virtual space for all your event discovery needs.</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt sed integer gravida in ac faucibus lorem. Eros hendrerit nibh egestas tincidunt. Ullamcorper dolor mauris dui non nunc amet ultrices. In erat sagittis ipsum justo.</p>
+          <br />
+          {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt sed integer gravida in ac faucibus lorem. Eros hendrerit nibh egestas tincidunt. Ullamcorper dolor mauris dui non nunc amet ultrices. In erat sagittis ipsum justo.</p> */}
           <Link to="/event/dashboard">
             <motion.div
               whileHover={{ scale: 1.05 }}
