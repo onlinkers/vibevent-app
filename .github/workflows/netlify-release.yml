@@ -18,8 +18,11 @@ jobs:
         git config --global user.email "link2link.web@gmail.com"
         git config --global --list
         git config --local --list
-    - name: Push to prod
+    - name: Update version
       run: |
         echo "Releasing $RELEASE_VERSION to netlify production"
         npm version $RELEASE_VERSION --no-git-tag-version
-        git push origin master && git push origin master:prod --force
+        git add .
+        git commit -m "$RELEASE_VERSION"
+    - name: Push to prod
+      run: git push origin master && git push origin master:prod --force
