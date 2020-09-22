@@ -21,5 +21,5 @@ jobs:
     - name: Push to prod
       run: |
         echo "Releasing $RELEASE_VERSION to netlify production"
-        npm version $RELEASE_VERSION
+        npm version $RELEASE_VERSION --no-git-tag-version
         git push origin master && git push origin master:prod --force
