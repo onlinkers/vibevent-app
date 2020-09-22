@@ -103,7 +103,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     
     event.rooms && event.rooms.forEach((room, index) => {
 
-      if(room.type == "zoom") {
+      if(room.type === "zoom") {
         rooms.push(
           <a 
             key={`room-${index}`}

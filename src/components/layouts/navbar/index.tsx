@@ -6,7 +6,7 @@ import { AppContext } from "context/AppContext";
 import Sidebar from "./sidebar";
 import Bottombar from "./bottombar";
 
-import BookIcon from "components/svg/book-icon";
+// import BookIcon from "components/svg/book-icon";
 import CreateIcon from "components/svg/create-icon";
 // import HomeIcon from "components/svg/home-icon";
 import SearchIcon from "components/svg/search-icon";
