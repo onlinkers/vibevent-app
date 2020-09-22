@@ -5,9 +5,9 @@
   overflow-y: scroll;
   overflow-x: hidden;
 
-  $landing-text-size-lg: 1.75em;
-  $landing-text-size: 1.5em;
-  $landing-text-size-sm: 1.25em;
+  $landing-text-size-lg: 1.5em;
+  $landing-text-size: 1.25em;
+  $landing-text-size-sm: 1em;
 
   .hero {
     width: 100%;
@@ -170,7 +170,7 @@
   }
 
   .steps {
-    width: 100%;
+    width: 100vw;
     margin-top: 10%;
 
     .step-text-container {
@@ -213,8 +213,10 @@
       }
 
       @include tablet-portrait {
+        max-width: 80%;
+        margin-left: 10%;
         font-size: $landing-text-size-sm;
-        padding-top: 10em;
+        padding-top: 5em;
         
         .step-text-container-flex {
           flex-direction: row;
@@ -233,8 +235,8 @@
         }
 
         .step-text {
-          max-width: 60vw;
-          padding: 0 3em 0 3em;
+          max-width: 50vw;
+          padding: 0 5em 0 5em;
         }
 
         .step-num {
@@ -247,6 +249,9 @@
 
         &.first {
           padding-top: 0;
+        }
+        &.last {
+          padding-top: 10em;
         }
       }
 
@@ -270,6 +275,8 @@
   }
   
   .step-background {
+    padding-top: 5%;
+    padding-bottom: 5%;
 
     &.s-1 {
       .textbox-white {
@@ -282,13 +289,10 @@
         font-weight: bold;
         user-select: none;
         margin-left: 10%;
-        margin-right: 10%;
       }
   
       .step-background-img {
         height: 80%;
-        margin-top: 5%;
-        padding-top: 10%;
         width: 100%;
         background: url(../../assets/media/splash-0.png);
         background-position: top 50% center;
@@ -333,16 +337,17 @@
     }
 
     &.s-3 {
-      width: 100%;
-      margin-top: 5%;
+      width: 80%;
+      margin: 0 auto 10% auto;
       height: 30em;
-      margin-bottom: 10%;
       background: url(../../assets/media/splash-1.png);
       background-position: bottom center;
       background-repeat: no-repeat;
       background-size: contain;
 
       @include tablet-portrait {
+        margin: 5% 0 10% 0;
+        width: 100%;
         transform: translate(50%, -100%);
         position: absolute;
       }
@@ -352,7 +357,7 @@
       }
 
       @include desktop {
-        height: 40em;
+        height: 35em;
         transform: translate(40%, -90%);
       }
     }

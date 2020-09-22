@@ -25,7 +25,7 @@ interface Props {
 
 const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fetchAllEvents }) => {
 
-  const { eventId } = useParams();
+  const { eventId } = useParams() as { eventId: string };
   const history = useHistory();
   const { breakpoint } = useContext(ThemeContext);
 

@@ -103,11 +103,11 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     
     event.rooms && event.rooms.forEach((room, index) => {
 
-      if(room.roomLink) {
+      if(room.type === "zoom") {
         rooms.push(
           <a 
             key={`room-${index}`}
-            href={room.roomLink}
+            href={room.link}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -119,8 +119,8 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
       } else {
         rooms.push(
           <div 
-            key={room.roomId}
-            onClick={() => redirectToRoom(room.roomId)}>
+            key={room.link}
+            onClick={() => redirectToRoom(room.link)}>
             <Card.Meta
               className="event__room-button"
               title={"Join " + room.name || `Main Room ${index}`}
@@ -151,8 +151,12 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
           {generateCategories()}
         </div>
         {event.links?.register &&
-            (redirects ? <Button className="event__actions-register" href={event.links.register}>Register</Button>
-              : <Button className="event__actions-register">Register</Button>)}
+          <Button
+            type="primary"
+            className="event__actions-register"
+            href={redirects ? event.links.register : "#"}
+          >Register
+          </Button>}
       </div>
 
       <h1>{event.name}</h1>

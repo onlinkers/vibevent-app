@@ -26,8 +26,8 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
 
   const history = useHistory();
 
-  const roomHandler = (roomId) => {
-    history.push(`/room/${roomId}`);
+  const roomHandler = (link) => {
+    history.push(`/room/${link}`);
   };
 
   return (

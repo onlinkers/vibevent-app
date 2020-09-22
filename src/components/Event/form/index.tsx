@@ -180,7 +180,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
               }
             ]
           },
-          render: <Input placeholder="Enter url"/>
+          render: <Input placeholder="URL"/>
         }
       ]}/>
 
@@ -188,22 +188,35 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       
       <DynamicInput type="room" inputs={[
         {
-          name: "roomId",
+          name: "type",
           props: {
-            style: { width: "50%" },
+            style: { width: "30%" },
             rules: [
               {
                 required: true,
-                message: "Enter a room id!",
+                message: "Enter room type!",
               }
             ]
           },
-          render: <Input placeholder="Enter room ID"/>
+          render: <DynamicSelect dropdownPlaceholder="Room type" initialOptions={["zoom"]} dynamic={false}/>
+        },
+        {
+          name: "link",
+          props: {
+            style: { width: "30%" },
+            rules: [
+              {
+                required: true,
+                message: "Enter a room URL!",
+              }
+            ]
+          },
+          render: <Input placeholder="URL"/>
         },
         {
           name: "name",
           props: {
-            style: { width: "50%" }
+            style: { width: "30%" }
           },
           render: <Input placeholder="Room name"/>
         }
@@ -240,7 +253,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       <Divider/>
 
       <Button type="primary" htmlType="submit" disabled={isSubmitting}>
-        {mode === "CREATE" ? "Create Event" : "Edit Event"}
+        {mode === "CREATE" ? "Create Event" : "Save Event"}
       </Button>
 
       {mode === "EDIT" &&
