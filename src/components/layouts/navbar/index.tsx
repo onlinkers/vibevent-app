@@ -30,11 +30,11 @@ const authenticatedRoutes = [
     url: "/event/create",
     mobileIcon: CreateIcon
   },
-  {
-    label: "My Activity",
-    url: "/profile",
-    mobileIcon: BookIcon
-  },
+  // {
+  //   label: "My Activity",
+  //   url: "/profile",
+  //   mobileIcon: BookIcon
+  // },
 ];
 
 const Navbar = () => {
