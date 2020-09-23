@@ -27,8 +27,8 @@ const EventLargeCard: React.FunctionComponent<Props> = (props) => {
     onSaveClick = () => {},
   } = props;
 
-  const month = momentz(event.startDate).tz("America/Los_Angeles").format("MMM").toUpperCase();
-  const date = momentz(event.startDate).tz("America/Los_Angeles").format("DD");
+  const month = momentz(event.startDate).format("MMM").toUpperCase();
+  const date = momentz(event.startDate).format("DD");
 
   const hosts = (event.hosts as User[]).map((host) => `${host.firstName} ${host.lastName || ""}`);
 

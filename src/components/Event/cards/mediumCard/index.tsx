@@ -22,7 +22,7 @@ const EventMediumCard: React.FunctionComponent<Props> = (props) => {
     onSaveClick = () => {},
   } = props;
 
-  const month = momentz(event?.startDate).tz("America/Los_Angeles").format("MMM DD");
+  const month = momentz(event?.startDate).format("MMM DD");
   const hosts = (event.hosts as User[]).map((host) => `${host.firstName} ${host.lastName || ""}`);
   
   const handleSaveClick = () => {
