@@ -57,10 +57,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   const handleSubmit = async (formValues) => {
 
-    const { venueName, date, link, room, ...rest } = formValues;
-
-    // links need to be re-organized
-    const links = link;
+    const { venueName, date, room, links = [], ...rest } = formValues;
 
     const payload = {
       ...rest,
@@ -73,8 +70,8 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
       // Dates need to be in ISO form
       startDate: date[0].toISOString(),
       endDate: date[1].toISOString(),
-      links,
-      rooms: room
+      rooms: room,
+      links
     };
 
     // TODO: Proper Image Uploading
@@ -89,9 +86,9 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   const handleFormChange = (changedValues) => {
 
-    // TODO: Find a way/or dont even bother render-ing link/room changes in the form
-    if(changedValues.link) return;
-    else if(changedValues.room) return;
+    // TODO: Find a way/or dont even bother render-ing links/room changes in the form
+    if(changedValues.links) return;
+    if(changedValues.room) return;
 
     const {
       date = null,
