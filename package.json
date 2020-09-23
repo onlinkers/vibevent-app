@@ -1,6 +1,6 @@
 {
   "name": "event-discovery-app",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
