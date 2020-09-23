@@ -36,8 +36,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
     const { venueName, date, link, tags, room, ...rest } = formValues;
 
     // links need to be re-organized
-    const links = {};
-    if(link && link.length) link.forEach((l) => { links[l.type] = l.url; });
+    const links = link;
 
     const payload = {
       ...thisEvent,

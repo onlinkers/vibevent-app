@@ -70,9 +70,9 @@ const Landing = () => {
         <LandingHeader />
         <img src={Hero3D} alt="hero" className="hero-3d"/>
         <div className="hero-text">
-          <h1>A virtual space for all your event discovery needs.</h1>
+          <h1>The First Ever Event Management Solution.</h1>
           <br />
-          {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt sed integer gravida in ac faucibus lorem. Eros hendrerit nibh egestas tincidunt. Ullamcorper dolor mauris dui non nunc amet ultrices. In erat sagittis ipsum justo.</p> */}
+          <p>Have trouble coordinating with your team, or client during an event planning process? we facilitate that process to showcase your idea to the world faster.</p>
           <Link to="/event/dashboard">
             <motion.div
               whileHover={{ scale: 1.05 }}

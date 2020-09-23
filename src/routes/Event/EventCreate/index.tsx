@@ -44,7 +44,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
     },
     description: "",
     categories: [],
-    links: {},
+    links: [],
     media: {
       coverPhoto: { baseSrc: "" },
       hostPhotos: []
@@ -60,8 +60,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
     const { venueName, date, link, room, ...rest } = formValues;
 
     // links need to be re-organized
-    const links = {};
-    if(link && link.length) link.forEach((l) => { links[l.type] = l.url; });
+    const links = link;
 
     const payload = {
       ...rest,

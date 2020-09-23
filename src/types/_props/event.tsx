@@ -16,12 +16,7 @@ export interface Event {
     count: number;
   };
   categories: string[];
-  links?: [
-    {
-      name: string;
-      link: string;
-    }
-  ];
+  links: Link[] | [];
   media?: {
     coverPhoto?: Image;
     hostPhotos?: Image[];
@@ -36,4 +31,9 @@ export interface Event {
     link: string;
     name?: string;
   }]
+}
+
+interface Link {
+  name: string;
+  link: string;
 }
