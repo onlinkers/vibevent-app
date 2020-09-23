@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import moment from "moment";
+import momentz from "moment-timezone";
 
 import popup from "popup";
 import { Divider } from "antd";
@@ -135,7 +135,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
           eventCategories={eventCategories}
           initialValues={{
             name: thisEvent.name,
-            date: [moment.utc(thisEvent.startDate), moment.utc(thisEvent.endDate)],
+            date: [momentz(thisEvent.startDate).tz("America/Los_Angeles"), momentz(thisEvent.endDate).tz("America/Los_Angeles")],
             price: thisEvent.price,
             description: thisEvent.description,
             categories: thisEvent.categories,

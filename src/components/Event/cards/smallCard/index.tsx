@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import momentz from "moment-timezone";
 import { motion } from "framer-motion";
 
 import "./index.scss";
@@ -13,7 +13,7 @@ interface Props {
 // Used in quickaccesstool (desktop) and mobile view
 const EventSmallCard: React.FunctionComponent<Props> = (props) => {
   const { event, onClick = () => {} } = props;
-  const month = moment.utc(event?.startDate).format("MMM DD");
+  const month = momentz(event?.startDate).tz("America/Los_Angeles").format("MMM DD");
 
   const hosts = (event.hosts as User[]).map((host) => `${host.firstName} ${host.lastName || ""}`);
 
