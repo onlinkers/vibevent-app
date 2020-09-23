@@ -3,7 +3,7 @@ import momentz from "moment-timezone";
 import ReactMarkdown from "markdown-to-jsx";
 import { Link } from "react-router-dom";
 
-import { Empty, Card, Avatar, Tag, Button, Divider } from "antd";
+import { Empty, Card, Avatar, Tag, Button, Divider, Popover } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import DefaultImage from "assets/media/default-image.png";
 
@@ -167,11 +167,15 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
       </div>
 
       <h1>{event.name}</h1>
-      <div>
-        <div>{momentz(event.startDate).format("LLLL")} - {momentz(event.endDate).format("LLLL zz ([GMT]Z)")}
-          <br />
-        </div>
-        <div>Hosted at <strong>{event.venue.name}</strong></div>
+      <div >
+        <Popover placement="right" content={`Your timezone: ${momentz.tz.guess()} (${momentz.tz(momentz.tz.guess()).format("z")})`}>
+          <div className="event__dates">
+            Event starts <strong>{momentz(event.startDate).format("LLLL")}</strong> <br/>
+            Event ends <strong>{momentz(event.endDate).format("LLLL [(GMT]Z[)]")}</strong>
+          </div>
+        </Popover>
+        <br />
+        <div>Hosted on <strong>{event.venue.name}</strong></div>
         <div>Event is <strong>{event.price ? event.price : "free"}</strong></div>
         <br />
       </div>
