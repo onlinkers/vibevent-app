@@ -151,9 +151,9 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
 
       <Divider orientation="left">Add Links</Divider>
       
-      <DynamicInput type="link" inputs={[
+      <DynamicInput type="links" inputs={[
         {
-          name: "type",
+          name: "name",
           props: {
             style: { width: "30%" },
             rules: [
@@ -163,16 +163,16 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
               }
             ]
           },
-          render: <DynamicSelect dropdownPlaceholder="Link type" initialOptions={["register", "ticket"]} dynamic={false}/>
+          render: <Input placeholder="Type"/>
         },
         {
-          name: "url",
+          name: "link",
           props: {
             style: { width: "70%" },
             rules: [
               {
                 required: true,
-                message: "Enter a url!",
+                message: "Enter a link!",
               },
               {
                 type: "url",

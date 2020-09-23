@@ -33,11 +33,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
 
   const handleSubmit = async (formValues) => {
 
-    const { venueName, date, link, tags, room, ...rest } = formValues;
-
-    // links need to be re-organized
-    const links = {};
-    if(link && link.length) link.forEach((l) => { links[l.type] = l.url; });
+    const { venueName, date, links = [], tags, room, ...rest } = formValues;
 
     const payload = {
       ...thisEvent,
@@ -88,7 +84,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
   const handleFormChange = (changedValues) => {
 
     // TODO: Find a way/or dont even bother render-ing link/room changes in the form
-    if(changedValues.link) return;
+    if(changedValues.links) return;
     else if (changedValues.room) return;
 
     const {
@@ -139,7 +135,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
             price: thisEvent.price,
             description: thisEvent.description,
             categories: thisEvent.categories,
-            link: thisEvent.links && Object.entries(thisEvent.links).map(([type, url]) => ({ type, url })),
+            links: thisEvent.links,
             room: thisEvent.rooms,
             venueName: thisEvent.venue.name,
             // venueCoordinates: thisEvent.venue.location, // TODO
