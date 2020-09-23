@@ -16,10 +16,12 @@ export interface Event {
     count: number;
   };
   categories: string[];
-  links?: {
-    ticket?: string;
-    register?: string;
-  };
+  links?: [
+    {
+      name: string;
+      link: string;
+    }
+  ];
   media?: {
     coverPhoto?: Image;
     hostPhotos?: Image[];

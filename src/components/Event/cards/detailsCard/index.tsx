@@ -150,13 +150,15 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         <div className="event__categories">
           {generateCategories()}
         </div>
-        {event.links?.register &&
+        {event.links && event.links.map((link) => (
           <Button
+            key={link.name}
             type="primary"
-            className="event__actions-register"
-            href={redirects ? event.links.register : "#"}
-          >Register
-          </Button>}
+            className="event__actions-register t--capitalize"
+            href={redirects ? link.link : "#"}
+          >{link.name}
+          </Button>
+        ))}
       </div>
 
       <h1>{event.name}</h1>
