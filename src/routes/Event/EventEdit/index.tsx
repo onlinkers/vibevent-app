@@ -135,7 +135,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
           eventCategories={eventCategories}
           initialValues={{
             name: thisEvent.name,
-            date: [momentz(thisEvent.startDate).tz("America/Los_Angeles"), momentz(thisEvent.endDate).tz("America/Los_Angeles")],
+            date: [momentz(thisEvent.startDate), momentz(thisEvent.endDate)],
             price: thisEvent.price,
             description: thisEvent.description,
             categories: thisEvent.categories,
