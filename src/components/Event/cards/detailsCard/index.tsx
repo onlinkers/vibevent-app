@@ -97,11 +97,14 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     
   const generateRooms = () => {
     
+    // filter out event rooms that are "empty" or without links
+    const eventRooms = event.rooms && event.rooms.length && event.rooms.filter((r) => r && r.link);
+    // display "no rooms" if none
+    if(!eventRooms || !eventRooms.length) return <Empty description={false}>No Rooms found</Empty>;
+    
     const rooms: any[] = [];
     
-    if(!event.rooms || !event.rooms.length) return <Empty description={false}>No Rooms found</Empty>;
-    
-    event.rooms && event.rooms.forEach((room, index) => {
+    eventRooms.forEach((room, index) => {
 
       if(room.type === "zoom") {
         rooms.push(
@@ -113,7 +116,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
           >
             <Card.Meta
               className="event__room-button"
-              title={"Join " + room.name || `Main Room ${index}`}
+              title={room.name ? "Join " + room.name : `Join Room ${index}`}
             />
           </a>);
       } else {
@@ -123,7 +126,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
             onClick={() => redirectToRoom(room.link)}>
             <Card.Meta
               className="event__room-button"
-              title={"Join " + room.name || `Main Room ${index}`}
+              title={room.name ? "Join " + room.name : `Join Room ${index}`}
             />
           </div>);
       }
@@ -150,25 +153,17 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         <div className="event__categories">
           {generateCategories()}
         </div>
-        {(event.links as any)?.register ?
-          (
+        <div className="event__links">
+          {event.links.length ? (event.links as any).map((link) => link && (
             <Button
+              key={link.name}
               type="primary"
-              className="event__actions-register"
-              href={redirects ? (event.links as any).register : "#"}
-            >Register
+              className="event__actions-register t--capitalize"
+              href={redirects && link.link}
+            >{link.name}
             </Button>
-          ) : (
-            event.links.length && (event.links as any).map((link) => (
-              <Button
-                key={link.name}
-                type="primary"
-                className="event__actions-register t--capitalize"
-                href={redirects ? link.link : "#"}
-              >{link.name}
-              </Button>
-            ))
-          )}
+          )) : null}
+        </div>
       </div>
 
       <h1>{event.name}</h1>

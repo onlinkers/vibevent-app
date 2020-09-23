@@ -81,11 +81,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
 
   };
 
-  const handleFormChange = (changedValues) => {
-
-    // TODO: Find a way/or dont even bother render-ing link/room changes in the form
-    if(changedValues.links) return;
-    else if (changedValues.room) return;
+  const handleFormChange = (changedValues, allValues) => {
 
     const {
       date = null,
@@ -95,6 +91,12 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
       // name, price, description, categories
       ...rest
     } = changedValues;
+
+    let links = [];
+    if(changedValues.links && allValues.links) links = allValues.links;
+
+    let rooms = [];
+    if(changedValues.rooms && allValues.rooms) rooms = allValues.rooms;
 
     const startDate = (date && date[0]) || thisEvent?.startDate;
     const endDate = (date && date[1]) || thisEvent?.endDate;
@@ -111,7 +113,9 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
       tags: {
         ...thisEvent?.tags,
         hostTags,
-      }
+      },
+      links,
+      rooms
     };
 
     setThisEvent(newFormFields);
