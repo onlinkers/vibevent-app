@@ -84,20 +84,22 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   };
 
-  const handleFormChange = (changedValues) => {
-
-    // TODO: Find a way/or dont even bother render-ing links/room changes in the form
-    if(changedValues.links) return;
-    if(changedValues.room) return;
-
+  const handleFormChange = (changedValues, allValues) => {
+    
     const {
       date = null,
       venueName = previewValues.venue.name,
       tags: hostTags = previewValues.tags?.hostTags,
-
+      
       // name, price, description, categories
       ...rest
     } = changedValues;
+    
+    let links = [];
+    if(changedValues.links && allValues.links) links = allValues.links;
+
+    let rooms = [];
+    if(changedValues.rooms && allValues.rooms) rooms = allValues.rooms;
 
     const startDate = (date && date[0]) || previewValues.startDate;
     const endDate = (date && date[1]) || previewValues.endDate;
@@ -114,7 +116,9 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
       tags: {
         ...previewValues.tags,
         hostTags,
-      }
+      },
+      links,
+      rooms
     };
 
     setPreviewValues(newFormFields);

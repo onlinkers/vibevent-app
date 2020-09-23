@@ -29,6 +29,9 @@ interface Props {
 }
 
 // const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
+const ROOM_TYPES = [
+  "zoom"
+];
 
 const EventForm: React.FunctionComponent<Props> = (props) => {
 
@@ -186,7 +189,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
 
       <Divider orientation="left">Add Rooms</Divider>
       
-      <DynamicInput type="room" inputs={[
+      <DynamicInput type="rooms" inputs={[
         {
           name: "type",
           props: {
@@ -198,7 +201,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
               }
             ]
           },
-          render: <DynamicSelect dropdownPlaceholder="Room type" initialOptions={["zoom"]} dynamic={false}/>
+          render: <DynamicSelect dropdownPlaceholder="Room type" initialOptions={ROOM_TYPES} dynamic={false}/>
         },
         {
           name: "link",
