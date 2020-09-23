@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import momentz from "moment-timezone";
 import ReactMarkdown from "markdown-to-jsx";
 import { Link } from "react-router-dom";
 
@@ -168,7 +168,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
 
       <h1>{event.name}</h1>
       <div>
-        <div>{moment(event.startDate).format("LLLL")} - {moment(event.endDate).format("LLLL")}
+        <div>{momentz(event.startDate).tz("America/Vancouver").format("LLLL")} - {momentz(event.endDate).tz("America/Vancouver").format("LLLL")}
           <br />(Pacific Daylight Time, GMT-0700)
         </div>
         <div>Hosted at <strong>{event.venue.name}</strong></div>
