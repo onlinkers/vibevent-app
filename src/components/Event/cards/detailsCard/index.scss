@@ -74,6 +74,8 @@
 
     .event__actions {
         display: flex;
+        flex-direction: column;
+        margin-bottom: 1em;
         
         .event__links {
             margin-left: auto;
@@ -85,8 +87,6 @@
                 width: fit-content;
                 padding-left: 2em;
                 padding-right: 2em;
-                
-                // TODO: extend button--selectable
                 transition: all 0.2s;
                 &:hover {
                     transform: scale(1.1);
@@ -97,12 +97,13 @@
         .event__categories {
             display: flex;
             flex-direction: row;
-            flex-wrap: wrap;
+            flex-wrap: unset;
             z-index: 1;
-            overflow: hidden;
+            overflow-x: scroll;
             line-height: 1.5em;
             align-items: center;
             align-content: flex-start;
+            margin-bottom: 1em;
 
             .ant-tag {
                 user-select: none;
@@ -113,10 +114,20 @@
                 margin-bottom: 0.5em;
             }
         }
+
+        @include tablet-portrait {
+            flex-direction: row;
+
+            .event__categories {
+                overflow: hidden;
+                flex-wrap: wrap;
+            }
+        }
     }
 
     .event__dates {
         width: max-content;
+        max-width: 100%;
     }
 
     h1 {
