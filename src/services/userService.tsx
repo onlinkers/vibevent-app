@@ -2,6 +2,16 @@ import api from "../api";
 import { apiErrorHandler } from "../popup";
 
 export default {
+  getUsers: async({ withEvents = true }) => {
+    try {
+      const url = withEvents ? "/users?withEvents=true" : "/users?withEvents=false";
+      const results = await api.get(url);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
+  },
   getUsersByIds: async ({ ids, withEvents = true }) => {
     try {
       // check if ids is still an array

@@ -183,7 +183,12 @@
     }
 
     .event__edit_button {
+        display: inline-block;
         margin: 2em 15% 0 15%;
         width: 70%;
+
+        .ant-btn {
+            width: 100%;
+        }
     }
 }

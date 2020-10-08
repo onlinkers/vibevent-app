@@ -134,6 +134,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
           onDelete={handleDelete}
           eventCategories={eventCategories}
           initialValues={{
+            hosts: thisEvent.hosts.map((host) => host._id),
             name: thisEvent.name,
             date: [momentz(thisEvent.startDate), momentz(thisEvent.endDate)],
             price: thisEvent.price,

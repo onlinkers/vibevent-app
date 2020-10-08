@@ -159,7 +159,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
               key={link.name}
               type="primary"
               className="event__actions-register t--capitalize"
-              href={redirects && link.link}
+              href={redirects ? link.link : ""}
             >{link.name}
             </Button>
           )) : null}
@@ -199,8 +199,8 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         {generateRooms()}
       </div>
 
-      {allowEdit && <Link to={`${event._id}/edit`}>
-        <Button type="primary" className="event__edit_button">Edit this event</Button>
+      {allowEdit && <Link to={`${event._id}/edit`} className="event__edit_button">
+        <Button type="primary">Edit this event</Button>
       </Link>}
             
     </div>

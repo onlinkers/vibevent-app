@@ -40,10 +40,19 @@
     height: 20vh;
     width: 100%;
 }
-.ant-btn {
-    min-width: 40%;
-    max-width: 500px;
+.ant-modal-footer, .ant-modal-confirm-btns {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.ant-modal-footer > .ant-btn,
+.ant-modal-confirm-btns > .ant-btn {
+    width: 40%;
     margin: 1em auto;
+}
+
+.ant-modal-body > .host-select-item {
+    margin: 0 auto;
 }
 
 /* TODO: Mobile View */
