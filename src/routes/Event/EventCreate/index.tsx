@@ -57,7 +57,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   const handleSubmit = async (formValues) => {
 
-    const { venueName, date, room, links = [], ...rest } = formValues;
+    const { venueName, date, rooms, links = [], ...rest } = formValues;
 
     const payload = {
       ...rest,
@@ -70,7 +70,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
       // Dates need to be in ISO form
       startDate: date[0].toISOString(),
       endDate: date[1].toISOString(),
-      rooms: room,
+      rooms: rooms,
       links
     };
 
@@ -95,10 +95,10 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
       ...rest
     } = changedValues;
     
-    let links = [];
+    let links = previewValues.links || [];
     if(changedValues.links && allValues.links) links = allValues.links;
 
-    let rooms = [];
+    let rooms = previewValues.rooms || [];
     if(changedValues.rooms && allValues.rooms) rooms = allValues.rooms;
 
     const startDate = (date && date[0]) || previewValues.startDate;

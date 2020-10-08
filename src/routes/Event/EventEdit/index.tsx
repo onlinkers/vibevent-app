@@ -36,7 +36,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
 
   const handleSubmit = async (formValues) => {
 
-    const { venueName, date, links = [], tags, room, ...rest } = formValues;
+    const { venueName, date, links = [], tags, rooms, ...rest } = formValues;
 
     const payload = {
       ...thisEvent,
@@ -50,7 +50,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
       startDate: date[0].toISOString(),
       endDate: date[1].toISOString(),
       links,
-      rooms: room,
+      rooms,
       tags: {
         ...thisEvent?.tags,
         hostTags: tags
@@ -101,10 +101,10 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
       ...rest
     } = changedValues;
 
-    let links = [];
+    let links = thisEvent.links|| [];
     if(changedValues.links && allValues.links) links = allValues.links;
 
-    let rooms = [];
+    let rooms = thisEvent.rooms|| [];
     if(changedValues.rooms && allValues.rooms) rooms = allValues.rooms;
 
     const startDate = (date && date[0]) || thisEvent?.startDate;
@@ -150,7 +150,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
             description: thisEvent.description,
             categories: thisEvent.categories,
             links: thisEvent.links,
-            room: thisEvent.rooms,
+            rooms: thisEvent.rooms,
             venueName: thisEvent.venue.name,
             // venueCoordinates: thisEvent.venue.location, // TODO
             tags: thisEvent.tags?.hostTags
