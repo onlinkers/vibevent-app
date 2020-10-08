@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import momentz from "moment-timezone";
@@ -16,6 +16,7 @@ import { EventCategoriesPayload } from "types/store";
 
 import eventService from "services/eventService";
 import { fetchAllEvents } from "store/actions/eventActions";
+import { arrayEqualCheck } from "utils";
 
 interface Props {
   event: Event;
@@ -30,6 +31,8 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
   const { breakpoint } = useContext(ThemeContext);
 
   const [thisEvent, setThisEvent] = useState(event);
+
+  const eventHostIds = useMemo(() => event.hosts.map((host) => host._id), [event]);
 
   const handleSubmit = async (formValues) => {
 
@@ -60,8 +63,14 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
     delete payload.updatedAt;
 
     // TODO: Proper Image Uploading
-    
+
     await eventService.setEvent({ id: eventId, payload });
+
+    // check if hosts need to be updated (order matters)
+    if(!arrayEqualCheck(formValues.hosts, eventHostIds, true)) {
+      await eventService.updateEventHost({ id: eventId, payload: { hosts: formValues.hosts } });
+    }
+
     fetchAllEvents();
 
     popup.success("Event changes saved!");
@@ -134,7 +143,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
           onDelete={handleDelete}
           eventCategories={eventCategories}
           initialValues={{
-            hosts: thisEvent.hosts.map((host) => host._id),
+            hosts: eventHostIds,
             name: thisEvent.name,
             date: [momentz(thisEvent.startDate), momentz(thisEvent.endDate)],
             price: thisEvent.price,

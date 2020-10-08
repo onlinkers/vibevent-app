@@ -51,6 +51,16 @@ export default {
     }
   },
 
+  updateEventHost: async ({ id, payload }) => {
+    try {
+      const results = await api.patch(`/event/${id}/host`, payload);
+      return results;
+    } catch(err) {
+      apiErrorHandler(err);
+      throw err;
+    }
+  },
+
   // EVENT CATEGORIES
   getAllEventCategories: async () => {
     try {
