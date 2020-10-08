@@ -40,6 +40,12 @@
     height: 20vh;
     width: 100%;
 }
+.footer > .ant-btn {
+    min-width: 40%;
+    max-width: 500px;
+    margin: 1em auto;
+}
+
 .ant-modal-footer, .ant-modal-confirm-btns {
     display: flex;
     flex-direction: row;

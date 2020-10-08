@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 // import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 import {
@@ -28,7 +27,6 @@ interface Props {
   initialValues?: any;
   onChange?: (fieldsChanged: any, allFields?:any) => void;
   onDelete?: () => void;
-  userId: string;
 }
 
 // const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
@@ -38,8 +36,7 @@ const ROOM_TYPES = [
 
 const EventForm: React.FunctionComponent<Props> = (props) => {
 
-  const { mode, onSubmit, eventCategories, onChange = () => {}, onDelete = () => {}, userId } = props;
-  const { initialValues = { hosts: [userId] } } = props;
+  const { mode, onSubmit, eventCategories, onChange = () => {}, onDelete = () => {}, initialValues } = props;
   // const initialVenueCoordinates = (initialValues && initialValues.venueCoordinates) || null;
 
   const [form] = Form.useForm();
@@ -59,13 +56,13 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
     }
   };
 
-  const handleChangeHosts = (newHosts) => {
+  const handleChangeHosts = (newHosts, newHostObjects) => {
     // save the new hosts for submission
     setHosts(newHosts);
     // close the modal
     setIsHostModalOpen(false);
-    // update the view
-    onChange({ hosts: newHosts }, {});
+    // update the view with host objects
+    onChange({ hosts: newHostObjects }, {});
   };
 
   // TODO: Geocoding
@@ -99,7 +96,6 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
         handleOk={handleChangeHosts}
         handleCancel={() => setIsHostModalOpen(false)}
         initialValues={initialValues.hosts || []}
-        userId={userId}
       />
   
       <Form
@@ -302,11 +298,4 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-
-const mapStateToProps = ({ userData }) => {
-  return {
-    userId: userData.user._id
-  };
-};
-
-export default connect(mapStateToProps)(EventForm);
+export default EventForm;

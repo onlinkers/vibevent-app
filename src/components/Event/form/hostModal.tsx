@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { Modal, Button, Form, Select } from "antd";
 import userService from "services/userService";
 import popup from "popup";
@@ -6,7 +7,7 @@ import { User } from "types/props";
 
 interface Props {
     isOpen: boolean
-    handleOk: (any: any) => void
+    handleOk: (any: any, any2: any) => void
     handleCancel: (any: any) => void
     initialValues: string[]
     userId: string
@@ -42,11 +43,22 @@ const HostModal: React.FunctionComponent<Props> = (props) => {
     fetchUsers();
   }, []);
 
-  const handleSubmit = async () => {
-    const { hosts } = await form.validateFields();
+  const handleSubmit = async (formValues) => {
+    const { hosts } = formValues;
     // get the actual host objects
     const hostObjects = hosts.map((hostId) => availableUsers[hostId]);
-    handleOk(hostObjects);
+
+    // check if the current user is included in the host list
+    if(!hosts.includes(userId)) {
+      Modal.confirm({
+        title: "You are not in the current list of hosts for this event. Are you sure you want continue? You will not be able to make edits to this event after.",
+        onCancel: () => {},
+        onOk: () => {
+          handleOk(hosts, hostObjects);}
+      });
+    } else {
+      handleOk(hosts, hostObjects);
+    }
   };
 
   return (
@@ -56,6 +68,7 @@ const HostModal: React.FunctionComponent<Props> = (props) => {
       layout="horizontal"
       size={"small"}
       initialValues={{ hosts: initialValues }}
+      onFinish={handleSubmit}
     >
 
       <Modal
@@ -63,7 +76,7 @@ const HostModal: React.FunctionComponent<Props> = (props) => {
         title="Edit your Hosts"
         footer={[
           <Button key="back" onClick={handleCancel}>Cancel</Button>,
-          <Button key="submit" type="primary" loading={!usersLoaded} onClick={handleSubmit}>Save Hosts</Button>,
+          <Button key="submit" type="primary" loading={!usersLoaded} onClick={() => form.submit()}>Save Hosts</Button>,
         ]}
       >
         <Form.Item
@@ -73,24 +86,6 @@ const HostModal: React.FunctionComponent<Props> = (props) => {
             {
               required: true,
               message: "Event must have at least one host!",
-            },
-            {
-              validator: (rule, value) => {
-                // confirm if the main user is being removed
-                if(!value.includes(userId)) {
-                  Modal.confirm({
-                    title: "Are you sure you want to remove yourself as a host for this event?",
-                    onCancel: () => {
-                      const currentHosts = form.getFieldValue("hosts");
-                      form.setFieldsValue({
-                        hosts: [...currentHosts, userId]
-                      });
-                    },
-                    onOk: () => {}
-                  });
-                }
-                return Promise.resolve();
-              }
             }
           ]}
         >
@@ -103,7 +98,7 @@ const HostModal: React.FunctionComponent<Props> = (props) => {
                 key={user._id}
                 value={user._id}
                 className="host-select-option"
-              >{user.firstName + " " + user.lastName}</Select.Option>
+              >{user.firstName + " " + (user.lastName || "")}</Select.Option>
             ))}
           </Select>
         </Form.Item>
@@ -113,4 +108,11 @@ const HostModal: React.FunctionComponent<Props> = (props) => {
   );
 };
 
-export default HostModal;
+
+const mapStateToProps = ({ userData }) => {
+  return {
+    userId: userData.user._id
+  };
+};
+
+export default connect(mapStateToProps)(HostModal);
