@@ -54,11 +54,24 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     photos.push(hostPhotos.length === 2 ? <div key="host-col" className="event__images-2-row">{hostPhotos}</div> : hostPhotos);
         
     // get 2 user photos
-    const userPhotos = ((event.media.userPhotos?.length && event.media.userPhotos.slice(0,2)) || []).map((photo, index) => {
+    let userPhotos: any = [];
+    // if user photos exist
+    if(event.media.userPhotos?.length) {
+      userPhotos = event.media.userPhotos.slice(0,2);
+    }
+    // if there are extra host photos
+    else if(event.media.hostPhotos && event.media.hostPhotos.length >= 3) {
+      const remainingHostPhotos = event.media.hostPhotos.slice(2);
+      if(remainingHostPhotos.length >= 2) remainingHostPhotos.splice(0,2);
+      userPhotos = remainingHostPhotos;
+    }
+    // turn user photos into DOM objects
+    userPhotos = userPhotos.map((photo, index) => {
       return <div key={`user-${index}`} className="event__images-image">
         <img src={photo.url} alt={`user-${index}`} loading="lazy"/>
       </div>;
     });
+
     photos.push(userPhotos.length === 2 ? <div key="user-col" className="event__images-2-row">{userPhotos}</div> : userPhotos);
     
     return photos;
