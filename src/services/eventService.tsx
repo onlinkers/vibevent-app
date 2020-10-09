@@ -34,7 +34,7 @@ export default {
   },
   setEvent: async ({ id, payload }) => {
     try {
-      const results = await api.put(`/event/${id}`, payload);
+      const results = await api.put(`/events/${id}`, payload);
       return results;
     } catch(err) {
       apiErrorHandler(err);
@@ -43,7 +43,7 @@ export default {
   },
   deleteEvent: async ({ id }) => {
     try {
-      const results = await api.delete(`/event/${id}`);
+      const results = await api.delete(`/events/${id}`);
       return results;
     } catch(err) {
       apiErrorHandler(err);
@@ -53,7 +53,7 @@ export default {
 
   updateEventHost: async ({ id, payload }) => {
     try {
-      const results = await api.patch(`/event/${id}/host`, payload);
+      const results = await api.patch(`/events/${id}/host`, payload);
       return results;
     } catch(err) {
       apiErrorHandler(err);
@@ -64,7 +64,7 @@ export default {
   // EVENT CATEGORIES
   getAllEventCategories: async () => {
     try {
-      const results = await api.get("/events/categories");
+      const results = await api.get("/categories");
       return results;
     } catch(err) {
       apiErrorHandler(err);

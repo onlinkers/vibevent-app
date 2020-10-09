@@ -27,7 +27,7 @@ export default {
   },
   createUser: async (payload) => {
     try {
-      const results = await api.post("/user", payload);
+      const results = await api.post("/users", payload);
       return results;
     } catch(err) {
       apiErrorHandler(err);
@@ -36,7 +36,7 @@ export default {
   },
   setUser: async ({ id, payload }) => {
     try {
-      const results = await api.put(`/user/${id}`, payload);
+      const results = await api.put(`/users/${id}`, payload);
       return results;
     } catch(err) {
       apiErrorHandler(err);
@@ -45,7 +45,7 @@ export default {
   },
   deleteUser: async ({ id }) => {
     try {
-      const results = await api.delete(`/user/${id}`);
+      const results = await api.delete(`/users/${id}`);
       return results;
     } catch(err) {
       apiErrorHandler(err);
@@ -54,7 +54,7 @@ export default {
   },
   saveEvent: async ({ id, payload }) => {
     try {
-      const results = await api.patch(`/user/${id}/events_saved`, payload);
+      const results = await api.patch(`/users/${id}/events_saved`, payload);
       return results;
     } catch(err) {
       apiErrorHandler(err);
