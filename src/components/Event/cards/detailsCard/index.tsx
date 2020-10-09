@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Empty, Card, Avatar, Tag, Button, Divider, Popover } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import DefaultImage from "assets/media/default-image.png";
+import Image from "components/shared/image";
 
 import { User, Event } from "types/props";
 import { EventCategoriesPayload } from "types/store";
@@ -36,19 +37,19 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
   const generatePhotos = () => {
 
     // check if media exists
-    if(!event?.media) return <img className="event__images__cover" alt="event-cover" src={DefaultImage}/>;
+    if(!event?.media) return <Image className="event__images__cover" alt="event-cover" src={DefaultImage}/>;
         
     const photos: any[] = [];
     
     // get cover photo
     photos.push(<div key="div-img-cover" className="event__images-host">
-      <img src={event.media.coverPhoto?.url || DefaultImage} alt="event-cover" loading="lazy"/>
+      <Image src={event.media.coverPhoto?.url || DefaultImage} alt="event-cover" loading="lazy"/>
     </div>);
     
     // get 2 host photos
     const hostPhotos = ((event.media.hostPhotos?.length && event.media.hostPhotos.slice(0,2)) || []).map((photo, index) => {
       return <div key={`host-${index}`} className="event__images-image">
-        <img src={photo.url} alt={`host-${index}`} loading="lazy"/>
+        <Image src={photo.url} alt={`host-${index}`} loading="lazy"/>
       </div>;
     });
     photos.push(hostPhotos.length === 2 ? <div key="host-col" className="event__images-2-row">{hostPhotos}</div> : hostPhotos);
@@ -68,7 +69,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     // turn user photos into DOM objects
     userPhotos = userPhotos.map((photo, index) => {
       return <div key={`user-${index}`} className="event__images-image">
-        <img src={photo.url} alt={`user-${index}`} loading="lazy"/>
+        <Image src={photo.url} alt={`user-${index}`} loading="lazy"/>
       </div>;
     });
 

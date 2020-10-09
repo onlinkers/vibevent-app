@@ -6,6 +6,7 @@ import momentz from "moment-timezone";
 
 import DefaultImage from "assets/media/default-image.png";
 import { Button } from "antd";
+import Image from "components/shared/image";
 
 import "./index.scss";
 import { User } from "types/props";
@@ -46,7 +47,7 @@ const EventLargeCard: React.FunctionComponent<Props> = (props) => {
       onClick={link}
     >
       <div className="event-coverphoto">
-        <img
+        <Image
           src={event.media?.coverPhoto?.url || DefaultImage}
           alt=""
           className="event-coverphoto__img"

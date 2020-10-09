@@ -4,6 +4,7 @@ import momentz from "moment-timezone";
 import "./index.scss";
 import { Event, User } from "types/props";
 import SaveButton from "components/shared/buttons/saveButton";
+import Image from "components/shared/image";
 
 // import shareIcon from "../../../assets/icons/share.svg";
 
@@ -31,7 +32,7 @@ const EventMediumCard: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className="event-card-medium">
-      <img
+      <Image
         className="event-coverphoto"
         src={event?.media?.coverPhoto?.url}
         alt="eventCoverPhoto"

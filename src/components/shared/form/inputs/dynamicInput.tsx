@@ -36,7 +36,7 @@ const DynamicInput: React.FunctionComponent<Props> = (props) => {
               <MinusCircleOutlined style={{ color: "red" }} onClick={() => remove(field.name)}/>
             </div>
           ))}
-          <Button type="dashed" onClick={() => add()}><PlusOutlined /> Add {type}</Button>
+          <Button className="form-button" type="dashed" onClick={() => add()}><PlusOutlined /> Add {type}</Button>
         </>
       )}
     </Form.List>

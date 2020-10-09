@@ -3,6 +3,8 @@ import React from "react";
 import { Card, Skeleton } from "antd";
 import "./index.scss";
 
+import Image from "components/shared/image";
+
 import { Event } from "types/props";
 import DefaultImage from "assets/media/default-image.png";
 
@@ -23,7 +25,7 @@ const EventTinyCard: React.FunctionComponent<Props> = (props) => {
     <Card
       hoverable
       className="event-card-tiny"
-      cover={<img src={event?.media?.coverPhoto?.url || DefaultImage} alt="event-coverimage" />}
+      cover={<Image src={event?.media?.coverPhoto?.url || DefaultImage} alt="event-coverimage" />}
       {...rest}
     >
       <Skeleton loading={loading} active>
