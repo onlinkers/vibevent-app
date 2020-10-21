@@ -19,7 +19,7 @@
 		"categories": [],
 		"links": [],
 		"media": {
-			"coverPhoto": { "baseSrc": "https://picsum.photos/id/870/500/300?grayscale" }
+			"coverPhoto": { "url": "https://picsum.photos/id/870/500/300?grayscale" }
 		},
 		"tags": { "hostTags": [], "userTags": [] },
 		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
@@ -44,7 +44,7 @@
 		"categories": [],
 		"links": [],
 		"media": {
-			"coverPhoto": { "baseSrc": "https://i.picsum.photos/id/1048/5616/3744.jpg?hmac=N5TZKe4gtmf4hU8xRs-zbS4diYiO009Jni7n50609zk" }
+			"coverPhoto": { "url": "https://i.picsum.photos/id/1048/5616/3744.jpg?hmac=N5TZKe4gtmf4hU8xRs-zbS4diYiO009Jni7n50609zk" }
 		},
 		"tags": { "hostTags": [], "userTags": [] },
 		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
@@ -70,7 +70,7 @@
 		"categories": [],
 		"links": [],
 		"media": {
-			"coverPhoto": { "baseSrc": "https://i.picsum.photos/id/1042/3456/5184.jpg?hmac=5xr8Veg2D_kEQQO6rvGj_Yk8s_N4iq3-eZ9_KclSXNQ" }
+			"coverPhoto": { "url": "https://i.picsum.photos/id/1042/3456/5184.jpg?hmac=5xr8Veg2D_kEQQO6rvGj_Yk8s_N4iq3-eZ9_KclSXNQ" }
 		},
 		"tags": { "hostTags": [], "userTags": [] },
 		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
@@ -96,7 +96,7 @@
 		"categories": [],
 		"links": [],
 		"media": {
-			"coverPhoto": { "baseSrc": "https://i.picsum.photos/id/119/3264/2176.jpg?hmac=PYRYBOGQhlUm6wS94EkpN8dTIC7-2GniC3pqOt6CpNU" }
+			"coverPhoto": { "url": "https://i.picsum.photos/id/119/3264/2176.jpg?hmac=PYRYBOGQhlUm6wS94EkpN8dTIC7-2GniC3pqOt6CpNU" }
 		},
 		"tags": { "hostTags": [], "userTags": [] },
 		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
@@ -122,7 +122,7 @@
 		"categories": [],
 		"links": [],
 		"media": {
-			"coverPhoto": { "baseSrc": "https://i.picsum.photos/id/304/6016/4000.jpg?hmac=ULWayz92dKMWLEZviIJkgLRd6J5FClakkDq_3VmXbw0" }
+			"coverPhoto": { "url": "https://i.picsum.photos/id/304/6016/4000.jpg?hmac=ULWayz92dKMWLEZviIJkgLRd6J5FClakkDq_3VmXbw0" }
 		},
 		"tags": { "hostTags": [], "userTags": [] },
 		"createdAt": { "$date": { "$numberLong": "1593942762000" } },

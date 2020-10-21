@@ -25,7 +25,7 @@ export default {
   },
   createEvent: async (payload) => {
     try {
-      const results = await api.post("/event", payload);
+      const results = await api.post("/events", payload);
       return results;
     } catch(err) {
       apiErrorHandler(err);

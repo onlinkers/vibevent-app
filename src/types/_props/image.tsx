@@ -1,5 +1,5 @@
 export interface Image {
-    baseSrc: string
+    url: string
     size?: {
         height: number
         width: number

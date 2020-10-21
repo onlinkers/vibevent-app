@@ -46,7 +46,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
     categories: [],
     links: [],
     media: {
-      coverPhoto: { baseSrc: "" },
+      coverPhoto: { url: "" },
       hostPhotos: []
     },
     tags: {
