@@ -19,7 +19,7 @@ const ProfileDetails = (props: Props) => {
   // editable states
   const { profilePhoto, eventsCreated, eventsInvolved, eventsSaved } = user;
 
-  const imageSrc = profilePhoto?.baseSrc || DefaultAvatar;
+  const imageSrc = profilePhoto?.url || DefaultAvatar;
 
   const [editable, setEditable] = useState(false);
   // original input states

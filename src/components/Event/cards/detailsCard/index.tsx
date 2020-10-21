@@ -42,13 +42,13 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     
     // get cover photo
     photos.push(<div key="div-img-cover" className="event__images-host">
-      <img src={event.media.coverPhoto?.baseSrc || DefaultImage} alt="event-cover" loading="lazy"/>
+      <img src={event.media.coverPhoto?.url || DefaultImage} alt="event-cover" loading="lazy"/>
     </div>);
     
     // get 2 host photos
     const hostPhotos = ((event.media.hostPhotos?.length && event.media.hostPhotos.slice(0,2)) || []).map((photo, index) => {
       return <div key={`host-${index}`} className="event__images-image">
-        <img src={photo.baseSrc} alt={`host-${index}`} loading="lazy"/>
+        <img src={photo.url} alt={`host-${index}`} loading="lazy"/>
       </div>;
     });
     photos.push(hostPhotos.length === 2 ? <div key="host-col" className="event__images-2-row">{hostPhotos}</div> : hostPhotos);
@@ -56,7 +56,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     // get 2 user photos
     const userPhotos = ((event.media.userPhotos?.length && event.media.userPhotos.slice(0,2)) || []).map((photo, index) => {
       return <div key={`user-${index}`} className="event__images-image">
-        <img src={photo.baseSrc} alt={`user-${index}`} loading="lazy"/>
+        <img src={photo.url} alt={`user-${index}`} loading="lazy"/>
       </div>;
     });
     photos.push(userPhotos.length === 2 ? <div key="user-col" className="event__images-2-row">{userPhotos}</div> : userPhotos);
@@ -72,7 +72,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     (event.hosts as User[]).forEach((host, index) => {
       hosts.push(<Card.Meta
         key={host._id || "host" + index}
-        avatar={ <Avatar src={host.profilePhoto?.baseSrc || DefaultImage} />}
+        avatar={ <Avatar src={host.profilePhoto?.url || DefaultImage} />}
         title={`${host.firstName} ${host.lastName || ""}`}
         description={host.description || ""}
       />);
@@ -97,8 +97,8 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     
   const generateRooms = () => {
     
-    // filter out event rooms that are "empty" or without links
-    const eventRooms = event.rooms && event.rooms.length && event.rooms.filter((r) => r && r.link);
+    // filter out event rooms that are "empty" or without urls
+    const eventRooms = event.rooms && event.rooms.length && event.rooms.filter((r) => r && r.url);
     // display "no rooms" if none
     if(!eventRooms || !eventRooms.length) return <Empty description={false}>No Rooms found</Empty>;
     
@@ -110,7 +110,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         rooms.push(
           <a 
             key={`room-${index}`}
-            href={room.link}
+            href={room.url}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -122,8 +122,8 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
       } else {
         rooms.push(
           <div 
-            key={room.link}
-            onClick={() => redirectToRoom(room.link)}>
+            key={room.url}
+            onClick={() => redirectToRoom(room.url)}>
             <Card.Meta
               className="event__room-button"
               title={room.name ? "Join " + room.name : `Join Room ${index}`}
@@ -159,7 +159,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
               key={link.name}
               type="primary"
               className="event__actions-register t--capitalize"
-              href={redirects && link.link}
+              href={redirects ? link.url : ""}
             >{link.name}
             </Button>
           )) : null}
@@ -199,8 +199,8 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         {generateRooms()}
       </div>
 
-      {allowEdit && <Link to={`${event._id}/edit`}>
-        <Button type="primary" className="event__edit_button">Edit this event</Button>
+      {allowEdit && <Link to={`${event._id}/edit`} className="event__edit_button">
+        <Button type="primary">Edit this event</Button>
       </Link>}
             
     </div>

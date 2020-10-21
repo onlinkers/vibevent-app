@@ -46,7 +46,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
     categories: [],
     links: [],
     media: {
-      coverPhoto: { baseSrc: "" },
+      coverPhoto: { url: "" },
       hostPhotos: []
     },
     tags: {
@@ -62,7 +62,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
     const payload = {
       ...rest,
       // We need to set the user that creates the event as "host"
-      hosts: [user._id],
+      hosts: formValues.hosts || [user._id],
       // venue needs its own object (including the coordinates)
       venue: {
         name: venueName,
@@ -135,6 +135,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
           onChange={handleFormChange}
           onSubmit={handleSubmit}
           eventCategories={eventCategories}
+          initialValues={{ hosts: [user._id] }}
         />
       </div>
       <EventDetailsCard

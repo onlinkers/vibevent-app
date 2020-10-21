@@ -47,7 +47,7 @@ const EventLargeCard: React.FunctionComponent<Props> = (props) => {
     >
       <div className="event-coverphoto">
         <img
-          src={event.media?.coverPhoto?.baseSrc || DefaultImage}
+          src={event.media?.coverPhoto?.url || DefaultImage}
           alt=""
           className="event-coverphoto__img"
         />
