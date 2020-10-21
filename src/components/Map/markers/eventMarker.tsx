@@ -11,7 +11,7 @@ interface Props {
 
 const EventMarker: React.FunctionComponent<Props> = ({ event, redirect }) => {
 
-  const imageSrc = event.media?.coverPhoto?.baseSrc || DefaultImage;
+  const imageSrc = event.media?.coverPhoto?.url || DefaultImage;
   const imageName = event.name;
   const eventId = event._id;
 

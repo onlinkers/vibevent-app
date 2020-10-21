@@ -42,13 +42,13 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     
     // get cover photo
     photos.push(<div key="div-img-cover" className="event__images-host">
-      <img src={event.media.coverPhoto?.baseSrc || DefaultImage} alt="event-cover" loading="lazy"/>
+      <img src={event.media.coverPhoto?.url || DefaultImage} alt="event-cover" loading="lazy"/>
     </div>);
     
     // get 2 host photos
     const hostPhotos = ((event.media.hostPhotos?.length && event.media.hostPhotos.slice(0,2)) || []).map((photo, index) => {
       return <div key={`host-${index}`} className="event__images-image">
-        <img src={photo.baseSrc} alt={`host-${index}`} loading="lazy"/>
+        <img src={photo.url} alt={`host-${index}`} loading="lazy"/>
       </div>;
     });
     photos.push(hostPhotos.length === 2 ? <div key="host-col" className="event__images-2-row">{hostPhotos}</div> : hostPhotos);
@@ -56,7 +56,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     // get 2 user photos
     const userPhotos = ((event.media.userPhotos?.length && event.media.userPhotos.slice(0,2)) || []).map((photo, index) => {
       return <div key={`user-${index}`} className="event__images-image">
-        <img src={photo.baseSrc} alt={`user-${index}`} loading="lazy"/>
+        <img src={photo.url} alt={`user-${index}`} loading="lazy"/>
       </div>;
     });
     photos.push(userPhotos.length === 2 ? <div key="user-col" className="event__images-2-row">{userPhotos}</div> : userPhotos);
@@ -72,7 +72,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     (event.hosts as User[]).forEach((host, index) => {
       hosts.push(<Card.Meta
         key={host._id || "host" + index}
-        avatar={ <Avatar src={host.profilePhoto?.baseSrc || DefaultImage} />}
+        avatar={ <Avatar src={host.profilePhoto?.url || DefaultImage} />}
         title={`${host.firstName} ${host.lastName || ""}`}
         description={host.description || ""}
       />);
@@ -159,7 +159,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
               key={link.name}
               type="primary"
               className="event__actions-register t--capitalize"
-              href={redirects && link.url}
+              href={redirects ? link.url : ""}
             >{link.name}
             </Button>
           )) : null}

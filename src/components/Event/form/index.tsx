@@ -50,7 +50,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
       await onSubmit(formValues);
 
     }
-    finally {
+    catch(err) {
 
       setIsSubmitting(false);
 

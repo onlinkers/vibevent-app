@@ -33,7 +33,7 @@ const EventMediumCard: React.FunctionComponent<Props> = (props) => {
     <div className="event-card-medium">
       <img
         className="event-coverphoto"
-        src={event?.media?.coverPhoto?.baseSrc}
+        src={event?.media?.coverPhoto?.url}
         alt="eventCoverPhoto"
         onClick={() => onClick()}
       />

@@ -27,7 +27,7 @@ const EventSmallCard: React.FunctionComponent<Props> = (props) => {
     >
       <img
         className="event-coverphoto"
-        src={event?.media?.coverPhoto?.baseSrc}
+        src={event?.media?.coverPhoto?.url}
         alt="eventCoverPhoto"
       />
       <div className="event-description">
