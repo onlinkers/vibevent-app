@@ -169,7 +169,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
           render: <Input placeholder="Type"/>
         },
         {
-          name: "link",
+          name: "url",
           props: {
             style: { width: "70%" },
             rules: [
@@ -204,7 +204,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
           render: <DynamicSelect dropdownPlaceholder="Room type" initialOptions={ROOM_TYPES} dynamic={false}/>
         },
         {
-          name: "link",
+          name: "url",
           props: {
             style: { width: "30%" },
             rules: [

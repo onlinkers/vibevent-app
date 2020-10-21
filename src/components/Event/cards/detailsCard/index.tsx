@@ -97,8 +97,8 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     
   const generateRooms = () => {
     
-    // filter out event rooms that are "empty" or without links
-    const eventRooms = event.rooms && event.rooms.length && event.rooms.filter((r) => r && r.link);
+    // filter out event rooms that are "empty" or without urls
+    const eventRooms = event.rooms && event.rooms.length && event.rooms.filter((r) => r && r.url);
     // display "no rooms" if none
     if(!eventRooms || !eventRooms.length) return <Empty description={false}>No Rooms found</Empty>;
     
@@ -110,7 +110,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         rooms.push(
           <a 
             key={`room-${index}`}
-            href={room.link}
+            href={room.url}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -122,8 +122,8 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
       } else {
         rooms.push(
           <div 
-            key={room.link}
-            onClick={() => redirectToRoom(room.link)}>
+            key={room.url}
+            onClick={() => redirectToRoom(room.url)}>
             <Card.Meta
               className="event__room-button"
               title={room.name ? "Join " + room.name : `Join Room ${index}`}
@@ -159,7 +159,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
               key={link.name}
               type="primary"
               className="event__actions-register t--capitalize"
-              href={redirects && link.link}
+              href={redirects && link.url}
             >{link.name}
             </Button>
           )) : null}

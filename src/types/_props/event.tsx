@@ -26,14 +26,16 @@ export interface Event {
     userTags: string[];
     hostTags: string[];
   };
-  rooms?: [{
-    type: string;
-    link: string;
-    name?: string;
-  }]
+  rooms?: Room[] | []
 }
 
 interface Link {
   name: string;
-  link: string;
+  url: string;
+}
+
+interface Room {
+  type: string;
+  name?: string;
+  url: string;
 }
