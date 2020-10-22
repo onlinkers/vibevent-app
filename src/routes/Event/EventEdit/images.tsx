@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import crypto from "crypto";
 
 import popup from "popup";
@@ -15,7 +14,7 @@ interface Props {
     event: Event;
 }
   
-const EventEditImages: React.FunctionComponent<Props> = () => {
+const EventEditImages: React.FunctionComponent<Props> = ({ event }) => {
 
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState({});
@@ -39,24 +38,25 @@ const EventEditImages: React.FunctionComponent<Props> = () => {
       const bytes = crypto.randomBytes(32);
       // create the md5 hash of the random bytes
       const imageHash = crypto.createHash("MD5").update(bytes).digest("hex");
+      const imageExtension = file.type.split("/")[1];
 
-      console.log({ file }, file.name, file.size);
       // get pre-signed url
-      const { data: [info] } = await imageService.getPresignedUrl([{
-        bucketName: imageService.BUCKET_NAME,
-        bucketKey: `events/${type}/${imageHash}`,
-        contentType: file.type,
-        meta: {
-          name: file.name,
-          size: String(file.size),
-          type: file.type,
-          uid: file.uid,
-          lastModified: String(file.lastModified)
-        }
-      }]);
-      console.log({ info });
+      const { data: [info] } = await imageService.getPresignedUrl({
+        payload: [{
+          bucketName: imageService.BUCKET_NAME,
+          bucketKey: `${event._id}/cover/${imageHash}.${imageExtension}`,
+          contentType: file.type,
+          meta: {
+            hash: imageHash,
+            name: file.name,
+            size: String(file.size),
+            type: file.type,
+            uid: file.uid,
+            lastModified: String(file.lastModified)
+          }
+        }]
+      });
       setPresignedInfo(info);
-      // TODO: Add metadata
 
     }
     catch(err) {
@@ -65,12 +65,10 @@ const EventEditImages: React.FunctionComponent<Props> = () => {
   };
 
   const handleUpload = async ({
-    onSuccess, onError, data, filename, file,
-    // onProgress, withCredentials, action, headers
+    onSuccess, onError, file,
+    // onProgress, withCredentials, action, headers, data, filename
   }) => {
     try {
-      console.log("uploading", { file }, filename, { data });
-      console.log(presignedInfo);
 
       const { url, ...info } = presignedInfo;
 
@@ -78,10 +76,11 @@ const EventEditImages: React.FunctionComponent<Props> = () => {
         url: url,
         payload: file,
         options: {
-          params: info,
+        //   params: info,
           headers: {
+            "x-amz-acl": "public-read",
             "Content-Type": info.ContentType || file.type
-          }
+          },
         }
       });
       onSuccess(null, file);
@@ -114,7 +113,6 @@ const EventEditImages: React.FunctionComponent<Props> = () => {
     <div className="Page">
       <Upload
         accept=".png,.jpg,.jpeg"
-        action={presignedInfo.url}
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
