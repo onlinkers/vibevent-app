@@ -4,6 +4,7 @@
  */
 export const getImageNameFromUrl = (url: string): string => {
 
-  return url.substring(url.lastIndexOf("/") + 1);
+  const cleanUrl = url.split(/[#?]/)[0] || "";
+  return cleanUrl.substring(cleanUrl.lastIndexOf("/") + 1);
   
 };

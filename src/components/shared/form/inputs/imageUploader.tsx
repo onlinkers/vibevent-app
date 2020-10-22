@@ -124,11 +124,13 @@ const ImageUploader: React.FunctionComponent<Props> = (props) => {
         beforeUpload={handleBeforeUpload}
         customRequest={handleUpload}
         multiple={false} // might need to come up with functionality in the future
+        disabled={disableUpload}
       >
-        {(maxFiles && fileList.length >= maxFiles) || disableUpload ? null : <div>
-          <PlusOutlined />
-          <div style={{ marginTop: 8 }}>Upload</div>
-        </div>}
+        {maxFiles && fileList.length >= maxFiles ? null
+          : <div style={disableUpload ? { color: "lightgrey" } : {}}>
+            {disableUpload ? "User" : <PlusOutlined style={{ marginBottom: 8 }}/>}
+            <div>Upload</div>
+          </div>}
       </Upload>
 
       <Modal

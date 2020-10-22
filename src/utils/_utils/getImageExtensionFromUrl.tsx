@@ -1,4 +1,4 @@
-const ACCEPTABLE_EXTENSIONS = ["png", "jpg"];
+const ACCEPTABLE_EXTENSIONS = ["png", "jpg", "jpeg"];
 
 /**
  * gets the image extension from a url string
@@ -7,8 +7,8 @@ const ACCEPTABLE_EXTENSIONS = ["png", "jpg"];
 export const getImageExtensionFromUrl = (url: string): string => {
 
   // do some whacky splitting
-  let extension = url.split(/[#?]/)[0] || "";
-  extension = extension.split(".").pop() || "";
+  const cleanUrl = url.split(/[#?]/)[0] || "";
+  let extension = cleanUrl.split(".").pop() || "";
   extension = extension.trim();
 
   // check if extension is acceptable
