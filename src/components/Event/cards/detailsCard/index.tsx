@@ -153,11 +153,11 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className="event-details-card">
-      {<div className="back-button">
-        <span className="button--clickable" onClick={redirects ? redirectBack : () => {}}>
+      <div className="back-button">
+        {redirects && <span className="button--clickable" onClick={redirectBack}>
           <ArrowLeftOutlined /> Back
-        </span>
-      </div>}
+        </span>}
+      </div>
 
       <div className="event__images">
         {generatePhotos()}
