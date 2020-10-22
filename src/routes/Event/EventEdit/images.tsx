@@ -1,129 +1,89 @@
 import React, { useState } from "react";
-
+import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 import popup from "popup";
-import { Upload, Modal } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import Image from "components/shared/image";
-import { convertToBase64, createRandomHash } from "utils";
 
-import imageService from "services/images";
+import { Button } from "antd";
+import ImageUploader from "components/shared/form/inputs/imageUploader";
 
+import { fetchAllEvents } from "store/actions/eventActions";
+import eventService from "services/eventService";
 import { Event } from "types/props";
 
 interface Props {
-    event: Event;
+  event: Event;
+  fetchAllEvents: Function;
 }
   
-const EventEditImages: React.FunctionComponent<Props> = ({ event }) => {
+const EventEditImages: React.FunctionComponent<Props> = ({ event, fetchAllEvents }) => {
 
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState({});
-  const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState([]);
-  const [presignedInfo, setPresignedInfo] = useState<any>({});
+  const { _id: eventId } = event;
+  const history = useHistory();
 
-  const handleBeforeUpload = async (file) => {
-    try {
+  const [coverPhoto, setCoverPhoto] = useState(event.media && event.media.coverPhoto ? {
+    uid: "coverphoto",
+    name: event.media?.coverPhoto.url.split("/")[-1], // to use actual name here
+    type: `image/${event.media?.coverPhoto.url.split(".")[-1]}`, // to use actual type
+    status: "done",
+    response: "Photo load error",
+    url: event.media?.coverPhoto?.url
+  } : {});
 
-      const imageHash = createRandomHash();
-      const imageExtension = file.type.split("/")[1];
+  
+  const onSubmit = async () => {
 
-      // get pre-signed url
-      const { data: [info] } = await imageService.getPresignedUrl({
-        payload: [{
-          bucketName: imageService.getBucketName("event"),
-          bucketKey: `${event._id}/cover/${imageHash}.${imageExtension}`,
-          contentType: file.type,
-          meta: {
-            hash: imageHash,
-            name: file.name,
-            size: String(file.size),
-            type: file.type,
-            uid: file.uid,
-            lastModified: String(file.lastModified)
-          }
-        }]
-      });
-      setPresignedInfo(info);
+    const filename = `${coverPhoto.uid}.${coverPhoto.type?.split("/")[1]}`;
+    const url = `${eventId}/cover/${filename}`;
 
-    }
-    catch(err) {
-      popup.error("Error getting pre-signed url: ", err.message);
-    }
-  };
+    const payload: any = {
+      ...event,
+      media: {
+        ...event.media,
+        coverPhoto: { url }
+      }
+    };
 
-  const handleUpload = async ({
-    onSuccess, onError, file,
-    // onProgress, withCredentials, action, headers, data, filename
-  }) => {
-    try {
+    console.log("submitting", payload.media);
+    await eventService.setEvent({
+      id: eventId,
+      payload
+    }).catch(() => {});
 
-      const { url, ...info } = presignedInfo;
+    fetchAllEvents();
 
-      await imageService.usePresignedUrl({
-        url: url,
-        payload: file,
-        options: {
-        //   params: info,
-          headers: {
-            "x-amz-acl": "public-read",
-            "Content-Type": info.ContentType || file.type
-          },
-        }
-      });
-      onSuccess(null, file);
-    }
-    catch(err) {
-      onError(err.message, err, file);
-    }
+    popup.success("Event images saved!");
+    history.push(`/event/${eventId}`);
 
   };
 
-  const handleCancel = () => {
-    setPreviewVisible(false);
-  };
+  const onCancel = () => {
 
-  const handlePreview = async file => {
-    if (!file.url && !file.preview) {
-      file.preview = await convertToBase64(file.originFileObj);
-    }
+    history.push(`/event/${eventId}`);
 
-    setPreviewImage(file.url || file.preview);
-    setPreviewVisible(true);
-    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
-  };
-
-  const handleChange = ({ fileList }) => {
-    setFileList(fileList);
   };
 
   return (
     <div className="Page">
-      <Upload
-        accept=".png,.jpg,.jpeg"
+      <ImageUploader
+        collection="events"
+        directory={`${eventId}/cover`}
+        acceptedExtensions=".png,.jpg,.jpeg"
+        onChange={([photo]) => setCoverPhoto(photo)}
         listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChange}
-        beforeUpload={handleBeforeUpload}
-        customRequest={handleUpload}
-      >
-        {fileList.length >= 8 ? null : <div>
-          <PlusOutlined />
-          <div style={{ marginTop: 8 }}>Upload</div>
-        </div>}
-      </Upload>
-
-      <Modal
-        visible={previewVisible}
-        title={previewTitle}
-        footer={null}
-        onCancel={handleCancel}
-      >
-        <Image alt="example" style={{ width: "100%" }} src={previewImage} />
-      </Modal>
+        maxFiles={1}
+        initialList={[coverPhoto]}
+      />
+      <Button type="primary" onClick={onSubmit}>Save</Button>
+      <Button type="primary" onClick={onCancel}>Cancel</Button>
     </div>
   );
 };
 
-export default EventEditImages;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllEvents: () => dispatch(fetchAllEvents())
+  };
+};
+
+export default connect(null, mapDispatchToProps)(EventEditImages);
