@@ -108,7 +108,6 @@ const ImageUploader: React.FunctionComponent<Props> = (props) => {
 
   const handleChange = ({ fileList }) => {
     setFileList(fileList);
-    console.log("change!", { presignedInfo }, { fileList });
     onChange(fileList);
   };
 

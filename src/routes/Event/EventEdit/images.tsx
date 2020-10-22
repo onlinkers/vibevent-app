@@ -43,7 +43,6 @@ const EventEditImages: React.FunctionComponent<Props> = ({ event, fetchAllEvents
       }
     };
 
-    console.log("submitting", payload.media);
     await eventService.setEvent({
       id: eventId,
       payload
