@@ -135,6 +135,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
           onChange={handleFormChange}
           onSubmit={handleSubmit}
           eventCategories={eventCategories}
+          eventHosts={[user]}
           initialValues={{ hosts: [user._id] }}
         />
       </div>

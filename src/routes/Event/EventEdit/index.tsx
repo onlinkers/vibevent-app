@@ -142,6 +142,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
           onSubmit={handleSubmit}
           onDelete={handleDelete}
           eventCategories={eventCategories}
+          eventHosts={thisEvent.hosts}
           initialValues={{
             hosts: eventHostIds,
             name: thisEvent.name,
