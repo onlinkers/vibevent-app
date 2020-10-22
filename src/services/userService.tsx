@@ -1,10 +1,12 @@
 import api from "../api";
 import { apiErrorHandler } from "../popup";
+import { createQueryString } from "./_utils";
 
 export default {
-  getUsers: async({ withEvents = true }) => {
+  getUsers: async({ query = {} }) => {
     try {
-      const url = withEvents ? "/users?withEvents=true" : "/users?withEvents=false";
+      const queryString = createQueryString(query);
+      const url = `/users?${queryString}`;
       const results = await api.get(url);
       return results;
     } catch(err) {
@@ -12,12 +14,13 @@ export default {
       throw err;
     }
   },
-  getUsersByIds: async ({ ids, withEvents = true }) => {
+  getUsersByIds: async ({ ids, query = {} }) => {
     try {
       // check if ids is still an array
       let userIds = ids;
       if(typeof ids !== "string") userIds = ids.join(",");
-      const url = withEvents ? `/users/${userIds}?withEvents=true` : `/users/${userIds}?withEvents=false`;
+      const queryString = createQueryString(query);
+      const url = `/users/${userIds}?${queryString}`;
       const results = await api.get(url);
       return results;
     } catch(err) {
