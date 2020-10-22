@@ -57,11 +57,6 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
       },
     };
 
-    delete payload._id;
-    delete payload.hosts;
-    delete payload.createdAt;
-    delete payload.updatedAt;
-
     // TODO: Proper Image Uploading
 
     await eventService.setEvent({ id: eventId, payload });
@@ -74,7 +69,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
     fetchAllEvents();
 
     popup.success("Event changes saved!");
-    history.goBack();
+    history.push(`/event/${eventId}`);
 
   };
 
@@ -92,7 +87,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
 
   const handleCancel = async () => {
 
-    history.goBack();
+    history.push(`/event/${eventId}`);
 
   };
 

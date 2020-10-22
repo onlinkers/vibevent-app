@@ -38,6 +38,13 @@ export default {
   },
   setEvent: async ({ id, payload }) => {
     try {
+
+      // backup
+      delete payload._id;
+      delete payload.hosts;
+      delete payload.createdAt;
+      delete payload.updatedAt;
+
       const results = await api.put(`/events/${id}`, payload);
       return results;
     } catch(err) {
