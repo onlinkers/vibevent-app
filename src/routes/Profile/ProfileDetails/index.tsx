@@ -69,7 +69,7 @@ const ProfileDetails = (props: Props) => {
     <div className="Profile row">
       {/* TODO: Profile picture uploading */}
       <div className="col-2 user-profile">
-        <Image className="user-profile__image" src={imageSrc} alt="profile" />
+        <Image collection="users" className="user-profile__image" src={imageSrc} alt="profile" />
         <Typography.Title className="user-profile__name">
           {firstName} {lastName}
         </Typography.Title>

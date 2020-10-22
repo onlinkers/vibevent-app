@@ -25,7 +25,7 @@ const EventTinyCard: React.FunctionComponent<Props> = (props) => {
     <Card
       hoverable
       className="event-card-tiny"
-      cover={<Image src={event?.media?.coverPhoto?.url || DefaultImage} alt="event-coverimage" />}
+      cover={<Image collection="events" src={event?.media?.coverPhoto?.url || DefaultImage} alt="event-coverimage" />}
       {...rest}
     >
       <Skeleton loading={loading} active>

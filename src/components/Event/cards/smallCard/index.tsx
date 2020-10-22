@@ -28,9 +28,10 @@ const EventSmallCard: React.FunctionComponent<Props> = (props) => {
       onClick={() => onClick()}
     >
       <Image
-        className="event-coverphoto"
+        collection="events"
         src={event?.media?.coverPhoto?.url}
         alt="eventCoverPhoto"
+        className="event-coverphoto"
       />
       <div className="event-description">
         <p className="description-date">{month}</p>

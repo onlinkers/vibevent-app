@@ -1,5 +1,5 @@
 import React from "react";
-import imageService from "services/images";
+import { createImageUrl } from "utils";
 
 interface Props {
     src: string
@@ -14,13 +14,8 @@ const Image = (props) => {
   // eslint-disable-next-line
   const { src, collection = '', size, alt = 'image', ...rest } = props;
 
-  const BUCKET_NAME = imageService.getBucketName(collection);
-  const IMAGE_BUCKET_URL = `https://${BUCKET_NAME}.s3.amazonaws.com`;
-
   // check if the key is of url form or base64 encoded string
-  const urlExpression = /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi;
-  const regex = new RegExp(urlExpression);
-  const imageSource = (src.includes(";base64,") || src.match(regex)) ? src : `${IMAGE_BUCKET_URL}/${src}`;
+  const imageSource = createImageUrl({ src, collection, size });
 
   return (
     <img {...rest} src={imageSource} alt={alt} loading="lazy"/>

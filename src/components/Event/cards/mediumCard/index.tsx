@@ -33,9 +33,10 @@ const EventMediumCard: React.FunctionComponent<Props> = (props) => {
   return (
     <div className="event-card-medium">
       <Image
-        className="event-coverphoto"
+        collection="events"
         src={event?.media?.coverPhoto?.url}
         alt="eventCoverPhoto"
+        className="event-coverphoto"
         onClick={() => onClick()}
       />
       <div className="event-description">

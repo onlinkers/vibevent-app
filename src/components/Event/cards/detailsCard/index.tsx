@@ -37,19 +37,19 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
   const generatePhotos = () => {
 
     // check if media exists
-    if(!event?.media) return <Image className="event__images__cover" alt="event-cover" src={DefaultImage}/>;
+    if(!event?.media) return <Image collection="events" src={DefaultImage} alt="event-cover" className="event__images__cover"/>;
         
     const photos: any[] = [];
     
     // get cover photo
     photos.push(<div key="div-img-cover" className="event__images-host">
-      <Image src={event.media.coverPhoto?.url || DefaultImage} alt="event-cover" loading="lazy"/>
+      <Image collection="events" src={event.media.coverPhoto?.url || DefaultImage} alt="event-cover" loading="lazy"/>
     </div>);
     
     // get 2 host photos
     const hostPhotos = ((event.media.hostPhotos?.length && event.media.hostPhotos.slice(0,2)) || []).map((photo, index) => {
       return <div key={`host-${index}`} className="event__images-image">
-        <Image src={photo.url} alt={`host-${index}`} loading="lazy"/>
+        <Image collection="events" src={photo.url} alt={`host-${index}`} loading="lazy"/>
       </div>;
     });
     photos.push(hostPhotos.length === 2 ? <div key="host-col" className="event__images-2-row">{hostPhotos}</div> : hostPhotos);
@@ -69,7 +69,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
     // turn user photos into DOM objects
     userPhotos = userPhotos.map((photo, index) => {
       return <div key={`user-${index}`} className="event__images-image">
-        <Image src={photo.url} alt={`user-${index}`} loading="lazy"/>
+        <Image collection="events" src={photo.url} alt={`user-${index}`} loading="lazy"/>
       </div>;
     });
 
@@ -213,11 +213,11 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         {generateRooms()}
       </div>
 
-      {allowEdit && <Link to={`${event._id}/images`} className="event__edit_button">
-        <Button type="primary">Edit event images</Button>
-      </Link>}
       {allowEdit && <Link to={`${event._id}/edit`} className="event__edit_button">
         <Button type="primary">Edit this event</Button>
+      </Link>}
+      {allowEdit && <Link to={`${event._id}/images`} className="event__edit_button">
+        <Button type="link">Edit event images</Button>
       </Link>}
             
     </div>
