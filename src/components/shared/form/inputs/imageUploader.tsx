@@ -6,7 +6,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import Image from "components/shared/image";
 
 import imageService from "services/images";
-import { convertToBase64 } from "utils";
+import { convertToBase64, getImageNameFromUrl } from "utils";
 
 interface Props {
     collection: string;
@@ -16,6 +16,7 @@ interface Props {
     listType?: "text" | "picture" | "picture-card";
     maxFiles?: number;
     initialList?: any[]
+    disableUpload?: boolean
 }
   
 const ImageUploader: React.FunctionComponent<Props> = (props) => {
@@ -27,7 +28,8 @@ const ImageUploader: React.FunctionComponent<Props> = (props) => {
     onChange,
     listType = "picture-card",
     maxFiles = null,
-    initialList = []
+    initialList = [],
+    disableUpload = false,
   } = props;
 
   const [previewVisible, setPreviewVisible] = useState(false);
@@ -103,7 +105,7 @@ const ImageUploader: React.FunctionComponent<Props> = (props) => {
     }
     setPreviewImage(file.url || file.preview);
     setPreviewVisible(true);
-    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
+    setPreviewTitle(file.name || getImageNameFromUrl(file.url));
   };
 
   const handleChange = ({ fileList }) => {
@@ -123,7 +125,7 @@ const ImageUploader: React.FunctionComponent<Props> = (props) => {
         customRequest={handleUpload}
         multiple={false} // might need to come up with functionality in the future
       >
-        {(maxFiles && fileList.length >= maxFiles) ? null : <div>
+        {(maxFiles && fileList.length >= maxFiles) || disableUpload ? null : <div>
           <PlusOutlined />
           <div style={{ marginTop: 8 }}>Upload</div>
         </div>}

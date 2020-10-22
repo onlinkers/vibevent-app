@@ -19,6 +19,10 @@ export * from "./_utils/filterEventsByCategoryKeys";
 
 export * from "./_utils/filterEventMarkersToDelete";
 
+export * from "./_utils/getImageExtensionFromUrl";
+
+export * from "./_utils/getImageNameFromUrl";
+
 export * from "./_utils/getUrlQuery";
 
 export * from "./_utils/isUrl";
