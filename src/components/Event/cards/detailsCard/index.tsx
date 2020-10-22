@@ -213,6 +213,9 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         {generateRooms()}
       </div>
 
+      {allowEdit && <Link to={`${event._id}/images`} className="event__edit_button">
+        <Button type="primary">Edit event images</Button>
+      </Link>}
       {allowEdit && <Link to={`${event._id}/edit`} className="event__edit_button">
         <Button type="primary">Edit this event</Button>
       </Link>}

@@ -90,6 +90,12 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
 
   };
 
+  const handleCancel = async () => {
+
+    history.goBack();
+
+  };
+
   const handleFormChange = (changedValues, allValues) => {
 
     const {
@@ -140,6 +146,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
           mode="EDIT"
           onChange={handleFormChange}
           onSubmit={handleSubmit}
+          onCancel={handleCancel}
           onDelete={handleDelete}
           eventCategories={eventCategories}
           eventHosts={thisEvent.hosts}

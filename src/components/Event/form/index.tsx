@@ -24,6 +24,7 @@ import { User } from "types/props";
 interface Props {
   mode: "CREATE" | "EDIT";
   onSubmit: Function;
+  onCancel: () => void;
   eventCategories: EventCategoriesPayload;
   eventHosts?: User[]
   initialValues?: any;
@@ -38,7 +39,7 @@ const ROOM_TYPES = [
 
 const EventForm: React.FunctionComponent<Props> = (props) => {
 
-  const { mode, onSubmit, eventCategories, onChange = () => {}, onDelete = () => {}, initialValues, eventHosts = [] } = props;
+  const { mode, onSubmit, eventCategories, onChange = () => {}, onDelete = () => {}, initialValues, eventHosts = [], onCancel } = props;
   // const initialVenueCoordinates = (initialValues && initialValues.venueCoordinates) || null;
 
   const [form] = Form.useForm();
@@ -283,6 +284,10 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
         <Button type="primary" htmlType="submit" disabled={isSubmitting}>
           {mode === "CREATE" ? "Create Event" : "Save Event"}
         </Button>
+
+        {mode === "EDIT" && <Button type="primary" onClick={onCancel} disabled={isSubmitting}>
+          Cancel
+        </Button>}
 
         {mode === "EDIT" &&
       <Popconfirm
