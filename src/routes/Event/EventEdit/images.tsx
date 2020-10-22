@@ -31,7 +31,7 @@ const EventEditImages: React.FunctionComponent<Props> = ({ event }) => {
       // get pre-signed url
       const { data: [info] } = await imageService.getPresignedUrl({
         payload: [{
-          bucketName: imageService.BUCKET_NAME,
+          bucketName: imageService.getBucketName("event"),
           bucketKey: `${event._id}/cover/${imageHash}.${imageExtension}`,
           contentType: file.type,
           meta: {

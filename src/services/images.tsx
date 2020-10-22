@@ -3,10 +3,13 @@ import { apiErrorHandler } from "../popup";
 
 let BUCKET_ENV = "stage";
 if(process.env.NODE_ENV === "production") BUCKET_ENV = "prod";
-else if(process.env.NODE_ENV === "development") BUCKET_ENV = "stage";
+else if(process.env.NODE_ENV === "development") BUCKET_ENV = "dev";
 
 export default {
-  BUCKET_NAME: `vibevent-image-${BUCKET_ENV}`,
+  getBucketName: (collection = "") => {
+    if(collection) return `vibevent-images-${collection}-${BUCKET_ENV}`;
+    else return `vibevent-images-${BUCKET_ENV}`;
+  },
   getPresignedUrl: async({ payload, options = {} }) => {
     try {
       const url = "/images";
