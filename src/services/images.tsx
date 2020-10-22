@@ -23,28 +23,6 @@ export default {
       return results;
     } catch(err) {
       apiErrorHandler(err);
-      console.log({ err });
-      throw err;
-    }
-  },
-  useXHRPresignedUrl: async({ url, payload, options }) => {
-    try {
-      const xhr = new XMLHttpRequest();
-      // S3 requires PUT method!
-      xhr.open("PUT", url);
-      xhr.onreadystatechange = async (res) => {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            console.log("hello");
-          } else {
-            console.log({ xhr }, { res });
-            throw "NO";
-          }
-        }
-      };
-      xhr.send(payload);
-    } catch(err) {
-      apiErrorHandler(err);
       throw err;
     }
   }

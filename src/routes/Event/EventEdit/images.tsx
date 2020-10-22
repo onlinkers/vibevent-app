@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import crypto from "crypto";
 
 import popup from "popup";
 import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import Image from "components/shared/image";
+import { convertToBase64, createRandomHash } from "utils";
 
 import imageService from "services/images";
 
@@ -22,22 +22,10 @@ const EventEditImages: React.FunctionComponent<Props> = ({ event }) => {
   const [fileList, setFileList] = useState([]);
   const [presignedInfo, setPresignedInfo] = useState<any>({});
 
-  const getBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  };
-
-  const handleBeforeUpload = async (type, { file, fileList }) => {
+  const handleBeforeUpload = async (file) => {
     try {
 
-      // create image hash name
-      const bytes = crypto.randomBytes(32);
-      // create the md5 hash of the random bytes
-      const imageHash = crypto.createHash("MD5").update(bytes).digest("hex");
+      const imageHash = createRandomHash();
       const imageExtension = file.type.split("/")[1];
 
       // get pre-signed url
@@ -97,7 +85,7 @@ const EventEditImages: React.FunctionComponent<Props> = ({ event }) => {
 
   const handlePreview = async file => {
     if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
+      file.preview = await convertToBase64(file.originFileObj);
     }
 
     setPreviewImage(file.url || file.preview);
@@ -117,7 +105,7 @@ const EventEditImages: React.FunctionComponent<Props> = ({ event }) => {
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
-        beforeUpload={(file, fileList) => handleBeforeUpload("cover", { file, fileList })}
+        beforeUpload={handleBeforeUpload}
         customRequest={handleUpload}
       >
         {fileList.length >= 8 ? null : <div>

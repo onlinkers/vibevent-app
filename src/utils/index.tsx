@@ -7,6 +7,10 @@ export * from "./_utils/arrayEqualCheck";
 
 export * from "./_utils/arrayAlphabeticalComparer";
 
+export * from "./_utils/convertToBase64";
+
+export * from "./_utils/createRandomHash";
+
 export * from "./_utils/filterArrayByArray";
 
 export * from "./_utils/filterEventsByCategoryKeys";
