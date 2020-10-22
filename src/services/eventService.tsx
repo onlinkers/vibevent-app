@@ -1,22 +1,26 @@
 import api from "../api";
 import { apiErrorHandler } from "../popup";
+import { createQueryString } from "./_utils";
 
 export default {
-  getAllEvents: async () => {
+  getAllEvents: async ({ query = {} }) => {
     try {
-      const results = await api.get("/events");
+      const queryString = createQueryString(query);
+      const results = await api.get(`/events?${queryString}`);
       return results;
     } catch(err) {
       apiErrorHandler(err);
       throw err;
     }
   },
-  getEventsByIds: async ({ ids }) => {
+  getEventsByIds: async ({ ids, query = {} }) => {
     try {
       // check if ids is still an array
       let eventIds = ids;
       if(typeof ids !== "string") eventIds = ids.join(",");
-      const results = await api.get(`/events/${eventIds}`);
+      // form queries, if any
+      const queryString = createQueryString(query);
+      const results = await api.get(`/events/${eventIds}/${queryString}`);
       return results;
     } catch(err) {
       apiErrorHandler(err);

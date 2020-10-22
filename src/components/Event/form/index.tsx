@@ -19,11 +19,13 @@ import HostModal from "./hostModal";
 
 import "./index.scss";
 import { EventCategoriesPayload } from "types/store";
+import { User } from "types/props";
 
 interface Props {
   mode: "CREATE" | "EDIT";
   onSubmit: Function;
   eventCategories: EventCategoriesPayload;
+  eventHosts?: User[]
   initialValues?: any;
   onChange?: (fieldsChanged: any, allFields?:any) => void;
   onDelete?: () => void;
@@ -36,7 +38,7 @@ const ROOM_TYPES = [
 
 const EventForm: React.FunctionComponent<Props> = (props) => {
 
-  const { mode, onSubmit, eventCategories, onChange = () => {}, onDelete = () => {}, initialValues } = props;
+  const { mode, onSubmit, eventCategories, onChange = () => {}, onDelete = () => {}, initialValues, eventHosts = [] } = props;
   // const initialVenueCoordinates = (initialValues && initialValues.venueCoordinates) || null;
 
   const [form] = Form.useForm();
@@ -95,6 +97,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
         isOpen={isHostModalOpen}
         handleOk={handleChangeHosts}
         handleCancel={() => setIsHostModalOpen(false)}
+        eventHosts={eventHosts}
         initialValues={initialValues.hosts || []}
       />
   
@@ -187,7 +190,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
             render: <Input placeholder="Type"/>
           },
           {
-            name: "link",
+            name: "url",
             props: {
               style: { width: "70%" },
               rules: [
@@ -222,7 +225,7 @@ const EventForm: React.FunctionComponent<Props> = (props) => {
             render: <DynamicSelect dropdownPlaceholder="Room type" initialOptions={ROOM_TYPES} dynamic={false}/>
           },
           {
-            name: "link",
+            name: "url",
             props: {
               style: { width: "30%" },
               rules: [

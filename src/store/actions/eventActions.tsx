@@ -68,7 +68,7 @@ export const fetchAllEventData = () => {
     
     // Get all events
     try {
-      const { data } = await eventService.getAllEvents();
+      const { data } = await eventService.getAllEvents({ query: { withHosts: true } });
       events = data;
     }
     catch (error) {
@@ -94,7 +94,7 @@ export const fetchAllEvents = () => {
   return async (dispatch) => {
     try {
       dispatch(fetchEventDataRequest());
-      const { data } = await eventService.getAllEvents();
+      const { data } = await eventService.getAllEvents({ query: { withHosts: true } });
       const events = data;
       dispatch(fetchAllEventsSuccess(events));
     }

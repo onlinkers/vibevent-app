@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { Modal, Button, Form, Select } from "antd";
+import { Modal, Button, Form } from "antd";
+import UserSearch from "components/shared/form/inputs/userSearch";
 import userService from "services/userService";
-import popup from "popup";
 import { User } from "types/props";
 
 interface Props {
     isOpen: boolean
     handleOk: (any: any, any2: any) => void
-    handleCancel: (any: any) => void
+    handleCancel: () => void
+    eventHosts: User[]
     initialValues: string[]
     userId: string
 }
@@ -18,35 +19,18 @@ const HostModal: React.FunctionComponent<Props> = (props) => {
     isOpen,
     handleOk,
     handleCancel,
+    eventHosts,
     initialValues,
     userId
   } = props;
 
   const [form] = Form.useForm();
-  const [usersLoaded, setUsersLoaded] = useState(false);
-  const [availableUsers, setAvailableUsers] = useState<{[key: string]: User}>({});
 
-  const fetchUsers = async () => {
-    try {
-      setUsersLoaded(false);
-      const { data } = await userService.getUsers({});
-      setAvailableUsers(data);
-
-    } catch(err) {
-      popup.error("Error getting other users.");
-    } finally {
-      setUsersLoaded(true);
-    }
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const handleSubmit = async (formValues) => {
+  const onSubmit = async (formValues) => {
     const { hosts } = formValues;
     // get the actual host objects
-    const hostObjects = hosts.map((hostId) => availableUsers[hostId]);
+    const { data } = await userService.getUsersByIds({ ids: hosts });
+    const hostObjects = Object.values(data);
 
     // check if the current user is included in the host list
     if(!hosts.includes(userId)) {
@@ -60,6 +44,12 @@ const HostModal: React.FunctionComponent<Props> = (props) => {
       handleOk(hosts, hostObjects);
     }
   };
+  
+  const onCancel = () => {
+    // reset to initial
+    handleCancel();
+    form.resetFields();
+  };
 
   return (
     <Form
@@ -68,15 +58,16 @@ const HostModal: React.FunctionComponent<Props> = (props) => {
       layout="horizontal"
       size={"small"}
       initialValues={{ hosts: initialValues }}
-      onFinish={handleSubmit}
+      onFinish={onSubmit}
     >
 
       <Modal
         visible={isOpen}
         title="Edit your Hosts"
+        onCancel={onCancel}
         footer={[
-          <Button key="back" onClick={handleCancel}>Cancel</Button>,
-          <Button key="submit" type="primary" loading={!usersLoaded} onClick={() => form.submit()}>Save Hosts</Button>,
+          <Button key="back" onClick={onCancel}>Cancel</Button>,
+          <Button key="submit" type="primary" onClick={() => form.submit()}>Save Hosts</Button>,
         ]}
       >
         <Form.Item
@@ -89,18 +80,11 @@ const HostModal: React.FunctionComponent<Props> = (props) => {
             }
           ]}
         >
-          <Select
+          <UserSearch
             mode="multiple"
             className="host-select"
-          >
-            {Object.values(availableUsers).map((user) => (
-              <Select.Option
-                key={user._id}
-                value={user._id}
-                className="host-select-option"
-              >{user.firstName + " " + (user.lastName || "")}</Select.Option>
-            ))}
-          </Select>
+            initialUserOptions={eventHosts}
+          />
         </Form.Item>
 
       </Modal>

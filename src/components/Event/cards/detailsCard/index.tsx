@@ -149,7 +149,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         {generatePhotos()}
       </div>
 
-      <div className="event__actions">
+      <div className="event__misc">
         <div className="event__categories">
           {generateCategories()}
         </div>
@@ -158,7 +158,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
             <Button
               key={link.name}
               type="primary"
-              className="event__actions-register t--capitalize"
+              className="event__link t--capitalize"
               href={redirects ? link.url : ""}
             >{link.name}
             </Button>
