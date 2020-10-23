@@ -1,17 +1,18 @@
 import { message } from "antd";
+const CONTACT_MESSAGE = "Please contact our customer service team if problem persists.";
 
 export const success = (userText = "", devText = "") => {
 
-  const hideDevLogs = !process.env.REACT_APP_DEV_LOGS || process.env.REACT_APP_DEV_LOGS === "false";
+  const devLogs = process.env.REACT_APP_DEV_LOGS && process.env.REACT_APP_DEV_LOGS !== "false";
   let text = "Success!"; // generic success message
 
-  // If in production environment
-  if(hideDevLogs) {
-    text = userText || "Success!";
-  }
   // If not in production
-  else {
+  if(devLogs) {
     text = devText || userText || "< a success message was not provided >";
+  }
+  // If in production environment
+  else if(userText){
+    text = userText;
   }
 
   // finally, show the text
@@ -21,16 +22,16 @@ export const success = (userText = "", devText = "") => {
 
 export const error = (userText = "", devText = "") => {
 
-  const hideDevLogs = !process.env.REACT_APP_DEV_LOGS || process.env.REACT_APP_DEV_LOGS === "false";
-  let text = "An error occured!"; // generic error message
-
-  // If in production environment
-  if(hideDevLogs) {
-    text = userText || "An error occured! Please contact our customer service team if problem persists.";
-  }
+  const devLogs = process.env.REACT_APP_DEV_LOGS && process.env.REACT_APP_DEV_LOGS !== "false";
+  let text = `An error occured! ${CONTACT_MESSAGE}`; // generic error message
+  
   // If not in production
-  else {
+  if(devLogs) {
     text = devText || userText || "< an error message was not provided >";
+  }
+  // If in production environment
+  else if(userText) {
+    text = userText;
   }
 
   // finally, show the text
@@ -43,7 +44,6 @@ export const apiErrorHandler = (err) => {
 
   // Check if in production (cleaner logs)
   const devLogs = process.env.REACT_APP_DEV_LOGS && process.env.REACT_APP_DEV_LOGS !== "false";
-  const CONTACT_MESSAGE = "Please contact our customer service team if problem persists.";
 
   const REQUEST=`${err.response?.config.method.toUpperCase()} ${err.response?.config.url}`;
   const EXTENDED_REQUEST = `${err.response?.config.method.toUpperCase()} ${err.response?.config.baseURL}${err.response?.config.url}`;
