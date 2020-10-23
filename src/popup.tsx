@@ -51,15 +51,13 @@ export const apiErrorHandler = (err) => {
   
   // if the API could not be reached
   if(!err.response && err.config) errorMessage = devLogs ? "NETWORK ERROR: API could not be reached/errored out!" : `Network could not be reached! ${CONTACT_MESSAGE}` ;
-  // only check for other log types if devLogs is true
-  else if(devLogs) {
   // if the endpoint is available (and gettting a string response)
-    if(err.response && err.response.data === "error") errorMessage = `API ${err.response.status} ERROR: ${err.response.statusText}`;
-    // if other endpoint error
-    else if(err.response) errorMessage = `API ${err.response.status} ERROR for ${REQUEST}: ${err.response.data.name} - ${err.response.data.message}`;
-    // if axios error
-    else if(err.isAxiosError) errorMessage = `AXIOS ERROR: ${err.message} | REQUEST: ${EXTENDED_REQUEST}`;
-  }
+  else if(err.response && err.response.data === "error") errorMessage = devLogs ? `API ${err.response.status} ERROR: ${err.response.statusText}` : `A network error occured! ${CONTACT_MESSAGE}`;
+  // if other endpoint error
+  else if(err.response) errorMessage = devLogs ? `API ${err.response.status} ERROR for ${REQUEST}: ${err.response.data.name} - ${err.response.data.message}` : err.response.data.message;
+  // if axios error
+  else if(err.isAxiosError) errorMessage = devLogs ? `AXIOS ERROR: ${err.message} | REQUEST: ${EXTENDED_REQUEST}` : `An error occured while trying to reach network! ${CONTACT_MESSAGE}`;
+
   // finally, log it
   message.error(errorMessage);
   
