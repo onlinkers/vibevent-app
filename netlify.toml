@@ -16,19 +16,21 @@
 #   command = "NODE_ENV=production npm run build"
 
 # Production context: All deploys to the main repository branch will inherit these settings.
-# Master branch will use the production stage (to change to stage)
+# Master branch will use the stage environment
 [context.production]
-    command = "NODE_ENV=production npm run build"
+    command = "npm run build"
 [context.production.environment]
     NODE_ENV = "stage"
 
 # Deploy Preview context: All deploy previews will inherit these settings
-# We want deploy previews to use NODE_ENV development
+# We want deploy previews to use development environment (ideally), but that adds a bit of complication
 [context.deploy-preview]
     command = "npm run build"
 [context.deploy-preview.environment]
-    NODE_ENV = "development"
+    NODE_ENV = "stage"
 
 # Branch Deploy context: All deploys that are not in an active deploy preview will inherit these settings
 # [context.branch-deploy]
-#   command = "NODE_ENV=development npm run build"
+#   command = "npm run build"
+# [context.branch-deploy.environment]
+#     NODE_ENV = "development"
