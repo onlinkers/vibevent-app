@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import popup from "popup";
 import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import Image from "components/shared/image";
@@ -39,34 +38,27 @@ const ImageUploader: React.FunctionComponent<Props> = (props) => {
   const [presignedInfo, setPresignedInfo] = useState<any>({});
 
   const handleBeforeUpload = async (file) => {
-    try {
+    // const imageHash = createRandomHash();
+    const imageHash = file.uid;
+    const imageExtension = file.type.split("/")[1];
 
-      // const imageHash = createRandomHash();
-      const imageHash = file.uid;
-      const imageExtension = file.type.split("/")[1];
-
-      // get pre-signed url
-      const { data: [info] } = await imageService.getPresignedUrl({
-        payload: [{
-          bucketName: imageService.getBucketName(collection),
-          bucketKey: `${directory}/${imageHash}.${imageExtension}`,
-          contentType: file.type,
-          meta: {
-            hash: imageHash,
-            name: file.name,
-            size: String(file.size),
-            type: file.type,
-            uid: file.uid,
-            lastModified: String(file.lastModified)
-          }
-        }]
-      });
-      setPresignedInfo(info);
-
-    }
-    catch(err) {
-      popup.error("Error getting pre-signed url: ", err.message);
-    }
+    // get pre-signed url
+    const { data: [info] } = await imageService.getPresignedUrl({
+      payload: [{
+        bucketName: imageService.getBucketName(collection),
+        bucketKey: `${directory}/${imageHash}.${imageExtension}`,
+        contentType: file.type,
+        meta: {
+          hash: imageHash,
+          name: file.name,
+          size: String(file.size),
+          type: file.type,
+          uid: file.uid,
+          lastModified: String(file.lastModified)
+        }
+      }]
+    });
+    setPresignedInfo(info);
   };
 
   const handleUpload = async ({
