@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Empty, Card, Avatar, Tag, Button, Divider, Popover } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import DefaultImage from "assets/media/default-image.png";
+import Image from "components/shared/image";
 
 import { User, Event } from "types/props";
 import { EventCategoriesPayload } from "types/store";
@@ -36,29 +37,42 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
   const generatePhotos = () => {
 
     // check if media exists
-    if(!event?.media) return <img className="event__images__cover" alt="event-cover" src={DefaultImage}/>;
+    if(!event?.media) return <Image collection="events" src={DefaultImage} alt="event-cover" className="event__images__cover"/>;
         
     const photos: any[] = [];
     
     // get cover photo
     photos.push(<div key="div-img-cover" className="event__images-host">
-      <img src={event.media.coverPhoto?.url || DefaultImage} alt="event-cover" loading="lazy"/>
+      <Image collection="events" src={event.media.coverPhoto?.url || DefaultImage} alt="event-cover" loading="lazy"/>
     </div>);
     
     // get 2 host photos
     const hostPhotos = ((event.media.hostPhotos?.length && event.media.hostPhotos.slice(0,2)) || []).map((photo, index) => {
       return <div key={`host-${index}`} className="event__images-image">
-        <img src={photo.url} alt={`host-${index}`} loading="lazy"/>
+        <Image collection="events" src={photo.url} alt={`host-${index}`} loading="lazy"/>
       </div>;
     });
     photos.push(hostPhotos.length === 2 ? <div key="host-col" className="event__images-2-row">{hostPhotos}</div> : hostPhotos);
         
     // get 2 user photos
-    const userPhotos = ((event.media.userPhotos?.length && event.media.userPhotos.slice(0,2)) || []).map((photo, index) => {
+    let userPhotos: any = [];
+    // if user photos exist
+    if(event.media.userPhotos?.length) {
+      userPhotos = event.media.userPhotos.slice(0,2);
+    }
+    // if there are extra host photos
+    else if(event.media.hostPhotos && event.media.hostPhotos.length >= 3) {
+      const remainingHostPhotos = event.media.hostPhotos.slice(2);
+      if(remainingHostPhotos.length >= 2) remainingHostPhotos.splice(0,2);
+      userPhotos = remainingHostPhotos;
+    }
+    // turn user photos into DOM objects
+    userPhotos = userPhotos.map((photo, index) => {
       return <div key={`user-${index}`} className="event__images-image">
-        <img src={photo.url} alt={`user-${index}`} loading="lazy"/>
+        <Image collection="events" src={photo.url} alt={`user-${index}`} loading="lazy"/>
       </div>;
     });
+
     photos.push(userPhotos.length === 2 ? <div key="user-col" className="event__images-2-row">{userPhotos}</div> : userPhotos);
     
     return photos;
@@ -139,11 +153,11 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className="event-details-card">
-      {<div className="back-button">
-        <span className="button--clickable" onClick={redirects ? redirectBack : () => {}}>
+      <div className="back-button">
+        {redirects && <span className="button--clickable" onClick={redirectBack}>
           <ArrowLeftOutlined /> Back
-        </span>
-      </div>}
+        </span>}
+      </div>
 
       <div className="event__images">
         {generatePhotos()}
@@ -201,6 +215,9 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
 
       {allowEdit && <Link to={`${event._id}/edit`} className="event__edit_button">
         <Button type="primary">Edit this event</Button>
+      </Link>}
+      {allowEdit && <Link to={`${event._id}/images`} className="event__edit_button">
+        <Button type="link">Edit event photos</Button>
       </Link>}
             
     </div>

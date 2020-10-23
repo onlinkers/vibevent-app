@@ -8,6 +8,16 @@
     }
 }
 
+.EventForm {
+    .ant-divider.ant-divider-horizontal {
+        margin-top: 2em;
+        margin-bottom: 1em;
+    }
+    .form-button {
+        margin-top: 0;
+    }
+}
+
 .category-select-option > .ant-select-item-option-content,
 .category-select > .ant-select-selector > .ant-select-selection-item > .ant-select-selection-item-content {
     text-transform: capitalize;

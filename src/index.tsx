@@ -30,9 +30,9 @@ Amplify.configure(awsconfig);
 // possibly abstract this once the amount of middlewares and enhancers grow
 const thunkMiddleware = applyMiddleware(thunk);
 
-// compose with redux dev tools if in 'development' mode and if exists in browser
+// compose with redux dev tools if not in 'production' mode and if exists in browser
 const reduxDevTools =
-  process.env.NODE_ENV === "development" &&
+  process.env.REACT_APP_ENVIRONMENT !== "production" &&
   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
   (window as any).__REDUX_DEVTOOLS_EXTENSION__();
 
@@ -67,4 +67,5 @@ ReactDOM.render(
 serviceWorker.unregister();
 
 // Finally, log for debugging and development purposes
-console.log(`Running app in ${process.env.NODE_ENV} environment`); // eslint-disable-line
+console.log(`Running app in ${process.env.REACT_APP_ENVIRONMENT} environment`); // eslint-disable-line
+console.log(`NODE_ENV=${process.env.NODE_ENV}`); // eslint-disable-line

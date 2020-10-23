@@ -62,6 +62,8 @@ A dotenv (`.env`) environmental file needs to be created at `root`
 - `.env.stage` will rely on an external instance of the API to be running, which makes use of the API in the stage environment
 - (WITH CAUTION) `.env.prod` will also rely on an external instance of the API to be running in the production environment
 
+The environmental variable `REACT_APP_ENVIRONMENT` is used to keep track of our application's environment. `NODE_ENV` is only used during building (`react-app-rewired` has some optimizations in place for building when `NODE_ENV` is 'production')
+
 ### Components and Utilities
 
 Custom pages are located in `src/views`, while custom-created components are located in `src/components`

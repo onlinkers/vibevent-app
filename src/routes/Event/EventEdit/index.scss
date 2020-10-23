@@ -1,0 +1,32 @@
+.ImageEdit {
+    flex-direction: column;
+    padding-left: 10%;
+    padding-right: 10%;
+
+    .ant-divider {
+        &:before  {
+            width: 0 !important;
+        }
+        .ant-divider-inner-text {
+            padding: 0;
+        }
+    }
+
+    .ant-upload-picture-card-wrapper {
+        .ant-upload-list {
+            .ant-upload-list-item {
+                .ant-upload-list-item-info {
+                    &:before {
+                        left: 0;
+                    }
+                }
+            }
+        }
+        
+    }
+
+    .ant-btn {
+        width: 10em;
+        align-self: start;
+    }
+}

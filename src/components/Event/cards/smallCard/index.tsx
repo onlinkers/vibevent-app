@@ -2,6 +2,9 @@ import React from "react";
 import momentz from "moment-timezone";
 import { motion } from "framer-motion";
 
+import DefaultImage from "assets/media/default-image.png";
+import Image from "components/shared/image";
+
 import "./index.scss";
 import { Event, User } from "types/props";
 
@@ -25,10 +28,11 @@ const EventSmallCard: React.FunctionComponent<Props> = (props) => {
       transition={{ duration: 0.001 }}
       onClick={() => onClick()}
     >
-      <img
-        className="event-coverphoto"
-        src={event?.media?.coverPhoto?.url}
+      <Image
+        collection="events"
+        src={event?.media?.coverPhoto?.url || DefaultImage}
         alt="eventCoverPhoto"
+        className="event-coverphoto"
       />
       <div className="event-description">
         <p className="description-date">{month}</p>

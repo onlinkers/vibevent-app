@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Button, Typography, Collapse, Empty, Divider } from "antd";
 import TinyEventCard from "components/Event/cards/tinyCard";
 
+import Image from "components/shared/image";
+
 import { User } from "types/props";
 import DefaultAvatar from "assets/media/default-avatar.png";
 
@@ -67,7 +69,7 @@ const ProfileDetails = (props: Props) => {
     <div className="Profile row">
       {/* TODO: Profile picture uploading */}
       <div className="col-2 user-profile">
-        <img className="user-profile__image" src={imageSrc} alt="profile" />
+        <Image collection="users" className="user-profile__image" src={imageSrc} alt="profile" />
         <Typography.Title className="user-profile__name">
           {firstName} {lastName}
         </Typography.Title>

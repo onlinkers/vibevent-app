@@ -35,6 +35,12 @@ axiosInstance.interceptors.response.use((response) => {
 
 // Request Interceptor
 axiosInstance.interceptors.request.use(function (config) {
+  // don't include Authorization header for s3 uploads
+  if(config.method?.toLowerCase() === "put" && config.url?.includes("s3")) {
+    delete config.headers.Authorization;
+    return config;
+  }
+
   // get the id token from local storage
   const rawToken = localStorage.getItem("cognitoIdToken");
   const token = `Bearer ${rawToken}`;

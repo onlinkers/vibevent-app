@@ -57,11 +57,6 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
       },
     };
 
-    delete payload._id;
-    delete payload.hosts;
-    delete payload.createdAt;
-    delete payload.updatedAt;
-
     // TODO: Proper Image Uploading
 
     await eventService.setEvent({ id: eventId, payload });
@@ -74,7 +69,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
     fetchAllEvents();
 
     popup.success("Event changes saved!");
-    history.goBack();
+    history.push(`/event/${eventId}`);
 
   };
 
@@ -87,6 +82,12 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
 
     popup.success("Event deleted!");
     history.push("/event/dashboard");
+
+  };
+
+  const handleCancel = async () => {
+
+    history.push(`/event/${eventId}`);
 
   };
 
@@ -140,6 +141,7 @@ const EventEdit: React.FunctionComponent<Props> = ({ event, eventCategories, fet
           mode="EDIT"
           onChange={handleFormChange}
           onSubmit={handleSubmit}
+          onCancel={handleCancel}
           onDelete={handleDelete}
           eventCategories={eventCategories}
           eventHosts={thisEvent.hosts}

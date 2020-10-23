@@ -8,6 +8,7 @@ import EventDashboard from "./EventDashboard";
 import EventDetails from "./EventDetails";
 import EventCreate from "./EventCreate";
 import EventEdit from "./EventEdit";
+import EventEditImages from "./EventEdit/images";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
 import QuickAccessMenu from "components/Event/searchTools";
@@ -74,6 +75,14 @@ const EventRoutesWithId: React.FunctionComponent<Props2> = (props) => {
           // Check if the user is permitted to edit the event
           event.hosts.map(host => host._id).includes(userId) ? (
             <EventEdit event={event} />
+          ) : (
+            <Redirect to="/forbidden"/>
+          )
+        } />
+        <AuthRoute path="/event/:eventId/images" component={
+          // Check if the user is permitted to edit the event's images
+          event.hosts.map(host => host._id).includes(userId) ? (
+            <EventEditImages event={event} />
           ) : (
             <Redirect to="/forbidden"/>
           )

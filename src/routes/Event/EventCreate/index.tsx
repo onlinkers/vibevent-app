@@ -84,6 +84,12 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
 
   };
 
+  const handleCancel = async () => {
+
+    history.goBack();
+
+  };
+
   const handleFormChange = (changedValues, allValues) => {
     
     const {
@@ -134,6 +140,7 @@ const EventCreate: React.FunctionComponent<Props> = (props) => {
           mode="CREATE"
           onChange={handleFormChange}
           onSubmit={handleSubmit}
+          onCancel={handleCancel}
           eventCategories={eventCategories}
           eventHosts={[user]}
           initialValues={{ hosts: [user._id] }}
