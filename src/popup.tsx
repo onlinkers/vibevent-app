@@ -5,7 +5,7 @@ export const success = (userText = "", devText = "") => {
   const hideDevLogs = !process.env.REACT_APP_DEV_LOGS || process.env.REACT_APP_DEV_LOGS === "false";
   let text = "Success!"; // generic success message
 
-  // If in production stage
+  // If in production environment
   if(hideDevLogs) {
     text = userText || "Success!";
   }
@@ -24,7 +24,7 @@ export const error = (userText = "", devText = "") => {
   const hideDevLogs = !process.env.REACT_APP_DEV_LOGS || process.env.REACT_APP_DEV_LOGS === "false";
   let text = "An error occured!"; // generic error message
 
-  // If in production stage
+  // If in production environment
   if(hideDevLogs) {
     text = userText || "An error occured! Please contact our customer service team if problem persists.";
   }
@@ -45,7 +45,7 @@ export const apiErrorHandler = (err) => {
   const EXTENDED_REQUEST = `${err.response?.config.method.toUpperCase()} ${err.response?.config.baseURL}${err.response?.config.url}`;
   let errorMessage = `UNDEFINED ERROR for ${REQUEST}! ${err.message}`;
   
-  // If in production stage
+  // If in production environment
   if(!process.env.REACT_APP_DEV_LOGS || process.env.REACT_APP_DEV_LOGS === "false") errorMessage = "A network error occured! Please contact our customer service team if problem persists.";
   // if the API could not be reached
   else if(!err.response && err.config) errorMessage = "NETWORK ERROR: API could not be reached/errored out!";
