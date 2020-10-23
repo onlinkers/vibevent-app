@@ -32,7 +32,6 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "prebuild": "echo \"Buiding application in\" ${NODE_ENV} \"environment...\"",
     "test": "react-app-rewired test",
     "lint": "eslint . --ext js,jsx,ts,tsx --fix",
     "precommit-msg": "echo 'Running pre-commit checks...' && exit 0",
