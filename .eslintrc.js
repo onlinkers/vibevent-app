@@ -30,8 +30,8 @@ module.exports = {
   plugins: ["react", "react-hooks", "@typescript-eslint"],
   rules: {
     // Disable console logs on production branch
-    "no-console": process.env.NODE_ENV === "prod" ? 2 : 1,
-    "no-debugger": process.env.NODE_ENV === "prod" ? 2 : 1,
+    "no-console": process.env.REACT_APP_ENVIRONMENT === "production" ? 2 : 1,
+    "no-debugger": process.env.REACT_APP_ENVIRONMENT === "production" ? 2 : 1,
 
     // React rules
     "react-hooks/rules-of-hooks": 2, // Checks rules of Hooks

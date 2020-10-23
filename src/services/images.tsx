@@ -2,8 +2,8 @@ import api from "../api";
 import { apiErrorHandler } from "../popup";
 
 let BUCKET_ENV = "stage";
-if(process.env.NODE_ENV === "production") BUCKET_ENV = "prod";
-else if(process.env.NODE_ENV === "development") BUCKET_ENV = "dev";
+if(process.env.REACT_APP_ENVIRONMENT === "production") BUCKET_ENV = "prod";
+else if(process.env.REACT_APP_ENVIRONMENT === "development") BUCKET_ENV = "dev";
 
 export default {
   getBucketName: (collection = "") => {
