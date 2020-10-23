@@ -17,7 +17,7 @@
 
 # Production context: All deploys to the main repository branch will inherit these settings.
 # Master branch will use the stage environment
-# But build using production node environment
+# However, NODE_ENV is specified because we want to optimize the build process (react-app-rewired)
 [context.production]
     command = "NODE_ENV=production npm run build"
 [context.production.environment]
