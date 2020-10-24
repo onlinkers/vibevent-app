@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Select, Spin } from "antd";
 import userService from "services/userService";
 import { User } from "types/props";
-import popup from "popup";
 
 interface Props {
     mode: "multiple" | "tags";
@@ -25,26 +24,22 @@ const UserSearch: React.FunctionComponent<Props> = (props) => {
   const [isFetching, setisFetching] = useState(false);
 
   const fetchUsers = async value => {
-    try {
-      fetchId += 1;
-      const currentFetchId = fetchId;
-      setisFetching(true);
-      setOptions([]);
+    fetchId += 1;
+    const currentFetchId = fetchId;
+    setisFetching(true);
+    setOptions([]);
     
-      const { data } = await userService.getUsers({
-        query: {
-          withEvents: false,
-          results: 10,
-          name: value
-        }
-      });
-
-      if(fetchId === currentFetchId) {
-        setOptions(data);
-        setisFetching(false);
+    const { data } = await userService.getUsers({
+      query: {
+        withEvents: false,
+        results: 10,
+        name: value
       }
-    } catch(err) {
-      popup.error("Error getting user list.");
+    });
+
+    if(fetchId === currentFetchId) {
+      setOptions(data);
+      setisFetching(false);
     }
   };
 
