@@ -17,11 +17,11 @@ const routes = [
     url: "/event/dashboard",
     mobileIcon: SearchIcon
   },
-  // {
-  //   label: "Discover",
-  //   url: "/discover",
-  //   mobileIcon: () => {}
-  // },
+  {
+    label: "Discover",
+    url: "/discover",
+    mobileIcon: () => {}
+  },
 ];
   
 const authenticatedRoutes = [

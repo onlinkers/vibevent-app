@@ -6,15 +6,15 @@ import { Auth } from "aws-amplify";
 // Import all the parent routes
 // import Home from "./Home";
 import Events from "./Event";
-// import Discover from "./Discover";
-// import Profile from "./Profile";
+import Discover from "./Discover";
+import Profile from "./Profile";
 import Landing from "./Landing";
 
 import Rooms from "./Rooms";
 import Authentication from "./Authentication";
 import NotFound from "./NotFound";
 import Forbidden from "./Forbidden";
-import Construction from "./Construction";
+// import Construction from "./Construction";
 
 import AuthRoute from "./AuthRoute";
 import { AppContext } from "context/AppContext";
@@ -94,7 +94,7 @@ const Routes: React.FunctionComponent<Props> = (props) => {
           component={<Landing />}
           altComponent={<Landing />}
         />
-        <AuthRoute path="/profile" component={<Construction />} /> {/*  TO CHANGE */}
+        <AuthRoute path="/profile" component={<Profile />} />
 
         {/* AUTHENTICATION */}
         <AuthRoute path="/auth" altComponent={<Authentication />} redirect />
@@ -102,7 +102,7 @@ const Routes: React.FunctionComponent<Props> = (props) => {
         {/* PUBLIC ROUTES */}
         <Route path="/event" component={Events} />
         <Route path="/room/:roomId" component={Rooms} />
-        <Route path="/discover" component={Construction} /> {/* TO CHANGE */}
+        <Route path="/discover" component={Discover} />
         <Route path="/forbidden" component={Forbidden} />
         <Route path="/empty" render={() => <div></div>} />
         {/* <Route path="/home" component={Home} /> */} {/* FOR TESTING */}

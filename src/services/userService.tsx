@@ -2,6 +2,8 @@ import api from "../api";
 import { apiErrorHandler } from "../popup";
 import { createQueryString } from "./_utils";
 
+import DEFAULT_USER_DATA from "../assets/showcaseData/userData.json";
+
 export default {
   getUsers: async({ query = {} }) => {
     try {
@@ -11,7 +13,8 @@ export default {
       return results;
     } catch(err) {
       apiErrorHandler(err);
-      throw err;
+      // throw err;
+      return { data: DEFAULT_USER_DATA };
     }
   },
   getUsersByIds: async ({ ids, query = {} }) => {
@@ -25,7 +28,8 @@ export default {
       return results;
     } catch(err) {
       apiErrorHandler(err);
-      throw err;
+      // throw err;
+      return { data: DEFAULT_USER_DATA };
     }
   },
   createUser: async (payload) => {

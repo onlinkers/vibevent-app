@@ -2,6 +2,9 @@ import api from "../api";
 import { apiErrorHandler } from "../popup";
 import { createQueryString } from "./_utils";
 
+import DEFAULT_EVENT_DATA from "../assets/showcaseData/eventData.json";
+import DEFAULT_EVENT_CATEGORIES_DATA from "../assets/showcaseData/categoriesData.json";
+
 export default {
   getAllEvents: async ({ query = {} }) => {
     try {
@@ -10,7 +13,8 @@ export default {
       return results;
     } catch(err) {
       apiErrorHandler(err);
-      throw err;
+      // throw err;
+      return { data: DEFAULT_EVENT_DATA }; 
     }
   },
   getEventsByIds: async ({ ids, query = {} }) => {
@@ -24,7 +28,8 @@ export default {
       return results;
     } catch(err) {
       apiErrorHandler(err);
-      throw err;
+      // throw err;
+      return { data: DEFAULT_EVENT_DATA }; 
     }
   },
   createEvent: async (payload) => {
@@ -79,7 +84,8 @@ export default {
       return results;
     } catch(err) {
       apiErrorHandler(err);
-      throw err;
+      // throw err;
+      return { data: Object.assign({}, ...DEFAULT_EVENT_CATEGORIES_DATA.map((x) => ({ [x.key]: x.name }))) };
     }
   }
 };

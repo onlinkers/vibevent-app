@@ -46,9 +46,9 @@
   text-align: center;
   left: 0;
   top: 0;
-  opacity: 60%;
   user-select: none;
-  z-index: 500;
+  opacity: 100%;
+  z-index: 99;
 }
 
 .Error {
@@ -62,8 +62,8 @@
   text-align: center;
   left: 0;
   top: 0;
-  opacity: 60%;
-  z-index: 500;
+  opacity: 100%;
+  z-index: 99;
 }
 
 /* TODO: Mobile View */

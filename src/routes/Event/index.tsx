@@ -144,15 +144,15 @@ const Events = (props) => {
   return <>
     <Navbar/>
     {loading ? <Loading /> : (
-      hasErrors ? (
-        <ErrorWithData refreshPage={refreshPage} errors={Object.values(errors)} />
-      ) : (
-        <Switch>
-          <Route path="/event/dashboard" component={EventDashboard} />
-          <AuthRoute path="/event/create" component={<EventCreate />} />
-          <Route path="/event/:eventId" component={ConnectedEventRoutesWithId} />
-        </Switch>
-      )
+      // hasErrors ? (
+      //   <ErrorWithData refreshPage={refreshPage} errors={Object.values(errors)} />
+      // ) : (
+      <Switch>
+        <Route path="/event/dashboard" component={EventDashboard} />
+        <AuthRoute path="/event/create" component={<EventCreate />} />
+        <Route path="/event/:eventId" component={ConnectedEventRoutesWithId} />
+      </Switch>
+      // )
     )}
   </>;
 };

@@ -26,14 +26,14 @@
 }
 
 .CategoryScroller > .category-chip {
-    color: black;
-    background: transparent;
+    color: black !important;
+    background: transparent !important;
 }
 
 .CategoryScroller > .category-chip--active {
-    color: white;
+    color: white !important;
     /* TODO: Mobile View */
-    background: #2351f4;
+    background: #2351f4 !important;
 }
 
 .CategoryScroller > .ant-tag {

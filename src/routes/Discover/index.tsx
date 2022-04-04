@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Navbar from "components/layouts/navbar";
 
 import { MapContext, MapProvider } from "context/MapContext";
 import Map from "components/Map";
@@ -25,26 +26,29 @@ const Discover: React.FunctionComponent<DispatchProps> = ({ eventData }) => {
   const events = errors.events ? {} : e;
 
   return (
-    <MapProvider>
-      <MapContext.Consumer>
-        {({ loaded, selectedCategories, setSelectedCategories }) => (
-          <div className="Discover Page">
-            {!errors.eventCategories ? <CategoryFilter
-              loaded={loaded && !eventsLoading}
-              eventCategoryDefinitions={eventCategories}
-              selectedCategories={selectedCategories}
-              setSelectedCategories={setSelectedCategories}
-            /> : null}
-            <Map
-              loaded={loaded && !eventsLoading}
-              events={events}
-              selectedCategories={selectedCategories}
-              error={errors.events || null}
-            />
-          </div>
-        )}
-      </MapContext.Consumer>
-    </MapProvider>
+    <>
+      <Navbar/>
+      <MapProvider>
+        <MapContext.Consumer>
+          {({ loaded, selectedCategories, setSelectedCategories }) => (
+            <div className="Discover Page">
+              {!errors.eventCategories ? <CategoryFilter
+                loaded={loaded && !eventsLoading}
+                eventCategoryDefinitions={eventCategories}
+                selectedCategories={selectedCategories}
+                setSelectedCategories={setSelectedCategories}
+              /> : null}
+              <Map
+                loaded={loaded && !eventsLoading}
+                events={events}
+                selectedCategories={selectedCategories}
+                error={errors.events || null}
+              />
+            </div>
+          )}
+        </MapContext.Consumer>
+      </MapProvider>
+    </>
   );
 };
 
