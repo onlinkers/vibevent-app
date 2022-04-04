@@ -13,20 +13,20 @@ import Loading from "../Loading";
 import NotFound from "../NotFound";
 import QuickAccessMenu from "components/Event/searchTools";
 
-import { ReloadOutlined } from "@ant-design/icons";
+// import { ReloadOutlined } from "@ant-design/icons";
 import { Event } from "types/props";
 import { EventsPayload } from "types/store";
 
 import eventService from "services/eventService";
 import { fetchAllEvents } from "store/actions/eventActions";
 
-const ErrorWithData = ({ refreshPage, errors }) => (
-  <div className="Page--full Error">
-    <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
-    <div className="t--unselectable">{errors[0]}</div>
-    <div className="t--unselectable">{errors[1]}</div>
-  </div>
-);
+// const ErrorWithData = ({ refreshPage, errors }) => (
+//   <div className="Page--full Error">
+//     <div onClick={refreshPage} className="button--clickable"><ReloadOutlined /></div>
+//     <div className="t--unselectable">{errors[0]}</div>
+//     <div className="t--unselectable">{errors[1]}</div>
+//   </div>
+// );
 
 interface Props2 {
   events: EventsPayload;
@@ -124,17 +124,17 @@ const Events = (props) => {
 
   const {
     loading,
-    errors,
+    // errors,
     fetchAllEvents,
   } = props;
-  const history = useHistory();
+  // const history = useHistory();
 
-  const hasErrors = errors.events || errors.eventCategories;
+  // const hasErrors = errors.events || errors.eventCategories;
 
-  const refreshPage = () => {
-    history.push("/empty");
-    history.goBack();
-  };
+  // const refreshPage = () => {
+  //   history.push("/empty");
+  //   history.goBack();
+  // };
 
   // Dashboard needs refreshing when opened
   useEffect(() => {
