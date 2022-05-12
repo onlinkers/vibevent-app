@@ -190,7 +190,7 @@ const EventDetailsCard: React.FunctionComponent<Props> = (props) => {
         </Popover>
         <br />
         <div>Hosted on <strong>{event.venue.name}</strong></div>
-        <div>Event is <strong>{event.price ? event.price : "free"}</strong></div>
+        <div>Event is <strong>${event.price ? `${event.price}.00` : "free"}</strong></div>
         <br />
       </div>
 

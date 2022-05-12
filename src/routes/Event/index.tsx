@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Redirect, useHistory, useParams } from "react-router-dom";
+import { Switch, Route,
+  // Redirect,
+  useHistory, useParams } from "react-router-dom";
 import Navbar from "components/layouts/navbar";
 
-import AuthRoute from "../AuthRoute";
 import EventDashboard from "./EventDashboard";
 import EventDetails from "./EventDetails";
 import EventCreate from "./EventCreate";
@@ -35,7 +36,9 @@ interface Props2 {
 
 const EventRoutesWithId: React.FunctionComponent<Props2> = (props) => {
 
-  const { userId, events } = props;
+  const {
+    // userId,
+    events } = props;
   const { eventId } = useParams() as { eventId: string };
   const history = useHistory();
 
@@ -53,7 +56,7 @@ const EventRoutesWithId: React.FunctionComponent<Props2> = (props) => {
       };
       
       const reduxEvent = events[eventId];
-
+      
       if(reduxEvent) { // if the event is found in redux
         setThisEvent(reduxEvent);
         setEventLoaded(true);
@@ -71,22 +74,28 @@ const EventRoutesWithId: React.FunctionComponent<Props2> = (props) => {
   return !eventLoaded ? <Loading /> : (
     event ? (
       <Switch>
-        <AuthRoute path="/event/:eventId/edit" component={
-          // Check if the user is permitted to edit the event
-          event.hosts.map(host => host._id).includes(userId) ? (
-            <EventEdit event={event} />
-          ) : (
-            <Redirect to="/forbidden"/>
-          )
-        } />
-        <AuthRoute path="/event/:eventId/images" component={
-          // Check if the user is permitted to edit the event's images
-          event.hosts.map(host => host._id).includes(userId) ? (
-            <EventEditImages event={event} />
-          ) : (
-            <Redirect to="/forbidden"/>
-          )
-        } />
+        <Route path="/event/:eventId/edit"
+        // render={() =>
+        //   // Check if the user is permitted to edit the event
+        //   event.hosts.map(host => host._id).includes(userId) ? (
+        //     <EventEdit event={event} />
+        //   ) : (
+        //     <Redirect to="/forbidden"/>
+        //   )
+        // }
+          render={() => <EventEdit event={event} />}
+        />
+        <Route path="/event/:eventId/images"
+        // render={() =>
+        //   // Check if the user is permitted to edit the event's images
+        //   event.hosts.map(host => host._id).includes(userId) ? (
+        //     <EventEditImages event={event} />
+        //   ) : (
+        //     <Redirect to="/forbidden"/>
+        //   )
+        // }
+          render={() => <EventEditImages event={event} />}
+        />
         <Route path="/event/:eventId" render={() => <>
           <EventDetails event={event}/>
           <QuickAccessMenu events={events} />
@@ -149,7 +158,7 @@ const Events = (props) => {
       // ) : (
       <Switch>
         <Route path="/event/dashboard" component={EventDashboard} />
-        <AuthRoute path="/event/create" component={<EventCreate />} />
+        <Route path="/event/create" component={EventCreate} />
         <Route path="/event/:eventId" component={ConnectedEventRoutesWithId} />
       </Switch>
       // )

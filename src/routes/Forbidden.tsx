@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "antd";
 import { Link, useLocation, useHistory } from "react-router-dom";
 
 import { getUrlQuery } from "utils";
@@ -18,8 +19,8 @@ const Forbidden = () => {
         <br />
                 Please log in with a different account with admin privileges
       </p>
-      <Link to="/auth/login"><button color="primary">Log In</button></Link>
-      <p><button color="primary" onClick={() => redirected ? history.go(-2) : history.goBack()}>Go Back</button></p>
+      <Link to="/auth/login"><Button color="primary">Log In</Button></Link>
+      <Button color="primary" onClick={() => redirected ? history.go(-2) : history.goBack()}>Go Back</Button>
     </div>   
   );
 };

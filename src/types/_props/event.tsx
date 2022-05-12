@@ -6,8 +6,8 @@ export interface Event {
   _id: string;
   hosts: User[];
   name: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date|string;
+  endDate: Date|string;
   venue: Venue;
   price?: number;
   description?: string;

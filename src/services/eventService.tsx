@@ -1,6 +1,7 @@
 import api from "../api";
 import { apiErrorHandler } from "../popup";
 import { createQueryString } from "./_utils";
+import { Event } from "types/props";
 
 import DEFAULT_EVENT_DATA from "../assets/showcaseData/eventData.json";
 import DEFAULT_EVENT_CATEGORIES_DATA from "../assets/showcaseData/categoriesData.json";
@@ -29,7 +30,11 @@ export default {
     } catch(err) {
       apiErrorHandler(err);
       // throw err;
-      return { data: DEFAULT_EVENT_DATA }; 
+      const localData: Event[] = [];
+      DEFAULT_EVENT_DATA.forEach((event) => {
+        if (ids.includes(event._id)) localData.push(event);
+      }, []);
+      return { data: localData }; 
     }
   },
   createEvent: async (payload) => {

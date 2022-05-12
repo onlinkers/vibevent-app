@@ -19,7 +19,7 @@ interface Props {
 const EventDetails: React.FunctionComponent<Props> = (props) => {
 
   const {
-    userId,
+    // userId,
     event,
     eventCategories,
   } = props;
@@ -38,7 +38,8 @@ const EventDetails: React.FunctionComponent<Props> = (props) => {
         eventCategories={eventCategories}
         redirectToRoom={roomHandler}
         redirectBack={() => { history.push("/event/dashboard"); }}
-        allowEdit={event.hosts.map((host) => host._id).includes(userId)}
+        // allowEdit={event.hosts.map((host) => host._id).includes(userId)}
+        allowEdit={true}
       />
     </div>
   );

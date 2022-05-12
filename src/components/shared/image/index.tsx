@@ -1,5 +1,6 @@
 import React from "react";
 import { createImageUrl } from "utils";
+import DefaultImage from "assets/media/default-image.png";
 
 interface Props {
     src: string
@@ -18,7 +19,11 @@ const Image = (props) => {
   const imageSource = createImageUrl({ src, collection, size });
 
   return (
-    <img {...rest} src={imageSource} alt={alt} loading="lazy"/>
+    <img {...rest} src={imageSource} alt={alt} loading="lazy"
+      onError={(e) => {
+        e.currentTarget.src = DefaultImage;
+      }}
+    />
   );
 };
 

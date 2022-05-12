@@ -1,6 +1,6 @@
 [
 	{
-		"_id": { "$oid": "ffffffffffffffffffff0001" },
+		"_id": "ffffffffffffffffffff0001",
 		"role": "DEVELOPER",
 		"firstName": "test",
 		"lastName": "user",
@@ -10,25 +10,25 @@
 			"url": "https://picsum.photos/id/237/300/300"
 		},
 		"eventsCreated": [
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee0001" },
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee0002" },
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee0003" },
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee0004" },
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee0005" },
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee0006" },
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee0007" }
+			"eeeeeeeeeeeeeeeeeeee0001",
+			"eeeeeeeeeeeeeeeeeeee0002",
+			"eeeeeeeeeeeeeeeeeeee0003",
+			"eeeeeeeeeeeeeeeeeeee0004",
+			"eeeeeeeeeeeeeeeeeeee0005",
+			"eeeeeeeeeeeeeeeeeeee0006",
+			"eeeeeeeeeeeeeeeeeeee0007"
 		],
 		"eventsInvolved": [],
 		"eventsSaved": [
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee0001" },
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee0002" },
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee0003" }
+			"eeeeeeeeeeeeeeeeeeee0001",
+			"eeeeeeeeeeeeeeeeeeee0002",
+			"eeeeeeeeeeeeeeeeeeee0003"
 		],
 		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
 		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
 	},
 	{
-        "_id": { "$oid": "ffffffffffffffffffff0002" },
+        "_id": "ffffffffffffffffffff0002" ,
 		"role": "USER",
 		"firstName": "Chou",
 		"lastName": "Tzu-yu",
@@ -41,7 +41,7 @@
 		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
 	},
 	{
-        "_id": { "$oid": "ffffffffffffffffffff0003" },
+        "_id": "ffffffffffffffffffff0003" ,
 		"role": "USER",
 		"firstName": "Mina",
 		"lastName": "Myōi",
@@ -54,7 +54,7 @@
 		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
 	},
 	{
-        "_id": { "$oid": "ffffffffffffffffffff0004" },
+        "_id": "ffffffffffffffffffff0004" ,
 		"role": "USER",
 		"firstName": "Son",
 		"lastName": "Chae-young",
@@ -67,7 +67,7 @@
 		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
 	},
 	{
-        "_id": { "$oid": "ffffffffffffffffffff0005" },
+        "_id": "ffffffffffffffffffff0005" ,
 		"role": "USER",
 		"firstName": "Momo",
 		"lastName": "Hirai",
@@ -80,7 +80,7 @@
 		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
 	},
 	{
-        "_id": { "$oid": "ffffffffffffffffffff0006" },
+        "_id": "ffffffffffffffffffff0006" ,
 		"role": "USER",
 		"firstName": "Im",
 		"lastName": "Nayeon",
@@ -93,7 +93,7 @@
 		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
 	},
 	{
-        "_id": { "$oid": "ffffffffffffffffffff0007" },
+        "_id": "ffffffffffffffffffff0007" ,
 		"role": "USER",
 		"firstName": "Kim",
 		"lastName": "Dahyun",
@@ -106,7 +106,7 @@
 		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
 	},
 	{
-        "_id": { "$oid": "ffffffffffffffffffff0008" },
+        "_id": "ffffffffffffffffffff0008" ,
 		"role": "USER",
 		"firstName": "Sana",
 		"lastName": "Minatozaki",
@@ -119,7 +119,7 @@
 		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
 	},
 	{
-        "_id": { "$oid": "ffffffffffffffffffff0009" },
+        "_id": "ffffffffffffffffffff0009" ,
 		"role": "USER",
 		"firstName": "Park",
 		"lastName": "Jihyo",
@@ -132,7 +132,7 @@
 		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
 	},
 	{
-        "_id": { "$oid": "ffffffffffffffffffff0010" },
+        "_id": "ffffffffffffffffffff0010" ,
 		"role": "USER",
 		"firstName": "Yoo",
 		"lastName": "Jeong-yeon",
@@ -145,7 +145,7 @@
 		"updatedAt": { "$date": { "$numberLong": "1593942762000" } }
 	},
 	{
-        "_id": { "$oid": "ffffffffffffffffffff2001" },
+        "_id": "ffffffffffffffffffff2001" ,
 		"role": "HOST",
 		"firstName": "UBC SISA",
 		"description": "Sauder International Student Association (SISA) is a CUS service which provides students in the Sauder community to meet each other and learn from each other’s culture. SISA’s mission is to bring students from diverse backgrounds together and establish an open-arms community for those that may be feeling a lil’ bit homesick. We proudly open our events to ALL students, whether you’re domestic or international!",
@@ -155,7 +155,7 @@
 			"url": " https://onlinker-image-prod.s3.amazonaws.com/sisa.jpeg "
 		},
 		"eventsCreated": [
-			{ "$oid": "eeeeeeeeeeeeeeeeeeee2001" }
+			"eeeeeeeeeeeeeeeeeeee2001"
 		],
 		"eventsInvolved": [],
 		"createdAt": { "$date": { "$numberLong": "1593942762000" } },
